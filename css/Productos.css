@@ -1,0 +1,128 @@
+.productos {
+    font-style: rgb(16, 16, 56);
+    padding: 20px;
+    margin: 20px;
+    position: absolute;
+    top: 50px;
+    left: 190px;
+}
+
+.mi-contenedor {
+    background-color: rgb(241, 241, 241);
+    /* Color de fondo blanco */
+    padding: 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 20px;
+    width: 1112px;
+    height: 598px;
+    position: absolute;
+    top: 60px;
+    left: 213px;
+}
+
+.contenedor_produc {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 20px;
+    width: 255px;
+    height: 365px;
+    position: absolute;
+    top: 85px;
+    left: 10px;
+}
+
+.contenedorproduc1 {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 20px;
+    width: 255px;
+    height: 365px;
+    position: absolute;
+    top: 85px;
+    left: 350px;
+
+}
+
+.contenedorproduc2 {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 20px;
+    width: 255px;
+    height: 365px;
+    position: absolute;
+    top: 85px;
+    left: 690px;
+}
+
+.imgflech {
+    position: absolute;
+    top: 210px;
+    left: 990px;
+}
+
+.agr {
+    position: absolute;
+    top: 190px;
+    left: 40px;
+}
+
+.agr2 {
+    position: absolute;
+    top: 220px;
+    left: 30px;
+}
+
+.agr3 {
+    position: absolute;
+    top: 220px;
+    left: 30px;
+}
+
+.img1 {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.img2 {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+}
+
+.imgplus {
+    position: absolute;
+    top: 130px;
+    left: 110px;
+}
+
+.icon1{
+    position: absolute;
+    top: 300px;
+    left: 60px;
+}
+
+.icon2{
+    position: absolute;
+    top: 300px;
+    left: 155px;
+}
+
+.icon3{
+    position: absolute;
+    top: 300px;
+    left: 60px;
+}
+
+.icon4{
+    position: absolute;
+    top: 300px;
+    left: 155px;
+}
