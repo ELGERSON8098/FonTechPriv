@@ -23,7 +23,7 @@
                         <div class="col-md-12">
                             <!-- Contenido de la página -->
                             <div class="d-flex justify-content-end mt-3">
-                                <div class="me-md-5">
+                                <div class="me-md-5 me-3">
                                     <a class="nav-link" href="#">
                                         Mi Perfil
                                     </a>
@@ -34,6 +34,7 @@
                                     </a>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                     <div class="mi-contenedor">
@@ -42,7 +43,7 @@
                         </div>
                         <div class="contenedor_produc">
                             <div class="imgplus">
-                                <img src="../../Recursos/img/icon _plus_.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/icon _plus_.png" alt="Agregar Productos">
                             </div>
                             <div class="agr">
                                 <h5>Agregar Productos</h5>
@@ -50,34 +51,34 @@
                         </div>
                         <div class="contenedorproduc1">
                             <div class="img1">
-                                <img src="../../Recursos/img/Link → Article.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/Link → Article.png" alt="Samsung Galaxy S23 Ultra">
                             </div>
                             <div class="agr2">
                                 <h5>Samsung Galaxy S23 Ultra</h5>
                             </div>
                             <div class="icon1">
-                                <img src="../../Recursos/img/icon _pencil_.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/icon _pencil_.png" alt="Editar">
                             </div>
                             <div class="icon2">
-                                <img src="../../Recursos/img/icon _x letter_.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/icon _x letter_.png" alt="Eliminar">
                             </div>
                         </div>
                         <div class="contenedorproduc2">
                             <div class="img2">
-                                <img src="../../Recursos/img/image 5.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/image 5.png" alt="Apple Watch Series 8 41mm GPS">
                             </div>
                             <div class="agr3">
                                 <h5>Apple Watch Series 8 41mm GPS</h5>
                             </div>
                             <div class="icon3">
-                                <img src="../../Recursos/img/icon _pencil_.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/icon _pencil_.png" alt="Editar">
                             </div>
                             <div class="icon4">
-                                <img src="../../Recursos/img/icon _x letter_.png" alt="Dashboard" href="#">
+                                <img src="../../Recursos/img/icon _x letter_.png" alt="Eliminar">
                             </div>
                         </div>
                         <div class="imgflech">
-                            <img src="../../Recursos/img/List → Item → Link.png" alt="Dashboard" href="#">
+                            <img src="../../Recursos/img/List → Item → Link.png" alt="Flecha">
                         </div>
                     </div>
                 </div>
@@ -85,33 +86,45 @@
         </div>
         </main>
 
-        <nav class="col-md-2 d-md-block bg-light sidebar bg-white">
+        <nav class="col-md-2 d-md-block sidebar" style="background-color: rgba(255, 255, 255, 0);">
             <div class="position-sticky">
                 <a class="navbar-brand mb-5 mt-3" href="#">
                     <img src="../../Recursos/img/image 67.png" alt="Logo" width="100" class="mb-4">
                 </a>
-                <ul class="nav flex-column">
-                    <li class="nav-item mb-5">
-                        <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
-                            <img src="../../Recursos/img/List → Item → Link → dashboard.svg.png" alt="Dashboard"
-                                width="20" height="20" class="me-2">
-                            Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item mb-5">
-                        <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
-                            <img src="../../Recursos/img/List → Item → Link → 2.svg.png" alt="Dashboard" width="20"
-                                height="20" class="me-2">
-                            Catálogos
-                        </a>
-                    </li>
-                    <li class="nav-item mb-5">
-                        <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
-                            <img src="../../Recursos/img/List → Item → Link → 8.svg.png" alt="Dashboard" width="20"
-                                class="me-2">
-                            Productos
-                        </a>
-                    </li>
+        
+                <!-- Menú desplegable solo en pantallas pequeñas -->
+                <div class="navbar navbar-light navbar-expand-md d-md-none" style="background-color: rgba(255, 255, 255, 0);">
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
+                        aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+        
+
+
+                <div class="collapse navbar-collapse d-md-block" id="sidebarNav">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-5">
+                            <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
+                                <img src="../../Recursos/img/List → Item → Link → dashboard.svg.png" alt="Dashboard"
+                                    width="20" height="20" class="me-2">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item mb-5">
+                            <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
+                                <img src="../../Recursos/img/List → Item → Link → 2.svg.png" alt="Catálogos" width="20"
+                                    height="20" class="me-2">
+                                Catálogos
+                            </a>
+                        </li>
+                        <li class="nav-item mb-5">
+                            <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
+                                <img src="../../Recursos/img/List → Item → Link → 8.svg.png" alt="Productos" width="20"
+                                    class="me-2">
+                                Productos
+                            </a>
+                        </li>
                     <li class="nav-item mb-5">
                         <a class="nav-link active d-flex align-items-center" href="#" style="color: rgb(20, 67, 57);">
                             <img src="../../Recursos/img/List → Item → Link → 4.svg.png" alt="Dashboard" width="20"
