@@ -1,29 +1,29 @@
-.agrs {
+#agrs {
     position: absolute;
-    top: 190px;
-    left: 60px;
-}
-
-.agrs2 {
-    position: absolute;
-    top: 220px;
-    left: 80px;
-}
-
-.agrs3 {
-    position: absolute;
-    top: 220px;
-    left: 100px;
-}
-
-.imgs1 {
-    position: absolute;
-    top: 55px;
-    left: 20px;
-}
-
-.imgs2 {
-    position: absolute;
-    top: 15px;
+    top: 230px;
     left: 50px;
+}
+
+#agrs2 {
+    position: absolute;
+    top: 260px;
+    left: 94px;
+}
+
+#agrs3 {
+    position: absolute;
+    top: 250px;
+    left: 74px;
+}
+
+#imgs1 {
+    position: absolute;
+    top: 25px;
+    left: 50px;
+}
+
+#imgs2 {
+    position: absolute;
+    top: 60px;
+    left: 27px;
 }
