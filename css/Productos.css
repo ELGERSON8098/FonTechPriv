@@ -1,133 +1,129 @@
-.productos {
-    font-style: rgb(16, 16, 56);
-    padding: 20px;
-    margin: 20px;
+#movableContainer{
     position: absolute;
-    top: 50px;
-    left: 190px;
-}
-
-.mi-contenedor {
-    background-color: rgb(241, 241, 241);
-    /* Color de fondo blanco */
-    padding: 20px;
-    margin: 20px;
+    top: 35px;
+    left: 30px;
     border: none;
     border-radius: 20px;
-    width: 1112px;
-    height: 598px;
-    position: absolute;
-    top: 60px;
-    left: 213px;
+    /* Ajusta el radio de los bordes según tus preferencias */
+    overflow: hidden;
 }
 
-.contenedor_produc .card {
-    position: absolute;
-    top: 55px;
-    left: 690px;
-    padding: 20px;
-    margin: 20px;
-    border: none;
-    border-radius: 20px;
+#movableContainer,
+#movableContainer1,
+#movableContainer2 {
     width: 260px;
     height: 450px;
-    /* Esto quitará los bordes de todas las tarjetas dentro del contenedor */
 }
 
-
-.contenedor_produc1 .card {
-    position: absolute;
-    top: 55px;
-    left: 330px;
-    padding: 20px;
-    margin: 20px;
-    border: none;
-    border-radius: 20px;
-    width: 260px;
-    height: 450px;
-    /* Esto quitará los bordes de todas las tarjetas dentro del contenedor */
+#movableContainer.moved-down {
+    top: 200px;
+    /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
 
-.contenedor_produc2 .card {
-    position: absolute;
-    top: 55px;
-    left: 1px;
-    padding: 20px;
-    margin: 20px;
-    border: none;
-    border-radius: 20px;
-    width: 260px;
-    height: 450px;
-    /* Esto quitará los bordes de todas las tarjetas dentro del contenedor */
+#movableContainer.moved-right {
+    left: 200px;
+    /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
 
-.imgflech {
+#movableContainer1 {
     position: absolute;
-    top: 210px;
+    top: 35px;
     left: 990px;
+    border: none;
+    border-radius: 20px;
+    /* Ajusta el radio de los bordes según tus preferencias */
+    overflow: hidden;
 }
 
-#textoProducto {
+.custom-container {
+    background-color: #f3f3f3; /* Cambia el color a tu preferencia */
+    padding: 250px; /* Relleno interior */
+    border-radius: 20px; /* Bordes redondeados */
     position: absolute;
-    top: 270px;
-    left: 30px;
-    /* Ajusta el margen superior según tus preferencias */
+    bottom: 20px; /* Ajusta según sea necesario para la posición vertical */
+    left: 150px; /* Ajusta según sea necesario para la posición horizontal */
+ }
+
+#movableContainer2 {
+    position: absolute;
+    top: 35px;
+    left: 40px;
+    border: none;
+    border-radius: 20px;
+    /* Ajusta el radio de los bordes según tus preferencias */
+    overflow: hidden;
 }
 
-#textoProducto1 {
-    position: absolute;
-    top: 270px;
-    left: 30px;
-    /* Ajusta el margen superior según tus preferencias */
+#movableContainer1.moved-down {
+    top: 200px;
+    /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
 
-#textoProducto2 {
-    position: absolute;
-    top: 230px;
-    left: 50px;
-    /* Ajusta el margen superior según tus preferencias */
+#movableContainer1.moved-right {
+    left: 200px;
+    /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
 
-#imagenProducto {
-    position: absolute;
-    top: 15px;
-    left: 20px;
+#movableContainer2.moved-down {
+    top: 200px;
+    /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
 
-#imagenProducto1 {
-    position: absolute;
-    top: 30px;
-    left: 20px;
-    width: 220px;
-}
-
-#imagenProducto2 {
-    position: absolute;
-    top: 130px;
-    left: 110px;
-    width: 50px;
+#movableContainer2.moved-right {
+    left: 200px;
+    /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
 
 #icon1 {
-    position: absolute;
-    top: 370px;
-    left: 60px;
+    margin-left: 10px; /* Ajusta el margen izquierdo según tu preferencia */
+    margin-top: 40px;
 }
 
 #icon2 {
-    position: absolute;
-    top: 370px;
-    left: 155px;
+    margin-left: 50px; /* Ajusta el margen izquierdo según tu preferencia */
+    margin-top: 40px;
 }
 
-#icon3 {
-    position: absolute;
-    top: 370px;
-    left: 60px;
+#movableContainer2 img {
+    width: 50%;
+    margin-left: 65px; /* Ajusta el margen izquierdo según tu preferencia */
+    margin-top: 100px; /* Ajusta el valor según tus necesidades */
 }
 
-#icon4 {
-    position: absolute;
-    top: 370px;
-    left: 155px;
+
+/* Estilos específicos para pantallas medianas (md) y grandes (lg) */
+@media (max-width: 991.98px) {
+
+    #movableContainer {
+        left: 30px;
+        margin-top: 980px; 
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    #movableContainer.moved-right {
+        left: 50px;
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    #movableContainer1 {
+        left: 30px;
+        margin-top: 500px; 
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    #movableContainer1.moved-right {
+        left: 50px;
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    #movableContainer2 {
+        left: 30px;
+        margin-top: 30px; 
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    #movableContainer1.moved-right {
+        left: 50px;
+        /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
 }
