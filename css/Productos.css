@@ -1,7 +1,6 @@
 #movableContainer{
     position: absolute;
-    top: 35px;
-    left: 30px;
+    left: 390px;
     border: none;
     border-radius: 20px;
     /* Ajusta el radio de los bordes según tus preferencias */
@@ -16,7 +15,7 @@
 }
 
 #movableContainer.moved-down {
-    top: 200px;
+    top: 35px;
     /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
 
@@ -28,7 +27,7 @@
 #movableContainer1 {
     position: absolute;
     top: 35px;
-    left: 990px;
+    left: 730px;
     border: none;
     border-radius: 20px;
     /* Ajusta el radio de los bordes según tus preferencias */
@@ -41,7 +40,7 @@
     border-radius: 20px; /* Bordes redondeados */
     position: absolute;
     bottom: 20px; /* Ajusta según sea necesario para la posición vertical */
-    left: 150px; /* Ajusta según sea necesario para la posición horizontal */
+    left: 210px; /* Ajusta según sea necesario para la posición horizontal */
  }
 
 #movableContainer2 {
@@ -95,7 +94,7 @@
 @media (max-width: 991.98px) {
 
     #movableContainer {
-        left: 30px;
+        left: 140px;
         margin-top: 980px; 
         /* Ajusta el valor según sea necesario para pantallas medianas */
     }
@@ -106,7 +105,7 @@
     }
 
     #movableContainer1 {
-        left: 30px;
+        left: 140px;
         margin-top: 500px; 
         /* Ajusta el valor según sea necesario para pantallas medianas */
     }
@@ -117,7 +116,7 @@
     }
 
     #movableContainer2 {
-        left: 30px;
+        left: 140px;
         margin-top: 30px; 
         /* Ajusta el valor según sea necesario para pantallas medianas */
     }
@@ -125,5 +124,12 @@
     #movableContainer1.moved-right {
         left: 50px;
         /* Ajusta el valor según sea necesario para pantallas medianas */
+    }
+
+    .custom-container{
+        position: absolute;
+        top: 150px;
+        left: 15px;
+        height: 133%;
     }
 }
