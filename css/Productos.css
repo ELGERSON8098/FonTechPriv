@@ -145,7 +145,7 @@
     }
 }
 
-@media (max-width: 375.98px) {
+@media (max-width: 375px) {
     .custom-container {
         position: absolute;
         top: 150px;
@@ -155,12 +155,23 @@
     }
 }
 
+@media (max-width: 390.98px) {
+    .custom-container {
+        position: absolute;
+        top: 150px;
+        left: 35px;
+        height: 250%;
+        width: 310px;
+    }
+}
+
+
 @media (max-width: 430.98px) {
     .custom-container {
         position: absolute;
         top: 150px;
         left: 55px;
-        height: 230%;
+        height: 170%;
         width: 310px;
     }
 }
