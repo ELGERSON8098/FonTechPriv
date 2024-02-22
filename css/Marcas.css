@@ -1,0 +1,42 @@
+.my-custom-column {
+    margin-top: 2px;
+    float: left;
+    max-width: 180px; /* Ajusta el ancho máximo según tus necesidades */
+}
+
+.my-form {
+    width: 900px; /* Ajusta el ancho máximo según tus necesidades */
+    height: 750px;
+}
+
+#my_forms{
+    width: 1000px;
+    position: relative;
+    right: 180px;
+}
+
+.my-name{
+    position: absolute;
+    margin-top: 190px;
+}
+
+.my-prec{
+    position: absolute;
+    margin-top: 290px;
+}
+
+.my-exist{
+    position: absolute;
+    margin-top: 480px;
+}
+
+.my-cat{
+    position: absolute;
+    margin-top: 380px;
+}
+
+.my-btn{
+    position: absolute;
+    margin-top: 570px;
+    left: 350px;
+}
