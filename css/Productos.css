@@ -2,6 +2,15 @@
     font-family: 'Comfortaa', regular;
 }
 
+.Flecha {
+    width: 200px;
+    height: 200px;
+    margin-top: -400px;
+    margin-left: 1550px;
+    border: none;
+}
+
+
 #movableContainer {
     position: absolute;
     left: 500px;
@@ -10,24 +19,24 @@
     /* Ajusta el radio de los bordes según tus preferencias */
     overflow: hidden;
 }
- 
+
 #movableContainer,
 #movableContainer1,
 #movableContainer2 {
     width: 260px;
     height: 450px;
 }
- 
+
 #movableContainer.moved-down {
     top: 130px;
     /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
- 
+
 #movableContainer.moved-right {
     left: 200px;
     /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
- 
+
 #movableContainer1 {
     position: absolute;
     top: 130px;
@@ -37,7 +46,7 @@
     /* Ajusta el radio de los bordes según tus preferencias */
     overflow: hidden;
 }
- 
+
 .custom-container {
     background-color: #f3f3f3;
     /* Cambia el color a tu preferencia */
@@ -51,8 +60,8 @@
     /* Ajusta según sea necesario para la posición horizontal */
     top: 120px;
 }
- 
- 
+
+
 #movableContainer2 {
     position: absolute;
     top: 130px;
@@ -62,39 +71,39 @@
     /* Ajusta el radio de los bordes según tus preferencias */
     overflow: hidden;
 }
- 
+
 #movableContainer1.moved-down {
     top: 200px;
     /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
- 
+
 #movableContainer1.moved-right {
     left: 200px;
     /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
- 
+
 #movableContainer2.moved-down {
     top: 200px;
     /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
- 
+
 #movableContainer2.moved-right {
     left: 200px;
     /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
 }
- 
+
 #icon1 {
     margin-left: 10px;
     /* Ajusta el margen izquierdo según tu preferencia */
     margin-top: 40px;
 }
- 
+
 #icon2 {
     margin-left: 50px;
     /* Ajusta el margen izquierdo según tu preferencia */
     margin-top: 40px;
 }
- 
+
 #movableContainer2 img {
     width: 50%;
     margin-left: 65px;
@@ -102,44 +111,38 @@
     margin-top: 100px;
     /* Ajusta el valor según tus necesidades */
 }
- 
- 
+
+
+/* Estilos específicos para pantallas medianas (md) y grandes (lg) */
 /* Estilos específicos para pantallas medianas (md) y grandes (lg) */
 @media (max-width: 991.98px) {
- 
     #movableContainer {
         left: 30px;
         margin-top: 898px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
+
     #movableContainer.moved-right {
         left: 50px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
+
     #movableContainer1 {
         left: 30px;
         margin-top: 400px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
+
     #movableContainer1.moved-right {
         left: 50px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
+
     #movableContainer2 {
         left: 30px;
         margin-top: -100px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
-    #movableContainer1.moved-right {
+
+    #movableContainer2.moved-right {
         left: 50px;
-        /* Ajusta el valor según sea necesario para pantallas medianas */
     }
- 
+
     .custom-container {
         position: absolute;
         top: 150px;
@@ -153,9 +156,30 @@
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 35px;
+        left: 45px;
         height: 230%;
         width: 310px;
+    }
+
+    .Flecha {
+        width: 200px;
+        height: 200px;
+        margin-top: 1200px;
+        margin-left: 120px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer,
+    #movableContainer1,
+    #movableContainer2 {
+        left: 30px;
+    }
+
+    #movableContainer.moved-right,
+    #movableContainer1.moved-right,
+    #movableContainer2.moved-right {
+        left: 50px;
     }
 }
 
@@ -164,18 +188,59 @@
         position: absolute;
         top: 150px;
         left: 35px;
-        height: 250%;
+        height: 50px;
         width: 310px;
     }
-}
 
+    .Flecha {
+        width: 200px;
+        height: 200px;
+        margin-top: 1410px;
+        margin-left: 140px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer,
+    #movableContainer1,
+    #movableContainer2 {
+        left: 30px;
+    }
+
+    #movableContainer.moved-right,
+    #movableContainer1.moved-right,
+    #movableContainer2.moved-right {
+        left: 50px;
+    }
+}
 
 @media (max-width: 430.98px) {
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 55px;
-        height: 170%;
+        left: 30px;
+        height: 180%;
         width: 310px;
+    }
+
+    .Flecha {
+        width: 200px;
+        height: 200px;
+        margin-top: 1490px;
+        margin-left: 92px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer,
+    #movableContainer1,
+    #movableContainer2 {
+        left: 30px;
+    }
+
+    #movableContainer.moved-right,
+    #movableContainer1.moved-right,
+    #movableContainer2.moved-right {
+        left: 50px;
     }
 }
