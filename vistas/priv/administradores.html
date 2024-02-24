@@ -33,6 +33,7 @@
                                         Cerrar Sesión
                                     </a>
                                 </div>
+
                             </div>
 
                         </div>
@@ -52,6 +53,24 @@
                                     <th>Ajustes</th>
                                 </tr>
                                 <tr>
+                                    <td>****</td>
+                                    <td>********</td>
+                                    <td>**************</td>
+                                    <td>
+                                        <!-- Botón para agregar -->
+                                        <button type="button" class="btn btn-success">
+                                            <i class="bi bi-plus-circle-fill"></i> Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td colspan="5" id="rowsFound"></td>
+                                </tr>
+                               
+                                <tr>
                                     <td>Administrador</td>
                                     <td>Juan</td>
                                     <td>Juan123@gmail.com</td>
@@ -65,6 +84,11 @@
                                     </td>
                                 </tr>
                             </thead>
+
+
+
+
+
                             <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                             <tbody id="tableBody"></tbody>
                         </table>
