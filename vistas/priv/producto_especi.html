@@ -239,7 +239,76 @@
         </div>
     </div>
 
-    
+    <div class="modal fade" id="productModal" tabindex="-2" role="dialog" aria-labelledby="productModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" id="my_forms">
+                <form id="saveForm" class="my-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="productModalLabel">Editar Producto</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-sm-12 col-md-6 my-custom-column">
+                            <img id="productImage" src="ruta/a/tu/imagen.png" alt="Imagen del producto"
+                                class="img-fluid">
+                            <input type="file" id="imagenProducto" style="display: none;" accept=".png, .jpg">
+                            <button id="changeImageButton" class="btn btn-primary mt-2">Cambiar imagen</button>
+                        </div>
+                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                        <div class="col-sm-12 col-md-6 my-espe">
+                            <label for="especi" class="form-label" id="especifi">Especificaciones</label>
+                            <input id="especi" type="text" name="especi" class="form-control" required>
+                        </div>
+                    
+                        <div class="col-sm-12 col-md-6 my-exist">
+                            <label for="Nombre" class="form-label" id="Nom">Ram</label>
+                            <input id="Nombre" type="text" name="descripcionProducto" class="form-control" required>
+                        </div>
+                       
+
+                        <div class="col-sm-12 col-md-6 my-from">
+                            <label for="camfron" class="form-label" >camara frontal</label>
+                            <input id="camfron" type="text" name="camfron" 
+                                class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 my-proce">
+                            <label for="Proce" class="form-label" >Procesador</label>
+                            <input id="Proce" type="text" name="proces" 
+                                class="form-control" required>
+                        </div>
+
+
+                        <div class="col-sm-12 col-md-6 my-pant">
+                            <label for="Pantalla" class="form-label" id="Pan">Pantalla</label>
+                            <input id="Pantalla" type="text" name="descripcionProducto" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 my-trase">
+                            <label for="Trase" class="form-label" id="Trase">Camara Trasera</label>
+                            <input id="Trase" type="text" name="Trase" class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6 my-capa">
+                            <label for="Capa" class="form-label" id="Capacidad">Capacidad</label>
+                            <input id="Capa" type="text" name="Capa" class="form-control" required>
+                        </div>
+                        
+                        </div>
+                        <div class="col-sm-12 col-md-6 my-siste">
+                            <label for="categoriaProducto" class="form-label" id="siste">Sistema Operativo</label>
+                            <select id="categoriaProducto" name="categoriaProducto" class="form-select" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer my-btn">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-danger">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
