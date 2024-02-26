@@ -68,7 +68,7 @@
                                         <img src="../../Recursos/img/icon _x letter_.png" class="img-fluid"
                                             alt="Nueva imagen" id="icon2">
                                         <!-- Botón de eliminar -->
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -94,16 +94,17 @@
                         <img src="../../Recursos/img/image 67.png" alt="Logo" width="100" class="mb-4">
                     </a>
 
-                   <!-- Menú desplegable para pantallas pequeñas, medianas y grandes -->
-<div class="navbar navbar-light navbar-expand-xl d-xl-none" style="background-color: rgba(255, 255, 255, 0);">
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-        data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+                    <!-- Menú desplegable para pantallas pequeñas, medianas y grandes -->
+                    <div class="navbar navbar-light navbar-expand-xl d-xl-none"
+                        style="background-color: rgba(255, 255, 255, 0);">
+                        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
 
-<div class="collapse navbar-collapse d-xl-block" id="sidebarNav">
+                    <div class="collapse navbar-collapse d-xl-block" id="sidebarNav">
                         <ul class="nav flex-column">
                             <li class="nav-item mb-5">
                                 <a class="nav-link active d-flex align-items-center" href="#"
@@ -180,8 +181,8 @@
         <img src="../../Recursos/img/List → Item → Link.png" class="card-img-top img-fluid" alt="Flechita">
     </div>
 
-    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="agregarProductoModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
+        aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,7 +199,8 @@
                         </div>
                         <div class="form-group">
                             <label for="descripcionProducto">Descripción:</label>
-                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500" required></textarea>
+                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500"
+                                required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="marcaProducto">Marca:</label>
@@ -208,7 +210,7 @@
                                 <option value="Apple">Xiaomi</option>
                                 <option value="Apple">Alcatel</option>
                                 <option value="Apple">Huawei</option>
-                                
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -229,7 +231,8 @@
                         </div>
                         <div class="form-group">
                             <label for="imagenPreview">Vista previa:</label>
-                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen" style="max-width: 200px;">
+                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
+                                style="max-width: 200px;">
                         </div>
                         <div id="camposAdicionales">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -244,6 +247,71 @@
         </div>
     </div>
 
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
+        aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="agregarProductoForm">
+                        <div class="form-group">
+                            <label for="nombreProducto">Nombre:</label>
+                            <input type="text" class="form-control" id="nombreProducto" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcionProducto">Descripción:</label>
+                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500"
+                                required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="marcaProducto">Marca:</label>
+                            <select class="form-control" id="marcaProducto" required>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Apple">Xiaomi</option>
+                                <option value="Apple">Alcatel</option>
+                                <option value="Apple">Huawei</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoriaProducto">Categoría:</label>
+                            <select class="form-control" id="categoriaProducto" required>
+                                <option value="Audifonos">Audífonos</option>
+                                <option value="Audifonos">Cases</option>
+                                <option value="Audifonos">Cargadores</option>
+                                <option value="Audifonos">Micro-SD</option>
+                                <option value="Smartwatch">Smartwatch</option>
+                                <option value="Celulares">Celulares</option>
+                                <option value="Tablets">Tablets</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagenProducto">Imagen:</label>
+                            <input type="file" class="form-control" id="imagenProducto" accept="image/*" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagenPreview">Vista previa:</label>
+                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
+                                style="max-width: 200px;">
+                        </div>
+                        <div id="camposAdicionales">
+                            <!-- Campos adicionales se agregarán dinámicamente -->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="agregarProductoForm">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
@@ -254,6 +322,12 @@
             $('#movableContainer2').click(function () {
                 // Mostrar el modal de "Agregar Producto"
                 $('#agregarProductoModal').modal('show');
+            });
+
+            // Escuchar el clic en el botón "Editar"
+            $('#icon1').click(function () {
+                // Mostrar el modal de "Editar Producto"
+                $('#editarProductoModal').modal('show');
             });
 
             // Escuchar el clic en el botón "Eliminar"
@@ -342,6 +416,15 @@
                 var reader = new FileReader();
                 reader.onload = function () {
                     $('#imagenPreview').attr('src', reader.result);
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            });
+
+            // Mostrar la vista previa de la imagen seleccionada (Modal de Edición)
+            $('#imagenProductoEditar').change(function (event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    $('#imagenPreviewEditar').attr('src', reader.result);
                 }
                 reader.readAsDataURL(event.target.files[0]);
             });
