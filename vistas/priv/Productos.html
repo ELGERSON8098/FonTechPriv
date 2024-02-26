@@ -174,95 +174,124 @@
         </div> <!-- Cierre de la fila del Contenedor Horizontal y Vertical -->
     </div>
 
-        <div class="Flecha">
-            <img src="../../Recursos/img/List → Item → Link.png" class="card-img-top img-fluid" alt="Flechita">
-        </div>
+    <div class="Flecha">
+        <img src="../../Recursos/img/List → Item → Link.png" class="card-img-top img-fluid" alt="Flechita">
+    </div>
 
-    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel"
+    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog" aria-labelledby="agregarProductoModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" id="my_forms">
-                <form id="saveForm" class="my-form">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="productModalLabel">Editar Producto</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="col-sm-12 col-md-6 my-custom-column">
-                            <img id="productImage" src="ruta/a/tu/imagen.png" alt="Imagen del producto"
-                                class="img-fluid">
-                            <input type="file" id="imagenProducto" style="display: none;" accept=".png, .jpg">
-                            <button id="changeImageButton" class="btn btn-primary mt-2">Cambiar imagen</button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="agregarProductoForm">
+                        <div class="form-group">
+                            <label for="nombreProducto">Nombre:</label>
+                            <input type="text" class="form-control" id="nombreProducto" required>
                         </div>
-                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                        <div class="col-sm-12 col-md-6 my-name">
-                            <label for="Nombre" class="form-label" id="Nom">Nombre</label>
-                            <input id="Nombre" type="text" name="descripcionProducto" class="form-control" required>
+                        <div class="form-group">
+                            <label for="descripcionProducto">Descripción:</label>
+                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500" required></textarea>
                         </div>
-
-                        <div class="col-sm-12 col-md-6" id="descripcionProductoDiv">
-                            <label for="descripcionProducto" class="form-label">Descripción</label>
-                            <input id="descripcionProducto" type="text" name="descripcionProducto" class="form-control"
-                                required>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6 my-prec">
-                            <label for="precioProducto" class="form-label">Precio (US$)</label>
-                            <input id="precioProducto" type="number" name="precioProducto" min="0.01" step="0.01"
-                                class="form-control" required>
-                        </div>
-                        <div class="col-sm-12 col-md-6 my-exist">
-                            <label for="existenciasProducto" class="form-label" id="Exis">Existencias</label>
-                            <input id="existenciasProducto" type="number" name="existenciasProducto" min="1" step="1"
-                                class="form-control" required>
-                        </div>
-                        <div class="col-sm-12 col-md-6 my-cat">
-                            <label for="categoriaProducto" class="form-label" id="Cat">Categoría</label>
-                            <select id="categoriaProducto" name="categoriaProducto" class="form-select" required>
+                        <div class="form-group">
+                            <label for="marcaProducto">Marca:</label>
+                            <select class="form-control" id="marcaProducto" required>
+                                <option value="Samsung">Samsung</option>
+                                <option value="Apple">Apple</option>
+                                <option value="Apple">Xiaomi</option>
+                                <option value="Apple">Alcatel</option>
+                                <option value="Apple">Huawei</option>
+                                
                             </select>
                         </div>
-                    </div>
-                    <div class="modal-footer my-btn">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-danger">Cancelar</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label for="categoriaProducto">Categoría:</label>
+                            <select class="form-control" id="categoriaProducto" required>
+                                <option value="Audifonos">Audífonos</option>
+                                <option value="Audifonos">Cases</option>
+                                <option value="Audifonos">Cargadores</option>
+                                <option value="Audifonos">Micro-SD</option>
+                                <option value="Smartwatch">Smartwatch</option>
+                                <option value="Celulares">Celulares</option>
+                                <option value="Tablets">Tablets</option>
+                            </select>
+                        </div>
+                        <div id="camposAdicionales">
+                            <!-- Campos adicionales se agregarán dinámicamente -->
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" form="agregarProductoForm">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
 
-
-
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Escuchar el clic en el botón "Agregar Productos"
+            $('#movableContainer2').click(function () {
+                // Mostrar el modal de "Agregar Producto"
+                $('#agregarProductoModal').modal('show');
+            });
+
+            // Escuchar el cambio en el campo de "Categoría"
+            $('#categoriaProducto').change(function () {
+                // Obtener el valor seleccionado
+                var categoriaSeleccionada = $(this).val();
+                // Limpiar los campos adicionales
+                $('#camposAdicionales').empty();
+                // Si la categoría seleccionada es "Celulares" o "Tablets"
+                if (categoriaSeleccionada === 'Celulares' || categoriaSeleccionada === 'Tablets') {
+                    // Agregar campos adicionales específicos
+                    $('#camposAdicionales').append(`
+                        <div class="form-group">
+                            <label for="ramProducto">RAM:</label>
+                            <input type="text" class="form-control" id="ramProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="pantallaProducto">Pantalla:</label>
+                            <input type="text" class="form-control" id="pantallaProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="camaraTraseraProducto">Cámara Trasera:</label>
+                            <input type="text" class="form-control" id="camaraTraseraProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacidadProducto">Capacidad:</label>
+                            <input type="text" class="form-control" id="capacidadProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="camaraFrontalProducto">Cámara Frontal:</label>
+                            <input type="text" class="form-control" id="camaraFrontalProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="procesadorProducto">Procesador:</label>
+                            <input type="text" class="form-control" id="procesadorProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="sistemaOperativoProducto">Sistema Operativo:</label>
+                            <select class="form-control" id="sistemaOperativoProducto">
+                                <option value="Android">Android</option>
+                                <option value="IOS">IOS</option>
+                            </select>
+                        </div>
+                    `);
+                }
+            });
+        });
+    </script>
 </body>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Agrega una clase al contenedor para aplicar el margen inferior
-        $('#movableContainer').addClass('moved-down');
-    });
-
-    $(document).ready(function () {
-        $("#icon1").click(function () {
-            $("#productModal").modal('show');
-        });
-    });
-
-    $(document).ready(function () {
-        $("#changeImageButton").click(function () {
-            $("#imagenProducto").click();
-        });
-
-        $("#imagenProducto").change(function () {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#productImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-    });
-
-</script>
 
 </html>
