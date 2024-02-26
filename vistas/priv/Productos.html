@@ -247,18 +247,18 @@
         </div>
     </div>
 
-    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
-        aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog"
+        aria-labelledby="editarProductoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
+                    <h5 class="modal-title" id="editarProductoModalLabel">Agregar Producto</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="agregarProductoForm">
+                    <form id="editarProductoForm">
                         <div class="form-group">
                             <label for="nombreProducto">Nombre:</label>
                             <input type="text" class="form-control" id="nombreProducto" required>
@@ -269,8 +269,8 @@
                                 required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="marcaProducto">Marca:</label>
-                            <select class="form-control" id="marcaProducto" required>
+                            <label for="marcaProducto1">Marca:</label>
+                            <select class="form-control" id="marcaProducto1" required>
                                 <option value="Samsung">Samsung</option>
                                 <option value="Apple">Apple</option>
                                 <option value="Apple">Xiaomi</option>
@@ -280,8 +280,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="categoriaProducto">Categoría:</label>
-                            <select class="form-control" id="categoriaProducto" required>
+                            <label for="categoriaProducto1">Categoría:</label>
+                            <select class="form-control" id="categoriaProducto1" required>
                                 <option value="Audifonos">Audífonos</option>
                                 <option value="Audifonos">Cases</option>
                                 <option value="Audifonos">Cargadores</option>
@@ -300,7 +300,7 @@
                             <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
                                 style="max-width: 200px;">
                         </div>
-                        <div id="camposAdicionales">
+                        <div id="camposAdicionales1">
                             <!-- Campos adicionales se agregarán dinámicamente -->
                         </div>
                     </form>
@@ -327,7 +327,7 @@
             // Escuchar el clic en el botón "Editar"
             $('#icon1').click(function () {
                 // Mostrar el modal de "Editar Producto"
-                $('#editarProductoModal').modal('show');
+                $('#editarproducto').modal('show');
             });
 
             // Escuchar el clic en el botón "Eliminar"
@@ -411,6 +411,51 @@
                 }
             });
 
+                // Escuchar el cambio en el campo de "Categoría"
+                $('#categoriaProducto1').change(function () {
+                // Obtener el valor seleccionado
+                var categoriaSeleccionada = $(this).val();
+                // Limpiar los campos adicionales
+                $('#camposAdicionales1').empty();
+                // Si la categoría seleccionada es "Celulares" o "Tablets"
+                if (categoriaSeleccionada === 'Celulares' || categoriaSeleccionada === 'Tablets') {
+                    // Agregar campos adicionales específicos
+                    $('#camposAdicionales1').append(`
+                        <div class="form-group">
+                            <label for="ramProducto">RAM:</label>
+                            <input type="text" class="form-control" id="ramProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="pantallaProducto">Pantalla:</label>
+                            <input type="text" class="form-control" id="pantallaProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="camaraTraseraProducto">Cámara Trasera:</label>
+                            <input type="text" class="form-control" id="camaraTraseraProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="capacidadProducto">Capacidad:</label>
+                            <input type="text" class="form-control" id="capacidadProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="camaraFrontalProducto">Cámara Frontal:</label>
+                            <input type="text" class="form-control" id="camaraFrontalProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="procesadorProducto">Procesador:</label>
+                            <input type="text" class="form-control" id="procesadorProducto">
+                        </div>
+                        <div class="form-group">
+                            <label for="sistemaOperativoProducto">Sistema Operativo:</label>
+                            <select class="form-control" id="sistemaOperativoProducto">
+                                <option value="Android">Android</option>
+                                <option value="IOS">IOS</option>
+                            </select>
+                        </div>
+                    `);
+                }
+            });
+
             // Mostrar la vista previa de la imagen seleccionada
             $('#imagenProducto').change(function (event) {
                 var reader = new FileReader();
@@ -432,4 +477,5 @@
     </script>
 </body>
 
+</html>
 </html>
