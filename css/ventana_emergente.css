@@ -42,7 +42,11 @@
     position: absolute;
     margin-top: 290px;
 }
-
+.my-mar{
+    position: absolute;
+    margin-top: 450px;  
+    left: 300px;
+}
 .my-exist{
     position: absolute;
     margin-top: 480px;
@@ -58,3 +62,4 @@
     margin-top: 570px;
     left: 350px;
 }
+

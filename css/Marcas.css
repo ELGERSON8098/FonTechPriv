@@ -16,8 +16,8 @@
 }
 
 .my-name{
-    position: absolute;
-    margin-top: 190px;
+    position: left;
+    margin-top: 290px;
 }
 
 .my-prec{
@@ -25,10 +25,7 @@
     margin-top: 290px;
 }
 
-.my-exist{
-    position: absolute;
-    margin-top: 480px;
-}
+
 
 .my-cat{
     position: absolute;
