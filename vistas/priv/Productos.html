@@ -78,7 +78,8 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3 mt-1">
                                 <div class="card mb-3" id="movableContainer2">
-                                    <img src="../../Recursos/img/plus.png" class="card-img-top img-fluid" alt="samsung">
+                                    <img src="../../Recursos/img/plus.png" class="card-img-top img-fluid flech"
+                                        alt="Plus">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Agregar Productos</h5>
                                     </div>
@@ -232,7 +233,7 @@
                         <div class="form-group">
                             <label for="imagenPreview">Vista previa:</label>
                             <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
-                                style="max-width: 200px;">
+                                style="max-inline-size: 200px;">
                         </div>
                         <div id="camposAdicionales">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -247,8 +248,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog"
-        aria-labelledby="editarProductoModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="editarProductoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -297,8 +298,7 @@
                         </div>
                         <div class="form-group">
                             <label for="imagenPreview">Vista previa:</label>
-                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
-                                style="max-width: 200px;">
+                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen">
                         </div>
                         <div id="camposAdicionales1">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -411,8 +411,8 @@
                 }
             });
 
-                // Escuchar el cambio en el campo de "Categoría"
-                $('#categoriaProducto1').change(function () {
+            // Escuchar el cambio en el campo de "Categoría"
+            $('#categoriaProducto1').change(function () {
                 // Obtener el valor seleccionado
                 var categoriaSeleccionada = $(this).val();
                 // Limpiar los campos adicionales
@@ -478,4 +478,5 @@
 </body>
 
 </html>
+
 </html>

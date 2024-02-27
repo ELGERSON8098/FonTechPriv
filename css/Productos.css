@@ -10,15 +10,18 @@
     border: none;
 }
 
+.imagenPreview{
+    max-width: 200px;
+}
 
 #movableContainer {
     position: absolute;
-    top: 130px;
     left: 500px;
     border: none;
     border-radius: 20px;
     /* Ajusta el radio de los bordes según tus preferencias */
     overflow: hidden;
+    top: 130px;
 }
 
 #movableContainer,
@@ -96,10 +99,6 @@
     margin-top: 40px;
 }
 
-#editarSamsung {
-    margin-top: 40px;
-}
-
 #icon2 {
     margin-left: 50px;
     /* Ajusta el margen izquierdo según tu preferencia */
@@ -117,10 +116,10 @@
 
 /* Estilos específicos para pantallas medianas (md) y grandes (lg) */
 /* Estilos específicos para pantallas medianas (md) y grandes (lg) */
-@media (max-width: 991.98px) {
+@media (max-width: 1366.98px) {
     #movableContainer {
-        left: 30px;
-        margin-top: 898px;
+        left: 430px;
+        margin-top: -40px;
     }
 
     #movableContainer.moved-right {
@@ -128,29 +127,30 @@
     }
 
     #movableContainer1 {
-        left: 30px;
-        margin-top: 400px;
+        left: 790px;
+        margin-top: -40px;
     }
 
-    #movableContainer1.moved-right {
-        left: 50px;
-    }
 
     #movableContainer2 {
         left: 30px;
-        margin-top: -100px;
-    }
-
-    #movableContainer2.moved-right {
-        left: 50px;
+        margin-top: -40px;
     }
 
     .custom-container {
         position: absolute;
-        top: 150px;
-        left: 35px;
-        height: 180%;
-        width: 310px;
+        top: 110px;
+        left: 250px;
+        height: 90%;
+        width: 1090px;
+    }
+
+    .Flecha {
+        width: 200px;
+        margin-left: 1300px;
+        top: -80px;
+        position: relative;
+        border: none;
     }
 }
 
@@ -189,7 +189,7 @@
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 35px;
+        left: 50px;
         height: 50px;
         width: 310px;
     }
@@ -220,9 +220,9 @@
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 30px;
+        left: 50px;
         height: 180%;
-        width: 800px;
+        width: 230px;
     }
 
     .Flecha {
@@ -237,7 +237,14 @@
     #movableContainer,
     #movableContainer1,
     #movableContainer2 {
-        left: 30px;
+        margin-left: -10px;
+        width: 190px;
+        height: 400px;
+        
+    }
+
+    #IMG{
+        margin-left: -50px;
     }
 
     #movableContainer.moved-right,
