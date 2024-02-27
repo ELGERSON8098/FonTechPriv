@@ -1,0 +1,25 @@
+.nav-link {
+    font-family: 'Comfortaa', regular;
+}
+
+.custom-containerCT {
+    background-color: #f3f3f3;
+    /* Cambia el color a tu preferencia */
+    width: 1150px;
+    height: 600px;
+    /* Relleno interior */
+    border-radius: 20px;
+    /* Bordes redondeados */
+    position: absolute;
+    left: 270px;
+    /* Ajusta según sea necesario para la posición horizontal */
+    top: 120px;
+}
+
+
+
+.textCT{
+    position: absolute;
+    top: 90px;
+    left: 273px;
+}
