@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap">
     <link rel="stylesheet" href="../../css/contenedorDash.css">
     <link rel="stylesheet" href="../../css/Administradores.css">
+    <link rel="stylesheet" href="../../css/Miperfil.css">
+    <link rel="stylesheet" href="../../css/Productos.css">
 </head>
 
 <body class="min-vh-100">
@@ -38,55 +40,38 @@
 
                         </div>
                     </div>
-                    <h2 class="card-title text">Reservas</h2>
+                    <h2 class="card-title text">Mi Perfil</h2>
                     <div class="container mt-3 custom-container">
-                        <div class="table-responsive">
-                            <table class="table table-hover tablita">
-                                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-                                <thead>
-                                    <tr>
-                                        <td colspan="5" id="rowsFound"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Reservado</th>
-                                        <th>Nombre</th>
-                                        <th>CORREO</th>
-                                        <th>Precio</th>
-                                        <th>Estado del pedido</th>
-                                    </tr>
-                                    <tr>
-                                        <td>YASMUN</td>
-                                        <td>Yerson</td>
-                                        <td>Yerson@gmail.com</td>
-                                        <td>$499.00</td>
-                                        <td>
-                                            <!-- Botón para aceptar -->
-                                            <button type="button" class="btn" style="background-color: #1AB817; color: white;">
-                                                <i class="bi bi-plus-circle-fill"></i> Aceptar
-                                            </button>
-                                            
-                                            <!-- Botón para en camino -->
-                                            <button type="button" class="btn" style="background-color: #DDE116; color: white;">
-                                                <i class="bi bi-plus-circle-fill"></i> En camino
-                                            </button>
-                                            
-                                            <!-- Botón para entregado -->
-                                            <button type="button" class="btn" style="background-color: #0D99E8; color: white;">
-                                                <i class="bi bi-plus-circle-fill"></i> Entregado
-                                            </button>
-                                            
-                                            <!-- Botón para cancelado -->
-                                            <button type="button" class="btn" style="background-color: #DC3545; color: white;">
-                                                <i class="bi bi-plus-circle-fill"></i> Cancelado
-                                            </button>
-                                            
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                        <table class="table table-hover tablita">
+                            <form class="row g-3" id="profileForm">
+                                <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                                    <label for="nombreAdministrador" class="form-label">Nombre</label>
+                                    <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control" required>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                    <label for="apellidoAdministrador" class="form-label">Apellido</label>
+                                    <input id="apellidoAdministrador" type="text" name="apellidoAdministrador" class="form-control"
+                                        required>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-4 offset-lg-2">
+                                    <label for="correoAdministrador" class="form-label">Correo</label>
+                                    <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control" required>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-4">
+                                    <label for="aliasAdministrador" class="form-label">Alias</label>
+                                    <input id="aliasAdministrador" type="text" name="aliasAdministrador" class="form-control" required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+                                </div>
+                            </form>
+                               
+                                
+                                        
+                            
+                            
+                        </table>
                     </div>
-                </div>
             </main>
 
             <nav class="col-md-2 d-md-block sidebar" style="background-color: rgba(255, 255, 255,0);">
@@ -95,8 +80,8 @@
                         <img src="../../Recursos/img/image 67.png" alt="Logo" width="100" class="mb-4">
                     </a>
 
-                    <!-- Menú desplegable solo en pantallas pequeñas -->
-                    <div class="navbar navbar-light navbar-expand-md d-md-none"
+                    <!-- Menú desplegable para pantallas pequeñas, medianas y grandes -->
+                    <div class="navbar navbar-light navbar-expand-xl d-xl-none"
                         style="background-color: rgba(255, 255, 255, 0);">
                         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
                             data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
@@ -105,7 +90,7 @@
                         </button>
                     </div>
 
-                    <div class="collapse navbar-collapse d-md-block" id="sidebarNav">
+                    <div class="collapse navbar-collapse d-xl-block" id="sidebarNav">
                         <ul class="nav flex-column">
                             <li class="nav-item mb-5">
                                 <a class="nav-link active d-flex align-items-center" href="../priv/Dashboard.html"
@@ -177,37 +162,13 @@
         </div> <!-- Cierre de la fila del Contenedor Horizontal y Vertical -->
     </div>
 
+    
+
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
 </body>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Agrega una clase al contenedor para aplicar el margen inferior
-        $('#movableContainer').addClass('moved-down');
-    });
-
-    $(document).ready(function () {
-        $("#icon1").click(function () {
-            $("#productModal").modal('show');
-        });
-    });
-
-    $(document).ready(function () {
-        $("#changeImageButton").click(function () {
-            $("#imagenProducto").click();
-        });
-
-        $("#imagenProducto").change(function () {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#productImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-    });
-
-</script>
 
 </html>
