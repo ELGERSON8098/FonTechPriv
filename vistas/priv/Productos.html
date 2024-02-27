@@ -239,8 +239,9 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" form="agregarProductoForm">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnGuardar"
+                        form="agregarProductoForm">Guardar</button>
                 </div>
             </div>
         </div>
@@ -252,7 +253,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editarProductoModalLabel">Editar Producto</h5>
-                    
+
                 </div>
                 <div class="modal-body">
                     <form id="editarProductoForm">
@@ -302,7 +303,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-primary" form="agregarProductoForm">Guardar</button>
                 </div>
             </div>
@@ -361,6 +362,27 @@
                     }
                 });
             });
+
+            // Escuchar el clic en el botón "Guardar"
+            $('#btnGuardar').click(function () {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: "btn btn-success",
+
+                    },
+                    buttonsStyling: false
+                });
+                swalWithBootstrapButtons.fire({
+                    title: "Agregado",
+                    text: "Tu archivo ha sido agregado con exito.",
+                    icon: "success",
+                    confirmButtonText: "OK",
+
+                    reverseButtons: true
+                })
+            });
+
+
 
             // Escuchar el cambio en el campo de "Categoría"
             $('#categoriaProducto').change(function () {
@@ -478,7 +500,5 @@
         });
     </script>
 </body>
-
-</html>
 
 </html>
