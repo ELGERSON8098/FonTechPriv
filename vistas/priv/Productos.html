@@ -231,8 +231,7 @@
                         </div>
                         <div class="form-group">
                             <label for="imagenPreview">Vista previa:</label>
-                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
-                                style="max-width: 200px;">
+                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen">
                         </div>
                         <div id="camposAdicionales">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -246,9 +245,9 @@
             </div>
         </div>
     </div>
-<!--Modal para editar productos-->
-    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog"
-        aria-labelledby="editarProductoModalLabel" aria-hidden="true">
+    <!--Modal para editar productos-->
+    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="editarProductoModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -297,7 +296,7 @@
                         </div>
                         <div class="form-group">
                             <label for="imagenPreviewEdit">Vista previa:</label>
-                            <img id="imagenPreviewEdit" class="img-fluid" src="#" alt="Vista previa de la imagen" style="max-width: 200px;">
+                            <img id="imagenPreviewEdit" class="img-fluid" src="#" alt="Vista previa de la imagen">
                         </div>
                         <div id="camposAdicionales1">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -410,8 +409,8 @@
                 }
             });
 
-                // Escuchar el cambio en el campo de "Categoría"
-                $('#categoriaProducto1').change(function () {
+            // Escuchar el cambio en el campo de "Categoría"
+            $('#categoriaProducto1').change(function () {
                 // Obtener el valor seleccionado
                 var categoriaSeleccionada = $(this).val();
                 // Limpiar los campos adicionales
@@ -465,22 +464,23 @@
             });
 
 
- // Mostrar la vista previa de la imagen seleccionada en el modal de editar producto
-$('#imagenProductoEdit').change(function (event) {
-    var reader = new FileReader();
-    reader.onload = function () {
-        $('#imagenPreviewEdit').attr('src', reader.result);
-    }
-    reader.readAsDataURL(event.target.files[0]);
-});
+            // Mostrar la vista previa de la imagen seleccionada en el modal de editar producto
+            $('#imagenProductoEdit').change(function (event) {
+                var reader = new FileReader();
+                reader.onload = function () {
+                    $('#imagenPreviewEdit').attr('src', reader.result);
+                }
+                reader.readAsDataURL(event.target.files[0]);
+            });
 
 
 
 
-            
+
         });
     </script>
 </body>
 
 </html>
+
 </html>
