@@ -10,7 +10,7 @@
     border: none;
 }
 
-.imagenPreview{
+.imagenPreview {
     max-width: 200px;
 }
 
@@ -114,8 +114,8 @@
 }
 
 
-/* Estilos específicos para pantallas medianas (md) y grandes (lg) */
-/* Estilos específicos para pantallas medianas (md) y grandes (lg) */
+/* Estilos específicos para pantallas medianas (md) */
+/* Estilos específicos para pantallas medianas (md)*/
 @media (max-width: 1366.98px) {
     #movableContainer {
         left: 430px;
@@ -154,102 +154,242 @@
     }
 }
 
-@media (max-width: 375px) {
+
+@media (min-width: 359px) and (max-width: 360px) {
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 45px;
-        height: 230%;
-        width: 310px;
+        left: 20px;
+        height: 205%;
+        width: 320px;
     }
 
     .Flecha {
-        width: 200px;
-        height: 200px;
-        margin-top: 1200px;
-        margin-left: 120px;
+        width: 150px;
+        margin-top: 1550px;
+        margin-left: 95px;
         transform: rotate(-269deg);
         border: none;
     }
 
-    #movableContainer,
-    #movableContainer1,
-    #movableContainer2 {
-        left: 30px;
+    #movableContainer{
+        left: 31px;
+        margin-top: 900px;
     }
 
-    #movableContainer.moved-right,
-    #movableContainer1.moved-right,
-    #movableContainer2.moved-right {
-        left: 50px;
+    #movableContainer1 {
+        left: 31px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 31px;
+        margin-top: -85px;
     }
 }
 
-@media (max-width: 390.98px) {
+@media (min-width: 374px) and (max-width: 375px) {
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 50px;
-        height: 50px;
-        width: 310px;
+        left: 30px;
+        height: 225%;
+        width: 320px;
     }
 
     .Flecha {
-        width: 200px;
-        height: 200px;
-        margin-top: 1410px;
-        margin-left: 140px;
+        width: 150px;
+        margin-top: 1550px;
+        margin-left: 105px;
         transform: rotate(-269deg);
         border: none;
     }
 
-    #movableContainer,
-    #movableContainer1,
-    #movableContainer2 {
-        left: 30px;
+    #movableContainer{
+        left: 31px;
+        margin-top: 900px;
     }
 
-    #movableContainer.moved-right,
-    #movableContainer1.moved-right,
-    #movableContainer2.moved-right {
-        left: 50px;
+    #movableContainer1 {
+        left: 31px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 31px;
+        margin-top: -85px;
     }
 }
 
-@media (max-width: 430.98px) {
+
+@media (min-width: 389px) and (max-width: 390px) {
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 50px;
+        left: 35px;
         height: 180%;
-        width: 230px;
+        width: 320px;
     }
 
     .Flecha {
-        width: 200px;
-        height: 200px;
-        margin-top: 1490px;
-        margin-left: 92px;
+        width: 150px;
+        margin-top: 1550px;
+        margin-left: 105px;
         transform: rotate(-269deg);
         border: none;
     }
 
-    #movableContainer,
-    #movableContainer1,
+    #movableContainer{
+        left: 31px;
+        margin-top: 900px;
+    }
+
+    #movableContainer1 {
+        left: 31px;
+        margin-top: 410px;
+    }
+
+
     #movableContainer2 {
-        margin-left: -10px;
-        width: 190px;
-        height: 400px;
-        
+        left: 31px;
+        margin-top: -85px;
+    }
+}
+
+@media  (min-width: 392px) and (max-width: 410px){
+    .custom-container {
+        position: absolute;
+        top: 150px;
+        left: 20px;
+        height: 170%;
+        width: 270px;
     }
 
-    #IMG{
-        margin-left: -50px;
+    .Flecha {
+        width: 150px;
+        margin-top: 1580px;
+        margin-left: 60px;
+        transform: rotate(-269deg);
+        border: none;
     }
 
-    #movableContainer.moved-right,
-    #movableContainer1.moved-right,
-    #movableContainer2.moved-right {
+    #movableContainer{
+        left: 5px;
+        margin-top: 900px;
+    }
+
+    #movableContainer1 {
+        left: 5px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 5px;
+        margin-top: -85px;
+    }
+}
+
+@media  (min-width: 411px) and (max-width: 412px){
+    .custom-container {
+        position: absolute;
+        top: 150px;
+        left: 40px;
+        height: 168%;
+        width: 330px;
+    }
+
+    .Flecha {
+        width: 150px;
+        margin-top: 1580px;
+        margin-left: 110px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer{
+        left: 33px;
+        margin-top: 900px;
+    }
+
+    #movableContainer1 {
+        left: 33px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 33px;
+        margin-top: -85px;
+    }
+}
+
+@media  (min-width: 413px) and (max-width: 414px){
+    .custom-container {
+        position: absolute;
+        top: 150px;
+        left: 40px;
+        height: 170%;
+        width: 330px;
+    }
+
+    .Flecha {
+        width: 150px;
+        margin-top: 1580px;
+        margin-left: 115px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer{
+        left: 33px;
+        margin-top: 900px;
+    }
+
+    #movableContainer1 {
+        left: 33px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 33px;
+        margin-top: -85px;
+    }
+}
+
+@media  (min-width: 429px) and (max-width: 430px){
+    .custom-container {
+        position: absolute;
+        top: 150px;
         left: 50px;
+        height: 165%;
+        width: 330px;
+    }
+
+    .Flecha {
+        width: 150px;
+        margin-top: 1580px;
+        margin-left: 115px;
+        transform: rotate(-269deg);
+        border: none;
+    }
+
+    #movableContainer{
+        left: 33px;
+        margin-top: 900px;
+    }
+
+    #movableContainer1 {
+        left: 33px;
+        margin-top: 410px;
+    }
+
+
+    #movableContainer2 {
+        left: 33px;
+        margin-top: -85px;
     }
 }
