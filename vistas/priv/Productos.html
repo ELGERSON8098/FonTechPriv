@@ -78,8 +78,7 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3 mt-1">
                                 <div class="card mb-3" id="movableContainer2">
-                                    <img src="../../Recursos/img/plus.png" class="card-img-top img-fluid flech"
-                                        alt="Plus">
+                                    <img src="../../Recursos/img/plus.png" class="card-img-top img-fluid" alt="samsung">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">Agregar Productos</h5>
                                     </div>
@@ -233,7 +232,7 @@
                         <div class="form-group">
                             <label for="imagenPreview">Vista previa:</label>
                             <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen"
-                                style="max-inline-size: 200px;">
+                                style="max-width: 200px;">
                         </div>
                         <div id="camposAdicionales">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -247,9 +246,9 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="editarProductoModalLabel"
-        aria-hidden="true">
+<!--Modal para editar productos-->
+    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog"
+        aria-labelledby="editarProductoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -293,12 +292,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="imagenProducto">Imagen:</label>
-                            <input type="file" class="form-control" id="imagenProducto" accept="image/*" required>
+                            <label for="imagenProductoEdit">Imagen:</label>
+                            <input type="file" class="form-control" id="imagenProductoEdit" accept="image/*" required>
                         </div>
                         <div class="form-group">
-                            <label for="imagenPreview">Vista previa:</label>
-                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen">
+                            <label for="imagenPreviewEdit">Vista previa:</label>
+                            <img id="imagenPreviewEdit" class="img-fluid" src="#" alt="Vista previa de la imagen" style="max-width: 200px;">
                         </div>
                         <div id="camposAdicionales1">
                             <!-- Campos adicionales se agregarán dinámicamente -->
@@ -411,8 +410,8 @@
                 }
             });
 
-            // Escuchar el cambio en el campo de "Categoría"
-            $('#categoriaProducto1').change(function () {
+                // Escuchar el cambio en el campo de "Categoría"
+                $('#categoriaProducto1').change(function () {
                 // Obtener el valor seleccionado
                 var categoriaSeleccionada = $(this).val();
                 // Limpiar los campos adicionales
@@ -465,18 +464,23 @@
                 reader.readAsDataURL(event.target.files[0]);
             });
 
-            // Mostrar la vista previa de la imagen seleccionada (Modal de Edición)
-            $('#imagenProductoEditar').change(function (event) {
-                var reader = new FileReader();
-                reader.onload = function () {
-                    $('#imagenPreviewEditar').attr('src', reader.result);
-                }
-                reader.readAsDataURL(event.target.files[0]);
-            });
+
+ // Mostrar la vista previa de la imagen seleccionada en el modal de editar producto
+$('#imagenProductoEdit').change(function (event) {
+    var reader = new FileReader();
+    reader.onload = function () {
+        $('#imagenPreviewEdit').attr('src', reader.result);
+    }
+    reader.readAsDataURL(event.target.files[0]);
+});
+
+
+
+
+            
         });
     </script>
 </body>
 
 </html>
-
 </html>
