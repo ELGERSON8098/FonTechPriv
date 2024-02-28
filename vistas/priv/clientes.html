@@ -10,7 +10,7 @@
     <!-- Fuente Comfortaa desde Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap">
     <link rel="stylesheet" href="../../css/contenedorDash.css">
-    <link rel="stylesheet" href="../../css/Clientes.css">
+    <link rel="stylesheet" href="../../css/Administradores.css">
 </head>
 
 <body class="min-vh-100">
@@ -24,7 +24,7 @@
                             <!-- Contenido de la página -->
                             <div class="d-flex justify-content-end mt-3">
                                 <div class="me-md-5 me-3">
-                                    <a class="nav-link" href="#">
+                                    <a class="nav-link" href="../priv/Miperfil.html">
                                         Mi Perfil
                                     </a>
                                 </div>
@@ -38,44 +38,57 @@
 
                         </div>
                     </div>
-                    <h2 class="card-title textCT">Mi Perfil</h2>
-                    <div class="container mt-3 custom-containerCT">
-                        <form>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="inputNombre4">Nombre</label>
-                                <input type="text" class="form-control" id="inputName4" placeholder="Alejandro">
-                              </div>
-                              <div class="form-group col-md-6">
-                                <label for="inputApellido4">Apellido</label>
-                                <input type="text" class="form-control" id="inputApellido4" placeholder="Apellido">
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="inputEmail">Correo</label>
-                              <input type="email" class="form-control" id="inputEmail" placeholder="correoejemplo503@gmai.com">
-                            </div>
-                            
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="inputCell">Telefono</label>
-                                <input type="tel" class="form-control" id="inputCell" placeholder="77777777"> 
-                              </div>
-                              <div class="form-group col-md-4">
-                                <label for="inputState">State</label>
-                                <select id="inputState" class="form-control">
-                                  <option selected>Administrador</option>
-                                  <option selected>Empleado</option>
-                                  
-                                </select>
-                              </div>
-                              
-                            </div>
-                            <div class="form-group">
-                              
-                            </div>
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                          </form>
+                    <h2 class="card-title text">Clientes</h2>
+                    <div class="container mt-3 custom-container">
+                        <table class="table table-hover tablita">
+                            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td colspan="5" id="rowsFound"></td>
+                                </tr>
+                                <tr>
+                                    <th>Cargo</th>
+                                    <th>NOMBRE</th>
+                                    <th>CORREO</th>
+                                    <th>Ajustes</th>
+                                </tr>
+                                <tr>
+                                    <td>****</td>
+                                    <td>********</td>
+                                    <td>**************</td>
+                                    <td>
+                                        <!-- Botón para agregar -->
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                            data-bs-target="#agregarModal">
+                                            <i class="bi bi-plus-circle-fill"></i> Agregar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                            <thead>
+                                <tr>
+                                    <td colspan="5" id="rowsFound"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Administrador</td>
+                                    <td>Juan</td>
+                                    <td>Juan123@gmail.com</td>
+                                    <td>
+                                        <button type="button" class="btn btn-info editEmployeeBtn"
+                                            data-bs-toggle="modal" data-bs-target="#editarModal" data-employee-id="1">
+                                            <i class="bi bi-pencil-fill">Editar</i>
+                                        </button>
+                                        <button type="button" class="btn btn-danger deleteEmployeeBtn">
+                                            <i class="bi bi-trash-fill">Eliminar</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </thead>
+                            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                            <tbody id="tableBody"></tbody>
+                        </table>
                     </div>
             </main>
 
@@ -167,14 +180,121 @@
         </div> <!-- Cierre de la fila del Contenedor Horizontal y Vertical -->
     </div>
 
-    
-   
+    <!-- Modal para agregar -->
+    <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Agregar Nuevo Administrador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para agregar un nuevo empleado -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido">
+                        </div>
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contraseña" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contraseña">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Número Telefónico</label>
+                            <input type="tel" class="form-control" id="telefono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="cargo" class="form-label">Cargo</label>
+                            <select class="form-select" id="cargo">
+                                <option value="supervisor">Supervisor</option>
+                                <option value="empleado">Empleado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar -->
+    <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Administrador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario para editar un administrador -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="editNombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="editNombre">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editApellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="editApellido">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCorreo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="editCorreo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editContraseña" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="editContraseña">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editTelefono" class="form-label">Número Telefónico</label>
+                            <input type="tel" class="form-control" id="editTelefono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="editCargo" class="form-label">Cargo</label>
+                            <select class="form-select" id="editCargo">
+                                <option value="supervisor">Supervisor</option>
+                                <option value="empleado">Empleado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    
+    <script>
+        // Función para mostrar una ventana de confirmación al intentar eliminar un empleado
+        $(document).ready(function () {
+            $(".deleteEmployeeBtn").click(function () {
+                if (confirm("¿Estás seguro de eliminarlo?")) {
+                    // Aquí iría el código para eliminar el empleado si se confirma la acción
+                    // De momento mostraremos un mensaje en la consola
+                    console.log("Empleado eliminado");
+                } else {
+                    // Si se cancela la eliminación no se hace nada
+                    console.log("Eliminación cancelada");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
