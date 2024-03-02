@@ -78,6 +78,10 @@
     /* Ajusta según sea necesario para cambiar la posición del contenedor */
 }
 
+.navbar-white {
+    background-color: white ;
+}
+
 #movableContainer1.moved-right {
     left: 200px;
     /* Ajusta según sea necesario para cambiar la posición hacia la derecha */
