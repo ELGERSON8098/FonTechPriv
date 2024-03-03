@@ -700,12 +700,12 @@
             position: absolute;
             top: 150px;
             left: 40px;
-            height: 170%;
-            width: 900px;
+            height: 200%;
+            width: 4000px;
         }
             #movableContainer{
                 left: 175px;
-                margin-top: 1050px;
+                margin-top: 1100px;
                 width:355px;
                height: 500px;
     
@@ -713,7 +713,7 @@
     
             #movableContainer1 {
                 left: 175px;
-                margin-top: 470px;
+                margin-top: 530px;
                 width: 355px;
                 height: 500px;
     
@@ -721,8 +721,8 @@
     
     
             #movableContainer2 {
-                left: 175px;
-                margin-top: -100px;
+                left: 180px;
+                margin-top: -60px;
                 width: 355px;
                 height: 500px;
             }
@@ -730,6 +730,46 @@
             width: 150px;
             margin-top: 1880px;
             margin-left: 305px;
+            transform: rotate(-269deg);
+            border: none;
+        }
+    }
+    
+    @media  (min-width: 992px) and (max-width: 1020px){
+        .custom-container {
+            position: absolute;
+            top: 150px;
+            left: 40px;
+            height: 200%;
+            width: 900px;
+        }
+            #movableContainer{
+                left: 250px;
+                margin-top: 1100px;
+                width:355px;
+               height: 500px;
+    
+            }
+    
+            #movableContainer1 {
+                left: 250px;
+                margin-top: 490px;
+                width: 355px;
+                height: 500px;
+    
+            }
+    
+    
+            #movableContainer2 {
+                left: 250px;
+                margin-top: -40px;
+                width: 355px;
+                height: 500px;
+            }
+            .Flecha{
+            width: 150px;
+            margin-top: 1880px;
+            margin-left: 380px;
             transform: rotate(-269deg);
             border: none;
         }
