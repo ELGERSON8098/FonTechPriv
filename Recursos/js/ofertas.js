@@ -176,8 +176,8 @@ $(document).ready(function () {
         }
     });
 
-    // Mostrar la vista previa de la imagen seleccionada
-    $('#imagenProducto').change(function (event) {
+     // Mostrar la vista previa de la imagen seleccionada
+      $('#imagenProducto').change(function (event) {
         var reader = new FileReader();
         reader.onload = function () {
             $('#imagenPreview').attr('src', reader.result);
@@ -206,6 +206,9 @@ function Blanco_PantallaChica() {
         navbar.classList.remove('navbar-white');
     }
 }
+
+document.addEventListener('DOMContentLoaded', Blanco_PantallaChica);
+window.addEventListener('resize', Blanco_PantallaChica);
 
 document.addEventListener('DOMContentLoaded', Blanco_PantallaChica);
 window.addEventListener('resize', Blanco_PantallaChica);
