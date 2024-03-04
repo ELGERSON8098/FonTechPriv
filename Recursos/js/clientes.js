@@ -1,6 +1,6 @@
 // Función para mostrar una ventana de confirmación al intentar eliminar un empleado
 $(document).ready(function () {
-    $(".deleteClientBtn").click(function () {
+    $(".deleteEmployeeBtn").click(function () {
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
@@ -17,10 +17,175 @@ $(document).ready(function () {
                 console.log("Empleado eliminado");
                 Swal.fire(
                     '¡Eliminado!',
-                    'Tu archivo ha sido eliminado.',
+                    'Tu administrador ha sido eliminado.',
                     'success'
                 );
             }
         });
     });
 });
+
+// Espera a que el DOM esté completamente cargado
+document.addEventListener("DOMContentLoaded", function () {
+    // Selecciona los campos de nombre, apellido, correo, contraseña y teléfono
+    var nombreInput = document.getElementById("nombreCL");
+    var apellidoInput = document.getElementById("apellidoCL");
+    var correoInput = document.getElementById("correoCL");
+    var contraseñaInput = document.getElementById("contraseñaCL");
+    var telefonoInput = document.getElementById("telefonoCL");
+
+    // Agrega listeners para el evento de teclado (keydown) en los campos de nombre, apellido, correo, contraseña y teléfono
+    nombreInput.addEventListener("keydown", function (event) {
+        validarLetrasConEspacios(event);
+    });
+    apellidoInput.addEventListener("keydown", function (event) {
+        validarLetrasConEspacios(event);
+    });
+    correoInput.addEventListener("blur", validarCorreo);
+    contraseñaInput.addEventListener("blur", validarContraseña); // Agregamos validación al perder el foco del campo contraseña
+    telefonoInput.addEventListener("keydown", function (event) {
+        validarNumeros(event);
+    });
+
+    // Selecciona el botón de guardar cambios
+    var guardarCambiosBtn = document.getElementById("guardarCambiosCLBtn");
+
+    // Agrega un listener para el evento de clic
+    guardarCambiosBtn.addEventListener("click", function (event) {
+        // Previene el comportamiento predeterminado del formulario (enviarlo)
+        event.preventDefault();
+
+        // Validar que todos los campos estén llenos y cumplan con las validaciones
+        var nombre = document.getElementById("nombreCL").value.trim();
+        var apellido = document.getElementById("apellidoCL").value.trim();
+        var correo = document.getElementById("correoCL").value.trim();
+        var contraseña = document.getElementById("contraseñaCL").value.trim();
+        var telefono = document.getElementById("telefonoCL").value.trim();
+        var cargo = document.getElementById("cargoCL").value.trim();
+
+        // Expresión regular para validar solo letras y espacios
+        var letrasConEspaciosRegex = /^[A-Za-z\s]+$/;
+
+        // Expresión regular para validar el formato de correo electrónico
+        var correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Validación de nombre
+        if (nombre === "" || !letrasConEspaciosRegex.test(nombre)) {
+            mostrarError('Por favor, ingresa un nombre válido.');
+            return;
+        }
+
+        // Validación de apellido
+        if (apellido === "" || !letrasConEspaciosRegex.test(apellido)) {
+            mostrarError('Por favor, ingresa un apellido válido.');
+            return;
+        }
+
+        // Validación de correo electrónico
+        if (correo === "" || !correoRegex.test(correo)) {
+            mostrarError('Por favor, ingresa un correo electrónico válido.');
+            return;
+        }
+
+        // Validación de contraseña
+        if (contraseña === "") {
+            mostrarError('Por favor, ingresa una contraseña.');
+            return;
+        }
+
+        // Validación de teléfono
+        var numerosRegex = /^[0-9]+$/;
+        if (telefono === "" || !numerosRegex.test(telefono)) {
+            mostrarError('Por favor, ingresa un número de teléfono válido.');
+            return;
+        }
+
+        // Resto de validaciones...
+
+        // Si todos los campos están llenos y pasan las validaciones, muestra la alerta de guardado
+        mostrarExito('Los cambios se han guardado correctamente.');
+
+        // Limpia los campos del formulario
+        limpiarCampos();
+    });
+});
+
+// Función para validar que solo se ingresen letras (con espacios) en los campos de nombre y apellido
+function validarLetrasConEspacios(event) {
+    // Obtiene el código de la tecla presionada
+    var key = event.key;
+
+    // Expresión regular para validar si la tecla presionada es una letra o un espacio
+    var letrasConEspaciosRegex = /^[A-Za-z\s]$/;
+
+    // Si la tecla presionada no es una letra ni un espacio, cancela el evento de teclado
+    if (!letrasConEspaciosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
+        event.preventDefault();
+    }
+}
+
+// Función para validar el formato de correo electrónico
+function validarCorreo() {
+    var correoInput = document.getElementById("correo");
+    var correo = correoInput.value.trim();
+    var correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (correo !== "" && !correoRegex.test(correo)) {
+        mostrarError('Por favor, ingresa un correo electrónico válido.');
+    }
+}
+
+// Función para validar el campo de contraseña
+function validarContraseña() {
+    var contraseñaInput = document.getElementById("contraseña");
+    var contraseña = contraseñaInput.value.trim();
+
+    if (contraseña === "") {
+        mostrarError('Por favor, ingresa una contraseña.');
+    }
+}
+
+// Función para validar que solo se ingresen números en el campo de teléfono
+function validarNumeros(event) {
+    // Obtiene el código de la tecla presionada
+    var key = event.key;
+
+    // Expresión regular para validar si la tecla presionada es un número
+    var numerosRegex = /^[0-9]$/;
+
+    // Si la tecla presionada no es un número, cancela el evento de teclado
+    if (!numerosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
+        event.preventDefault();
+    }
+}
+
+// Función para mostrar una alerta de error
+function mostrarError(mensaje) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: mensaje
+    });
+}
+
+// Función para mostrar una alerta de éxito
+function mostrarExito(mensaje) {
+    Swal.fire({
+        icon: 'success',
+        title: '¡Guardado!',
+        text: mensaje,
+        showConfirmButton: false,
+        timer: 1500 // Cierra automáticamente después de 1.5 segundos
+    });
+}
+
+// Función para limpiar los campos del formulario
+function limpiarCampos() {
+    document.getElementById("nombreCL").value = "";
+    document.getElementById("apellidoCL").value = "";
+    document.getElementById("correoCL").value = "";
+    document.getElementById("contraseñaCL").value = "";
+    document.getElementById("telefonoCL").value = "";
+    document.getElementById("cargoCL").selectedIndex = 0; // Selecciona la primera opción en el select
+}
+
