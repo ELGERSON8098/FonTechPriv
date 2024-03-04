@@ -10,7 +10,6 @@
     <!-- Fuente Comfortaa desde Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap">
     <link rel="stylesheet" href="../../css/contenedorDash.css">
-    <link rel="stylesheet" href="../../css/Administradores.css">
     <link rel="stylesheet" href="../../css/Reservas.css">
 </head>
 
@@ -62,25 +61,29 @@
                                         <td>$499.00</td>
                                         <td>
                                             <!-- Botón para aceptar -->
-                                            <button type="button" class="btn" style="background-color: #1AB817; color: white;">
+                                            <button type="button" class="btn"
+                                                style="background-color: #1AB817; color: white;">
                                                 <i class="bi bi-plus-circle-fill"></i> Aceptar
                                             </button>
-                                            
+
                                             <!-- Botón para en camino -->
-                                            <button type="button" class="btn" style="background-color: #DDE116; color: white;">
+                                            <button type="button" class="btn"
+                                                style="background-color: #DDE116; color: white;">
                                                 <i class="bi bi-plus-circle-fill"></i> En camino
                                             </button>
-                                            
+
                                             <!-- Botón para entregado -->
-                                            <button type="button" class="btn" style="background-color: #0D99E8; color: white;">
+                                            <button type="button" class="btn"
+                                                style="background-color: #0D99E8; color: white;">
                                                 <i class="bi bi-plus-circle-fill"></i> Entregado
                                             </button>
-                                            
+
                                             <!-- Botón para cancelado -->
-                                            <button type="button" class="btn" style="background-color: #DC3545; color: white;">
+                                            <button type="button" class="btn"
+                                                style="background-color: #DC3545; color: white;">
                                                 <i class="bi bi-plus-circle-fill"></i> Cancelado
                                             </button>
-                                            
+
                                         </td>
                                     </tr>
                                 </thead>
@@ -183,32 +186,6 @@
 </body>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Agrega una clase al contenedor para aplicar el margen inferior
-        $('#movableContainer').addClass('moved-down');
-    });
-
-    $(document).ready(function () {
-        $("#icon1").click(function () {
-            $("#productModal").modal('show');
-        });
-    });
-
-    $(document).ready(function () {
-        $("#changeImageButton").click(function () {
-            $("#imagenProducto").click();
-        });
-
-        $("#imagenProducto").change(function () {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#productImage').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        });
-    });
-
-</script>
+<script src="../../Recursos/js/reservas.js"></script>
 
 </html>
