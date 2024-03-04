@@ -15,15 +15,20 @@
     <link rel="stylesheet" href="../../css/ventana_emergente.css">
 </head>
 
+<!--body class="min-vh-100: Por lo que entendi es para establecer el cuerpo de la página y tenga el
+100% de la altura de la pagina visible y nos ayuda a no tener problemas con el diseño con poco contenido de la página-->
 <body class="min-vh-100">
+    <!--class="container-fluid overflow-hidden: Por lo que entendi es para establecer un contenido fluido y que ocupe el 100% del ancho del contenedor mas cercano 
+    (No entendi Mucho pero bueno, quitenme boostrap no me guta mucho)--> 
     <div class="container-fluid overflow-hidden">
+        <!--Row: Por lo que entendi es para ordenar las columnas que boostrap trae que son 12-->
         <div class="row">
             <!-- Contenedor Horizontal -->
             <main class="col-md-12">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
-                            <!-- Contenido de la página -->
+                            <!-- Contenido de la página y el mt-3: Significa el margen en la parte superior del elemento ejemplo como un Margin-top en css-->
                             <div class="d-flex justify-content-end mt-3">
                                 <div class="me-md-5 me-3">
                                     <a class="nav-link" href="../priv/Miperfil.html">
@@ -39,6 +44,8 @@
 
                         </div>
                     </div>
+                     <!--Aqui tenemos el comienzo de contenedor gris del fondo que tiene la pagina y dentro de este contenedor los demas
+                    contenedores que llevan la inf de el contenedor agregar productos y editar los productos ya registrados-->
                     <div class="container mt-3 custom-container">
                         <h2 class="card-title" id="text">Oferta</h2>
                         <div class="row">
@@ -56,6 +63,7 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Aqui seria ejemplo el contenedor que lleva un producto ya registrado donde se podra editar y eliminar con lso botes de abajo-->
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3 mt-1">
                                 <div class="card mb-3" id="movableContainer1">
@@ -65,6 +73,7 @@
                                         <h5 class="card-title">Apple Watch</h5>
                                         <img src="../../Recursos/img/icon _pencil_.png" class="img-fluid"
                                             alt="Nueva imagen" id="icon1">
+                                            <!-- Botón de Editar -->
                                         <img src="../../Recursos/img/icon _x letter_.png" class="img-fluid"
                                             alt="Nueva imagen" id="icon2">
                                         <!-- Botón de eliminar -->
@@ -74,7 +83,7 @@
                             </div>
                         </div>
 
-
+                        <!--Este pues es el contenedor que esta dentro del custom-container para agregar nuevos productos-->
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3 mt-1">
                                 <div class="card mb-3" id="movableContainer2">
@@ -88,6 +97,8 @@
                     </div>
                 </div>
             </main>
+             <!--Sidebar: Una barra lateral es una sección de la interfaz
+            de usuario que se encuentra a un lado de la pantalla que en nuestro caso es a la izquierda .-->
             <nav class="col-md-2 d-md-block sidebar navbar">
                 <div class="position-sticky">
                     <a class="navbar-brand mb-5 mt-3" href="#">
@@ -177,10 +188,12 @@
         </div> <!-- Cierre de la fila del Contenedor Horizontal y Vertical -->
     </div>
 
+    <!--La imagen de la Flecha que nos ayudara a ir cambiando de porductos-->
     <div class="Flecha">
         <img src="../../Recursos/img/List → Item → Link.png" class="card-img-top img-fluid" alt="Flechita">
     </div>
 
+    <!--Esto pues es cuando este en el form cuando se quiera agregar un producto nuevo-->
     <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
         aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -254,7 +267,8 @@
             </div>
         </div>
     </div>
-    <!--Modal para editar productos-->
+
+     <!--Esto pues es cuando este en el form cuando se quiera editar un producto-->
     <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="editarProductoModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -327,7 +341,7 @@
     </div>
     <!-- Bootstrap JS y dependencias -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- jQuery -->
+    <!-- jQuery y mandamos a llamar el js de productos pa que sirvan los forms de arriba cuando se agrege un nuevo producto o edite-->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="../../Recursos/js/ofertas.js"></script>
 </body>

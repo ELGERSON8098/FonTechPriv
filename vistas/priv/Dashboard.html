@@ -12,8 +12,13 @@
   <link rel="stylesheet" href="../../css/Dash.css">
 </head>
 
+<!--body class="min-vh-100: Por lo que entendi es para establecer el cuerpo de la página y tenga el
+100% de la altura de la pagina visible y nos ayuda a no tener problemas con el diseño con poco contenido de la página-->
 <body class="min-vh-100">
+  <!--class="container-fluid overflow-hidden: Por lo que entendi es para establecer un contenido fluido y que ocupe el 100% del ancho del contenedor mas cercano 
+(No entendi Mucho pero bueno, quitenme boostrap no me guta mucho)-->
   <div class="container-fluid overflow-hidden">
+    <!--Row: Por lo que entendi es para ordenar las columnas que boostrap trae que son 12-->
     <div class="row">
       <!-- Contenedor Horizontal -->
       <main class="col-md-12">
@@ -37,13 +42,15 @@
           </div>
       </main>
 
+       <!--Sidebar: Una barra lateral es una sección de la interfaz
+            de usuario que se encuentra a un lado de la pantalla que en nuestro caso es a la izquierda .-->
       <nav class="col-md-2 d-md-block sidebar navbar">
         <div class="position-sticky">
             <a class="navbar-brand mb-5 mt-3" href="#">
                 <img src="../../Recursos/img/image 67.png" alt="Logo" width="100" class="mb-4">
             </a>
 
-          <!-- Menú desplegable solo en pantallas pequeñas -->
+          <!-- Menú desplegable para pantallas pequeñas y medianas-->
           <div class="navbar navbar-light navbar-expand-md d-md-none" style="background-color: rgba(255, 255, 255, 0);">
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarNav"
               aria-controls="sidebarNav" aria-expanded="false" aria-label="Toggle navigation">
