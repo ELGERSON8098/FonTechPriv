@@ -27,13 +27,14 @@ $(document).ready(function () {
 
 // Espera a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", function () {
-    // Selecciona los campos de nombre, apellido, correo y teléfono
+    // Selecciona los campos de nombre, apellido, correo, contraseña y teléfono
     var nombreInput = document.getElementById("nombre");
     var apellidoInput = document.getElementById("apellido");
     var correoInput = document.getElementById("correo");
+    var contraseñaInput = document.getElementById("contraseña");
     var telefonoInput = document.getElementById("telefono");
 
-    // Agrega listeners para el evento de teclado (keydown) en los campos de nombre, apellido, correo y teléfono
+    // Agrega listeners para el evento de teclado (keydown) en los campos de nombre, apellido, correo, contraseña y teléfono
     nombreInput.addEventListener("keydown", function (event) {
         validarLetrasConEspacios(event);
     });
@@ -41,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         validarLetrasConEspacios(event);
     });
     correoInput.addEventListener("blur", validarCorreo);
+    contraseñaInput.addEventListener("blur", validarContraseña); // Agregamos validación al perder el foco del campo contraseña
     telefonoInput.addEventListener("keydown", function (event) {
         validarNumeros(event);
     });
@@ -85,6 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // Validación de contraseña
+        if (contraseña === "") {
+            mostrarError('Por favor, ingresa una contraseña.');
+            return;
+        }
+
         // Validación de teléfono
         var numerosRegex = /^[0-9]+$/;
         if (telefono === "" || !numerosRegex.test(telefono)) {
@@ -124,7 +132,16 @@ function validarCorreo() {
 
     if (correo !== "" && !correoRegex.test(correo)) {
         mostrarError('Por favor, ingresa un correo electrónico válido.');
-        // No se borra automáticamente el campo de correo
+    }
+}
+
+// Función para validar el campo de contraseña
+function validarContraseña() {
+    var contraseñaInput = document.getElementById("contraseña");
+    var contraseña = contraseñaInput.value.trim();
+
+    if (contraseña === "") {
+        mostrarError('Por favor, ingresa una contraseña.');
     }
 }
 
