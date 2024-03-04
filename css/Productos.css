@@ -118,8 +118,8 @@
 }
 
 
-/* Estilos específicos para pantallas medianas (md) */
-/* Estilos específicos para pantallas medianas (md)*/
+
+/* Estilos específicos*/
 @media only screen and (max-width: 1366.98px) {
     #movableContainer {
         left: 430px;
@@ -266,15 +266,15 @@
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 20px;
-        height: 170%;
+        left: 50px;
+        height: 1500px;
         width: 270px;
     }
 
     .Flecha {
         width: 150px;
         margin-top: 1580px;
-        margin-left: 60px;
+        margin-left: 95px;
         transform: rotate(-269deg);
         border: none;
     }
@@ -301,13 +301,13 @@
         position: absolute;
         top: 150px;
         left: 40px;
-        height: 168%;
+        height: 1500px;
         width: 330px;
     }
 
     .Flecha {
         width: 150px;
-        margin-top: 1580px;
+        margin-top: 1530px;
         margin-left: 110px;
         transform: rotate(-269deg);
         border: none;
@@ -335,13 +335,13 @@
         position: absolute;
         top: 150px;
         left: 40px;
-        height: 170%;
+        height: 1500px;
         width: 330px;
     }
 
     .Flecha {
         width: 150px;
-        margin-top: 1580px;
+        margin-top: 1530px;
         margin-left: 115px;
         transform: rotate(-269deg);
         border: none;
@@ -402,9 +402,9 @@
     .custom-container {
         position: absolute;
         top: 150px;
-        left: 50px;
-        height: 165%;
-        width: 700px;
+        left: 90px;
+        height: 1510px;
+        width: 800px;
     }
 
     .Flecha {
@@ -416,7 +416,7 @@
         border: none;
     }
         #movableContainer{
-            left: 220px;
+            left: 150px;
             margin-top: 900px;
             width:300px;
            height: 470px;
@@ -425,7 +425,7 @@
         }
 
         #movableContainer1 {
-            left: 220px;
+            left: 150px;
             margin-top: 380px;
             width: 300px;
            height: 450px;
@@ -436,7 +436,7 @@
 
 
         #movableContainer2 {
-            left: 220px;
+            left: 150px;
             margin-top: -70px;
             width: 300px;
             height: 350px;
@@ -454,7 +454,7 @@
         position: absolute;
         top: 150px;
         left: 40px;
-        height: 170%;
+        height: 1800px;
         width: 900px;
     }
         #movableContainer{
@@ -489,46 +489,7 @@
     }
 }
 
-@media  (min-width: 1023px) and (max-width: 1024px){
-    .custom-container {
-        position: absolute;
-        top: 150px;
-        left: 40px;
-        height: 170%;
-        width: 900px;
-    }
-        #movableContainer{
-            left: 250px;
-            margin-top: 1050px;
-            width:355px;
-           height: 500px;
 
-        }
-
-        #movableContainer1 {
-            left: 250px;
-            margin-top: 470px;
-            width: 355px;
-            height: 500px;
-
-        }
-
-
-        #movableContainer2 {
-            left: 250px;
-            margin-top: -100px;
-            width: 355px;
-            height: 450px;
-        }
-
-        .Flecha{
-        width: 150px;
-        margin-top: 1750px;
-        margin-left: 375px;
-        transform: rotate(-269deg);
-        border: none;
-    }
-}
 @media (min-width: 279px) and (max-width: 280px) {
     .custom-container {
         position: absolute;
@@ -569,18 +530,19 @@
     }
 }
 
+
 @media  (min-width: 415px) and (max-width: 575px){
     .custom-container {
         position: absolute;
         top: 150px;
         left: 20px;
-        height: 205%;
+        height: 1200px;
         width: 320px;
     }
 
     .Flecha {
         width: 120px;
-        margin-top: 1150px;
+        margin-top: 1199px;
         margin-left: 90px;
         transform: rotate(-269deg);
         border: none;
@@ -588,14 +550,14 @@
 
     #movableContainer{
         left: 38px;
-        margin-top: 650px;
+        margin-top: 680px;
         height: 360px;
         width: 220px;
     }
 
     #movableContainer1 {
         left: 31px;
-        margin-top: 260px;
+        margin-top: 280px;
         height: 380px;
         width: 230px;
     }
@@ -614,13 +576,13 @@
         position: absolute;
         top: 150px;
         left: 20px;
-        height: 205%;
+        height: 1500px;
         width: 540px;
     }
 
     .Flecha {
         width: 120px;
-        margin-top: 1480px;
+        margin-top: 1500px;
         margin-left: 190px;
         transform: rotate(-269deg);
         border: none;
@@ -654,13 +616,13 @@
         position: absolute;
         top: 150px;
         left: 50px;
-        height: 1750px;
+        height: 1600px;
         width: 700px;
     }
 
     .Flecha {
         width: 150px;
-        margin-top: 1600px;
+        margin-top: 1610px;
         margin-left: 325px;
 
         transform: rotate(-269deg);
@@ -700,7 +662,7 @@
             position: absolute;
             top: 150px;
             left: 40px;
-            height: 200%;
+            height: 1800px;
             width: 4000px;
         }
             #movableContainer{
@@ -740,7 +702,7 @@
             position: absolute;
             top: 150px;
             left: 40px;
-            height: 200%;
+            height: 1800px;
             width: 900px;
         }
             #movableContainer{
@@ -774,4 +736,40 @@
             border: none;
         }
     }
-    
+
+    @media  (min-width: 1021px) and (max-width: 1199px){
+        .custom-container {
+            position: absolute;
+            top: 150px;
+            left: 10px;
+            height: 555px;
+            width: 999px;
+        }
+
+        #movableContainer{
+            left: 680px;
+            margin-top: -40px;
+            width:250px;
+
+        }
+
+        #movableContainer1 {
+            left: 350px;
+            margin-top: -40px;
+            width: 250px;
+
+        }
+
+
+        #movableContainer2 {
+            left: 10px;
+            margin-top: -40px;
+            width: 250px;
+        }
+        .Flecha{
+            width: 150px;
+            margin-top: 250px;
+            margin-left: 950px;
+            border: none;
+        }
+    }
