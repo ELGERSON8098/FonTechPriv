@@ -176,7 +176,7 @@ $(document).ready(function () {
         }
     });
 
-    // Mostrar la vista previa de la imagen seleccionada
+     // Mostrar la vista previa de la imagen seleccionada
     $('#imagenProducto').change(function (event) {
         var reader = new FileReader();
         reader.onload = function () {
