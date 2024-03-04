@@ -27,16 +27,22 @@ $(document).ready(function () {
 
 // Espera a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", function () {
-    // Selecciona los campos de nombre y apellido
+    // Selecciona los campos de nombre, apellido, correo y teléfono
     var nombreInput = document.getElementById("nombre");
     var apellidoInput = document.getElementById("apellido");
+    var correoInput = document.getElementById("correo");
+    var telefonoInput = document.getElementById("telefono");
 
-    // Agrega listeners para el evento de teclado (keydown) en los campos de nombre y apellido
+    // Agrega listeners para el evento de teclado (keydown) en los campos de nombre, apellido, correo y teléfono
     nombreInput.addEventListener("keydown", function (event) {
-        validarLetras(event);
+        validarLetrasConEspacios(event);
     });
     apellidoInput.addEventListener("keydown", function (event) {
-        validarLetras(event);
+        validarLetrasConEspacios(event);
+    });
+    correoInput.addEventListener("blur", validarCorreo);
+    telefonoInput.addEventListener("keydown", function (event) {
+        validarNumeros(event);
     });
 
     // Selecciona el botón de guardar cambios
@@ -55,18 +61,34 @@ document.addEventListener("DOMContentLoaded", function () {
         var telefono = document.getElementById("telefono").value.trim();
         var cargo = document.getElementById("cargo").value.trim();
 
-        // Expresión regular para validar solo letras
-        var letrasRegex = /^[A-Za-z]+$/;
+        // Expresión regular para validar solo letras y espacios
+        var letrasConEspaciosRegex = /^[A-Za-z\s]+$/;
+
+        // Expresión regular para validar el formato de correo electrónico
+        var correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         // Validación de nombre
-        if (nombre === "" || !letrasRegex.test(nombre)) {
+        if (nombre === "" || !letrasConEspaciosRegex.test(nombre)) {
             mostrarError('Por favor, ingresa un nombre válido.');
             return;
         }
 
         // Validación de apellido
-        if (apellido === "" || !letrasRegex.test(apellido)) {
+        if (apellido === "" || !letrasConEspaciosRegex.test(apellido)) {
             mostrarError('Por favor, ingresa un apellido válido.');
+            return;
+        }
+
+        // Validación de correo electrónico
+        if (correo === "" || !correoRegex.test(correo)) {
+            mostrarError('Por favor, ingresa un correo electrónico válido.');
+            return;
+        }
+
+        // Validación de teléfono
+        var numerosRegex = /^[0-9]+$/;
+        if (telefono === "" || !numerosRegex.test(telefono)) {
+            mostrarError('Por favor, ingresa un número de teléfono válido.');
             return;
         }
 
@@ -80,16 +102,42 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Función para validar que solo se ingresen letras en los campos de nombre y apellido
-function validarLetras(event) {
+// Función para validar que solo se ingresen letras (con espacios) en los campos de nombre y apellido
+function validarLetrasConEspacios(event) {
     // Obtiene el código de la tecla presionada
     var key = event.key;
 
-    // Expresión regular para validar si la tecla presionada es una letra
-    var letrasRegex = /^[A-Za-z]$/;
+    // Expresión regular para validar si la tecla presionada es una letra o un espacio
+    var letrasConEspaciosRegex = /^[A-Za-z\s]$/;
 
-    // Si la tecla presionada no es una letra, cancela el evento de teclado
-    if (!letrasRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
+    // Si la tecla presionada no es una letra ni un espacio, cancela el evento de teclado
+    if (!letrasConEspaciosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
+        event.preventDefault();
+    }
+}
+
+// Función para validar el formato de correo electrónico
+function validarCorreo() {
+    var correoInput = document.getElementById("correo");
+    var correo = correoInput.value.trim();
+    var correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (correo !== "" && !correoRegex.test(correo)) {
+        mostrarError('Por favor, ingresa un correo electrónico válido.');
+        // No se borra automáticamente el campo de correo
+    }
+}
+
+// Función para validar que solo se ingresen números en el campo de teléfono
+function validarNumeros(event) {
+    // Obtiene el código de la tecla presionada
+    var key = event.key;
+
+    // Expresión regular para validar si la tecla presionada es un número
+    var numerosRegex = /^[0-9]$/;
+
+    // Si la tecla presionada no es un número, cancela el evento de teclado
+    if (!numerosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
         event.preventDefault();
     }
 }
