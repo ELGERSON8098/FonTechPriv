@@ -32,7 +32,7 @@ $(document).ready(function () {
             if (result.isConfirmed) {
                 swalWithBootstrapButtons.fire({
                     title: "¡Eliminado!",
-                    text: "Tu archivo ha sido eliminado.",
+                    text: "Tu categoria ha sido eliminado.",
                     icon: "success"
                 });
             } else if (
@@ -58,7 +58,7 @@ $(document).ready(function () {
         });
         swalWithBootstrapButtons.fire({
             title: "Agregado",
-            text: "Tu archivo ha sido agregado con exito.",
+            text: "Tu categoria ha sido agregado con exito.",
             icon: "success",
             confirmButtonText: "OK",
 
@@ -76,7 +76,7 @@ $(document).ready(function () {
         });
         swalWithBootstrapButtons.fire({
             title: "Agregado",
-            text: "Tu archivo ha sido agregado con exito.",
+            text: "Tu categoria ha sido editada con exito.",
             icon: "success",
             confirmButtonText: "OK",
 
