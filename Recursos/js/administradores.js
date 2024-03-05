@@ -189,3 +189,5 @@ function limpiarCampos() {
     document.getElementById("cargo").selectedIndex = 0; // Selecciona la primera opción en el select
 }
 
+
+
