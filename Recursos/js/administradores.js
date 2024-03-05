@@ -99,9 +99,6 @@ document.addEventListener("DOMContentLoaded", function () {
             mostrarError('Por favor, ingresa un número de teléfono válido.');
             return;
         }
-
-        // Resto de validaciones...
-
         // Si todos los campos están llenos y pasan las validaciones, muestra la alerta de guardado
         mostrarExito('Los cambios se han guardado correctamente.');
 
