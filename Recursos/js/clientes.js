@@ -100,8 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Resto de validaciones...
-
         // Si todos los campos están llenos y pasan las validaciones, muestra la alerta de guardado
         mostrarExito('Los cambios se han guardado correctamente.');
 
