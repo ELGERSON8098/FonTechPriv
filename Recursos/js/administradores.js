@@ -12,12 +12,10 @@ $(document).ready(function () {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Aquí iría el código para eliminar el empleado si se confirma la acción
-                // De momento mostraremos un mensaje en la consola
                 console.log("Empleado eliminado");
                 Swal.fire(
                     '¡Eliminado!',
-                    'Tu archivo ha sido eliminado.',
+                    'Tu administrador ha sido eliminado.',
                     'success'
                 );
             }
@@ -99,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
             mostrarError('Por favor, ingresa un número de teléfono válido.');
             return;
         }
-        // Si todos los campos están llenos y pasan las validaciones, muestra la alerta de guardado
+        // Si todos los campos están llenos y pasan las validaciones se muestra la alerta de guardado
         mostrarExito('Los cambios se han guardado correctamente.');
 
         // Limpia los campos del formulario
@@ -115,7 +113,7 @@ function validarLetrasConEspacios(event) {
     // Expresión regular para validar si la tecla presionada es una letra o un espacio
     var letrasConEspaciosRegex = /^[A-Za-z\s]$/;
 
-    // Si la tecla presionada no es una letra ni un espacio, cancela el evento de teclado
+    // Si la tecla presionada no es una letra ni un espacio no deja escribir
     if (!letrasConEspaciosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
         event.preventDefault();
     }
@@ -147,10 +145,10 @@ function validarNumeros(event) {
     // Obtiene el código de la tecla presionada
     var key = event.key;
 
-    // Expresión regular para validar si la tecla presionada es un número
+    // Validacion para que solo se pueda escribir numeros
     var numerosRegex = /^[0-9]$/;
 
-    // Si la tecla presionada no es un número, cancela el evento de teclado
+    // Si la tecla presionada no es un número no deja escribir
     if (!numerosRegex.test(key) && key !== 'Backspace' && key !== 'Delete') {
         event.preventDefault();
     }
@@ -172,7 +170,7 @@ function mostrarExito(mensaje) {
         title: '¡Guardado!',
         text: mensaje,
         showConfirmButton: false,
-        timer: 1500 // Cierra automáticamente después de 1.5 segundos
+        timer: 1500 // Se cierra automáticamente después de 1.5 segundos
     });
 }
 
