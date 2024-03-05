@@ -188,3 +188,4 @@ function limpiarCampos() {
     document.getElementById("telefono").value = "";
     document.getElementById("cargo").selectedIndex = 0; // Selecciona la primera opción en el select
 }
+

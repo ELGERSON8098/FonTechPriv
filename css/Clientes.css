@@ -29,3 +29,9 @@ left: 1px;
     top: 90px;
     left: 273px;
 }
+
+/* contenedorDash.css */
+.btn-gris {
+    background-color: #6c757d; /* Gris oscuro */
+    color: #fff; /* Texto blanco para contraste */
+}
