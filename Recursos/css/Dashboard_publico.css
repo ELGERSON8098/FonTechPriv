@@ -4,6 +4,7 @@
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font: 'Poppins', sans-serif;
     --color: #a80505;
+    --colo2: #020202;
 }
 body{
     font-family: var(--sm-font);
