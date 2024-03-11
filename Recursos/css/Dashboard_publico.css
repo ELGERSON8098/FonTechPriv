@@ -42,12 +42,12 @@ body{
 
 /* Estrellitas */
 .Estrellita:hover {
-    color: yellow;
+    color: rgb(240, 240, 89);
 }
 
 /* Estrellita */
 .Estrellita1 {
-    color: yellow;
+    color: rgb(240, 240, 89);
 }
 
 /* navbar */
