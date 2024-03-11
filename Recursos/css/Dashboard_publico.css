@@ -4,7 +4,7 @@
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font: 'Poppins', sans-serif;
     --color: #a80505;
-    --colo2: #020202;
+    --color2: #f7f33a;
 }
 body{
     font-family: var(--sm-font);
@@ -38,6 +38,11 @@ body{
 /* text color */
 .text-primary{
     color: var(--color)!important;
+}
+
+/* Estrellitas */
+.Estrellita{
+    color: var(--color2)!important;
 }
 
 /* navbar */
