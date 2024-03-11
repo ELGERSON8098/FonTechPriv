@@ -41,8 +41,8 @@ body{
 }
 
 /* Estrellitas */
-.Estrellita{
-    color: var(--color2)!important;
+.Estrellita:hover {
+    color: yellow;
 }
 
 /* navbar */
