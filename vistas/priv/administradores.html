@@ -76,55 +76,50 @@
         <div class="title text-center py-5">
             <h2 class="position-relative d-inline-block">Administradores</h2>
         </div>
-        <table class="table table-hover tablita">
-            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+        <table class="table">
             <thead>
                 <tr>
-                    <td colspan="5" id="rowsFound"></td>
-                </tr>
-                <tr>
-                    <th>Cargo</th>
-                    <th>NOMBRE</th>
-                    <th>CORREO</th>
-                    <th>Ajustes</th>
-                </tr>
-                <tr>
-                    <td>****</td>
-                    <td>********</td>
-                    <td>**************</td>
-                    <td>
-                        <!-- Botón para agregar -->
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#agregarModal">
-                            <i class="bi bi-plus-circle-fill"></i> Agregar
-                        </button>
-                    </td>
+                    <th scope="col">Cargo</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo Electrónico</th>
+                    <th scope="col">Funcionalidades</th>
                 </tr>
             </thead>
-            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
-            <thead>
+            <tbody>
                 <tr>
-                    <td colspan="5" id="rowsFound"></td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Agregar Nuevo Empleado</a>
+                    </td>
                 </tr>
-
                 <tr>
                     <td>Administrador</td>
-                    <td>Juan</td>
-                    <td>Juan124@gmail.com</td>
+                    <td>Caracol</td>
+                    <td>Mark@gmail.com</td>
                     <td>
-                        <button type="button" class="btn btn-info editEmployeeBtn" data-bs-toggle="modal"
-                            data-bs-target="#editarModal" data-employee-id="1">
-                            <i class="bi bi-pencil-fill">Editar</i>
-                        </button>
-                        <button type="button" class="btn btn-danger deleteEmployeeBtn">
-                            <i class="bi bi-trash-fill">Eliminar</i>
-                        </button>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
                     </td>
                 </tr>
-            </thead>
-            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-            <tbody id="tableBody"></tbody>
-        </table>
+                <tr>
+                    <td>Empleado</td>
+                    <td>Caracol</td>
+                    <td>Mark@gmail.com</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Administrador</td>
+                    <td>Caracol</td>
+                    <td>Mark@gmail.com</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                        <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>        
     </div>
 
     <!-- Modal para agregar -->

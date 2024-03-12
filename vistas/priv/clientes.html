@@ -71,48 +71,53 @@
         <!-- Separación entre navbar y sección de Productos -->
         <div class="my-5"></div>
     
-    <div class="container">
-        <div class="title text-center py-5">
-            <h2 class="position-relative d-inline-block">Clientes</h2>
-        </div>
-            <table class="table table-hover tablita">
-                <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+        <div class="container">
+            <div class="title text-center py-5">
+                <h2 class="position-relative d-inline-block">Clientes</h2>
+            </div>
+            <table class="table">
                 <thead>
                     <tr>
-                        <td colspan="5" id="rowsFound"></td>
-                    </tr>
-                    <tr>
-                        <th>Cargo</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Ajustes</th>
-                    </tr>
-                    <tr>
-                        <td>Cliente</td>
-                        <td>Gerson</td>
-                        <td>Gerson321@gmail.com</td>
-                        <td>
-                            <button type="button" class="btn btn-secondary reporteClientBtn btn-reporte-gris">
-                                <i class="bi bi-trash-fill"></i> Reporte
-                            </button>
-                            <button type="button" class="btn btn-info editClienttn"
-                                data-bs-toggle="modal" data-bs-target="#editarModalCL" data-client-id="1">
-                                <i class="bi bi-pencil-fill">Editar</i>
-                            </button>
-                            
-                            <button type="button" class="btn btn-danger deleteEmployeeBtn">
-                                <i class="bi bi-trash-fill">Eliminar</i>
-                            </button>
-                            
-                        </td>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Funcionalidades</th>
                     </tr>
                 </thead>
-                
-                <!-- Cuerpo de la tabla para mostrar un registro por fila -->
-                <tbody id="tableBody"></tbody>
-            </table>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Caracol</td>
+                        <td>Mark@gmail.com</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Reporte</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Caracol</td>
+                        <td>Mark@gmail.com</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Reporte</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Caracol</td>
+                        <td>Mark@gmail.com</td>
+                        <td>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Reporte</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Editar</a>
+                            <a href="#" class="btn btn-primary btn-sm mt-3">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>        
         </div>
-    </div>
 
    
 
