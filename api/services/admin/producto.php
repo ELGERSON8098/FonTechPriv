@@ -1,130 +1,129 @@
 <?php
-// Se incluye la clase del modelo.
-require_once('../../models/data/producto_data.php');
+require_once('../../helpers/database.php');
+require_once('../../models/data/marca_data.php');
 
-// Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
-    // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
-    // Se instancia la clase correspondiente.
-    $producto = new ProductoData;
-    // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
-    $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
-    // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
+    $marca = new MarcaData;
+    $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null);
+
+    // Verificar sesión de administrador y manejar acciones según $_GET['action']
     if (isset($_SESSION['idAdministrador'])) {
-        // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
-                if (!Validator::validateSearch($_POST['search'])) {
-                    $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $producto->searchRows()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
+                // Implementación para buscar marcas
+                if (isset($_POST['search'])) {
+                    // Realizar búsqueda con el término proporcionado
+                    $result['dataset'] = $marca->searchRows($_POST['search']);
+                    if ($result['dataset']) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Búsqueda exitosa';
+                    } else {
+                        $result['error'] = 'No se encontraron resultados';
+                    }
                 } else {
-                    $result['error'] = 'No hay coincidencias';
+                    $result['error'] = 'Se requiere un término de búsqueda';
                 }
                 break;
+
             case 'createRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['precioProducto']) or
-                    !$producto->setExistencias($_POST['existenciasProducto']) or
-                    !$producto->setCategoria($_POST['categoriaProducto']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
-                    !$producto->setImagen($_FILES['imagenProducto'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto creado correctamente';
-                    // Se asigna el estado del archivo después de insertar.
-                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN);
+                // Implementación para crear una nueva marca
+                if (isset($_POST['nombre'])) {
+                    if ($marca->setNombre($_POST['nombre'])) {
+                        if ($marca->createRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Marca creada correctamente';
+                        } else {
+                            $result['error'] = 'Error al crear la marca';
+                        }
+                    } else {
+                        $result['error'] = $marca->getDataError();
+                    }
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el producto';
+                    $result['error'] = 'Se requiere el nombre de la marca';
                 }
                 break;
+
             case 'readAll':
-                if ($result['dataset'] = $producto->readAll()) {
+                // Implementación para leer todas las marcas
+                $result['dataset'] = $marca->readAll();
+                if ($result['dataset']) {
                     $result['status'] = 1;
-                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                    $result['message'] = 'Marcas obtenidas correctamente';
                 } else {
-                    $result['error'] = 'No existen productos registrados';
+                    $result['error'] = 'No se encontraron marcas';
                 }
                 break;
+
             case 'readOne':
-                if (!$producto->setId($_POST['idProducto'])) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($result['dataset'] = $producto->readOne()) {
-                    $result['status'] = 1;
+                // Implementación para leer una marca específica
+                if (isset($_POST['id'])) {
+                    if ($marca->setId($_POST['id'])) {
+                        $result['dataset'] = $marca->readOne();
+                        if ($result['dataset']) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['error'] = 'La marca especificada no existe';
+                        }
+                    } else {
+                        $result['error'] = $marca->getDataError();
+                    }
                 } else {
-                    $result['error'] = 'Producto inexistente';
+                    $result['error'] = 'Se requiere el ID de la marca';
                 }
                 break;
+
             case 'updateRow':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setId($_POST['idProducto']) or
-                    !$producto->setFilename() or
-                    !$producto->setNombre($_POST['nombreProducto']) or
-                    !$producto->setDescripcion($_POST['descripcionProducto']) or
-                    !$producto->setPrecio($_POST['precioProducto']) or
-                    !$producto->setCategoria($_POST['categoriaProducto']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
-                    !$producto->setImagen($_FILES['imagenProducto'], $producto->getFilename())
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto modificado correctamente';
-                    // Se asigna el estado del archivo después de actualizar.
-                    $result['fileStatus'] = Validator::changeFile($_FILES['imagenProducto'], $producto::RUTA_IMAGEN, $producto->getFilename());
+                // Implementación para actualizar una marca
+                if (isset($_POST['id'], $_POST['nombre'])) {
+                    if ($marca->setId($_POST['id']) && $marca->setNombre($_POST['nombre'])) {
+                        if ($marca->updateRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Marca actualizada correctamente';
+                        } else {
+                            $result['error'] = 'Error al actualizar la marca';
+                        }
+                    } else {
+                        $result['error'] = $marca->getDataError();
+                    }
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el producto';
+                    $result['error'] = 'Se requieren el ID y el nombre de la marca';
                 }
                 break;
+
             case 'deleteRow':
-                if (
-                    !$producto->setId($_POST['idProducto']) or
-                    !$producto->setFilename()
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->deleteRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Producto eliminado correctamente';
-                    // Se asigna el estado del archivo después de eliminar.
-                    $result['fileStatus'] = Validator::deleteFile($producto::RUTA_IMAGEN, $producto->getFilename());
+                // Implementación para eliminar una marca
+                if (isset($_POST['id'])) {
+                    if ($marca->setId($_POST['id'])) {
+                        if ($marca->deleteRow()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Marca eliminada correctamente';
+                        } else {
+                            $result['error'] = 'Error al eliminar la marca';
+                        }
+                    } else {
+                        $result['error'] = $marca->getDataError();
+                    }
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el producto';
+                    $result['error'] = 'Se requiere el ID de la marca';
                 }
                 break;
-            case 'cantidadProductosCategoria':
-                if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'No hay datos disponibles';
-                }
-                break;
-            case 'porcentajeProductosCategoria':
-                if ($result['dataset'] = $producto->porcentajeProductosCategoria()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'No hay datos disponibles';
-                }
-                break;
+
             default:
-                $result['error'] = 'Acción no disponible dentro de la sesión';
+                $result['error'] = 'Acción no válida';
+                break;
         }
-        // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
-        $result['exception'] = Database::getException();
-        // Se indica el tipo de contenido a mostrar y su respectivo conjunto de caracteres.
-        header('Content-type: application/json; charset=utf-8');
-        // Se imprime el resultado en formato JSON y se retorna al controlador.
-        print(json_encode($result));
     } else {
-        print(json_encode('Acceso denegado'));
+        $result['error'] = 'Acceso denegado. Inicie sesión como administrador';
     }
+
+    // Obtener excepción de la base de datos, si la hubiera
+    $result['exception'] = Database::getException();
+
+    // Establecer tipo de contenido y devolver resultado como JSON
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($result);
 } else {
-    print(json_encode('Recurso no disponible'));
+    echo json_encode('Acción no especificada');
 }
+?>
