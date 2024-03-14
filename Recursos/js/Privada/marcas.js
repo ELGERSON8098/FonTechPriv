@@ -18,7 +18,7 @@ const deleteBrand = async (brandId) => {
             throw new Error('ID de marca no proporcionado');
         }
 
-        const url = `http://localhost/FonTechPriv.com/api/Privada/Marcas.PHP?id=${brandId}`;
+        const url = `http://localhost/FonTechPriv/api/Privada/Marcas.PHP?id=${brandId}`;
         
         const response = await fetch(url, {
             method: 'DELETE',
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const fillBrands = async () => {
     // Realiza la llamada a la API para obtener las marcas
-    const brandsData = await fetchData('http://localhost/FonTechPriv.com/api/Privada/Marcas.PHP');
+    const brandsData = await fetchData('http://localhost/FonTechPriv/api/Privada/Marcas.PHP');
 
     // Verifica si la llamada a la API fue exitosa
     if (brandsData.status === 1) {
@@ -98,6 +98,7 @@ const createBrandDiv = (brand, index) => {
 
 
 // En la función setupDeleteButton
+// En la función setupDeleteButton
 const setupDeleteButton = () => {
     const deleteButtons = document.querySelectorAll('.delete-brand');
 
@@ -108,11 +109,17 @@ const setupDeleteButton = () => {
 
             // Verifica que brandId tenga un valor antes de realizar la solicitud DELETE
             if (brandId) {
-                // Establece el ID de la marca en el botón Eliminar del modal
+                // Actualiza el ID de la marca en el botón de confirmación de eliminación
                 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
                 confirmDeleteBtn.setAttribute('data-brand-id', brandId);
 
-                // Resto del código para eliminar la marca...
+                // Remueve la marca del contenedor en la página
+                const brandContainer = document.getElementById(containerId);
+                if (brandContainer) {
+                    brandContainer.remove();
+                } else {
+                    console.error(`No se encontró el contenedor con ID ${containerId}`);
+                }
             } else {
                 console.error('ID de marca no proporcionado');
             }
@@ -120,8 +127,17 @@ const setupDeleteButton = () => {
     });
 };
 
+// Actualiza el evento click del botón de confirmación de eliminación
+document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+    const brandId = document.getElementById('confirmDeleteBtn').getAttribute('data-brand-id');
 
-
+    if (brandId) {
+        // Llamada a la función para eliminar la marca
+        await deleteBrand(brandId);
+    } else {
+        console.error('ID de marca no proporcionado');
+    }
+});
 
 
 
