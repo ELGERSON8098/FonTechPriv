@@ -11,8 +11,7 @@
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- bootstrap css -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- custom css -->
     <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
 
@@ -89,17 +88,8 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                    <div class="special-img position-relative overflow-hidden">
-                        <img src="https://img-prd-pim.poorvika.com/prodvarval/Apple-iphone-15-pro-Max-Natural-titanium-Front-Back-View-Thumbnail.png"
-                            class="w-100">
-
-                    </div>
-                    <div class="text-center">
-                        <p class="text-capitalize mt-3 mb-1" id="nombreMarca"></p>
-                        <a href="#" class="btn btn-primary mt-3">Editar</a>
-                        <a href="#" class="btn btn-primary mt-3">Eliminar</a>
-                    </div>
+                <div id="brandsContainer" class="special-list row g-0">
+                    <!-- Aquí se agregarán dinámicamente las marcas -->
                 </div>
             </div>
         </div>
@@ -201,14 +191,30 @@
         </div>
     </div>
 
+    <!-- Modal de Eliminación -->
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar esta marca?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button id="confirmDeleteBtn" type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal" data-brand-id="">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
+    
     <!-- bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-        <script></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../../Recursos/js/Privada/marcas.js"></script>
 
 </body>
 
