@@ -13,7 +13,7 @@
     <!-- bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- custom css -->
-    <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
+    <link rel="stylesheet" href="../../resources/css/Dashboard_publico.css">
 
 </head>
 
@@ -23,7 +23,7 @@
         <div class="container">
             <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
                 href="../publica/index.html">
-                <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
+                <img src="../../resources/img/image 67.png" class="logo img-fluid" alt="site icon">
             </a>
 
             <div class="order-lg-2 nav-btns">
@@ -66,32 +66,62 @@
         </div>
     </nav>
     <!-- Fin del navbar -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+        <!-- Separación entre navbar y sección de Productos -->
+        <div class="my-5"></div>
+    
+        <!-- Celulares -->
 
-    <!-- Separación entre navbar y sección de Productos -->
-    <div class="my-5"></div>
-
-    <!-- Celulares -->
-    <section id="special" class="py-5">
-        <div class="container">
-            <div class="title text-center py-5">
-                <h2 class="position-relative d-inline-block">Marcas</h2>
-            </div>
-
-            <div class="special-list row g-0">
-                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                    <div class="special-img position-relative overflow-hidden">
-                        <img src="https://cdn-icons-png.flaticon.com/256/4338/4338829.png" class="w-100">
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <div class="row">
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar" required>
                     </div>
-                    <div class="text-center">
-                        <p class="text-capitalize mt-3 mb-1">Agregar Nueva Marca</p>
-                        <a href="#" class="btn btn-primary mt-3">Agregar Marca</a>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="bi bi-search">Buscar</i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="bi bi-x-square-fill">Eliminar</i>
+                        </button>
                     </div>
                 </div>
-                
+            </form>
+            <div class="col-sm-12 col-md-6 text-end">
+                <!-- Botón para abrir una caja de diálogo al momento de crear un nuevo registro -->
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="bi bi-plus-square-fill">Agregar</i>
+                </button>
             </div>
         </div>
-    </section>
-    <!-- Fin de Productos -->
+
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover">
+            <!-- Encabezado de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+            <thead>
+                <tr>
+                    <td colspan="5" id="rowsFound"></td>
+                </tr>
+                <tr>
+                    <th>IMAGEN</th>
+                    <th>NOMBRE</th>
+                    <th>PRECIO (US$)</th>
+                    <th>CATEGORÍA</th>
+                    <th>ACCIONES</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+            <tbody id="tableBody"></tbody>
+        </table>
+        <!-- Fin de Productos -->
 
     <!--Esto pues es cuando este en el form cuando se quiera agregar una Marca nueva-->
     <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
