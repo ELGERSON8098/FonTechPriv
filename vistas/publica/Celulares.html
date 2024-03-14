@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fontech</title>
+    <!-- fontawesome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
+</head>
+
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+                href="../publica/index.html">
+                    <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
+                </a>
+
+                <div class="order-lg-2 nav-btns">
+                    <button type="button" class="btn position-relative">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <button type="button" onclick="redirect('../publica/Carrito.html')" class="btn position-relative">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
+                    </button>
+                    <button type="button" onclick="redirect('../publica/Carrito.html')" class="btn position-relative">
+                        <i class="fa fa-user"></i> 
+                    </button>
+                </div>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navMenu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                    <ul class="navbar-nav mx-auto text-center">
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link text-uppercase text-dark" href="../publica/Ofertas.html">Ofertas</a>
+                        </li>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link text-uppercase text-dark" href="../publica/Favoritos.html">Favoritos</a>
+                        </li>
+                        <li class="nav-item px-2 py-2">
+                            <a class="nav-link text-uppercase text-dark" href="../publica/HistorialDeCompras.html">Historial del Pedido</a>
+                        </li>
+                    </ul>
+                </div>
+            </a>
+        </div>
+    </nav>
+    <!-- Fin del navbar -->
+
+    <!-- Separación entre navbar y sección de celulares -->
+    <div class="my-5"></div>
+
+    <!-- Celulares -->
+    <section id="special" class="py-5">
+        <div class="container">
+            <div class="title text-center py-5">
+                <h2 class="position-relative d-inline-block">Celulares</h2>
+            </div>
+
+            <div class="special-list row g-0">
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://helios-i.mashable.com/imagery/articles/01ECWWy8t1g3cMS9XLUwVT2/images-1.fill.size_256x256.v1691591862.png"
+                            class="w-100">
+
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Samsung Galaxy S23</p>
+                        <span class="fw-bold d-block">$ 450.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://img-prd-pim.poorvika.com/prodvarval/Apple-iphone-15-pro-Max-Natural-titanium-Front-Back-View-Thumbnail.png"
+                            class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Iphone 15 Pro Max</p>
+                        <span class="fw-bold d-block">$ 800.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al Carrito</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://img-prd-pim.poorvika.com/prodvarval/redmi-note-13-pro-5g-white-thumbnail.png"
+                            class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Xiaomi Redmi Note 13</p>
+                        <span class="fw-bold d-block">$ 200.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://static.doji.co/product/medias/smartphones/samsung/galaxy-z-fold-4/1-front-back-phantom-black-thumbnail.png"
+                            class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Sansumg Galaxy Z-Fold</p>
+                        <span class="fw-bold d-block">$ 950.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://s.cdnshm.com/catalog/mx/t/210016270/apple-iphone-13-mini-128gb.jpg"
+                            class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Iphone 13 Mini</p>
+                        <span class="fw-bold d-block">$ 500.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://cdn.sysloun.cz/image/003-694-256/p/12/1226/zdmbfjnxjjc0hn0ge3cl.jpg"
+                            class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Huawei P50 Pro</p>
+                        <span class="fw-bold d-block">$ 350.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://www.ditinformatica.com.uy/imgs/productos/productos31_11703.jpg" class="w-100">
+                        
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Motorola G13</p>
+                        <span class="fw-bold d-block">$ 113.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://s.cdnshm.com/catalog/bg/t/94224784/honor-magic-5-lite.jpg" class="w-100">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Honor Magic 5 Lite</p>
+                        <span class="fw-bold d-block">$ 280.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="https://s.cdnshm.com/catalog/bg/t/94224784/honor-magic-5-lite.jpg" class="w-100">
+                    </div>
+                    <div class="text-center">
+                        <p class="text-capitalize mt-3 mb-1">Honor Magic 5 Lite</p>
+                        <span class="fw-bold d-block">$ 280.00</span>
+                        <a href="#" class="btn btn-primary mt-3">Añadir al carrito</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Fin de Celulares -->
+
+    <!-- footer -->
+    <footer class="bg-dark py-5">
+        <div class="container">
+            <div class="row text-white g-4">
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-light">Información</h5>
+                    <ul class="list-unstyled">
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Sobre Nosotros
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class=" me-1"></i> Terminos y Condiciones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-light">Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class=" me-1"></i> Home
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Ofertas
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class=" me-1"></i> Marcas
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class=" me-1"></i> Celulares
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Tablets
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> SmartWatch
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Audifonos
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Cases
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Cargadores
+                            </a>
+                        </li>
+                        <li class="my-3">
+                            <a href="#" class="text-white text-decoration-none text-muted">
+                                <i class="me-1"></i> Micro SD
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-light mb-3">Contactanos</h5>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </span>
+                        <span class="fw-light">
+                            San Salvador, Colonia Escalon, Edificio Don Pepe
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <span class="fw-light">
+                            Fontech503@gmail.com.sv
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-start my-2 text-muted">
+                        <span class="me-3">
+                            <i class="fas fa-phone-alt"></i>
+                        </span>
+                        <span class="fw-light">
+                            63058048
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+                    <h5 class="fw-light mb-3">Siguenos en nuestras redes sociales</h5>
+                    <div>
+                        <ul class="list-unstyled d-flex">
+                            <li>
+                                <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-white text-decoration-none text-muted fs-4 me-4">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Fin del footer -->
+
+
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+
+</html>
