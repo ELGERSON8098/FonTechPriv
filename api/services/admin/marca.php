@@ -1,7 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 
-require_once('../../helpers/database.php');
 require_once('../../models/data/marca_data.php');
 
 if (isset($_GET['action'])) {
