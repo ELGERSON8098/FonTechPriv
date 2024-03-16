@@ -35,7 +35,8 @@ const deleteBrand = async (brandId) => {
 
         if (data.status === 1) {
             console.log(`Marca con ID ${brandId} eliminada correctamente.`);
-            // Si la eliminación es exitosa, puedes hacer alguna acción adicional aquí si es necesario
+            // Llama a fillBrands para actualizar la página después de la eliminación exitosa
+            fillBrands();
         } else {
             console.error(`Error al eliminar la marca con ID ${brandId}: ${data.error || 'Error desconocido'}`);
         }
@@ -43,6 +44,7 @@ const deleteBrand = async (brandId) => {
         console.error('Error al eliminar la marca:', error.message);
     }
 };
+
 
 // Maneja el evento 'DOMContentLoaded' del documento
 document.addEventListener('DOMContentLoaded', () => {
@@ -97,7 +99,17 @@ const createBrandDiv = (brand, index) => {
 };
 
 
-// En la función setupDeleteButton
+// Define la función confirmDeleteHandler
+const confirmDeleteHandler = async () => {
+    const brandId = document.getElementById('confirmDeleteBtn').getAttribute('data-brand-id');
+    if (brandId) {
+        // Llamada a la función para eliminar la marca
+        await deleteBrand(brandId);
+    } else {
+        console.error('ID de marca no proporcionado');
+    }
+};
+
 // En la función setupDeleteButton
 const setupDeleteButton = () => {
     const deleteButtons = document.querySelectorAll('.delete-brand');
@@ -120,12 +132,20 @@ const setupDeleteButton = () => {
                 } else {
                     console.error(`No se encontró el contenedor con ID ${containerId}`);
                 }
+
+                // Elimina el evento click anterior del botón de confirmación de eliminación
+                confirmDeleteBtn.removeEventListener('click', confirmDeleteHandler);
+
+                // Agrega el nuevo manejador de eventos para el botón de confirmación de eliminación
+                confirmDeleteBtn.addEventListener('click', confirmDeleteHandler);
             } else {
                 console.error('ID de marca no proporcionado');
             }
         });
     });
 };
+
+
 
 // Actualiza el evento click del botón de confirmación de eliminación
 document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
