@@ -28,13 +28,14 @@ USE db_fon;
 --
 
 CREATE TABLE `tb_administradores_fon` (
-  `id_Administrador_Fon` int(11) NOT NULL,
+  `id_Administrador_Fon` INT UNSIGNED AUTO_INCREMENT,
   `nombre_admin` varchar(50) NOT NULL,
   `apellido_admin` varchar(50) NOT NULL,
   `edad_admin` int(11) NOT NULL,
   `correo_admin` varchar(50) NOT NULL,
   `telefono_admin` int(11) NOT NULL,
-  `contraseña_admin` varchar(50) NOT NULL
+  `contraseña_admin` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_Administrador_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -44,10 +45,11 @@ CREATE TABLE `tb_administradores_fon` (
 --
 
 CREATE TABLE `tb_categorias_fon` (
-  `id_Categoria_Fon` int(11) NOT NULL,
+  `id_Categoria_Fon`  INT UNSIGNED auto_increment,
   `nombre_Categoria` varchar(50) NOT NULL,
   `producto_Categoria` varchar(50) NOT NULL,
-  `id_Marca_Fon` int(11) NOT NULL
+  `id_Marca_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Categoria_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -57,9 +59,10 @@ CREATE TABLE `tb_categorias_fon` (
 --
 
 CREATE TABLE `tb_comentarios_fon` (
-  `id_Comentario_Fon` int(11) NOT NULL,
+  `id_Comentario_Fon` INT UNSIGNED AUTO_INCREMENT,
   `comentario` varchar(50) NOT NULL,
-  `id_Detalle_Reserva_Fon` int(11) NOT NULL
+  `id_Detalle_Reserva_Fon`INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Comentario_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -69,12 +72,13 @@ CREATE TABLE `tb_comentarios_fon` (
 --
 
 CREATE TABLE `tb_detalles_reservas_fon` (
-  `id_Detalle_Reserva_Fon` int(11) NOT NULL,
+  `id_Detalle_Reserva_Fon` INT UNSIGNED AUTO_INCREMENT,
   `precio` decimal(10,0) NOT NULL,
   `cantidad` int(11) NOT NULL,
   `log_message` varchar(255) NOT NULL,
-  `id_Producto_Fon` int(11) NOT NULL,
-  `id_Reserva_Fon` int(11) NOT NULL
+  `id_Producto_Fon` INT UNSIGNED NOT NULL,
+  `id_Reserva_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Detalle_Reserva_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -84,9 +88,10 @@ CREATE TABLE `tb_detalles_reservas_fon` (
 --
 
 CREATE TABLE `tb_direcciones_fon` (
-  `id_Direccion_Fon` int(11) NOT NULL,
+  `id_Direccion_Fon` INT UNSIGNED AUTO_INCREMENT,
   `direccion` varchar(50) NOT NULL,
-  `id_Reserva_Fon` int(11) NOT NULL
+  `id_Reserva_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Direccion_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -96,7 +101,7 @@ CREATE TABLE `tb_direcciones_fon` (
 --
 
 CREATE TABLE `tb_especificaciones_celulares_fon` (
-  `id_Especificacion_Celulares` int(11) NOT NULL,
+  `id_Especificacion_Celulares` INT UNSIGNED AUTO_INCREMENT,
   `capacidad_memoria_interna_celular` varchar(50) NOT NULL,
   `ram_celular` varchar(50) NOT NULL,
   `pantalla_celular` varchar(50) NOT NULL,
@@ -104,7 +109,8 @@ CREATE TABLE `tb_especificaciones_celulares_fon` (
   `sistema_operativo_celular` enum('Android','IOS') NOT NULL,
   `camara_frontal_celular` varchar(50) NOT NULL,
   `procesador_celular` varchar(50) NOT NULL,
-  `id_Producto_Fon` int(11) NOT NULL
+  `id_Producto_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Especificacion_Celulares`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,14 +120,15 @@ CREATE TABLE `tb_especificaciones_celulares_fon` (
 --
 
 CREATE TABLE `tb_especificaciones_tablets_fon` (
-  `id_Especificacion_Tablets` int(11) NOT NULL,
+  `id_Especificacion_Tablets` INT UNSIGNED AUTO_INCREMENT,
   `capacidad_almacenamiento_tablet` varchar(50) NOT NULL,
   `camara_primaria_tablet` varchar(50) NOT NULL,
   `camara_forntal_tablet` varchar(50) NOT NULL,
   `sistema_operativo_tablet` enum('Android','IOS') NOT NULL,
   `ram_tablet` varchar(50) NOT NULL,
   `tamaño_pantalla_tablet` varchar(50) NOT NULL,
-  `id_Producto_Fon` int(11) NOT NULL
+  `id_Producto_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Especificacion_Tablets`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -131,9 +138,10 @@ CREATE TABLE `tb_especificaciones_tablets_fon` (
 --
 
 CREATE TABLE `tb_estados_pedidos_fon` (
-  `id_Estado_Pedido_Fon` int(11) NOT NULL,
+  `id_Estado_Pedido_Fon` INT UNSIGNED AUTO_INCREMENT,
   `estado` enum('Cancelado','En camino','Aceptado','Entregado') NOT NULL,
-  `id_Reserva_Fon` int(11) NOT NULL
+  `id_Reserva_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Estado_Pedido_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -143,10 +151,15 @@ CREATE TABLE `tb_estados_pedidos_fon` (
 --
 
 CREATE TABLE `tb_marcas_fon` (
-  `id_Marca_Fon` int(11) NOT NULL,
+  `id_Marca_Fon`INT UNSIGNED AUTO_INCREMENT,
   `nombre_Marca` VARCHAR(50) NOT NULL,
-  `producto_marcar` varchar(50) NOT NULL
+  `producto_marcar` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_Marca_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
+
+
+
+
 
 
 -- --------------------------------------------------------
@@ -156,9 +169,10 @@ CREATE TABLE `tb_marcas_fon` (
 --
 
 CREATE TABLE `tb_niveles_usuarios_fon` (
-  `id_Nivel_Usuario_Fon` int(11) NOT NULL,
+  `id_Nivel_Usuario_Fon` INT UNSIGNED AUTO_INCREMENT,
   `nivel_usuario` enum('Supervisor','Empleado','Conserje') NOT NULL,
-  `id_Administrador_Fon` int(11) NOT NULL
+  `id_Administrador_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Nivel_Usuario_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -168,13 +182,14 @@ CREATE TABLE `tb_niveles_usuarios_fon` (
 --
 
 CREATE TABLE `tb_productos_fon` (
-  `id_Producto_Fon` int(11) NOT NULL,
+  `id_Producto_Fon` INT UNSIGNED AUTO_INCREMENT,
   `nombre_producto` varchar(50) NOT NULL,
   `descripcion_producto` varchar(50) NOT NULL,
   `precio_producto` decimal(10,0) NOT NULL,
   `existencia_producto` int(11) NOT NULL,
-  `id_Marca_Fon` int(11) NOT NULL,
-  `id_Categoria_Fon` int(11) NOT NULL
+  `id_Marca_Fon` INT UNSIGNED NOT NULL,
+  `id_Categoria_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Producto_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -184,13 +199,14 @@ CREATE TABLE `tb_productos_fon` (
 --
 
 CREATE TABLE `tb_registros_clientes_fon` (
-  `id_Registro_Fon` int(11) NOT NULL,
+  `id_Registro_Fon` INT UNSIGNED AUTO_INCREMENT,
   `nombre_registro` varchar(50) NOT NULL,
   `apellido_registro` varchar(50) NOT NULL,
   `edad_registro` int(11) NOT NULL,
   `correo_registro` varchar(50) NOT NULL,
   `telefono_registro` int(11) NOT NULL,
-  `contraseña_registro` varchar(50) NOT NULL
+  `contraseña_registro` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_Registro_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -200,104 +216,11 @@ CREATE TABLE `tb_registros_clientes_fon` (
 --
 
 CREATE TABLE `tb_reservas_fon` (
-  `id_Reserva_Fon` int(11) NOT NULL,
-  `id_Registro_Fon` int(11) NOT NULL
+  `id_Reserva_Fon` INT UNSIGNED AUTO_INCREMENT,
+  `id_Registro_Fon` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_Reserva_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `tb_administradores_fon`
---
-ALTER TABLE `tb_administradores_fon`
-  ADD PRIMARY KEY (`id_Administrador_Fon`);
-
---
--- Indices de la tabla `tb_categorias_fon`
---
-ALTER TABLE `tb_categorias_fon`
-  ADD PRIMARY KEY (`id_Categoria_Fon`);
-
---
--- Indices de la tabla `tb_comentarios_fon`
---
-ALTER TABLE `tb_comentarios_fon`
-  ADD PRIMARY KEY (`id_Comentario_Fon`);
-
---
--- Indices de la tabla `tb_detalles_reservas_fon`
---
-ALTER TABLE `tb_detalles_reservas_fon`
-  ADD PRIMARY KEY (`id_Detalle_Reserva_Fon`),
-  ADD KEY `fk_detalles_reservas_reserva` (`id_Reserva_Fon`),
-  ADD KEY `fk_detalles_reservas_producto` (`id_Producto_Fon`);
-
---
--- Indices de la tabla `tb_direcciones_fon`
---
-ALTER TABLE `tb_direcciones_fon`
-  ADD PRIMARY KEY (`id_Direccion_Fon`);
-
---
--- Indices de la tabla `tb_especificaciones_celulares_fon`
---
-ALTER TABLE `tb_especificaciones_celulares_fon`
-  ADD PRIMARY KEY (`id_Especificacion_Celulares`),
-  ADD KEY `fk_especificaciones_celulares_producto` (`id_Producto_Fon`);
-
---
--- Indices de la tabla `tb_especificaciones_tablets_fon`
---
-ALTER TABLE `tb_especificaciones_tablets_fon`
-  ADD PRIMARY KEY (`id_Especificacion_Tablets`),
-  ADD KEY `especificaciones_tablets_producto` (`id_Producto_Fon`);
-
---
--- Indices de la tabla `tb_estados_pedidos_fon`
---
-ALTER TABLE `tb_estados_pedidos_fon`
-  ADD PRIMARY KEY (`id_Estado_Pedido_Fon`),
-  ADD KEY `fk_estados_pedidos_reserva` (`id_Reserva_Fon`);
-
---
--- Indices de la tabla `tb_marcas_fon`
---
-ALTER TABLE `tb_marcas_fon`
-  ADD PRIMARY KEY (`id_Marca_Fon`);
-
---
--- Indices de la tabla `tb_niveles_usuarios_fon`
---
-ALTER TABLE `tb_niveles_usuarios_fon`
-  ADD PRIMARY KEY (`id_Nivel_Usuario_Fon`),
-  ADD KEY `fk_niveles_usuarios_admin` (`id_Administrador_Fon`);
-
---
--- Indices de la tabla `tb_productos_fon`
---
-ALTER TABLE `tb_productos_fon`
-  ADD PRIMARY KEY (`id_Producto_Fon`),
-  ADD KEY `fk_productos_marca` (`id_Marca_Fon`),
-  ADD KEY `fk_productos_categoria` (`id_Categoria_Fon`);
-
---
--- Indices de la tabla `tb_registros_clientes_fon`
---
-ALTER TABLE `tb_registros_clientes_fon`
-  ADD PRIMARY KEY (`id_Registro_Fon`);
-
---
--- Indices de la tabla `tb_reservas_fon`
---
-ALTER TABLE `tb_reservas_fon`
-  ADD PRIMARY KEY (`id_Reserva_Fon`),
-  ADD KEY `fk_reservas_cliente` (`id_Registro_Fon`);
-
---
--- Restricciones para tablas volcadas
---
 
 --
 -- Filtros para la tabla `tb_detalles_reservas_fon`
@@ -409,8 +332,8 @@ SELECT * FROM tb_niveles_usuarios_fon;
 
 INSERT INTO `tb_marcas_fon` (`id_Marca_Fon`, `nombre_Marca`, `producto_marcar`)
 VALUES
-(1, 'Samsung', 'Galaxy S21'),
-(2, 'Iphone', 'iPhone 13'),
+(1, 'Poco', 'Pixi 4'),
+(2, 'Redmi', 'Pixi 4'),
 (3, 'Alcaltel', 'Pixi 4'),
 (4, 'Xiaomi', 'Redmi Note 10'),
 (5, 'Samsung', 'Galaxy A52'),
@@ -434,6 +357,10 @@ VALUES
 (23, 'Alcaltel', '1V'),
 (24, 'Xiaomi', 'Redmi Note 9'),
 (25, 'Samsung', 'Galaxy A12'); 
+
+INSERT INTO `tb_marcas_fon` (`id_Marca_Fon`, `nombre_Marca`, `producto_marcar`)
+VALUES
+(27, 'Redmi', 'NOTE')
 
 SELECT * FROM tb_marcas_fon;
 
