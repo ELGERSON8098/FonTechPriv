@@ -153,7 +153,7 @@ CREATE TABLE `tb_estados_pedidos_fon` (
 CREATE TABLE `tb_marcas_fon` (
   `id_Marca_Fon`INT UNSIGNED AUTO_INCREMENT,
   `nombre_Marca` VARCHAR(50) NOT NULL,
-  `producto_marcar` varchar(50) NOT NULL,
+  `imagen_marcar` varchar(20) NOT NULL,
   PRIMARY KEY (`id_Marca_Fon`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=UTF8MB4_GENERAL_CI;
 
@@ -184,6 +184,7 @@ CREATE TABLE `tb_productos_fon` (
   `descripcion_producto` varchar(50) NOT NULL,
   `precio_producto` decimal(10,0) NOT NULL,
   `existencia_producto` int(11) NOT NULL,
+  `imagen_marcar` varchar(20) NOT NULL,
   `id_Marca_Fon` INT UNSIGNED NOT NULL,
   `id_Categoria_Fon` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`id_Producto_Fon`)
