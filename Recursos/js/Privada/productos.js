@@ -1,3 +1,7 @@
+
+
+
+
 $(document).ready(function () {
     // Escuchar el clic en el botón "Agregar Productos"
     $('#movableContainer2').click(function () {
