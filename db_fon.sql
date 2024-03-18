@@ -159,9 +159,6 @@ CREATE TABLE `tb_marcas_fon` (
 
 
 
-
-
-
 -- --------------------------------------------------------
 
 --
@@ -358,10 +355,6 @@ VALUES
 (24, 'Xiaomi', 'Redmi Note 9'),
 (25, 'Samsung', 'Galaxy A12'); 
 
-INSERT INTO `tb_marcas_fon` (`id_Marca_Fon`, `nombre_Marca`, `producto_marcar`)
-VALUES
-(27, 'Redmi', 'NOTE')
-
 SELECT * FROM tb_marcas_fon;
 
 INSERT INTO `tb_categorias_fon` (`id_Categoria_Fon`, `nombre_Categoria`, `producto_Categoria`, `id_Marca_Fon`)
@@ -539,6 +532,35 @@ VALUES
 
 SELECT * FROM tb_registros_clientes_fon;
 
+INSERT INTO tb_direcciones_fon (id_Direccion_Fon, direccion, id_Reserva_Fon) VALUES
+(1, 'Calle 1, Ciudad A', 1),
+(2, 'Avenida 2, Ciudad B', 2),
+(3, 'Carrera 3, Ciudad C', 3),
+(4, 'Calle 4, Ciudad A', 4),
+(5, 'Avenida 5, Ciudad B', 5),
+(6, 'Carrera 6, Ciudad C', 6),
+(7, 'Calle 7, Ciudad A', 7),
+(8, 'Avenida 8, Ciudad B', 8),
+(9, 'Carrera 9, Ciudad C', 9),
+(10, 'Calle 10, Ciudad A', 10),
+(11, 'Avenida 11, Ciudad B', 11),
+(12, 'Carrera 12, Ciudad C', 12),
+(13, 'Calle 13, Ciudad A', 13),
+(14, 'Avenida 14, Ciudad B', 14),
+(15, 'Carrera 15, Ciudad C', 15),
+(16, 'Calle 16, Ciudad A', 16),
+(17, 'Avenida 17, Ciudad B', 17),
+(18, 'Carrera 18, Ciudad C', 18),
+(19, 'Calle 19, Ciudad A', 19),
+(20, 'Avenida 20, Ciudad B', 20),
+(21, 'Carrera 21, Ciudad C', 21),
+(22, 'Calle 22, Ciudad A', 22),
+(23, 'Avenida 23, Ciudad B', 23),
+(24, 'Carrera 24, Ciudad C', 24),
+(25, 'Calle 25, Ciudad A', 25);
+
+SELECT * FROM tb_direcciones_fon;
+
 INSERT INTO tb_reservas_fon (id_Reserva_Fon, id_Registro_Fon) VALUES
 (1, 1),
 (2, 2),
@@ -567,6 +589,33 @@ INSERT INTO tb_reservas_fon (id_Reserva_Fon, id_Registro_Fon) VALUES
 (25, 25);
 
 SELECT * FROM tb_registros_clientes_fon;
+
+INSERT INTO tb_comentarios_fon (id_Comentario_Fon, comentario, id_Detalle_Reserva_Fon) VALUES
+(1, 'Buen servicio', 1),
+(2, 'Excelente atención al cliente', 2),
+(3, 'Producto de buena calidad', 3),
+(4, 'Rápido envío', 4),
+(5, 'Satisfecho con la compra', 5),
+(6, 'Recomendado', 6),
+(7, 'Problemas con la entrega', 7),
+(8, 'Deberían mejorar el empaque', 8),
+(9, 'Muy amables', 9),
+(10, 'Entrega puntual', 10),
+(11, 'Atención al cliente mejorable', 11),
+(12, 'Producto defectuoso', 12),
+(13, 'Fácil proceso de compra', 13),
+(14, 'Producto no recibido', 14),
+(15, 'Servicio al cliente lento', 15),
+(16, 'Buena relación calidad-precio', 16),
+(17, 'Reembolso solicitado', 17),
+(18, 'Envío perdido', 18),
+(19, 'Sorpresa con el producto', 19),
+(20, 'Respuesta rápida ante problemas', 20),
+(21, 'Mejoraría la comunicación', 21),
+(22, 'Pedido incorrecto', 22),
+(23, 'Envío rápido', 23),
+(24, 'Atención al cliente ineficiente', 24),
+(25, 'Producto dañado en tránsito', 25);
 
 INSERT INTO tb_detalles_reservas_fon (id_Detalle_Reserva_Fon, precio, cantidad, id_Producto_Fon, id_Reserva_Fon) VALUES
 (1, 100, 2, 1, 1),
@@ -597,34 +646,7 @@ INSERT INTO tb_detalles_reservas_fon (id_Detalle_Reserva_Fon, precio, cantidad, 
 
 SELECT * FROM tb_detalles_reservas_fon;
 
-INSERT INTO tb_direcciones_fon (id_Direccion_Fon, direccion, id_Reserva_Fon) VALUES
-(1, 'Calle 1, Ciudad A', 1),
-(2, 'Avenida 2, Ciudad B', 2),
-(3, 'Carrera 3, Ciudad C', 3),
-(4, 'Calle 4, Ciudad A', 4),
-(5, 'Avenida 5, Ciudad B', 5),
-(6, 'Carrera 6, Ciudad C', 6),
-(7, 'Calle 7, Ciudad A', 7),
-(8, 'Avenida 8, Ciudad B', 8),
-(9, 'Carrera 9, Ciudad C', 9),
-(10, 'Calle 10, Ciudad A', 10),
-(11, 'Avenida 11, Ciudad B', 11),
-(12, 'Carrera 12, Ciudad C', 12),
-(13, 'Calle 13, Ciudad A', 13),
-(14, 'Avenida 14, Ciudad B', 14),
-(15, 'Carrera 15, Ciudad C', 15),
-(16, 'Calle 16, Ciudad A', 16),
-(17, 'Avenida 17, Ciudad B', 17),
-(18, 'Carrera 18, Ciudad C', 18),
-(19, 'Calle 19, Ciudad A', 19),
-(20, 'Avenida 20, Ciudad B', 20),
-(21, 'Carrera 21, Ciudad C', 21),
-(22, 'Calle 22, Ciudad A', 22),
-(23, 'Avenida 23, Ciudad B', 23),
-(24, 'Carrera 24, Ciudad C', 24),
-(25, 'Calle 25, Ciudad A', 25);
 
-SELECT * FROM tb_direcciones_fon;
 
 INSERT INTO tb_estados_pedidos_fon (id_Estado_Pedido_Fon, estado, id_Reserva_Fon) VALUES
 (1, 'Aceptado', 1),
@@ -655,33 +677,11 @@ INSERT INTO tb_estados_pedidos_fon (id_Estado_Pedido_Fon, estado, id_Reserva_Fon
 
 SELECT * FROM tb_estados_pedidos_fon;
 
-INSERT INTO tb_comentarios_fon (id_Comentario_Fon, comentario, id_Detalle_Reserva_Fon) VALUES
-(1, 'Buen servicio', 1),
-(2, 'Excelente atención al cliente', 2),
-(3, 'Producto de buena calidad', 3),
-(4, 'Rápido envío', 4),
-(5, 'Satisfecho con la compra', 5),
-(6, 'Recomendado', 6),
-(7, 'Problemas con la entrega', 7),
-(8, 'Deberían mejorar el empaque', 8),
-(9, 'Muy amables', 9),
-(10, 'Entrega puntual', 10),
-(11, 'Atención al cliente mejorable', 11),
-(12, 'Producto defectuoso', 12),
-(13, 'Fácil proceso de compra', 13),
-(14, 'Producto no recibido', 14),
-(15, 'Servicio al cliente lento', 15),
-(16, 'Buena relación calidad-precio', 16),
-(17, 'Reembolso solicitado', 17),
-(18, 'Envío perdido', 18),
-(19, 'Sorpresa con el producto', 19),
-(20, 'Respuesta rápida ante problemas', 20),
-(21, 'Mejoraría la comunicación', 21),
-(22, 'Pedido incorrecto', 22),
-(23, 'Envío rápido', 23),
-(24, 'Atención al cliente ineficiente', 24),
-(25, 'Producto dañado en tránsito', 25);
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
