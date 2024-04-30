@@ -23,7 +23,7 @@ class MarcaData extends MarcaHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del producto es incorrecto';
+            $this->data_error = 'El identificador de la marca es incorrecto';
             return false;
         }
     }
@@ -42,54 +42,6 @@ class MarcaData extends MarcaHandler
             return true;
         } else {
             $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    /*
- * Establece la descripción de la marca.
- */
-    public function setDescripcion($value, $min = 2, $max = 250)
-    {
-        // Validación de la descripción.
-        if (!Validator::validateString($value)) {
-            $this->data_error = 'La descripción contiene caracteres prohibidos';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->descripcion = $value;
-            return true;
-        } else {
-            $this->data_error = 'La descripción debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    /*
- * Establece el precio de la marca.
- */
-    public function setPrecio($value)
-    {
-        // Validación del precio.
-        if (Validator::validateMoney($value)) {
-            $this->precio = $value;
-            return true;
-        } else {
-            $this->data_error = 'El precio debe ser un valor numérico';
-            return false;
-        }
-    }
-
-    /*
- * Establece las existencias de la marca.
- */
-    public function setExistencias($value)
-    {
-        // Validación de las existencias.
-        if (Validator::validateNaturalNumber($value)) {
-            $this->existencias = $value;
-            return true;
-        } else {
-            $this->data_error = 'El valor de las existencias debe ser numérico entero';
             return false;
         }
     }

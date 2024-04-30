@@ -11,7 +11,7 @@ if (isset($_GET['action'])) {
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
-    if (isset($_SESSION['idUsuario'])) {
+    if (isset($_SESSION['id_Administrador_Fon'])) {
         // Se compara la acción a realizar cuando un administrador ha iniciado sesión.
         switch ($_GET['action']) {
             case 'searchRows':
@@ -28,17 +28,17 @@ if (isset($_GET['action'])) {
                 
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setNombre($_POST['nombreMarca'])or
-                    !$categoria->setEstado(isset($_POST['estadoMarca']) ? 1 : 0) 
+                    !$marca->setNombre($_POST['nombreMarca'])or
+                    !$marca->setImagen(($_POST['imagenMarca'])) 
                 ) {
                     $result['error'] = $categoria->getDataError();
-                } elseif ($categoria->createRow()) {
+                } elseif ($marca->createRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Categoría creada correctamente';
                     // Se asigna el estado del archivo después de insertar.
-                    
+                    $result['fileStatus'] = Validator::saveFile($_FILES['imagenMarca'], $marca::RUTA_IMAGEN);
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear la categoría';
+                    $result['error'] = 'Ocurrió un problema al crear la marca';
                 }
                 break;
             case 'readAll':
@@ -50,7 +50,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$categoria->setId($_POST['idMarca'])) {
+                if (!$categoria->setId($_POST['id_Marca_Fon'])) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($result['dataset'] = $categoria->readOne()) {
                     $result['status'] = 1;
@@ -61,16 +61,16 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$categoria->setId($_POST['idMarca']) or
+                    !$categoria->setId($_POST['id_Marca_Fon']) or
                     !$categoria->setNombre($_POST['nombreMarca']) or
-                    !$categoria->setEstado(isset($_POST['estadoMarca']) ? 1 : 0)  
+                    !$categoria->setImagen($_FILES['imagenMarca'], $marca->getFilename())  
                 ) {
                     $result['error'] = $categoria->getDataError();
                 } elseif ($categoria->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Categoría modificada correctamente';
+                    $result['message'] = 'Marca modificada correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar la categoría';
+                    $result['error'] = 'Ocurrió un problema al modificar la marca';
                 }
                 break;
             case 'deleteRow':

@@ -11,11 +11,7 @@ class MarcaHandler
     */
     protected $id = null;
     protected $nombre = null;
-    protected $descripcion = null;
-    protected $precio = null;
-    protected $existencias = null;
     protected $imagen = null;
-    protected $categoria = null;
     protected $estado = null;
 
     // Constante para establecer la ruta de las imágenes.
@@ -27,17 +23,17 @@ class MarcaHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_marca, descripcion_marca, estado_marca
-                FROM ctg_marcas
-                WHERE descripcion_marca LIKE ? 
-                ORDER BY descripcion_marca';
+        $sql = 'SELECT id_Marca_Fon, nombre_Marca, imagen_marcar
+                FROM tb_marcas_fon
+                WHERE nombre_Marca LIKE ? 
+                ORDER BY nombre_Marca';
         $params = array($value);
         return Database::getRows($sql, $params);
     }
 
     public function createRow()
     {
-        $sql = 'INSERT INTO ctg_marcas(descripcion_marca, estado_marca)
+        $sql = 'INSERT INTO tb_marcas_fon(nombre_Marca, imagen_marcar)
                 VALUES(?, ?)';
         $params = array($this->nombre, $this->estado);
         return Database::executeRow($sql, $params);
@@ -45,55 +41,49 @@ class MarcaHandler
 
     public function readAll()
     {
-        $sql = 'SELECT id_marca, descripcion_marca,estado_marca
-                FROM ctg_marcas' ;
-        return Database::getRows($sql);
-    }
-    public function readAllActive()
-    {
-        $sql = 'SELECT id_marca, descripcion_marca,estado_marca
-                FROM ctg_marcas where estado_marca=true' ;
+        $sql = 'SELECT id_Marca_Fon, nombre_Marca,imagen_marcar
+                FROM tb_marcas_fon' ;
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_marca, descripcion_marca,estado_marca
-                FROM ctg_marcas
-                WHERE id_marca = ?';
+        $sql = 'SELECT id_Marca_Fon, nombre_Marca,imagen_marcar
+                FROM tb_marcas_fon
+                WHERE id_Marca_Fon = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
     public function readFilename()
     {
-        $sql = 'SELECT imagen_producto
-                FROM producto
-                WHERE id_producto = ?';
+        $sql = 'SELECT imagen_marcar
+                FROM tb_marcas_fon
+                WHERE id_Marca_Fon = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
     public function updateRow()
     {
-        $sql = 'UPDATE ctg_marcas
-                SET descripcion_marca = ?, estado_marca = ?
-                WHERE id_marca = ?';
+        $sql = 'UPDATE tb_marcas_fon
+                SET nombre_Marca = ?, imagen_marcar = ?
+                WHERE id_Marca_Fon = ?';
         $params = array( $this->nombre, $this->estado, $this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM ctg_marcas 
-                WHERE id_marca = ?';
+        $sql = 'DELETE FROM tb_marcas_fon 
+                WHERE id_Marca_Fon = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
 
     public function readProductosCategoria()
     {
-        $sql = 'SELECT id_producto, imagen_producto, nombre_producto, descripcion_producto, precio_producto, existencias_producto
+        $sql = 'SELECT id_Marca_Fon, nombre_Marca, imagen_marcar as marca
                 FROM producto
                 INNER JOIN categoria USING(id_categoria)
                 WHERE id_categoria = ? AND estado_producto = true
