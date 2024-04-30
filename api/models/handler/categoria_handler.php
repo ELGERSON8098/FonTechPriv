@@ -12,9 +12,6 @@ class CategoriaHandler
     protected $id = null;
     protected $nombre = null;
 
-    protected $descripcion = null;
-
-
     protected $imagen = null;
 
     // Constante para establecer la ruta de las imágenes.
