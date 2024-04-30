@@ -1,56 +1,89 @@
 <!DOCTYPE html>
+<!-- Declaración del idioma para el documento -->
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
+    <!-- Título del documento -->
+    <title></title>
+    <!-- Metadatos de la página web -->
+    <meta charset="utf-8">
+        <!-- Compatibilidad con Internet Explorer -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fontech</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Fuente Comfortaa desde Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap">
+    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
+    <!-- Llamada al icono de la página web -->
+    <link type="image/png" rel="icon" href="aqui la foto">
+    <!-- Llamada a las hojas de estilos del framework e iconos -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
 </head>
 
-<!--body class="min-vh-100: Por lo que entendi es para establecer el cuerpo de la página y tenga el
-100% de la altura de la pagina visible y nos ayuda a no tener problemas con el diseño con poco contenido de la página-->
-
-<body class="min-vh-100">
-    <!--py-5 h-100: Por lo que entendi el py-5 es para darle un padding vertical y darle un espacio interno con el valor 5  y h-100 es para darle un 100% de altura en el contenedor-->
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-white text-black" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <div class="mb-md-5 mt-md-4 pb-5">
-                            <div class=" mb-4 p-2 w-100 card-img-top img-fluid Logos">
-                                <img src="../../Recursos/img/image 67.png" alt="samsung">
-                            </div>
-                            <!--fw-bold para poner al texto en negrita y el text-uppercase para convertirlo en mayúscula el texto-->
-                            <h2 class="fw-bold mb-5 text-uppercase">Inicio de Sesión</h2>
-
-                            <div class=" mb-4">
-                                <input type="email" id="Email" class="form-control form-control-lg mb-2" />
-                                <label class="form-label" for="Email">Usuario</label>
-                            </div>
-
-                            <div class=" mb-5">
-                                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
-                                <label class="form-label" for="Contraseña">Contraseña</label>
-                            </div>
-
-                            <a class="btn btn-outline-black btn-lg px-5 mb-5" href="../priv/Dashboard.html">Iniciar
-                                Sesión</a>
-                            <p class="small mb-5 pb-lg-2"><a class="text-black-50" href="#!">¿Olvidaste tu
-                                    contraseña?</a></p>
-                        </div>
-                    </div>
+<body>
+    <!-- Contenido principal del documento -->
+    <main>
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <!-- Imagen del usuario -->
+        <img src="../../resources/img/user.png" class="mx-auto d-block" width="200">
+        <!-- Formulario para iniciar sesión -->
+        <form class="d-none" id="loginForm">
+            <div class="row g-3">
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <label for="alias" class="form-label">Usuario</label>
+                    <input id="alias" type="text" name="alias" class="form-control" required>
+                </div>
+                <div class="col-sm-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+                    <label for="clave" class="form-label">Contraseña</label>
+                    <input id="clave" type="password" name="clave" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Enviar</button>
                 </div>
             </div>
-        </div>
-    </div>
+        </form>
+        <!-- Formulario para crear el primer administrador -->
+        <form class="d-none" id="signupForm">
+            <div class="row g-3">
+                <div class="col-sm-12 col-md-6">
+                    <label for="nombreAdministrador" class="form-label">Nombre</label>
+                    <input id="nombreAdministrador" type="text" name="nombreAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="aliasAdministrador" class="form-label">Usuario</label>
+                    <input id="aliasAdministrador" type="text" name="aliasAdministrador" class="form-control" required>
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+                    <label for="correoAdministrador" class="form-label">Correo</label>
+                    <input id="correoAdministrador" type="email" name="correoAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="claveAdministrador" class="form-label">Contraseña</label>
+                    <input id="claveAdministrador" type="password" name="claveAdministrador" class="form-control"
+                        required>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <label for="confirmarClave" class="form-label">Confirmar contraseña</label>
+                    <input id="confirmarClave" type="password" name="confirmarClave" class="form-control" required>
+                </div>
+                <div class="text-center">
+                    <button type="reset" class="btn btn-secondary"><i class="bi bi-x-square"></i> Cancelar</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </main>
+    <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/index.js"></script>
 </body>
 
-<!-- Bootstrap JS y dependencias -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 </html>
