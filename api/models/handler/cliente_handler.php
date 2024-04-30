@@ -10,8 +10,7 @@ class ClienteHandler
     *   Declaración de atributos para el manejo de datos.
     */
     protected $id = null;
-    protected $nombre = null;    
-    protected $usuario = null;
+    protected $nombre = null;
     protected $apellido = null;
     protected $correo = null;
     protected $telefono = null;
@@ -24,16 +23,16 @@ class ClienteHandler
     /*
     *   Métodos para gestionar la cuenta del cliente.
     */
-    public function checkUser($usuario, $password)
+    public function checkUser($mail, $password)
     {
-        $sql = 'SELECT id_cliente, usuario_cliente, clave_cliente, estado_cliente
-                FROM prc_clientes
-                WHERE usuario_cliente = ?';
-        $params = array($usuario);
+        $sql = 'SELECT id_cliente, correo_cliente, clave_cliente, estado_cliente
+                FROM cliente
+                WHERE correo_cliente = ?';
+        $params = array($mail);
         $data = Database::getRow($sql, $params);
         if (password_verify($password, $data['clave_cliente'])) {
             $this->id = $data['id_cliente'];
-            $this->usuario = $data['usuario_cliente'];
+            $this->correo = $data['correo_cliente'];
             $this->estado = $data['estado_cliente'];
             return true;
         } else {
@@ -45,7 +44,7 @@ class ClienteHandler
     {
         if ($this->estado) {
             $_SESSION['idCliente'] = $this->id;
-            $_SESSION['usuarioc'] = $this->usuario;
+            $_SESSION['correoCliente'] = $this->correo;
             return true;
         } else {
             return false;
@@ -59,14 +58,6 @@ class ClienteHandler
                 WHERE id_cliente = ?';
         $params = array($this->clave, $this->id);
         return Database::executeRow($sql, $params);
-    }
-    public function readProfile()
-    {
-        $sql = 'SELECT id_cliente, nombre_cliente, apellido_cliente, email_cliente, usuario_cliente
-                FROM prc_clientes
-                WHERE id_cliente = ?';
-        $params = array($_SESSION['idCliente']);
-        return Database::getRow($sql, $params);
     }
 
     public function editProfile()

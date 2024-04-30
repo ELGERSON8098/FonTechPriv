@@ -1,139 +1,101 @@
 <?php
-// Se incluye la clase para trabajar con la base de datos.
-require_once('../../helpers/database.php');
+// Se incluye la clase para validar los datos de entrada.
+require_once('../../helpers/validator.php');
+// Se incluye la clase padre.
+require_once('../../models/handler/administrador_handler.php');
 /*
- *  Clase para manejar el comportamiento de los datos de la tabla administrador.
+ *  Clase para manejar el encapsulamiento de los datos de la tabla USUARIO.
  */
-class AdministradorHandler
+class AdministradorData extends AdministradorHandler
 {
-    /*
-     *  Declaración de atributos para el manejo de datos.
-     */
-    protected $id = null;
-    protected $nombre = null;
-    protected $apellido = null;
-    protected $correo = null;
-    protected $clave = null;
+    // Atributo genérico para manejo de errores.
+    private $data_error = null;
 
     /*
-     *  Métodos para gestionar la cuenta del administrador.
+     *  Métodos para validar y asignar valores de los atributos.
      */
-    public function checkUser($username, $password)
+    public function setId($value)
     {
-        $sql = 'SELECT id_administrador, usuario_administrador, clave_administrador
-                FROM tb_admins
-                WHERE  usuario_administrador = ?';
-        $params = array($username);
-        $data = Database::getRow($sql, $params);
-        if (password_verify($password, $data['clave_administrador'])) {
-            $_SESSION['idAdministrador'] = $data['id_administrador'];
-            $_SESSION['aliasAdministrador'] = $data['usuario_administrador'];
-            return $data['id_administrador']; // Devuelve el id_administrador
-        } else {
-            return false;
-        }
-    }
-    
-
-    public function checkPassword($password)
-    {
-        $sql = 'SELECT clave_administrador
-                FROM tb_admins
-                WHERE id_administrador = ?';
-        $params = array($_SESSION['idAdministrador']);
-        $data = Database::getRow($sql, $params);
-        // Se verifica si la contraseña coincide con el hash almacenado en la base de datos.
-        if (password_verify($password, $data['clave_administrador'])) {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id = $value;
             return true;
         } else {
+            $this->data_error = 'El identificador del administrador es incorrecto';
             return false;
         }
     }
 
-    public function changePassword()
+    public function setNombre($value, $min = 2, $max = 50)
     {
-        $sql = 'UPDATE administrador
-                SET clave_administrador = ?
-                WHERE id_administrador = ?';
-        $params = array($this->clave, $_SESSION['idadministrador']);
-        return Database::executeRow($sql, $params);
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nombre = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
     }
 
-    public function readProfile()
+    public function setApellido($value, $min = 2, $max = 50)
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador, id_nivel_usuario
-                FROM tb_admins
-                WHERE id_administrador = ?';
-        $params = array($_SESSION['idAdministrador']);
-        return Database::getRow($sql, $params);
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El apellido debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->apellido = $value;
+            return true;
+        } else {
+            $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
     }
 
-    public function editProfile()
+    public function setCorreo($value, $min = 8, $max = 100)
     {
-        $sql = 'UPDATE tb_admins
-                SET nombre_administrador = ?, usuario_administrador= ?, correo_administrador = ?
-                WHERE id_administrador = ?';
-        $params = array($this->nombre, $this->alias, $this->correo,  $_SESSION['idAdministrador']);
-        return Database::executeRow($sql, $params);
+        if (!Validator::validateEmail($value)) {
+            $this->data_error = 'El correo no es válido';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->correo = $value;
+            return true;
+        } else {
+            $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
     }
 
-    /*
-     *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
-     */
-    public function searchRows()
+    public function setAlias($value, $min = 6, $max = 25)
     {
-        $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador
-                FROM administrador
-                WHERE apellido_administrador LIKE ? OR nombre_administrador LIKE ?
-                ORDER BY apellido_administrador';
-        $params = array($value, $value);
-        return Database::getRows($sql, $params);
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El alias debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->alias = $value;
+            return true;
+        } else {
+            $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
     }
 
-    public function createRow()
+    public function setClave($value)
     {
-        // Insertar el administrador con el nivel de usuario correspondiente
-        $sql = 'INSERT INTO tb_admins(nombre_administrador, usuario_administrador, correo_administrador, clave_administrador, id_nivel_usuario)
-                VALUES (?, ?, ?, ?, ?)';
-        $params = array($this->nombre, $this->alias, $this->correo, $this->clave, 1); // ID de nivel de usuario = 1
-        return Database::executeRow($sql, $params);
-    }
-    
-    
-    
-    
-
-    public function readAll()
-    {
-        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador
-        FROM tb_admins;';
-        return Database::getRows($sql);
+        if (Validator::validatePassword($value)) {
+            $this->clave = password_hash($value, PASSWORD_DEFAULT);
+            return true;
+        } else {
+            $this->data_error = Validator::getPasswordError();
+            return false;
+        }
     }
 
-    public function readOne()
-    {
-        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador, clave_administrador, id_nivel_usuario
-        FROM tb_admins
-        WHERE id_administrador = ?;';
-        $params = array($this->id);
-        return Database::getRow($sql, $params);
-    }
 
-    public function updateRow()
+    // Método para obtener el error de los datos.
+    public function getDataError()
     {
-        $sql = 'UPDATE administrador
-                SET nombre_administrador = ?, apellido_administrador = ?, correo_administrador = ?
-                WHERE id_administrador = ?';
-        $params = array($this->nombre, $this->apellido, $this->correo, $this->id);
-        return Database::executeRow($sql, $params);
-    }
-
-    public function deleteRow()
-    {
-        $sql = 'DELETE FROM administrador
-                WHERE id_administrador = ?';
-        $params = array($this->id);
-        return Database::executeRow($sql, $params);
+        return $this->data_error;
     }
 }

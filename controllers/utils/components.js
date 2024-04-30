@@ -2,7 +2,7 @@
 *   CONTROLADOR DE USO GENERAL EN TODAS LAS PÁGINAS WEB.
 */
 // Constante para establecer la ruta base del servidor.
-const SERVER_URL = 'http://localhost/YNWA/api/';
+const SERVER_URL = 'http://localhost/Expo_Comodo/api/';
 
 /*
 *   Función para mostrar un mensaje de confirmación. Requiere la librería sweetalert para funcionar.
@@ -30,7 +30,6 @@ const confirmAction = (message) => {
         }
     });
 }
-
 
 /*
 *   Función asíncrona para manejar los mensajes de notificación al usuario. Requiere la librería sweetalert para funcionar.
@@ -63,13 +62,10 @@ const sweetAlert = async (type, text, timer, url = null) => {
         icon: icon,
         closeOnClickOutside: false,
         closeOnEsc: false,
-        button: { // Aquí envolvemos la función reload () en una función anónima
+        button: {
             text: 'Aceptar'
         }
     };
-
-
-
     // Se verifica el uso del temporizador.
     (timer) ? options.timer = 3000 : options.timer = null;
     // Se muestra el mensaje.
@@ -201,7 +197,6 @@ const logOut = async () => {
     }
 }
 
-
 /*
 *   Función asíncrona para intercambiar datos con el servidor.
 *   Parámetros: filename (nombre del archivo), action (accion a realizar) y form (objeto opcional con los datos que serán enviados al servidor).
@@ -223,36 +218,11 @@ const fetchData = async (filename, action, form = null) => {
         // Se agrega un parámetro a la ruta con el valor de la acción solicitada.
         PATH.searchParams.append('action', action);
         // Se define una constante tipo objeto con la respuesta de la petición.
-        // Se retorna el resultado en formato JSON.
         const RESPONSE = await fetch(PATH.href, OPTIONS);
-        console.log(RESPONSE); // Muestra la respuesta en la consola para verificar su contenido
+        // Se retorna el resultado en formato JSON.
         return await RESPONSE.json();
     } catch (error) {
         // Se muestra un mensaje en la consola del navegador web cuando ocurre un problema.
         console.log(error);
     }
 }
-/*const fetchData = async (filename, action, form = null) => {
-    // Se define una constante tipo objeto para establecer las opciones de la petición.
-    const OPTIONS = {};
-    // Se determina el tipo de petición a realizar.
-    if (form) {
-        OPTIONS.method = 'post';
-        OPTIONS.body = form;
-    } else {
-        OPTIONS.method = 'get';
-    }
-    try {
-        // Se declara una constante tipo objeto con la ruta específica del servidor.
-        const PATH = new URL(SERVER_URL + filename);
-        // Se agrega un parámetro a la ruta con el valor de la acción solicitada.
-        PATH.searchParams.append('action', action);
-        // Se define una constante tipo objeto con la respuesta de la petición.
-        const RESPONSE = await fetch(PATH.href, OPTIONS);
-        // Se retorna el resultado en formato JSON.
-        return await RESPONSE.json();
-    } catch (error) {
-        // Se muestra un mensaje en la consola del navegador web cuando ocurre un problema.
-        console.log(error);
-    }
-}*/

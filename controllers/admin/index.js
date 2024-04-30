@@ -1,8 +1,7 @@
-
 // Constante para establecer el formulario de registro del primer usuario.
 const SIGNUP_FORM = document.getElementById('signupForm');
 // Constante para establecer el formulario de inicio de sesión.
-const LOGIN_FORM = document.getElementById('loginForm'); 
+const LOGIN_FORM = document.getElementById('loginForm');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -19,13 +18,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         MAIN_TITLE.textContent = 'Iniciar sesión';
         // Se muestra el formulario para iniciar sesión.
         LOGIN_FORM.classList.remove('d-none');
-        //sweetAlert(4, DATA.message, true);
+        sweetAlert(4, DATA.message, true);
     } else {
         // Se establece el título del contenido principal.
         MAIN_TITLE.textContent = 'Registrar primer usuario';
         // Se muestra el formulario para registrar el primer usuario.
         SIGNUP_FORM.classList.remove('d-none');
-        alerta(4, DATA.error, true,"https://unsplash.it/400/200");
+        sweetAlert(4, DATA.error, true);
     }
 });
 
@@ -41,7 +40,7 @@ SIGNUP_FORM.addEventListener('submit', async (event) => {
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'index.html');
     } else {
-        //sweetAlert(2, DATA.error, false);
+        sweetAlert(2, DATA.error, false);
     }
 });
 
@@ -57,22 +56,6 @@ LOGIN_FORM.addEventListener('submit', async (event) => {
     if (DATA.status) {
         sweetAlert(1, DATA.message, true, 'dashboard.html');
     } else {
-        alerta(4, DATA.error, true,"https://unsplash.it/400/200");
+        sweetAlert(2, DATA.error, false);
     }
-});
-
-$(document).ready(function () {
-    $(".veen .rgstr-btn button").click(function () {
-        $('.veen .wrapper').addClass('move');
-        $('.body').css('background', '#CCC8AA');
-        $(".veen .login-btn button").removeClass('active');
-        $(this).addClass('active');
-    });
-
-    $(".veen .login-btn button").click(function () {
-        $('.veen .wrapper').removeClass('move');
-        $('.body').css('background', '#CCC8AA');
-        $(".veen .rgstr-btn button").removeClass('active');
-        $(this).addClass('active');
-    });
 });
