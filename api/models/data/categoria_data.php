@@ -28,10 +28,21 @@ class CategoriaData extends CategoriaHandler
         }
     }
 
-    public function setNombre($value, $min = 2, $max = 50)
+    public function setNombre($value, $min = 2, $max = 100)
     {
-        if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfanumérico';
+        // Verificar si la categoría ya existe en la base de datos
+        $checkSql = 'SELECT COUNT(*) as count FROM tb_categorias WHERE nombre_categoria = ?';
+        $checkParams = array($value);
+        $checkResult = Database::getRow($checkSql, $checkParams);
+    
+        if ($checkResult['count'] > 0) {
+            $this->data_error = 'La categoría ya existe';
+            return false;
+        }
+    
+        // Validar el valor y la longitud del nombre
+        if (!Validator::validateAlphabetic($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->nombre = $value;
@@ -41,6 +52,7 @@ class CategoriaData extends CategoriaHandler
             return false;
         }
     }
+    
 
     public function setImagen($file, $filename = null)
     {

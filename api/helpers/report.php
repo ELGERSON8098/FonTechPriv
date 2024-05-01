@@ -9,7 +9,7 @@ require_once('../../libraries/fpdf185/fpdf.php');
 class Report extends FPDF
 {
     // Constante para definir la ruta de las vistas del sitio privado.
-    const CLIENT_URL = 'http://localhost/Expo_Comodo/views/admin/';
+    const CLIENT_URL = 'http://localhost/fontechpriv/views/admin/';
     // Propiedad para guardar el título del reporte.
     private $title = null;
 

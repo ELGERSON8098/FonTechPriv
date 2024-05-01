@@ -28,65 +28,58 @@ const loadTemplate = async () => {
             // Se agrega el encabezado de la página web antes del contenido principal.
             MAIN.insertAdjacentHTML('beforebegin', `
         <header>
+        <!-- navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
-            <div class="container">
-                <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
-                    href="../admin/dashboard.html">
-                    <img src="../../resources/img/LogoComods.png" class="logo img-fluid" alt="site icon">
-                </a>
-            </div>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
-                <ul class="navbar-nav mx-auto text-center">
-                    <li class="nav-item px-2 py-2 dropdown">
-                        <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Productos
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-                        <li><a class="dropdown-item" href="../admin/producto.html">Productos</a></li>
-                        <li><a class="dropdown-item" href="../admin/categoria.html">Categorías</a></li>
-                        <li><a class="dropdown-item" href="../admin/genero.html">Género</a></li>
-                        <li class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="../admin/colores.html">Colores</a></li>
-                        <li><a class="dropdown-item" href="../admin/marcas.html">Marcas</a></li>
-                        <li><a class="dropdown-item" href="../admin/tallas.html">Tallas</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../admin/descuento.html">Descuentos</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../admin/usuariosc.html">Clientes</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../admin/reserva.html">Reservas</a>
-                    </li>
-                    <li class="nav-item px-2 py-2 dropdown">
+          <div class="container">
+              <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+                  href="../admin/dashboard.html">
+                  <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
+              </a>
+      
+              <div class="order-lg-2 nav-btns">
+                  <button type="button" class="btn position-relative">
+                      <i class="fa fa-user"></i>
+                      <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
+                  </button>
+              </div>
+      
+              <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+      
+              <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+                  <ul class="navbar-nav mx-auto text-center">
+                      <li class="nav-item px-2 py-2">
+                          <a class="nav-link text-uppercase text-dark" href="../admin/Catalogo.html">Catalogos</a>
+                      </li>
+                      <li class="nav-item px-2 py-2">
+                          <a class="nav-link text-uppercase text-dark" href="../admin/Productos.html">Productos</a>
+                      </li>
+                      <li class="nav-item px-2 py-2">
+                          <a class="nav-link text-uppercase text-dark" href="../admin/Marcas.html">Marcas</a>
+                      </li>
+                      <li class="nav-item px-2 py-2">
+                          <a class="nav-link text-uppercase text-dark" href="../admin/clientes.html">Clientes</a>
+                      </li>
+                      <li class="nav-item px-2 py-2">
+                          <a class="nav-link text-uppercase text-dark" href="../admin/Reservas.html">Reservas</a>
+                      </li>
+                      <li class="nav-item px-2 py-2 dropdown">
                         <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Direcciones
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-                        <li><a class="dropdown-item" href="../admin/producto.html">Departamentos</a></li>
+                        <li><a class="dropdown-item" href="../admin/departamentos.html">Departamentos</a></li>
                         <li><a class="dropdown-item" href="../admin/categoria.html">Municipios</a></li>
                         <li><a class="dropdown-item" href="../admin/genero.html">Distritos</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../admin/administrador.html">Administradores</a>
-                    </li>
-                    <li class="nav-item px-2 py-2 dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Cuenta: <b>${DATA.username}</b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="perfil.html">Editar perfil</a></li>
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="#" onclick="logOut()">Cerrar sesión</a></li>
-                                </ul>
-                            </li>
-                </ul>
-            </div>
-        </nav>
+                  </ul>
+              </div>
+              </a>
+          </div>
+      </nav>
+      <!-- Fin del navbar -->
     </header>
     <br>`);
             // Se agrega el pie de la página web después del contenido principal.

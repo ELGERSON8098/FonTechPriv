@@ -19,53 +19,23 @@
 
 <body>
 
-    <!-- navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
-        <div class="container">
-            <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
-                href="../publica/index.html">
-                <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
-            </a>
-
-            <div class="order-lg-2 nav-btns">
-                <button type="button" class="btn position-relative">
-                    <i class="fa fa-user"></i>
-                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
-                </button>
+     <!-- Contenido principal del documento -->
+     <main>
+        <!-- Título del contenido principal -->
+        <h3 id="mainTitle"></h3>
+        <!-- Contenedor de gráficos -->
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <!-- Gráfico 1: Cantidad de productos por categoría -->
+                <canvas id="chart1"></canvas>
             </div>
-
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse order-lg-1" id="navMenu">
-                <ul class="navbar-nav mx-auto text-center">
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/Dashboard.html">Dashboard</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/Catalogo.html">Catalogos</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/Productos.html">Productos</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/Marcas.html">Marcas</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/administradores.html">Administradores</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/clientes.html">Clientes</a>
-                    </li>
-                    <li class="nav-item px-2 py-2">
-                        <a class="nav-link text-uppercase text-dark" href="../priv/Reservas.html">Reservas</a>
-                    </li>
-                </ul>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <!-- Gráfico 2: Porcentaje de productos por categoría -->
+                <canvas id="chart2"></canvas>
             </div>
-            </a>
         </div>
-    </nav>
+    </main>
+    
     <!-- Fin del navbar -->
     <br>
     <br>
