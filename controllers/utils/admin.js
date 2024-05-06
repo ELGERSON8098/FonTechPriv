@@ -37,10 +37,10 @@ const loadTemplate = async () => {
               </a>
       
               <div class="order-lg-2 nav-btns">
-                  <button type="button" class="btn position-relative">
-                      <i class="fa fa-user"></i>
-                      <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
-                  </button>
+               <a href="../admin/miperfil.html" class="btn position-relative">
+                 <i class="fa fa-user"></i>
+                  <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
+               </a>
               </div>
       
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">

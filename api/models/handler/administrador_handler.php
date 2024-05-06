@@ -60,7 +60,7 @@ class AdministradorHandler
 
     public function changePassword()
     {
-        $sql = 'UPDATE administrador
+        $sql = 'UPDATE tb_admins
                 SET clave_administrador = ?
                 WHERE id_administrador = ?';
         $params = array($this->clave, $_SESSION['idadministrador']);
@@ -70,7 +70,7 @@ class AdministradorHandler
     public function readProfile()
     {
         // Consultar el perfil del administrador actual
-        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador, id_nivel_usuario
+        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador
                 FROM tb_admins
                 WHERE id_administrador = ?';
         $params = array($_SESSION['idAdministrador']);
