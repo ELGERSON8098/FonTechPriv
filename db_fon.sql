@@ -20,13 +20,13 @@ CREATE TABLE tb_departamentos (
   departamento VARCHAR(1000) NOT NULL,
   PRIMARY KEY (id_departamento)
 );
-
+           
 CREATE TABLE tb_municipios (
   id_municipio INT UNSIGNED AUTO_INCREMENT NOT NULL,
   municipio VARCHAR(1000) NOT NULL,
   id_departamento INT UNSIGNED NOT NULL,
   PRIMARY KEY (id_municipio),
-  CONSTRAINT fk_municipios FOREIGN KEY (id_departamento) REFERENCES tb_departamentos (id_departamento)
+  CONSTRAINT muni FOREIGN KEY (id_departamento) REFERENCES tb_departamentos (id_departamento)
 );
 
 CREATE TABLE tb_distritos (
@@ -34,8 +34,38 @@ CREATE TABLE tb_distritos (
   distrito VARCHAR(1000) NOT NULL,
   id_municipio INT UNSIGNED NOT NULL,
   PRIMARY KEY (id_distrito),
-  CONSTRAINT fk_distritos FOREIGN KEY (id_municipio) REFERENCES tb_municipios (id_municipio)
+  CONSTRAINT distrito FOREIGN KEY (id_municipio) REFERENCES tb_municipios (id_municipio)
 );
+
+INSERT INTO tb_departamentos (departamento) VALUES
+('San Salvador'),
+('Santa Ana'),
+('San Miguel');
+
+
+INSERT INTO tb_municipios (municipio, id_departamento) VALUES
+('San Salvador', 1),
+('Santa Tecla', 1),
+('Santa Ana', 2),
+('Metapán', 2),
+('San Miguel', 3),
+('Usulután', 3);
+
+INSERT INTO tb_distritos (distrito, id_municipio) VALUES
+('Distrito 1', 1),
+('Distrito 2', 2),
+('Distrito 3', 3),
+('Distrito 4', 4),
+('Distrito 5', 5),
+('Distrito 6', 6);
+
+UPDATE tb_distritos AS d
+                INNER JOIN tb_municipios AS m ON d.id_municipio = m.id_municipio
+                INNER JOIN tb_departamentos AS depto ON m.id_departamento = depto.id_departamento
+                SET d.distrito = 1, m.municipio = 1, m.id_departamento = 1
+                WHERE d.id_distrito = 1
+
+
 
 
 CREATE TABLE tb_admins (
@@ -82,6 +112,8 @@ CREATE TABLE tb_ofertas (
   PRIMARY KEY (id_oferta),
   CONSTRAINT ck_valor CHECK (valor >= 0)
 );
+
+SELECT * FROM tb_ofertas;
 
 CREATE TABLE tb_detalles_productos (
   id_detalle_producto INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -138,8 +170,3 @@ CREATE TABLE tb_detalles_reservas (
   CONSTRAINT ck_cantidad  CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
-
-
-
-
-

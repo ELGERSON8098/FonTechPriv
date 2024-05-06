@@ -52,9 +52,15 @@ const loadTemplate = async () => {
                       <li class="nav-item px-2 py-2">
                           <a class="nav-link text-uppercase text-dark" href="../admin/Catalogo.html">Catalogos</a>
                       </li>
-                      <li class="nav-item px-2 py-2">
-                          <a class="nav-link text-uppercase text-dark" href="../admin/Productos.html">Productos</a>
-                      </li>
+                      <li class="nav-item px-2 py-2 dropdown">
+                        <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Productos
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
+                        <li><a class="dropdown-item" href="../admin/productos.html">Productos</a></li>
+                        <li><a class="dropdown-item" href="../admin/ofertas.html">Descuentos</a></li>
+                        </ul>
+                    </li>
                       <li class="nav-item px-2 py-2">
                           <a class="nav-link text-uppercase text-dark" href="../admin/Marcas.html">Marcas</a>
                       </li>

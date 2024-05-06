@@ -21,8 +21,8 @@ class descuentoHandler
      public function searchRows()
      {
          $value = '%' . Validator::getSearchValue() . '%';
-         $sql = 'SELECT id_descuento, nombre_descuento, descripcion, valor
-                 FROM tb_descuentos
+         $sql = 'SELECT id_oferta, nombre_descuento, descripcion, valor
+                 FROM tb_ofertas
                  WHERE nombre_descuento LIKE ? OR descripcion LIKE ?
                  ORDER BY nombre_descuento';
          $params = array($value, $value);
@@ -31,7 +31,7 @@ class descuentoHandler
      
      public function createRow()
      {
-         $sql = 'INSERT INTO tb_descuentos(nombre_descuento, descripcion, valor)
+         $sql = 'INSERT INTO tb_ofertas(nombre_descuento, descripcion, valor)
                  VALUES(?, ?, ?)';
          $params = array($this->nombre, $this->descripcion, $this->valor);
          return Database::executeRow($sql, $params);
@@ -44,25 +44,25 @@ class descuentoHandler
 //Llamar los datos de la base de datos 
     public function readAll()
     {
-        $sql = 'SELECT id_descuento, nombre_descuento, descripcion, valor
-                FROM tb_descuentos';
+        $sql = 'SELECT id_oferta, nombre_descuento, descripcion, valor
+                FROM tb_ofertas';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_descuento, nombre_descuento, descripcion, valor
-                FROM tb_descuentos
-                WHERE id_descuento = ?';
+        $sql = 'SELECT id_oferta, nombre_descuento, descripcion, valor
+                FROM tb_ofertas
+                WHERE id_oferta = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
 
     public function updateRow()
     {
-        $sql = 'UPDATE tb_descuentos
+        $sql = 'UPDATE tb_ofertas
                 SET nombre_descuento = ?, descripcion = ?, valor = ?
-                WHERE id_descuento = ?';
+                WHERE id_oferta = ?';
         $params = array($this->nombre, $this->descripcion, $this->valor, $this->id);
         return Database::executeRow($sql, $params);
     }
@@ -70,8 +70,8 @@ class descuentoHandler
 
     public function deleteRow()
     {
-        $sql = 'DELETE FROM tb_descuentos
-                WHERE id_descuento = ?';
+        $sql = 'DELETE FROM tb_ofertas
+                WHERE id_oferta = ?';
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
