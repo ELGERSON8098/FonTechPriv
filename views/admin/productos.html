@@ -10,243 +10,219 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- bootstrap css -->
+    <!-- bootstrap csss -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- custom css -->
     <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
 </head>
 
-<body>
 
-     <!-- Contenido principal del documento -->
-     <main>
+
+<body>
+        <!-- Separación entre navbar y sección de Productos -->
+    <!-- Espacio vertical -->
+    <div class="my-5"></div>
+    <main>
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
-        <!-- Contenedor de gráficos -->
         <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <!-- Gráfico 1: Cantidad de productos por categoría -->
-                <canvas id="chart1"></canvas>
+            <!-- Formulario de búsqueda -->
+            <form class="col-sm-12 col-md-6" id="searchForm">
+                <div class="row">
+                    <div class="col-6">
+                        <input type="search" class="form-control" name="search" placeholder="Buscar" required>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-success">
+                            <i class="">Buscar</i>
+                        </button>
+                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                            <i class="">Limpiar</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <br>
+            <!-- Botón para crear -->
+            <div class="col-12 col-sm-auto ms-auto">
+                <button type="button" class="btn btn-primary" onclick="openCreate()">
+                    <i class="">Nuevo Producto</i>
+                </button>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <!-- Gráfico 2: Porcentaje de productos por categoría -->
-                <canvas id="chart2"></canvas>
+        </div>
+
+        <!-- Tabla para mostrar los registros existentes -->
+        <table class="table table-hover">
+            <!-- Encabezado de la tabla -->
+            <thead>
+                <tr>
+                    <!-- Cantidad de registros encontrados -->
+                    <td colspan="28" id="rowsFound"></td>
+                </tr>
+                <!-- Títulos de las columnas -->
+                <tr>
+                    <th>Nombre</th>
+                    <th>Marca</th>
+                    <th>Categoria</th>
+                    <th>Imagen</th>
+                    <!-- Añadir más títulos de columnas según sea necesario -->
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <!-- Cuerpo de la tabla -->
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <!-- Modal para guardar un registro -->
+        <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para guardar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-3">
+                            <!-- Campo oculto para el ID -->
+                            <input type="number" class="d-none" id="idCategoria" name="idCategoria">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreIMGP" class="form-label">Imagen</label>
+                                <input id="nombreIMGP" type="file" name="nombreIMGP" class="form-control">
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreProductoP" class="form-label">Producto</label>
+                                <input id="nombreProductoP" type="text" name="nombreProductoP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreMarcaP" class="form-label">Marca</label>
+                                <select id="nombreMarcaP" name="nombreMarcaP" class="form-select">
+                                    <!-- Las opciones de marca se llenarán dinámicamente aquí -->
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreCategoriaP" class="form-label">Categoría</label>
+                                <select id="nombreCategoriaP" name="nombreCategoriaP" class="form-select">
+                                    <!-- Las opciones de categoría se llenarán dinámicamente aquí -->
+                                </select>
+                            </div>
+                            
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="PrecioP" class="form-label">Precio</label>
+                                <input id="PrecioP" type="text" name="PrecioP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="existenciaP" class="form-label">Existencias</label>
+                                <input id="existenciaP" type="number" name="existenciaP" class="form-control" min="0" required>
+                            </div>
+                            
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="descripcionP" class="form-label">Descripcion</label>
+                                <input id="descripcionP" type="text" name="descripcionP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="cmemoriaP" class="form-label">Capacidad de memoria</label>
+                                <input id="cmemoriaP" type="text" name="cmemoriaP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="ramP" class="form-label">Ram</label>
+                                <input id="ramP" type="text" name="ramP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="tpantallaP" class="form-label">Tamaño Pantalla</label>
+                                <input id="tpantallaP" type="text" name="tpantallaP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="ctraseraP" class="form-label">Camara trasera PX</label>
+                                <input id="ctraseraP" type="text" name="ctraseraP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="cfrontalP" class="form-label">Camara frontal PX</label>
+                                <input id="cfrontalP" type="text" name="cfrontalP" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="soP" class="form-label">Sistema Operativo</label>
+                                <select id="soP" name="soP" class="form-select">
+                                    <!-- Las opciones de SO se llenarán dinámicamente aquí -->
+                                    <option value="Android">Android</option>
+                                    <option value="IOS">IOS</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="descuentoP" class="form-label">Descuento</label>
+                                <select id="descuentoP" name="descuentoP" class="form-select">
+                                    <!-- Las opciones de descuento se llenarán dinámicamente aquí -->
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </main>
-    
-        <!-- Separación entre navbar y sección de Productos -->
-        <div class="my-5"></div>
-    
-        <!-- Celulares -->
-        <section id="special" class="py-5">
-            <div class="container">
-                <div class="title text-center py-5">
-                    <h2 class="position-relative d-inline-block">Productos</h2>
-                </div>
-    
-                <div class="special-list row g-0">
-                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                        <div class="special-img position-relative overflow-hidden">
-                            <img src="https://cdn-icons-png.flaticon.com/256/4338/4338829.png"
-                                class="w-100">
-                        </div>
-                        <div class="text-center">
-                            <p class="text-capitalize mt-3 mb-1">Agregar Nuevo Producto</p>
-                            <a href="#" class="btn btn-primary mt-3">Agregar Producto</a>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                        <div class="special-img position-relative overflow-hidden">
-                            <img src="https://img-prd-pim.poorvika.com/prodvarval/Apple-iphone-15-pro-Max-Natural-titanium-Front-Back-View-Thumbnail.png"
-                                class="w-100">
-                            
-                        </div>
-                        <div class="text-center">
-                            <p class="text-capitalize mt-3 mb-1">Iphone 15 Pro Max</p>
-                            <a href="#" class="btn btn-primary mt-3">Editar</a>
-                            <a href="#" class="btn btn-primary mt-3">Eliminar</a>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                        <div class="special-img position-relative overflow-hidden">
-                            <img src="https://img-prd-pim.poorvika.com/prodvarval/redmi-note-13-pro-5g-white-thumbnail.png"
-                                class="w-100">
-                            
-                        </div>
-                        <div class="text-center">
-                            <p class="text-capitalize mt-3 mb-1">Xiaomi Redmi Note 13</p>
-                            <a href="#" class="btn btn-primary mt-3">Editar</a>
-                            <a href="#" class="btn btn-primary mt-3">Eliminar</a>
-                        </div>
-                    </div>
-    
-                    <div class="col-md-6 col-lg-4 col-xl-3 p-2">
-                        <div class="special-img position-relative overflow-hidden">
-                            <img src="https://static.doji.co/product/medias/smartphones/samsung/galaxy-z-fold-4/1-front-back-phantom-black-thumbnail.png"
-                                class="w-100">
-                            
-                        </div>
-                        <div class="text-center">
-                            <p class="text-capitalize mt-3 mb-1">Sansumg Galaxy Z-Fold</p>
-                            <a href="#" class="btn btn-primary mt-3">Editar</a>
-                            <a href="#" class="btn btn-primary mt-3">Eliminar</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Fin de Productos -->
-        
-    <!--Esto pues es cuando este en el form cuando se quiera agregar un producto nuevo-->
-    <div class="modal fade" id="agregarProductoModal" tabindex="-1" role="dialog"
-        aria-labelledby="agregarProductoModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="agregarProductoModalLabel">Agregar Producto</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="agregarProductoForm">
-                        <div class="form-group">
-                            <label for="nombreProducto">Nombre:</label>
-                            <input type="text" class="form-control" id="nombreProducto" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="descripcionProducto">Descripción:</label>
-                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500"
-                                required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="marcaProducto">Marca:</label>
-                            <select class="form-control" id="marcaProducto" required>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Apple">Apple</option>
-                                <option value="Apple">Xiaomi</option>
-                                <option value="Apple">Alcatel</option>
-                                <option value="Apple">Huawei</option>
 
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="categoriaProducto">Categoría:</label>
-                            <select class="form-control" id="categoriaProducto" required>
-                                <option value="Audifonos">Audífonos</option>
-                                <option value="Audifonos">Cases</option>
-                                <option value="Audifonos">Cargadores</option>
-                                <option value="Audifonos">Micro-SD</option>
-                                <option value="Smartwatch">Smartwatch</option>
-                                <option value="Celulares">Celulares</option>
-                                <option value="Tablets">Tablets</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="imagenProducto">Imagen:</label>
-                            <input type="file" class="form-control" id="imagenProducto" accept="image/*" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="imagenPreview">Vista previa:</label>
-                            <img id="imagenPreview" class="img-fluid" src="#" alt="Vista previa de la imagen">
-                        </div>
-                        <div id="camposAdicionales">
-                            <!-- Campos adicionales se agregarán dinámicamente -->
-                        </div>
-                        <div class="form-group">
-                            <label for="precioProducto">Precio:</label>
-                            <input type="number" class="form-control" id="precioProducto" min="0" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="precioProducto">Disponibilidad:</label>
-                            <input type="number" class="form-control" id="precioProducto" min="0" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnGuardar"
-                        form="agregarProductoForm">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Esto pues es cuando este en el form cuando se quiera editar un producto-->
-    <div class="modal fade" id="editarproducto" tabindex="-1" role="dialog" aria-labelledby="editarProductoModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editarProductoModalLabel">Editar Producto</h5>
-                </div>
-                <div class="modal-body">
-                    <form id="editarProductoForm">
-                        <div class="form-group">
-                            <label for="nombreProducto">Nombre:</label>
-                            <input type="text" class="form-control" id="nombreProducto" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="descripcionProducto">Descripción:</label>
-                            <textarea class="form-control" id="descripcionProducto" rows="5" maxlength="500"
-                                required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="marcaProducto1">Marca:</label>
-                            <select class="form-control" id="marcaProducto1" required>
-                                <option value="Samsung">Samsung</option>
-                                <option value="Apple">Apple</option>
-                                <option value="Apple">Xiaomi</option>
-                                <option value="Apple">Alcatel</option>
-                                <option value="Apple">Huawei</option>
-
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="categoriaProducto1">Categoría:</label>
-                            <select class="form-control" id="categoriaProducto1" required>
-                                <option value="Audifonos">Audífonos</option>
-                                <option value="Audifonos">Cases</option>
-                                <option value="Audifonos">Cargadores</option>
-                                <option value="Audifonos">Micro-SD</option>
-                                <option value="Smartwatch">Smartwatch</option>
-                                <option value="Celulares">Celulares</option>
-                                <option value="Tablets">Tablets</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="imagenProductoEdit">Imagen:</label>
-                            <input type="file" class="form-control" id="imagenProductoEdit" accept="image/*" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="imagenPreviewEdit">Vista previa:</label>
-                            <img id="imagenPreviewEdit" class="img-fluid" src="#" alt="Vista previa de la imagen">
-                        </div>
-                        <div id="camposAdicionales1">
-                            <!-- Campos adicionales se agregarán dinámicamente -->
-                        </div>
-                        <div class="form-group">
-                            <label for="precioProducto">Precio:</label>
-                            <input type="number" class="form-control" id="precioProducto" min="0" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="precioProducto">Disponibilidad:</label>
-                            <input type="number" class="form-control" id="precioProducto" min="0" required>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnGuardar1"
-                        form="agregarProductoForm">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- bootstrap js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="../../Recursos/js/productos.js"></script>
+    <!-- bootstrap js -->
+    <!-- Llamada al framework y librería de mensajes -->
+    <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+    <!-- Llamada al controlador general de la aplicación -->
+    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
+    <!-- Llamada al controlador del sitio privado -->
+    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
+    <!-- Llamada al controlador de la página web -->
+    <script type="text/javascript" src="../../controllers/admin/producto.js"></script>
 </body>
 
 </html>

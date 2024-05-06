@@ -136,8 +136,34 @@ class productoHandler
     
     public function readAll()
     {
-        $sql = 'SELECT id_producto, nombre_producto, codigo_interno, referencia_proveedor, imagen
-                FROM tb_productos';
+        $sql = 'SELECT 
+        p.id_producto,
+        p.nombre_producto,
+        m.marca,
+        c.nombre_categoria,
+        dp.precio,
+        dp.existencias,
+        dp.descripcion AS descripcion_producto,
+        dp.capacidad_memoria_interna_celular,
+        dp.ram_celular,
+        dp.pantalla_tamaño,
+        dp.camara_trasera_celular,
+        dp.sistema_operativo_celular,
+        dp.camara_frontal_celular,
+        dp.procesador_celular,
+        o.nombre_descuento,
+        o.descripcion AS descripcion_oferta,
+        o.valor AS valor_descuento
+    FROM 
+        tb_detalles_productos dp
+    INNER JOIN 
+        tb_productos p ON dp.id_producto = p.id_producto
+    INNER JOIN 
+        tb_marcas m ON p.id_marca = m.id_marca
+    INNER JOIN 
+        tb_categorias c ON p.id_categoria = c.id_categoria
+    INNER JOIN 
+        tb_ofertas o ON dp.id_oferta = o.id_oferta;';
                     
         return Database::getRows($sql);
     }
@@ -145,14 +171,34 @@ class productoHandler
 
     public function readOne()
     {
-        $sql = "SELECT * FROM tbproductos 
-        INNER JOIN tbdetalles_producto USING (id_producto)
-        INNER JOIN tbmarca USING (id_marca)
-        INNER JOIN tbcolor USING (id_color)
-        INNER JOIN tbdescuentos USING (id_descuento)
-        INNER JOIN tbcategorias USING (id_categoria)
-        INNER JOIN tbsubcategorias USING (id_subcategoria)
-        WHERE id_producto = ?;";
+        $sql = 'SELECT 
+        p.id_producto,
+        p.nombre_producto,
+        m.marca,
+        c.nombre_categoria,
+        dp.precio,
+        dp.existencias,
+        dp.descripcion AS descripcion_producto,
+        dp.capacidad_memoria_interna_celular,
+        dp.ram_celular,
+        dp.pantalla_tamaño,
+        dp.camara_trasera_celular,
+        dp.sistema_operativo_celular,
+        dp.camara_frontal_celular,
+        dp.procesador_celular,
+        o.nombre_descuento,
+        o.descripcion AS descripcion_oferta,
+        o.valor AS valor_descuento
+    FROM 
+        tb_detalles_productos dp
+    INNER JOIN 
+        tb_productos p ON dp.id_producto = p.id_producto
+    INNER JOIN 
+        tb_marcas m ON p.id_marca = m.id_marca
+    INNER JOIN 
+        tb_categorias c ON p.id_categoria = c.id_categoria
+    INNER JOIN 
+        tb_ofertas o ON dp.id_oferta = o.id_oferta;';
     
         $params = array($id_producto);
 

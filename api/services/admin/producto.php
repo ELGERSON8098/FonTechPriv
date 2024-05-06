@@ -28,13 +28,20 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['ImagenP']) or
-                    !$producto->setNombre($_POST['nombreP']) or
-                    !$producto->setDescripcion($_POST['CodigoI']) or
-                    !$producto->setPrecio($_POST['CodigoP']) or
-                    !$producto->setExistencias($_POST['MaterialP']) or
-                    !$producto->setCategoria($_POST['DescP']) or
-                    !$producto->setCategoria($_POST['duiUsuarioC'])
+                    !$producto->setNombre($_POST['nombreIMGP']) or
+                    !$producto->setNombre($_POST['nombreProductoP']) or
+                    !$producto->setNombre($_POST['nombreMarcaP']) or
+                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
+                    !$producto->setNombre($_POST['PrecioP']) or
+                    !$producto->setNombre($_POST['existenciaP']) or
+                    !$producto->setDescripcion($_POST['descripcionP']) or
+                    !$producto->setNombre($_POST['cmemoriaP']) or
+                    !$producto->setNombre($_POST['ramP']) or
+                    !$producto->setNombre($_POST['tpantallaP']) or
+                    !$producto->setNombre($_POST['ctraseraP']) or
+                    !$producto->setNombre($_POST['cfrontalP']) or
+                    !$producto->setNombre($_POST['soP']) or
+                    !$producto->setNombre($_POST['descuentoP'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
@@ -55,7 +62,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (!$producto->setId($_POST['idAdministrador'])) {
+                if (!$producto->setId($_POST['id_detalle_producto'])) {
                     $result['error'] = 'Administrador incorrecto';
                 } elseif ($result['dataset'] = $producto->readOne()) {
                     $result['status'] = 1;
@@ -66,10 +73,20 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['nombreAdministrador']) or
-                    !$producto->setCorreo($_POST['correoAdministrador']) or
-                    !$producto->setAlias($_POST['aliasAdministrador']) or
-                    !$producto->setClave($_POST['claveAdministrador'])
+                    !$producto->setNombre($_POST['nombreIMGP']) or
+                    !$producto->setNombre($_POST['nombreProductoP']) or
+                    !$producto->setNombre($_POST['nombreMarcaP']) or
+                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
+                    !$producto->setNombre($_POST['PrecioP']) or
+                    !$producto->setNombre($_POST['existenciaP']) or
+                    !$producto->setDescripcion($_POST['descripcionP']) or
+                    !$producto->setNombre($_POST['cmemoriaP']) or
+                    !$producto->setNombre($_POST['ramP']) or
+                    !$producto->setNombre($_POST['tpantallaP']) or
+                    !$producto->setNombre($_POST['ctraseraP']) or
+                    !$producto->setNombre($_POST['cfrontalP']) or
+                    !$producto->setNombre($_POST['soP']) or
+                    !$producto->setNombre($_POST['descuentoP'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->updateRow()) {
@@ -80,9 +97,9 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'deleteRow':
-                if ($_POST['idAdministrador'] == $_SESSION['idAdministrador']) {
+                if ($_POST['id_detalle_producto'] == $_SESSION['id_detalle_producto']) {
                     $result['error'] = 'No se puede eliminar a sí mismo';
-                } elseif (!$producto->setId($_POST['idAdministrador'])) {
+                } elseif (!$producto->setId($_POST['id_detalle_producto'])) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->deleteRow()) {
                     $result['status'] = 1;
@@ -117,10 +134,20 @@ if (isset($_GET['action'])) {
             case 'editProfile':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['nombreAdministrador']) or
-                    !$producto->setCorreo($_POST['correoAdministrador']) or
-                    !$producto->setAlias($_POST['aliasAdministrador']) or
-                    !$producto->setClave($_POST['claveAdministrador'])
+                    !$producto->setNombre($_POST['nombreIMGP']) or
+                    !$producto->setNombre($_POST['nombreProductoP']) or
+                    !$producto->setNombre($_POST['nombreMarcaP']) or
+                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
+                    !$producto->setNombre($_POST['PrecioP']) or
+                    !$producto->setNombre($_POST['existenciaP']) or
+                    !$producto->setDescripcion($_POST['descripcionP']) or
+                    !$producto->setNombre($_POST['cmemoriaP']) or
+                    !$producto->setNombre($_POST['ramP']) or
+                    !$producto->setNombre($_POST['tpantallaP']) or
+                    !$producto->setNombre($_POST['ctraseraP']) or
+                    !$producto->setNombre($_POST['cfrontalP']) or
+                    !$producto->setNombre($_POST['soP']) or
+                    !$producto->setNombre($_POST['descuentoP'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->editProfile()) {
@@ -164,10 +191,20 @@ if (isset($_GET['action'])) {
                 $_POST = Validator::validateForm($_POST);
                 $_POST['nombreAdministrador'];
                 if (
-                    !$producto->setNombre($_POST['nombreAdministrador']) or
-                    !$producto->setCorreo($_POST['correoAdministrador']) or
-                    !$producto->setAlias($_POST['aliasAdministrador']) or
-                    !$producto->setClave($_POST['claveAdministrador'])
+                    !$producto->setNombre($_POST['nombreIMGP']) or
+                    !$producto->setNombre($_POST['nombreProductoP']) or
+                    !$producto->setNombre($_POST['nombreMarcaP']) or
+                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
+                    !$producto->setNombre($_POST['PrecioP']) or
+                    !$producto->setNombre($_POST['existenciaP']) or
+                    !$producto->setDescripcion($_POST['descripcionP']) or
+                    !$producto->setNombre($_POST['cmemoriaP']) or
+                    !$producto->setNombre($_POST['ramP']) or
+                    !$producto->setNombre($_POST['tpantallaP']) or
+                    !$producto->setNombre($_POST['ctraseraP']) or
+                    !$producto->setNombre($_POST['cfrontalP']) or
+                    !$producto->setNombre($_POST['soP']) or
+                    !$producto->setNombre($_POST['descuentoP'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
