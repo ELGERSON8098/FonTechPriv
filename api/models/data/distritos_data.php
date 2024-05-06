@@ -2,13 +2,12 @@
 // Se incluye la clase para validar los datos de entrada.
 require_once('../../helpers/validator.php');
 // Se incluye la clase padre.
-require_once('../../models/handler/departamento_handler.php');
+require_once('../../models/handler/distritos_handler.php');
 /*
- *  Clase para manejar el encapsulamiento de los datos de la tabla USUARIO.
+ *  Clase para manejar el encapsulamiento de los datos de la tabla CATEGORIA.
  */
-class departamentoData extends departamentoHandler
+class distritoData extends distritoHandler
 {
-    // Atributo genérico para manejo de errores.
     private $data_error = null;
 
     /*
@@ -20,38 +19,48 @@ class departamentoData extends departamentoHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del color es incorrecto';
+            $this->data_error = 'El identificador de la reserva es incorrecto';
             return false;
         }
     }
 
     public function setNombre($value, $min = 2, $max = 50)
     {
-        // Verificar si el color ya existe en la base de datos
-        $checkSql = 'SELECT COUNT(*) as count FROM tb_departamentos WHERE departamento = ?';
-        $checkParams = array($value);
-        $checkResult = Database::getRow($checkSql, $checkParams);
-    
-        if ($checkResult['count'] > 0) {
-            $this->data_error = 'El departamento ya existe';
-            return false;
-        }
-    
-        // Validar el valor y la longitud del nombre
         if (!Validator::validateAlphabetic($value)) {
             $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre = $value;
+            $this->Distrito = $value;
             return true;
         } else {
             $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
-    
 
-    
+    public function setCategoria($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->Depa = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
+    public function setCategorias($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->Muni = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
+
 
     // Método para obtener el error de los datos.
     public function getDataError()
@@ -59,4 +68,3 @@ class departamentoData extends departamentoHandler
         return $this->data_error;
     }
 }
-

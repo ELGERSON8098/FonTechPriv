@@ -70,8 +70,8 @@ const loadTemplate = async () => {
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="productosDropdown">
                         <li><a class="dropdown-item" href="../admin/departamentos.html">Departamentos</a></li>
-                        <li><a class="dropdown-item" href="../admin/categoria.html">Municipios</a></li>
-                        <li><a class="dropdown-item" href="../admin/genero.html">Distritos</a></li>
+                        <li><a class="dropdown-item" href="../admin/municipios.html">Municipios</a></li>
+                        <li><a class="dropdown-item" href="../admin/distritos.html">Distritos</a></li>
                         </ul>
                     </li>
                   </ul>

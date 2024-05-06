@@ -65,8 +65,7 @@
                 <tr>
                     <th>Departamento</th>
                     <th>Municipio</th>
-                    <!-- Añadir más títulos de columnas según sea necesario -->
-                    <th></th>
+                    <th>Distrito</th>
                     <th></th>
                     <th></th>
                     <th></th>
@@ -111,14 +110,18 @@
                     <form id="saveForm">
                         <div class="modal-body row g-3">
                             <!-- Campo oculto para el ID -->
-                            <input type="number" class="d-none" id="idMunicipio" name="idMunicipio">
+                            <input type="number" class="d-none" id="idDistrito" name="idDistrito">
                             <div class="col-sm-12 col-md-6">
                                 <label for="Departamento" class="form-label">Departamento</label>
                                 <select id="Departamento" type="text" name="Departamento" class="form-control" required></select>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="nombreMun" class="form-label">Nombre del Municipio</label>
-                                <input id="nombreMun" type="text" name="nombreMun" class="form-control"
+                                <label for="Municipio" class="form-label">Municipio</label>
+                                <select id="Municipio" type="text" name="Municipio" class="form-control" required></select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreDis" class="form-label">Nombre del Distrito</label>
+                                <input id="nombreDis" type="text" name="nombreDis" class="form-control"
                                     required>
                             </div>
                         </div>
@@ -140,7 +143,7 @@
     <!-- Llamada al controlador del sitio privado -->
     <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
     <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/municipio.js"></script>
+    <script type="text/javascript" src="../../controllers/admin/distritos.js"></script>
 </body>
 
 </html>

@@ -1,13 +1,13 @@
 <?php
 // Se incluye la clase del modelo.
-require_once('../../models/data/municipio_data.php');
+require_once('../../models/data/distritos_data.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
     // Se crea una sesión o se reanuda la actual para poder utilizar variables de sesión en el script.
     session_start();
     // Se instancia la clase correspondiente.
-    $municipio = new municipioData;
+    $Distrito = new distritoData;
     // Se declara e inicializa un arreglo para guardar el resultado que retorna la API.
     $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => null, 'exception' => null, 'fileStatus' => null);
     // Se verifica si existe una sesión iniciada como administrador, de lo contrario se finaliza el script con un mensaje de error.
@@ -17,7 +17,7 @@ if (isset($_GET['action'])) {
             case 'searchRows':
                 if (!Validator::validateSearch($_POST['search'])) {
                     $result['error'] = Validator::getSearchError();
-                } elseif ($result['dataset'] = $municipio->searchRows()) {
+                } elseif ($result['dataset'] = $Distrito->searchRows()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
                 } else {
@@ -27,68 +27,78 @@ if (isset($_GET['action'])) {
                 case 'createRow':
                     $_POST = Validator::validateForm($_POST);
                     if (
-                        ! $municipio->setNombre($_POST['nombreMun']) or
-                        ! $municipio->setCategoria($_POST['Departamento'])
+                        ! $Distrito->setNombre($_POST['nombreDis']) or
+                        ! $Distrito->setCategorias($_POST['Municipio'])or
+                        ! $Distrito->setCategoria($_POST['Departamento'])
                     ) {
-                        $result['error'] = $municipio->getDataError();
-                    } elseif ($municipio->createRow()) {
+                        $result['error'] = $Distrito->getDataError();
+                    } elseif ($Distrito->createRow()) {
                         $result['status'] = 1;
-                        $result['message'] = 'Municipio creado correctamente';
+                        $result['message'] = 'Distrito creado correctamente';
                     } else {
-                        $result['error'] = 'Ocurrió un problema al crear el municipio';
+                        $result['error'] = 'Ocurrió un problema al crear el distrito';
                     }
                     break;
                 
             case 'readAll':
-                if ($result['dataset'] =  $municipio->readAll()) {
+                if ($result['dataset'] =  $Distrito->readAll()) {
                     $result['status'] = 1;
                     $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                 } else {
-                    $result['error'] = 'No existen municipios registrados';
+                    $result['error'] = 'No existen distritos registrados';
                 }
                 break;
                 case 'readAllS':
-                    if ($result['dataset'] =  $municipio->readAllS()) {
+                    if ($result['dataset'] =  $Distrito->readAllS()) {
                         $result['status'] = 1;
                         $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
                     } else {
-                        $result['error'] = 'No existen Departamentos registrados';
+                        $result['error'] = 'No existen departamentos registrados';
                     }
                     break;
+                    case 'readAllSS':
+                        if ($result['dataset'] =  $Distrito->readAllSS()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                        } else {
+                            $result['error'] = 'No existen municipios registrados';
+                        }
+                        break;
             case 'readOne':
-                if (! $municipio->setId($_POST['idMunicipio'])) {
-                    $result['error'] =  $municipio->getDataError();
-                } elseif ($result['dataset'] =  $municipio->readOne()) {
+                if (! $Distrito->setId($_POST['idDistrito'])) {
+                    $result['error'] =  $Distrito->getDataError();
+                } elseif ($result['dataset'] =  $Distrito->readOne()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Municipio inexistente';
+                    $result['error'] = 'Distrito inexistente';
                 }
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    ! $municipio->setId($_POST['idMunicipio'])or
-                    ! $municipio->setCategoria($_POST['Departamento'])or
-                    ! $municipio->setNombre($_POST['nombreMun']) 
+                    ! $Distrito->setId($_POST['idDistrito'])or
+                    ! $Distrito->setCategorias($_POST['Municipio'])or
+                    ! $Distrito->setCategoria($_POST['Departamento'])or
+                    ! $Distrito->setNombre($_POST['nombreDis']) 
                 ) {
-                    $result['error'] = $municipio->getDataError();
-                } elseif ( $municipio->updateRow()) {
+                    $result['error'] = $Distrito->getDataError();
+                } elseif ( $Distrito->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Municipio modificado correctamente';
+                    $result['message'] = 'Distrito modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el municipio';
+                    $result['error'] = 'Ocurrió un problema al modificar el distrito';
                 }
                 break;
             case 'deleteRow':
                 if (
-                    ! $municipio->setid($_POST['idMunicipio'])
+                    ! $Distrito->setid($_POST['idDistrito'])
                 ) {
-                    $result['error'] =  $municipio->getDataError();
-                } elseif ( $municipio->deleteRow()) {
+                    $result['error'] =  $Distrito->getDataError();
+                } elseif ( $Distrito->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Municipio eliminado correctamente';
+                    $result['message'] = 'Distrito eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el municipio';
+                    $result['error'] = 'Ocurrió un problema al eliminar el distrito';
                 }
                 break;
             

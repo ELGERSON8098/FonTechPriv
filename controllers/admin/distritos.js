@@ -1,5 +1,5 @@
 // Constantes para completar las rutas de la API.
-const MUNICIPIOS_API = 'services/admin/municipio.php';
+const DISTRITOS_API = 'services/admin/distritos.php';
 // Constante para establecer el formulario de buscar.
 const SEARCH_FORM = document.getElementById('searchForm');
 // Constantes para establecer el contenido de la tabla.
@@ -10,18 +10,19 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
     MODAL_TITLE = document.getElementById('modalTitle');
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
-    ID_MUN = document.getElementById('idMunicipio'),
+    ID_DIS = document.getElementById('idDistrito'),
     NOMBRE_DEPARTAMENTO = document.getElementById('Departamento');
-    NOMBRE_MUNICIPIO = document.getElementById('nombreMun');
+    NOMBRE_MUNICIPIO = document.getElementById('Municipio');
+    NOMBRE_DISTRITO = document.getElementById('nombreDis');
 // Se establece el título de la página web.
-document.querySelector('title').textContent = 'Municipios';
+document.querySelector('title').textContent = 'Distritos';
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
     // Se establece el título del contenido principal.
-    MAIN_TITLE.textContent = 'Gestionar municipios';
+    MAIN_TITLE.textContent = 'Gestionar Distritos';
     // Llamada a la función para llenar la tabla con los registros existentes.
     fillTable();
 });
@@ -41,18 +42,18 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
-    (ID_MUN.value) ? action = 'updateRow' : action = 'createRow';
+    (ID_DIS.value) ? action = 'updateRow' : action = 'createRow';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORM);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(MUNICIPIOS_API, action, FORM);
+    const DATA = await fetchData(DISTRITOS_API, action, FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.
         SAVE_MODAL.hide();
         // Se muestra un mensaje de éxito.
         sweetAlert(1, DATA.message, true);
-        ID_MUN.value = null;
+        ID_DIS.value = null;
         // Se carga nuevamente la tabla para visualizar los cambios.
         fillTable();
     } else {
@@ -72,7 +73,7 @@ const fillTable = async (form = null) => {
     // Se verifica la acción a realizar.
     (form) ? action = 'searchRows' : action = 'readAll';
     // Petición para obtener los registros disponibles.
-    const DATA = await fetchData(MUNICIPIOS_API, action, form);
+    const DATA = await fetchData(DISTRITOS_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
@@ -82,7 +83,7 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.departamento}</td>
                     <td>${row.municipio}</td>
-                    <td></td>
+                    <td>${row.distrito}</td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -108,10 +109,10 @@ const fillTable = async (form = null) => {
                     <td></td>
                     <td></td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_municipio})">
+                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_distrito})">
                             <i class="bi bi-pencil-fill">Actualizar</i>
                         </button>
-                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_municipio})">
+                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_distrito})">
                             <i class="bi bi-trash-fill">Eliminar</i>
                         </button>
                     </td>
@@ -133,10 +134,11 @@ const fillTable = async (form = null) => {
 const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
-    MODAL_TITLE.textContent = 'Crear municipio';
+    MODAL_TITLE.textContent = 'Crear distrito';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-    fillSelect(MUNICIPIOS_API, 'readAllS', 'Departamento');
+    fillSelect(DISTRITOS_API, 'readAllS', 'Departamento');
+    fillSelect(DISTRITOS_API, 'readAllSS', 'Municipio');
 }
 
 /*
@@ -147,21 +149,22 @@ const openCreate = () => {
 const openUpdate = async (id) => {
     // Se define una constante tipo objeto con los datos del registro seleccionado.
     const FORM = new FormData();
-    FORM.append('idMunicipio', id);
+    FORM.append('idDistrito', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(MUNICIPIOS_API, 'readOne', FORM);
+    const DATA = await fetchData(DISTRITOS_API, 'readOne', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_MODAL.show();
-        MODAL_TITLE.textContent = 'Actualizar municipio';
+        MODAL_TITLE.textContent = 'Actualizar distrito';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_MUN.value = ROW.id_municipio;
-        NOMBRE_MUNICIPIO.value = ROW.municipio;
-        fillSelect(MUNICIPIOS_API, 'readAllS', 'Departamento', ROW.id_departamento);
+        ID_DIS.value = ROW.id_distrito;
+        NOMBRE_DISTRITO.value = ROW.distrito;
+        fillSelect(DISTRITOS_API, 'readAllS', 'Departamento', ROW.id_departamento);
+        fillSelect(DISTRITOS_API, 'readAllSS', 'Municipio', ROW.id_municipio);
     } else {
         sweetAlert(2, DATA.error, false);
     }
@@ -179,9 +182,9 @@ const openDelete = async (id) => {
     if (RESPONSE) {
         // Se define una constante tipo objeto con los datos del registro seleccionado.
         const FORM = new FormData();
-        FORM.append('idMunicipio', id);
+        FORM.append('idDistrito', id);
         // Petición para eliminar el registro seleccionado.
-        const DATA = await fetchData(MUNICIPIOS_API, 'deleteRow', FORM);
+        const DATA = await fetchData(DISTRITOS_API, 'deleteRow', FORM);
         // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
         if (DATA.status) {
             // Se muestra un mensaje de éxito.
