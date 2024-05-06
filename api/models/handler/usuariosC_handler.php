@@ -34,14 +34,14 @@ class UsuariosHandler
 //Llamar los datos de la base de datos 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo,  
+        $sql = 'SELECT id_usuario, nombre, usuario, correo  
                 FROM tb_usuarios';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, correo
+        $sql = 'SELECT id_usuario, nombre, usuario, correo
                 FROM tb_usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);

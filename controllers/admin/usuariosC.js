@@ -83,11 +83,11 @@ const fillTable = async (form = null) => {
                     <td>${row.usuario}</td>
                     <td>${row.correo}</td>                
                     <td>
-                        <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_usuario})">
-                            <i class="bi bi-pencil-fill"></i>
+                        <button type="button" class="btn btn-info  me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_usuario})">
+                            <i class="bi bi-pencil-fill">Actualizar</i>
                         </button>
-                        <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_usuario})">
-                            <i class="bi bi-trash-fill"></i>
+                        <button type="button" class="btn btn-danger  me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_usuario})">
+                            <i class="bi bi-trash-fill">Eliminar</i>
                         </button>
                     </td>
                 </tr>
@@ -124,7 +124,7 @@ const openUpdate = async (id) => {
         ID_USUARIO.value = ROW.id_usuario;
         NOMBRE_USUARIO.value = ROW.nombre;
         ALIAS_USUARIO.value = ROW.usuario;
-        CONTRA_USUARIO.value = ROW.clave;
+        CORREO_USUARIO.value = ROW.correo;
       ;
     } else {
         sweetAlert(2, DATA.error, false);
