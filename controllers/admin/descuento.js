@@ -82,10 +82,10 @@ const fillTable = async (form = null) => {
                     <td>${row.descripcion}</td>
                     <td>${row.valor}</td>
                     <td>
-                    <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_oferta})">
+                    <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_oferta})">
                     <i class="bi bi-pencil-fill">Actualizar</i>
                 </button>
-                <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_oferta})">
+                <button type="button" class="btn btn-danger me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_oferta})">
                     <i class="bi bi-trash-fill">Eliminar</i>
                 </button>         
                     </td>
@@ -135,7 +135,7 @@ const openUpdate = async (id) => {
         SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_DESCUENTO.value = ROW.id_descuento;
+        ID_DESCUENTO.value = ROW.id_oferta;
         NOMBRE_DESCUENTO.value = ROW.nombre_descuento;
         NOMBRE_DESCRIPCION.value = ROW.descripcion;
         NOMBRE_VALOR.value = ROW.valor;
