@@ -23,7 +23,7 @@ class UsuariosHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, telefono, dui_cliente
+        $sql = 'SELECT id_usuario, nombre, usuario, correo
                 FROM tb_usuarios
                 WHERE nombre LIKE ? OR usuario LIKE ? OR correo LIKE ?
                 ORDER BY nombre';
@@ -34,14 +34,14 @@ class UsuariosHandler
 //Llamar los datos de la base de datos 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, telefono, dui_cliente
+        $sql = 'SELECT id_usuario, nombre, usuario, correo,  
                 FROM tb_usuarios';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, correo, dui_cliente
+        $sql = 'SELECT id_usuario, nombre, usuario, correo, correo
                 FROM tb_usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);
@@ -51,9 +51,9 @@ class UsuariosHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios
-                SET nombre = ?, usuario = ?, correo = ?, clave = ?, telefono = ?, dui_cliente = ?
+                SET nombre = ?, usuario = ?, correo = ?, clave = ?, 
                 WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->alias, $this->correo, $this->clave, $this->telefono, $this->dui, $this->id);
+        $params = array($this->nombre, $this->alias, $this->correo, $this->clave,  $this->id);
         return Database::executeRow($sql, $params);
     }
     

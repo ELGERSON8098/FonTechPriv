@@ -13,10 +13,8 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idusuarioC'),
     NOMBRE_USUARIO = document.getElementById('nombreUsuarioC'),
     ALIAS_USUARIO = document.getElementById('aliasUsuarioC'),
-    CORREO_USUARIO = document.getElementById('correoUsuarioC'),
-    Tel_USUARIO = document.getElementById('TelUsuarioC'),
-    CONTRA_USUARIO = document.getElementById('ContraC'),
-    DUI_USUARIO = document.getElementById('duiUsuarioC');
+    CORREO_USUARIO = document.getElementById('correoUsuarioC')
+
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,9 +81,7 @@ const fillTable = async (form = null) => {
                 <tr>
                     <td>${row.nombre}</td>
                     <td>${row.usuario}</td>
-                    <td>${row.correo}</td>
-                    <td>${row.telefono}</td>
-                    <td>${row.dui_cliente}</td>
+                    <td>${row.correo}</td>                
                     <td>
                         <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_usuario})">
                             <i class="bi bi-pencil-fill"></i>
@@ -128,10 +124,8 @@ const openUpdate = async (id) => {
         ID_USUARIO.value = ROW.id_usuario;
         NOMBRE_USUARIO.value = ROW.nombre;
         ALIAS_USUARIO.value = ROW.usuario;
-        CORREO_USUARIO.value = ROW.correo;
-        Tel_USUARIO.value = ROW.telefono;
         CONTRA_USUARIO.value = ROW.clave;
-        DUI_USUARIO.value = ROW.dui_cliente;
+      ;
     } else {
         sweetAlert(2, DATA.error, false);
     }
