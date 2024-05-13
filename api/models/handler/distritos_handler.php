@@ -60,6 +60,15 @@ class distritoHandler
         return Database::getRows($sql);
     }
     
+    public function readMunicipios(){
+
+        $sql = 'SELECT id_municipio, municipio
+        FROM tb_municipios 
+        WHERE id_departamento = ?';
+        $params = array($this->Depa);
+        return Database::getRows($sql, $params);
+    }
+
 
     public function readAllS()
     {

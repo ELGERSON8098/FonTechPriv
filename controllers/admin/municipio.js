@@ -109,10 +109,10 @@ const fillTable = async (form = null) => {
                     <td></td>
                     <td>
                         <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_municipio})">
-                            <i class="bi bi-pencil-fill">Actualizar</i>
+                            <i class="bi bi-pencil-fill"></i>
                         </button>
                         <button type="button" class="btn btn-danger me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_municipio})">
-                            <i class="bi bi-trash-fill">Eliminar</i>
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -161,7 +161,7 @@ const openUpdate = async (id) => {
         const ROW = DATA.dataset;
         ID_MUN.value = ROW.id_municipio;
         NOMBRE_MUNICIPIO.value = ROW.municipio;
-        fillSelect(MUNICIPIOS_API, 'readAllS', 'Departamento', ROW.id_departamento);
+        fillSelect(MUNICIPIOS_API, 'readAllS', 'Departamento', parseInt(ROW.id_departamento));
     } else {
         sweetAlert(2, DATA.error, false);
     }

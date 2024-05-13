@@ -10,6 +10,7 @@ class productoData extends productoHandler
 {
     // Atributo genérico para manejo de errores.
     private $data_error = null;
+    private $filename = null;
 
     /*
      *  Métodos para validar y asignar valores de los atributos.
@@ -17,17 +18,17 @@ class productoData extends productoHandler
     public function setId($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id = $value;
+            $this->id_producto = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador del administrador es incorrecto';
+            $this->data_error = 'El identificador del producto es incorrecto';
             return false;
         }
     }
 
     public function setImagen($file, $filename = null)
     {
-        if (Validator::validateImageFile($file, 5000)) {
+        if (Validator::validateImageFile($file, 1000)) {
             $this->imagen = Validator::getFilename();
             return true;
         } elseif (Validator::getFileError()) {
@@ -44,11 +45,24 @@ class productoData extends productoHandler
 
     public function setNombre($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateAlphabetic($value)) {
+        if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->nombre = $value;
+            $this->nombre_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+    public function setNombre1($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético descripcion';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->descripcion = $value;
             return true;
         } else {
             $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
@@ -56,80 +70,100 @@ class productoData extends productoHandler
         }
     }
 
-    public function setApellido($value, $min = 2, $max = 50)
-    {
-        if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El apellido debe ser un valor alfabético';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->apellido = $value;
-            return true;
-        } else {
-            $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    public function setCorreo($value, $min = 8, $max = 100)
-    {
-        if (!Validator::validateEmail($value)) {
-            $this->data_error = 'El correo no es válido';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->correo = $value;
-            return true;
-        } else {
-            $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
-
-    public function setAlias($value, $min = 6, $max = 25)
+    public function setNombre2($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El alias debe ser un valor alfanumérico';
+            $this->data_error = 'El nombre debe ser un valor alfabético pantalla';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->alias = $value;
+            $this->pantalla_tamaño = $value;
             return true;
         } else {
-            $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
 
-    public function setClave($value)
+    public function setNombre3($value, $min = 2, $max = 50)
     {
-        if (Validator::validatePassword($value)) {
-            $this->clave = password_hash($value, PASSWORD_DEFAULT);
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético camara trasera';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->camara_trasera_celular = $value;
             return true;
         } else {
-            $this->data_error = Validator::getPasswordError();
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
 
-    public function setDUI($value)
+    public function setNombre4($value, $min = 2, $max = 50)
     {
-        if (!Validator::validateDUI($value)) {
-            $this->data_error = 'El DUI debe tener el formato #########';
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético camara frontal';
             return false;
-        } elseif($this->checkDuplicate($value)) {
-            $this->data_error = 'El DUI ingresado ya existe';
-            return false;
-        } else {
-            $this->dui = $value;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->camara_frontal_celular = $value;
             return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
         }
     }
 
-    public function setTelefono($value)
+    public function setNombre5($value, $min = 2, $max = 50)
     {
-        if (Validator::validatePhone($value)) {
-            $this->telefono = $value;
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético sistema operativo';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->sistema_operativo_celular = $value;
             return true;
         } else {
-            $this->data_error = 'El teléfono debe tener el formato (2, 6, 7)#######';
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNombre6($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético procesador celular';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->procesador_celular = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNombre7($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético procesador celular';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->capacidad_memoria_interna_celular = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
+    public function setNombre8($value, $min = 2, $max = 50)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético procesador celular';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->ram_celular = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
             return false;
         }
     }
@@ -137,13 +171,103 @@ class productoData extends productoHandler
     public function setCantidad($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->cantidad = $value;
-            return true;
+                $this->cantidad = $value;
+                return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
             return false;
         }
     }
+
+    public function setCantidad1($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+                $this->precio = $value;
+                return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+    public function setCantidad2($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+                $this->existencias = $value;
+                return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+    public function setCantidad3($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+                $this->capacidad_memoria_interna_celular = $value;
+                return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+    public function setCantidad4($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+                $this->ram_celular = $value;
+                return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
+
+    public function setCategoria($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_categoria = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
+    public function setCategorias($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_marca = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
+    public function setCategoria1($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_oferta = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador de la categoría es incorrecto';
+            return false;
+        }
+    }
+
+    public function setFilename()
+    {
+        if ($data = $this->readFilename()) {
+            $this->filename = $data['imagen'];
+            return true;
+        } else {
+            $this->data_error = 'Producto inexistente';
+            return false;
+        }
+    }
+
+
 
 
 
@@ -151,6 +275,11 @@ class productoData extends productoHandler
     public function getDataError()
     {
         return $this->data_error;
+    }
+
+    public function getFilename()
+    {
+        return $this->filename;
     }
 }
 

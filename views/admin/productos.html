@@ -2,97 +2,75 @@
 <html lang="es">
 
 <head>
+    <!-- Codificación del documento -->
     <meta charset="UTF-8">
+    <!-- Compatibilidad con Internet Explorer -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Escalabilidad para dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fontech</title>
-    <!-- fontawesome cdn -->
+    <title></title>
+    <!-- Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- bootstrap csss -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- custom css -->
+    <!-- Bootstrap CSS -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icono de la página -->
+    <link type="image/png" rel="icon" href="../../resources/img/LogoComods.png">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
 </head>
 
-
-
 <body>
-        <!-- Separación entre navbar y sección de Productos -->
-    <!-- Espacio vertical -->
+    <!-- Separación del navbar -->
     <div class="my-5"></div>
+    <!-- Contenido principal -->
     <main>
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
+        <!-- Formulario de búsqueda -->
         <div class="row">
-            <!-- Formulario de búsqueda -->
             <form class="col-sm-12 col-md-6" id="searchForm">
                 <div class="row">
                     <div class="col-6">
                         <input type="search" class="form-control" name="search" placeholder="Buscar" required>
                     </div>
                     <div class="col-6">
-                        <button type="submit" class="btn btn-success">
-                            <i class="">Buscar</i>
+                        <button type="submit" class="btn btn-success  me-2 mb-2 mb-sm-2">
+                            <i class="bi bi-search"></i>
                         </button>
-                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
-                            <i class="">Limpiar</i>
+                        <button type="reset" class="btn btn-secondary  me-2 mb-2 mb-sm-2" onclick="fillTable()">
+                            <i class="bi bi-x-square-fill"></i>
                         </button>
                     </div>
                 </div>
             </form>
             <br>
             <br>
-            <!-- Botón para crear -->
             <div class="col-12 col-sm-auto ms-auto">
-                <button type="button" class="btn btn-primary" onclick="openCreate()">
-                    <i class="">Nuevo Producto</i>
+                <!-- Botón para agregar un nuevo producto -->
+                <button type="button" class="btn btn-primary me-2 mb-2 mb-sm-0" onclick="openCreate()">
+                    <i class="bi bi-plus-square-fill"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Tabla para mostrar los registros existentes -->
+        <!-- Tabla para mostrar los registros de productos -->
         <table class="table table-hover">
             <!-- Encabezado de la tabla -->
             <thead>
                 <tr>
                     <!-- Cantidad de registros encontrados -->
-                    <td colspan="28" id="rowsFound"></td>
+                    <td colspan="5" id="rowsFound"></td>
                 </tr>
                 <!-- Títulos de las columnas -->
                 <tr>
-                    <th>Nombre</th>
+                    <th>Imagen</th>
+                    <th>Nombre del producto</th>
                     <th>Marca</th>
                     <th>Categoria</th>
-                    <th>Imagen</th>
-                    <!-- Añadir más títulos de columnas según sea necesario -->
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -100,7 +78,7 @@
             <tbody id="tableBody"></tbody>
         </table>
 
-        <!-- Modal para guardar un registro -->
+        <!-- Modal para guardar un nuevo producto -->
         <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -109,102 +87,34 @@
                         <h1 class="modal-title fs-5" id="modalTitle"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para guardar un registro -->
+                    <!-- Formulario para guardar un nuevo producto -->
                     <form id="saveForm">
                         <div class="modal-body row g-3">
-                            <!-- Campo oculto para el ID -->
-                            <input type="number" class="d-none" id="idCategoria" name="idCategoria">
+                            <!-- Campo oculto para el ID del producto -->
+                            <input type="hidden" id="idProducto" name="idProducto">
+                            <!-- Campo para la imagen del producto -->
                             <div class="col-sm-12 col-md-6">
-                                <label for="nombreIMGP" class="form-label">Imagen</label>
-                                <input id="nombreIMGP" type="file" name="nombreIMGP" class="form-control">
+                                <label for="ImagenP" class="form-label">Imagen del producto</label>
+                                <input id="ImagenP" type="file" name="ImagenP" class="form-control" required>
+                            </div>
+                            <!-- Campos para los datos del producto -->
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreP" class="form-label">Nombre del producto</label>
+                                <input id="nombreP" type="text" name="nombreP" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="nombreProductoP" class="form-label">Producto</label>
-                                <input id="nombreProductoP" type="text" name="nombreProductoP" class="form-control"
-                                    required>
-                            </div>
+                                <label for="Marca" class="form-label">Marca</label>
+                                <select id="Marca" type="text" name="Marca" class="form-control" required></select>
 
-                            <div class="col-sm-12 col-md-6">
-                                <label for="nombreMarcaP" class="form-label">Marca</label>
-                                <select id="nombreMarcaP" name="nombreMarcaP" class="form-select">
-                                    <!-- Las opciones de marca se llenarán dinámicamente aquí -->
-                                </select>
                             </div>
-
                             <div class="col-sm-12 col-md-6">
-                                <label for="nombreCategoriaP" class="form-label">Categoría</label>
-                                <select id="nombreCategoriaP" name="nombreCategoriaP" class="form-select">
-                                    <!-- Las opciones de categoría se llenarán dinámicamente aquí -->
-                                </select>
+                                <label for="Categoria" class="form-label">Categoria</label>
+                                <select id="Categoria" type="text" name="Categoria" class="form-control"
+                                    required></select>
                             </div>
-                            
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="PrecioP" class="form-label">Precio</label>
-                                <input id="PrecioP" type="text" name="PrecioP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="existenciaP" class="form-label">Existencias</label>
-                                <input id="existenciaP" type="number" name="existenciaP" class="form-control" min="0" required>
-                            </div>
-                            
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="descripcionP" class="form-label">Descripcion</label>
-                                <input id="descripcionP" type="text" name="descripcionP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="cmemoriaP" class="form-label">Capacidad de memoria</label>
-                                <input id="cmemoriaP" type="text" name="cmemoriaP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ramP" class="form-label">Ram</label>
-                                <input id="ramP" type="text" name="ramP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="tpantallaP" class="form-label">Tamaño Pantalla</label>
-                                <input id="tpantallaP" type="text" name="tpantallaP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ctraseraP" class="form-label">Camara trasera PX</label>
-                                <input id="ctraseraP" type="text" name="ctraseraP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="cfrontalP" class="form-label">Camara frontal PX</label>
-                                <input id="cfrontalP" type="text" name="cfrontalP" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="soP" class="form-label">Sistema Operativo</label>
-                                <select id="soP" name="soP" class="form-select">
-                                    <!-- Las opciones de SO se llenarán dinámicamente aquí -->
-                                    <option value="Android">Android</option>
-                                    <option value="IOS">IOS</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <label for="descuentoP" class="form-label">Descuento</label>
-                                <select id="descuentoP" name="descuentoP" class="form-select">
-                                    <!-- Las opciones de descuento se llenarán dinámicamente aquí -->
-                                </select>
-                            </div>
-
                         </div>
                         <div class="modal-footer">
+                            <!-- Botón para guardar el producto -->
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
@@ -213,16 +123,104 @@
         </div>
     </main>
 
-    <!-- bootstrap js -->
-    <!-- Llamada al framework y librería de mensajes -->
+    <main>
+        <!-- Modal para guardar un nuevo producto -->
+        <div class="modal fade" id="saveModalS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitleS"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para guardar un nuevo producto -->
+                    <form id="saveFormS">
+                        <div class="modal-body row g-3">
+                            <input type="hidden" id="idProducto1" name="idProducto1">
+                            <input type="hidden" id="idProsub" name="idProsub">
+                            <!-- Campo para la imagen del producto -->
+                            <div class="col-sm-12 col-md-6">
+                                <label for="ImagenPs" class="form-label">Imagen del producto</label>
+                                <input id="ImagenPs" type="file" name="ImagenPs" class="form-control" required>
+                            </div>
+                            <!-- Campos para los datos del producto -->
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Name" class="form-label">Producto</label>
+                                <input id="Name" type="text" name="Name" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="PrecioP" class="form-label">Precio</label>
+                                <input id="PrecioP" type="number" name="PrecioP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Exist" class="form-label">Existencia</label>
+                                <input id="Exist" type="number" name="Exist" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Descrp" class="form-label">Descripción</label>
+                                <input id="Descrp" type="text" name="Descrp" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="MemoriaP" class="form-label">Almacenamiento</label>
+                                <input id="MemoriaP" type="text" name="MemoriaP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="RamP" class="form-label">Ram</label>
+                                <input id="RamP" type="text" name="RamP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="TamañoP" class="form-label">Tamaño de la pantalla</label>
+                                <input id="TamañoP" type="text" name="TamañoP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CamP" class="form-label">Camara Trasera</label>
+                                <input id="CamP" type="text" name="CamP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CamsP" class="form-label">Camara Frontal</label>
+                                <input id="CamsP" type="text" name="CamsP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="SisP" class="form-label">Sistema Operativo</label>
+                                <input id="SisP" type="text" name="SisP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="SistP" class="form-label">Procesador</label>
+                                <input id="SistP" type="text" name="SistP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Oferta" class="form-label">Descuento</label>
+                                <select id="Oferta" type="text" name="Oferta" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Marcas" class="form-label">Marca</label>
+                                <select id="Marcas" type="text" name="Marcas" class="form-control" required></select>
+
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Categorias" class="form-label">Categoria</label>
+                                <select id="Categorias" type="text" name="Categorias" class="form-control"
+                                    required></select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <!-- Botón para guardar el producto -->
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Bootstrap JavaScript -->
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert JavaScript -->
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
-    <!-- Llamada al controlador general de la aplicación -->
-    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
-    <!-- Llamada al controlador del sitio privado -->
-    <script type="text/javascript" src="../../controllers/utils/admin.js"></script>
-    <!-- Llamada al controlador de la página web -->
-    <script type="text/javascript" src="../../controllers/admin/producto.js"></script>
+
+    <!-- Controladores JavaScript -->
+    <script src="../../controllers/utils/admin.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
+    <script src="../../controllers/admin/producto.js"></script>
 </body>
 
 </html>

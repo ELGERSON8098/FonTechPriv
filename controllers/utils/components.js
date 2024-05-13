@@ -32,7 +32,8 @@ const confirmAction = (message) => {
 }
 
 /*
-*   Función asíncrona para manejar los mensajes de notificación al usuario. Requiere la librería sweetalert para funcionar.
+*   Función asíncrona para manejar los mensajes de notificación al usuario.
+*   Requiere la librería sweetalert para funcionar.
 *   Parámetros: type (tipo de mensaje), text (texto a mostrar), timer (uso de temporizador) y url (valor opcional con la ubicación de destino).
 *   Retorno: ninguno.
 */
@@ -76,24 +77,27 @@ const sweetAlert = async (type, text, timer, url = null) => {
 
 /*
 *   Función asíncrona para cargar las opciones en un select de formulario.
-*   Parámetros: filename (nombre del archivo), action (acción a realizar), select (identificador del select en el formulario) y selected (dato opcional con el valor seleccionado).
+*   Parámetros: filename (nombre del archivo), action (acción a realizar), select (identificador del select en el formulario) y filter (dato opcional para seleccionar una opción o filtrar los datos).
 *   Retorno: ninguno.
 */
-const fillSelect = async (filename, action, select, selected = null) => {
+const fillSelect = async (filename, action, select, filter = undefined) => {
+    // Se verifica si el filtro contiene un objeto para enviar a la API.
+    const FORM = (typeof (filter) == 'object') ? filter : null;
     // Petición para obtener los datos.
-    const DATA = await fetchData(filename, action);
+    const DATA = await fetchData(filename, action, FORM);
     let content = '';
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje.
     if (DATA.status) {
         content += '<option value="" selected>Seleccione una opción</option>';
         // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se obtiene el dato del primer campo.
+            // Se obtiene el dato del primer campo de la sentencia SQL.
             value = Object.values(row)[0];
-            // Se obtiene el dato del segundo campo.
+            // Se obtiene el dato del segundo campo de la sentencia SQL.
             text = Object.values(row)[1];
-            // Se verifica cada valor para enlistar las opciones.
-            if (value != selected) {
+            // Se verifica el valor del filtro para enlistar las opciones.
+            const SELECTED = (typeof (filter) == 'number') ? filter : null;
+            if (value != SELECTED) {
                 content += `<option value="${value}">${text}</option>`;
             } else {
                 content += `<option value="${value}" selected>${text}</option>`;
@@ -107,7 +111,8 @@ const fillSelect = async (filename, action, select, selected = null) => {
 }
 
 /*
-*   Función para generar un gráfico de barras verticales. Requiere la librería chart.js para funcionar.
+*   Función para generar un gráfico de barras verticales.
+*   Requiere la librería chart.js para funcionar.
 *   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título del gráfico).
 *   Retorno: ninguno.
 */
@@ -144,7 +149,8 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
 }
 
 /*
-*   Función para generar un gráfico de pastel. Requiere la librería chart.js para funcionar.
+*   Función para generar un gráfico de pastel.
+*   Requiere la librería chart.js para funcionar.
 *   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
 *   Retorno: ninguno.
 */

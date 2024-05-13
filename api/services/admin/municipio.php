@@ -24,21 +24,21 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                case 'createRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        ! $municipio->setNombre($_POST['nombreMun']) or
-                        ! $municipio->setCategoria($_POST['Departamento'])
-                    ) {
-                        $result['error'] = $municipio->getDataError();
-                    } elseif ($municipio->createRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Municipio creado correctamente';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al crear el municipio';
-                    }
-                    break;
-                
+            case 'createRow':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$municipio->setNombre($_POST['nombreMun']) or
+                    !$municipio->setCategoria($_POST['Departamento'])
+                ) {
+                    $result['error'] = $municipio->getDataError();
+                } elseif ($municipio->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Municipio creado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear el municipio';
+                }
+                break;
+
             case 'readAll':
                 if ($result['dataset'] =  $municipio->readAll()) {
                     $result['status'] = 1;
@@ -47,16 +47,16 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen municipios registrados';
                 }
                 break;
-                case 'readAllS':
-                    if ($result['dataset'] =  $municipio->readAllS()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen Departamentos registrados';
-                    }
-                    break;
+            case 'readAllS':
+                if ($result['dataset'] =  $municipio->readAllS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen municipios registrados';
+                }
+                break;
             case 'readOne':
-                if (! $municipio->setId($_POST['idMunicipio'])) {
+                if (!$municipio->setId($_POST['idMunicipio'])) {
                     $result['error'] =  $municipio->getDataError();
                 } elseif ($result['dataset'] =  $municipio->readOne()) {
                     $result['status'] = 1;
@@ -67,12 +67,12 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    ! $municipio->setId($_POST['idMunicipio'])or
-                    ! $municipio->setCategoria($_POST['Departamento'])or
-                    ! $municipio->setNombre($_POST['nombreMun']) 
+                    !$municipio->setId($_POST['idMunicipio']) or
+                    !$municipio->setCategoria($_POST['Departamento']) or
+                    !$municipio->setNombre($_POST['nombreMun'])
                 ) {
                     $result['error'] = $municipio->getDataError();
-                } elseif ( $municipio->updateRow()) {
+                } elseif ($municipio->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Municipio modificado correctamente';
                 } else {
@@ -81,17 +81,16 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    ! $municipio->setid($_POST['idMunicipio'])
+                    !$municipio->setid($_POST['idMunicipio'])
                 ) {
                     $result['error'] =  $municipio->getDataError();
-                } elseif ( $municipio->deleteRow()) {
+                } elseif ($municipio->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Municipio eliminado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el municipio';
                 }
                 break;
-            
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

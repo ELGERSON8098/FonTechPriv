@@ -67,17 +67,13 @@ class municipioHandler
     public function readOne()
     {
         $sql = 'SELECT 
-                    m.id_municipio, 
-                    m.municipio,
-                    d.id_departamento,
-                    d.departamento
-                FROM 
-                    tb_municipios m
-                INNER JOIN 
-                    tb_departamentos d ON m.id_departamento = d.id_departamento
-                WHERE 
-                    m.id_municipio = ?';
-        
+            id_municipio, 
+            municipio,
+            id_departamento,
+            departamento
+        FROM tb_municipios
+        INNER JOIN tb_departamentos USING(id_departamento)
+        WHERE id_municipio = ?';
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }

@@ -24,22 +24,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                case 'createRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        ! $Distrito->setNombre($_POST['nombreDis']) or
-                        ! $Distrito->setCategorias($_POST['Municipio'])or
-                        ! $Distrito->setCategoria($_POST['Departamento'])
-                    ) {
-                        $result['error'] = $Distrito->getDataError();
-                    } elseif ($Distrito->createRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Distrito creado correctamente';
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al crear el distrito';
-                    }
-                    break;
-                
+            case 'createRow':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$Distrito->setNombre($_POST['nombreDis']) or
+                    !$Distrito->setCategorias($_POST['Municipio']) or
+                    !$Distrito->setCategoria($_POST['Departamento'])
+                ) {
+                    $result['error'] = $Distrito->getDataError();
+                } elseif ($Distrito->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Distrito creado correctamente';
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear el distrito';
+                }
+                break;
+
             case 'readAll':
                 if ($result['dataset'] =  $Distrito->readAll()) {
                     $result['status'] = 1;
@@ -48,24 +48,33 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen distritos registrados';
                 }
                 break;
-                case 'readAllS':
-                    if ($result['dataset'] =  $Distrito->readAllS()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                    } else {
-                        $result['error'] = 'No existen departamentos registrados';
-                    }
-                    break;
-                    case 'readAllSS':
-                        if ($result['dataset'] =  $Distrito->readAllSS()) {
-                            $result['status'] = 1;
-                            $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
-                        } else {
-                            $result['error'] = 'No existen municipios registrados';
-                        }
-                        break;
+            case 'readAllS':
+                if ($result['dataset'] =  $Distrito->readAllS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen departamentos registrados';
+                }
+                break;
+            case 'readMunicipios':
+                if (!$Distrito->setCategoria($_POST['idDepartamento'])) {
+                    $result['error'] =  $Distrito->getDataError();
+                } elseif ($result['dataset'] =  $Distrito->readMunicipios()) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'Distrito inexistente';
+                }
+                break;
+            case 'readAllSS':
+                if ($result['dataset'] =  $Distrito->readAllSS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen municipios registrados';
+                }
+                break;
             case 'readOne':
-                if (! $Distrito->setId($_POST['idDistrito'])) {
+                if (!$Distrito->setId($_POST['idDistrito'])) {
                     $result['error'] =  $Distrito->getDataError();
                 } elseif ($result['dataset'] =  $Distrito->readOne()) {
                     $result['status'] = 1;
@@ -76,13 +85,13 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    ! $Distrito->setId($_POST['idDistrito'])or
-                    ! $Distrito->setCategorias($_POST['Municipio'])or
-                    ! $Distrito->setCategoria($_POST['Departamento'])or
-                    ! $Distrito->setNombre($_POST['nombreDis']) 
+                    !$Distrito->setId($_POST['idDistrito']) or
+                    !$Distrito->setCategorias($_POST['Municipio']) or
+                    !$Distrito->setCategoria($_POST['Departamento']) or
+                    !$Distrito->setNombre($_POST['nombreDis'])
                 ) {
                     $result['error'] = $Distrito->getDataError();
-                } elseif ( $Distrito->updateRow()) {
+                } elseif ($Distrito->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Distrito modificado correctamente';
                 } else {
@@ -91,17 +100,16 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    ! $Distrito->setid($_POST['idDistrito'])
+                    !$Distrito->setid($_POST['idDistrito'])
                 ) {
                     $result['error'] =  $Distrito->getDataError();
-                } elseif ( $Distrito->deleteRow()) {
+                } elseif ($Distrito->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Distrito eliminado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el distrito';
                 }
                 break;
-            
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

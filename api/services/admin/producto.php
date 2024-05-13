@@ -28,31 +28,48 @@ if (isset($_GET['action'])) {
             case 'createRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['nombreIMGP']) or
-                    !$producto->setNombre($_POST['nombreProductoP']) or
-                    !$producto->setNombre($_POST['nombreMarcaP']) or
-                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
-                    !$producto->setNombre($_POST['PrecioP']) or
-                    !$producto->setNombre($_POST['existenciaP']) or
-                    !$producto->setDescripcion($_POST['descripcionP']) or
-                    !$producto->setNombre($_POST['cmemoriaP']) or
-                    !$producto->setNombre($_POST['ramP']) or
-                    !$producto->setNombre($_POST['tpantallaP']) or
-                    !$producto->setNombre($_POST['ctraseraP']) or
-                    !$producto->setNombre($_POST['cfrontalP']) or
-                    !$producto->setNombre($_POST['soP']) or
-                    !$producto->setNombre($_POST['descuentoP'])
+                    !$producto->setImagen($_FILES['ImagenP']) or
+                    !$producto->setNombre($_POST['nombreP']) or
+                    !$producto->setCategoria($_POST['Categoria']) or
+                    !$producto->setCategorias($_POST['Marca'])
                 ) {
                     $result['error'] = $producto->getDataError();
-                } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Contraseñas diferentes';
                 } elseif ($producto->createRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador creado correctamente';
+                    $result['message'] = 'Productos agregado correctamente';
+                    // Se asigna el estado del archivo después de actualizar.
+                    $result['fileStatus'] = Validator::changeFile($_FILES['ImagenP'], $producto::RUTA_IMAGEN, $producto->getFilename());
                 } else {
-                    $result['error'] = 'Ocurrió un problema al crear el administrador';
+                    $result['error'] = $producto->getDataError() ?: 'Ocurrió un problema al agregar el producto';
                 }
                 break;
+
+            case 'createRowS':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$producto->setId($_POST['idProsub']) or
+                    !$producto->setCantidad1($_POST['PrecioP']) or
+                    !$producto->setCantidad2($_POST['Exist']) or
+                    !$producto->setNombre1($_POST['Descrp']) or
+                    !$producto->setNombre7($_POST['MemoriaP']) or
+                    !$producto->setNombre8($_POST['RamP']) or
+                    !$producto->setNombre2($_POST['TamañoP']) or
+                    !$producto->setNombre3($_POST['CamP']) or
+                    !$producto->setNombre4($_POST['CamsP']) or
+                    !$producto->setNombre5($_POST['SisP']) or
+                    !$producto->setNombre6($_POST['SistP']) or
+                    !$producto->setCategoria1($_POST['Oferta'])
+                ) {
+                    $result['error'] = $producto->getDataError();
+                } elseif ($producto->createRowS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Productos agregado correctamente';
+                    // Se asigna el estado del archivo después de actualizar.
+                } else {
+                    $result['error'] = $producto->getDataError() ?: 'Ocurrió un problema al agregar los datos del producto';
+                }
+                break;
+
             case 'readAll':
                 if ($result['dataset'] = $producto->readAll()) {
                     $result['status'] = 1;
@@ -61,168 +78,77 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen productos registrados';
                 }
                 break;
+            case 'readAllS':
+                if ($result['dataset'] = $producto->readAllS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen categorias registrados';
+                }
+                break;
+            case 'readAllSS':
+                if ($result['dataset'] = $producto->readAllSS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen marcas registrados';
+                }
+                break;
+            case 'readAllSSS':
+                if ($result['dataset'] = $producto->readAllSSS()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Existen ' . count($result['dataset']) . ' registros';
+                } else {
+                    $result['error'] = 'No existen descuentos registrados';
+                }
+                break;
             case 'readOne':
-                if (!$producto->setId($_POST['id_detalle_producto'])) {
-                    $result['error'] = 'Administrador incorrecto';
-                } elseif ($result['dataset'] = $producto->readOne()) {
+                if (!$producto->setId($_POST['idProsub'])) {
+                    $result['error'] = 'Producto incorrecto';
+                } elseif ($result['dataset'] = $producto->readOneS()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'Administrador inexistente';
+                    $result['error'] = 'Producto inexistente';
                 }
                 break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$producto->setNombre($_POST['nombreIMGP']) or
-                    !$producto->setNombre($_POST['nombreProductoP']) or
-                    !$producto->setNombre($_POST['nombreMarcaP']) or
-                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
-                    !$producto->setNombre($_POST['PrecioP']) or
-                    !$producto->setNombre($_POST['existenciaP']) or
-                    !$producto->setDescripcion($_POST['descripcionP']) or
-                    !$producto->setNombre($_POST['cmemoriaP']) or
-                    !$producto->setNombre($_POST['ramP']) or
-                    !$producto->setNombre($_POST['tpantallaP']) or
-                    !$producto->setNombre($_POST['ctraseraP']) or
-                    !$producto->setNombre($_POST['cfrontalP']) or
-                    !$producto->setNombre($_POST['soP']) or
-                    !$producto->setNombre($_POST['descuentoP'])
+                    !$producto->setId($_POST['idProsub']) or
+                    !$producto->setImagen($_FILES['ImagenPs']) or
+                    !$producto->setNombre($_POST['nombreP']) or
+                    !$producto->setCategoria($_POST['Categorias']) or
+                    !$producto->setCategorias($_POST['Marcas']) or
+                    !$producto->setCantidad1($_POST['PrecioP']) or
+                    !$producto->setCantidad2($_POST['Exist']) or
+                    !$producto->setNombre1($_POST['Descrp']) or
+                    !$producto->setCantidad3($_POST['MemoriaP']) or
+                    !$producto->setCantidad4($_POST['RamP']) or
+                    !$producto->setNombre2($_POST['TamañoP']) or
+                    !$producto->setNombre3($_POST['CamP']) or
+                    !$producto->setNombre4($_POST['CamsP']) or
+                    !$producto->setNombre5($_POST['SisP']) or
+                    !$producto->setNombre6($_POST['SistP']) or
+                    !$producto->setCategoria1($_POST['Oferta'])
                 ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->updateRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador modificado correctamente';
+                    $result['message'] = 'El producto modificado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el administrador';
+                    $result['error'] = 'Ocurrió un problema al modificar el producto';
                 }
                 break;
             case 'deleteRow':
-                if ($_POST['id_detalle_producto'] == $_SESSION['id_detalle_producto']) {
-                    $result['error'] = 'No se puede eliminar a sí mismo';
-                } elseif (!$producto->setId($_POST['id_detalle_producto'])) {
+                if (
+                    !$producto->setid($_POST['idProducto'])
+                ) {
                     $result['error'] = $producto->getDataError();
                 } elseif ($producto->deleteRow()) {
                     $result['status'] = 1;
-                    $result['message'] = 'Administrador eliminado correctamente';
+                    $result['message'] = 'Producto eliminado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al eliminar el administrador';
-                }
-                break;
-            case 'getUser':
-                if (isset($_SESSION['aliasAdministrador'])) {
-                    $result['status'] = 1;
-                    $result['username'] = $_SESSION['aliasAdministrador'];
-                } else {
-                    $result['error'] = 'Alias de administrador indefinido';
-                }
-                break;
-            case 'logOut':
-                if (session_destroy()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Sesión eliminada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al cerrar la sesión';
-                }
-                break;
-            case 'readProfile':
-                if ($result['dataset'] = $producto->readProfile()) {
-                    $result['status'] = 1;
-                } else {
-                    $result['error'] = 'Ocurrió un problema al leer el perfil';
-                }
-                break;
-            case 'editProfile':
-                $_POST = Validator::validateForm($_POST);
-                if (
-                    !$producto->setNombre($_POST['nombreIMGP']) or
-                    !$producto->setNombre($_POST['nombreProductoP']) or
-                    !$producto->setNombre($_POST['nombreMarcaP']) or
-                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
-                    !$producto->setNombre($_POST['PrecioP']) or
-                    !$producto->setNombre($_POST['existenciaP']) or
-                    !$producto->setDescripcion($_POST['descripcionP']) or
-                    !$producto->setNombre($_POST['cmemoriaP']) or
-                    !$producto->setNombre($_POST['ramP']) or
-                    !$producto->setNombre($_POST['tpantallaP']) or
-                    !$producto->setNombre($_POST['ctraseraP']) or
-                    !$producto->setNombre($_POST['cfrontalP']) or
-                    !$producto->setNombre($_POST['soP']) or
-                    !$producto->setNombre($_POST['descuentoP'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->editProfile()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Perfil modificado correctamente';
-                    $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el perfil';
-                }
-                break;
-            case 'changePassword':
-                $_POST = Validator::validateForm($_POST);
-                if (!$producto->checkPassword($_POST['claveActual'])) {
-                    $result['error'] = 'Contraseña actual incorrecta';
-                } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Confirmación de contraseña diferente';
-                } elseif (!$producto->setClave($_POST['claveNueva'])) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->changePassword()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Contraseña cambiada correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
-                }
-                break;
-            default:
-                $result['error'] = 'Acción no disponible dentro de la sesión';
-        }
-    } else {
-        // Se compara la acción a realizar cuando el administrador no ha iniciado sesión.
-        switch ($_GET['action']) {
-            case 'readUsers':
-                if ($producto->readAll()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Debe autenticarse para ingresar';
-                } else {
-                    $result['error'] = 'Debe crear un administrador para comenzar';
-                }
-                break;
-            case 'signUp':
-                $_POST = Validator::validateForm($_POST);
-                $_POST['nombreAdministrador'];
-                if (
-                    !$producto->setNombre($_POST['nombreIMGP']) or
-                    !$producto->setNombre($_POST['nombreProductoP']) or
-                    !$producto->setNombre($_POST['nombreMarcaP']) or
-                    !$producto->setCategoria($_POST['nombreCategoriaP']) or
-                    !$producto->setNombre($_POST['PrecioP']) or
-                    !$producto->setNombre($_POST['existenciaP']) or
-                    !$producto->setDescripcion($_POST['descripcionP']) or
-                    !$producto->setNombre($_POST['cmemoriaP']) or
-                    !$producto->setNombre($_POST['ramP']) or
-                    !$producto->setNombre($_POST['tpantallaP']) or
-                    !$producto->setNombre($_POST['ctraseraP']) or
-                    !$producto->setNombre($_POST['cfrontalP']) or
-                    !$producto->setNombre($_POST['soP']) or
-                    !$producto->setNombre($_POST['descuentoP'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
-                    $result['error'] = 'Contraseñas diferentes';
-                } elseif ($producto->createRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Administrador registrado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al registrar el administrador';
-                }
-                break;
-            case 'logIn':
-                $_POST = Validator::validateForm($_POST);
-                if ($producto->checkUser($_POST['alias'], $_POST['clave'])) {
-                    $result['status'] = 1;
-                    $result['message'] = 'Autenticación correcta';
-                } else {
-                    $result['error'] = 'Credenciales incorrectas';
+                    $result['error'] = 'Ocurrió un problema al eliminar el producto';
                 }
                 break;
             default:

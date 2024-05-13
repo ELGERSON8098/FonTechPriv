@@ -61,6 +61,16 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
+// Método del evento para cuando se cambia el select de departamento.
+NOMBRE_DEPARTAMENTO.addEventListener('change', async (event) => {
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData();
+    FORM.append('idDepartamento', NOMBRE_DEPARTAMENTO.value);
+    // Llamada a la función para llenar la tabla con los resultados de la búsqueda.
+    fillSelect(DISTRITOS_API, 'readMunicipios', 'Municipio', FORM);
+    NOMBRE_MUNICIPIO.disabled = false;
+});
+
 /*
 *   Función asíncrona para llenar la tabla con los registros disponibles.
 *   Parámetros: form (objeto opcional con los datos de búsqueda).
@@ -110,10 +120,10 @@ const fillTable = async (form = null) => {
                     <td></td>
                     <td>
                         <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_distrito})">
-                            <i class="bi bi-pencil-fill">Actualizar</i>
+                            <i class="bi bi-pencil-fill"></i>
                         </button>
                         <button type="button" class="btn btn-danger me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_distrito})">
-                            <i class="bi bi-trash-fill">Eliminar</i>
+                            <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
                 </tr>
@@ -135,6 +145,7 @@ const openCreate = () => {
     // Se muestra la caja de diálogo con su título.
     SAVE_MODAL.show();
     MODAL_TITLE.textContent = 'Crear distrito';
+    NOMBRE_MUNICIPIO.disabled = true;
     // Se prepara el formulario.
     SAVE_FORM.reset();
     fillSelect(DISTRITOS_API, 'readAllS', 'Departamento');
@@ -159,12 +170,13 @@ const openUpdate = async (id) => {
         MODAL_TITLE.textContent = 'Actualizar distrito';
         // Se prepara el formulario.
         SAVE_FORM.reset();
+        NOMBRE_MUNICIPIO.disabled = false;
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_DIS.value = ROW.id_distrito;
         NOMBRE_DISTRITO.value = ROW.distrito;
-        fillSelect(DISTRITOS_API, 'readAllS', 'Departamento', ROW.id_departamento);
-        fillSelect(DISTRITOS_API, 'readAllSS', 'Municipio', ROW.id_municipio);
+        fillSelect(DISTRITOS_API, 'readAllS', 'Departamento', parseInt(ROW.id_departamento));
+        fillSelect(DISTRITOS_API, 'readAllSS', 'Municipio', parseInt(ROW.id_municipio));
     } else {
         sweetAlert(2, DATA.error, false);
     }
