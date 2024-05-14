@@ -6,30 +6,18 @@ const SEARCH_FORM = document.getElementById('searchForm');
 const TABLE_BODY = document.getElementById('tableBody'),
     ROWS_FOUND = document.getElementById('rowsFound');
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
-MODAL_TITLE = document.getElementById('modalTitle');
+const SAVE_MODAL = new bootstrap.Modal('#saveModal'), // Modal para guardar un nuevo producto
+    MODAL_TITLE = document.getElementById('modalTitle'); // Título del modal
 // Constantes para establecer los elementos del componente Modal.
-const SAVE_MODALS = new bootstrap.Modal('#saveModalS'),
-MODAL_TITLES = document.getElementById('modalTitleS');
+const SAVE_MODALS = new bootstrap.Modal('#saveModalS'), // Modal para guardar un nuevo producto (variante)
+    MODAL_TITLES = document.getElementById('modalTitleS'); // Título del modal (variante)
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORMS = document.getElementById('saveForms'),
-ID_ESTADO = document.getElementById('idReservas');
-COMBOC_RESERVA = document.getElementById('EstadoP');
-// Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
-    ID_USUARIO = document.getElementById('idReserva'),
-    NOMBRE_USUARIO = document.getElementById('NomClien'),
-    TELEFONO_RESERVA = document.getElementById('TEL'),
-    FECHA_RESERVA = document.getElementById('FechReserva'),
-    PROD_RESERVA = document.getElementById('Produc'),
-    MATERIAL_RESERVA = document.getElementById('Materi'),
-    COLOR_RESERVA = document.getElementById('COL'),
-    TALLA_RESERVA = document.getElementById('Tallas'),
-    MARCA_RESERVA = document.getElementById('MARCA'),
-    CANTIDAD_RESERVA = document.getElementById('Cant'),
-    PRECIO_RESERVA = document.getElementById('Precio'),
-    DESCUENTO_RESERVA = document.getElementById('Descu'),
-    DESCUENTO_RESERVAS = document.getElementById('Descuentos');
+const SAVE_FORM = document.getElementById('saveForm'), // Formulario de guardar (modal principal)
+    ID_RESERVA = document.getElementById('idReserva'), // ID del producto (modal principal)
+    NOMBRE_RESERVAS = document.getElementById('NomClien'), // Nombre del cliente (modal principal)
+    FECHA_RESERVA = document.getElementById('FechReserva'), // Fecha de reserva (modal principal)
+    // ...otros campos del formulario (modal principal)
+    PRECIO_RESERVA = document.getElementById('Descu'); // Precio del producto (modal principal)
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -72,31 +60,28 @@ const fillTable = async (form = null) => {
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre}</td>
-                    <td>${row.dui_cliente}</td>
                     <td>${row.fecha_reserva}</td>
                     <td>${row.departamento}</td>
                     <td>${row.municipio}</td>
                     <td>${row.distrito}</td>
                     <td>${row.estado_reserva}</td>
-                
-                <td>
-                    <div class="btn-group" role="group" aria-label="Acciones">
-                        <button type="button" class="btn  btn-success rounded me-2 mb-2 mb-sm-2" onclick="openUpdateS(${row.id_reserva})">
-                            <i class="bi bi-bag-check"></i>
-                        </button>
-                        <button type="button" class="btn btn-warning rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_reserva})">
-                            <i class="bi bi-eye-fill"></i>
-                        </button>
-                        <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_reserva})">
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
-                        <button type="button" class="btn btn-secondary rounded me-2 mb-2 mb-sm-2" onclick="openDeletes()">
-                        <i class="bi bi-filetype-pdf"></i>
-                        </button>
-                    </div>
-                </td>
-                
-
+                    <!-- Botones de acciones -->
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Acciones">
+                            <button type="button" class="btn  btn-success rounded me-2 mb-2 mb-sm-2" onclick="openUpdateS(${row.id_reserva})">
+                                <i class="bi bi-bag-check"></i>
+                            </button>
+                            <button type="button" class="btn btn-warning rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_reserva})">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                            <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_reserva})">
+                                <i class="bi bi-trash-fill"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary rounded me-2 mb-2 mb-sm-2" onclick="openDeletes()">
+                                <i class="bi bi-filetype-pdf"></i>
+                            </button>
+                        </div>
+                    </td>
                 </tr>`;
         });
         // Se muestra un mensaje de acuerdo con el resultado.
@@ -105,7 +90,6 @@ const fillTable = async (form = null) => {
         sweetAlert(4, DATA.error, true);
     }
 }
-
 
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
@@ -146,6 +130,11 @@ const openUpdate = async (id) => {
     }
 }
 
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro (variante).
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
 const openUpdateS = async (id) => {
     console.log("id_reserva" + id);
     // Se define una constante tipo objeto con los datos del registro seleccionado.

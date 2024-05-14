@@ -4,8 +4,8 @@
 <head>
     <!-- Codificación del documento -->
     <meta charset="UTF-8">
-        <!-- Compatibilidad con Internet Explorer -->
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Compatibilidad con Internet Explorer -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Escalabilidad para dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
@@ -20,7 +20,7 @@
     <!-- Iconos de Bootstrap -->
     <link rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
     <!-- CSS personalizado -->
-    <link rel="stylesheet" href="../../resources/css/administrador.css">
+    <link rel="stylesheet" href="../../Recursos/css/Dashboard_publico.css">
 </head>
 
 <body>
@@ -30,74 +30,57 @@
     <main>
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
+        <!-- Formulario de búsqueda -->
         <div class="row">
-            <!-- Formulario de búsqueda -->
             <form class="col-sm-12 col-md-6" id="searchForm">
                 <div class="row">
                     <div class="col-6">
                         <input type="search" class="form-control" name="search" placeholder="Buscar" required>
                     </div>
                     <div class="col-6">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-success  me-2 mb-2 mb-sm-2">
                             <i class="bi bi-search"></i>
                         </button>
-                        <button type="reset" class="btn btn-secondary" onclick="fillTable()">
+                        <button type="reset" class="btn btn-secondary  me-2 mb-2 mb-sm-2" onclick="fillTable()">
                             <i class="bi bi-x-square-fill"></i>
                         </button>
                     </div>
                 </div>
             </form>
+            <br>
+            <br>
+            <div class="col-12 col-sm-auto ms-auto">
+                <!-- Botón para agregar un nuevo producto -->
+                <button type="button" class="btn btn-primary me-2 mb-2 mb-sm-0" onclick="openCreate()">
+                    <i class="bi bi-plus-square-fill"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Tabla para mostrar los registros de reservas -->
+        <!-- Tabla para mostrar los registros de productos -->
         <table class="table table-hover">
             <!-- Encabezado de la tabla -->
             <thead>
                 <tr>
                     <!-- Cantidad de registros encontrados -->
-                    <td colspan="8" id="rowsFound"></td>
+                    <td colspan="5" id="rowsFound"></td>
                 </tr>
                 <!-- Títulos de las columnas -->
                 <tr>
-                    <th>Nombre del cliente</th>
-                    <th>DUI</th>
-                    <th>Fecha de reserva</th>
+                    <th>Nombre</th>
+                    <th>Fecha Reserva</th>
                     <th>Departamento</th>
                     <th>Municipio</th>
                     <th>Distrito</th>
-                    <th>Estado de la reserva</th>
-                    <th>Acciones</th>
+                    <th>Estado de la Reserva</th>
+                    <th>Acciones</th>   
                 </tr>
             </thead>
             <!-- Cuerpo de la tabla -->
             <tbody id="tableBody"></tbody>
         </table>
 
-         <!--
-         <table class="table table-hover">
-            Encabezado de la tabla
-            <thead>
-                <tr>
-                    
-                    <td colspan="8" id="rowsFounds"></td>
-                </tr>
-               
-                <tr>
-                    <th>Nombre del cliente</th>
-                    <th>DUI</th>
-                    <th>Fecha de reserva</th>
-                    <th>Departamento</th>
-                    <th>Municipio</th>
-                    <th>Distrito</th>
-                    <th>Estado de la reserva</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            
-            <tbody id="tableBodys"></tbody>
-        </table>-->
-
-        <!-- Componente Modal para guardar una reserva -->
+        <!-- Modal para guardar un nuevo producto -->
         <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -106,91 +89,124 @@
                         <h1 class="modal-title fs-5" id="modalTitle"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para guardar una reserva -->
+                    <!-- Formulario para guardar un nuevo producto 
                     <form id="saveForm">
                         <div class="modal-body row g-3">
-                            <!-- Campo oculto para el ID de la reserva -->
-                            <input type="hidden" id="idReserva" name="idReserva">
-                            <!-- Campos de información de la reserva -->
+                             Campo oculto para el ID del producto 
+                            <input type="hidden" id="idProducto" name="idProducto">
+                             Campo para la imagen del producto 
                             <div class="col-sm-12 col-md-6">
-                                <label for="NomClien" class="form-label">Nombre del cliente</label>
-                                <input id="NomClien" type="text" name="NomClien" class="form-control" required readonly>
+                                <label for="ImagenP" class="form-label">Imagen del producto</label>
+                                <input id="ImagenP" type="file" name="ImagenP" class="form-control" required>
+                            </div>
+                            Campos para los datos del producto 
+                            <div class="col-sm-12 col-md-6">
+                                <label for="nombreP" class="form-label">Nombre del producto</label>
+                                <input id="nombreP" type="text" name="nombreP" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="TEL" class="form-label">Teléfono del cliente</label>
-                                <input id="TEL" type="text" name="TEL" class="form-control" required readonly>
+                                <label for="Marca" class="form-label">Marca</label>
+                                <select id="Marca" type="text" name="Marca" class="form-control" required></select>
+
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="FechReserva" class="form-label">Fecha de reserva</label>
-                                <input id="FechReserva" type="datetime" name="FechReserva" class="form-control" required
-                                    readonly>
+                                <label for="Categoria" class="form-label">Categoria</label>
+                                <select id="Categoria" type="text" name="Categoria" class="form-control"
+                                    required></select>
                             </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Produc" class="form-label">Productos</label>
-                                <input id="Produc" type="text" name="Produc" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Materi" class="form-label">Material</label>
-                                <input id="Materi" type="text" name="Materi" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="COL" class="form-label">Color</label>
-                                <input id="COL" type="text" name="COL" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Tallas" class="form-label">Talla</label>
-                                <input id="Tallas" type="text" name="Tallas" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="MARCA" class="form-label">Marca</label>
-                                <input id="MARCA" type="text" name="MARCA" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Cant" class="form-label">Cantidad</label>
-                                <input id="Cant" type="number" name="Cant" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Precio" class="form-label">Precio total de productos precio normal</label>
-                                <input id="Precio" type="number" name="Precio" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Descu" class="form-label">Descuento</label>
-                                <input id="Descu" type="number" name="Descu" class="form-control" required readonly>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Descuentos" class="form-label">Precio de productos aplicado el
-                                    descuento</label>
-                                <input id="Descuentos" type="number" name="Descuentos" class="form-control" required
-                                    readonly>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            Botón para guardar el producto -->
+                            <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+    </main>
 
-        <!-- Componente Modal para actualizar el estado de la reserva -->
+    <main>
+        <!-- Modal para guardar un nuevo producto -->
         <div class="modal fade" id="saveModalS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalTitleS" aria-hidden="true">
+            aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="modalTitleS"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para actualizar el estado de la reserva -->
-                    <form id="saveForms">
+                    <!-- Formulario para guardar un nuevo producto -->
+                    <form id="saveFormS">
                         <div class="modal-body row g-3">
-                            <!-- Campo oculto para el ID de la reserva -->
-                            <input type="hidden" id="idReservas" name="idReservas">
-                            <!-- Campo para seleccionar el estado del pedido -->
+                            <input type="hidden" id="idProducto1" name="idProducto1">
+                            <input type="hidden" id="idProsub" name="idProsub">
+                            <!-- Campo para la imagen del producto -->
                             <div class="col-sm-12 col-md-6">
-                                <label for="EstadoP" class="form-label">Estado del pedido</label>
-                                <select id="EstadoP" type="text" name="EstadoP" class="form-control" required></select>
+                                <label for="ImagenPs" class="form-label">Imagen del producto</label>
+                                <input id="ImagenPs" type="file" name="ImagenPs" class="form-control" required>
+                            </div>
+                            <!-- Campos para los datos del producto -->
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Name" class="form-label">Producto</label>
+                                <input id="Name" type="text" name="Name" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="PrecioP" class="form-label">Precio</label>
+                                <input id="PrecioP" type="number" name="PrecioP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Exist" class="form-label">Existencia</label>
+                                <input id="Exist" type="number" name="Exist" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Descrp" class="form-label">Descripción</label>
+                                <input id="Descrp" type="text" name="Descrp" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="MemoriaP" class="form-label">Almacenamiento</label>
+                                <input id="MemoriaP" type="text" name="MemoriaP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="RamP" class="form-label">Ram</label>
+                                <input id="RamP" type="text" name="RamP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="TamañoP" class="form-label">Tamaño de la pantalla</label>
+                                <input id="TamañoP" type="text" name="TamañoP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CamP" class="form-label">Camara Trasera</label>
+                                <input id="CamP" type="text" name="CamP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="CamsP" class="form-label">Camara Frontal</label>
+                                <input id="CamsP" type="text" name="CamsP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="SisP" class="form-label">Sistema Operativo</label>
+                                <input id="SisP" type="text" name="SisP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="SistP" class="form-label">Procesador</label>
+                                <input id="SistP" type="text" name="SistP" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Oferta" class="form-label">Descuento</label>
+                                <select id="Oferta" type="text" name="Oferta" class="form-control"></select>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Marcas" class="form-label">Marca</label>
+                                <select id="Marcas" type="text" name="Marcas" class="form-control" required></select>
+
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="Categorias" class="form-label">Categoria</label>
+                                <select id="Categorias" type="text" name="Categorias" class="form-control"
+                                    required></select>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <!-- Botón para guardar el cambio -->
+                            <!-- Botón para guardar el producto -->
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
@@ -202,10 +218,11 @@
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
     <!-- SweetAlert JavaScript -->
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
+
     <!-- Controladores JavaScript -->
     <script src="../../controllers/utils/admin.js"></script>
     <script src="../../controllers/utils/components.js"></script>
-    <script src="../../controllers/admin/reserva.js"></script> <!-- Controladores JavaScript -->
+    <script src="../../controllers/admin/reserva.js"></script>
 </body>
 
 </html>
