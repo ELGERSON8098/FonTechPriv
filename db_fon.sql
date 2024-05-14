@@ -15,18 +15,6 @@ CREATE TABLE tb_usuarios (
   CONSTRAINT uc_correo UNIQUE (correo)
 );
 
-INSERT INTO tb_usuarios (id_usuario, nombre, usuario, correo, clave) VALUES
-(1, 'Alejandro', 'dikei1', 'af111111@gmail.com' , '123456789'),
-(2, 'Alejandro', 'dikei2', 'af222222@gmail.com' , '123456789'),
-(3, 'Alejandro', 'dikei3', 'af333333@gmail.com' , '123456789'),
-(4, 'Alejandro', 'dikei4', 'af444444@gmail.com' , '123456789'),
-(5, 'Alejandro', 'dikei5', 'af555555@gmail.com' , '123456789'),
-(6, 'Alejandro', 'dikei6', 'af666666@gmail.com' , '123456789'),
-(7, 'Alejandro', 'dikei7', 'af777777@gmail.com' , '123456789'),
-(8, 'Alejandro', 'dikei8', 'af888888@gmail.com' , '123456789'),
-(9, 'Alejandro', 'dikei9', 'af999999@gmail.com' , '123456789'),
-(10, 'Alejandro', 'dikei10', 'af101010@gmail.com' , '123456789');
-
 CREATE TABLE tb_departamentos (
   id_departamento INT UNSIGNED AUTO_INCREMENT NOT NULL,
   departamento VARCHAR(1000) NOT NULL,
@@ -164,7 +152,7 @@ CREATE TABLE tb_reservas (
   PRIMARY KEY (id_reserva) -- Asegurando que id_reserva sea una clave primaria
 );
 
-select * from tb_reservas;
+
 	
 
 CREATE TABLE tb_detalles_reservas (
@@ -180,5 +168,3 @@ CREATE TABLE tb_detalles_reservas (
   CONSTRAINT ck_cantidad  CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
-
-select * from tb_detalles_reservas;
