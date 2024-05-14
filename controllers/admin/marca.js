@@ -11,7 +11,7 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_Marca = document.getElementById('idMarca'),
-    NOMBRE_Marca = document.getElementById('nombreMarca');
+    NOMBRE_Marca = document.getElementById('nombreMARCA');
 
 // Se establece el título de la página web.
 document.querySelector('title').textContent = 'Marcas';

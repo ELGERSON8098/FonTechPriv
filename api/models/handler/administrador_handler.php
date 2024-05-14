@@ -107,7 +107,7 @@ class AdministradorHandler
     public function readOne()
     {
         // Consultar un administrador específico en la tabla tb_admins
-        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador, clave_administrador, id_nivel_usuario
+        $sql = 'SELECT id_administrador, nombre_administrador, usuario_administrador, correo_administrador, clave_administrador
                 FROM tb_admins
                 WHERE id_administrador = ?';
         $params = array($this->id);

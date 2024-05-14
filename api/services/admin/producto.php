@@ -108,6 +108,7 @@ if (isset($_GET['action'])) {
                 } elseif ($result['dataset'] = $producto->readOneS()) {
                     $result['status'] = 1;
                 } else {
+                    //$result['status'] = 2;
                     $result['error'] = 'Producto inexistente';
                 }
                 break;
