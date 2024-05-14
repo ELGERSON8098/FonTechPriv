@@ -51,9 +51,9 @@ class UsuariosHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios
-                SET nombre = ?, usuario = ?, correo = ?, clave = ?, 
+                SET nombre = ?, usuario = ?, correo = ?
                 WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->alias, $this->correo, $this->clave,  $this->id);
+        $params = array($this->nombre, $this->alias, $this->correo, $this->id);
         return Database::executeRow($sql, $params);
     }
     

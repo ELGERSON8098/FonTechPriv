@@ -46,10 +46,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$usuariosC->setNombre($_POST['nombreUsuarioC']) or
                     !$usuariosC->setAlias($_POST['aliasUsuarioC']) or
-                    !$usuariosC->setCorreo($_POST['correoUsuarioC']) or
-                    !$usuariosC->setClave($_POST['claveUsuarioC']) or
-                    !$usuariosC->setTelefono($_POST['TelUsuarioC']) or
-                    !$usuariosC->setDUI($_POST['duiUsuarioC'])
+                    !$usuariosC->setCorreo($_POST['correoUsuarioC'])              
                 ) {
                     $result['error'] = $usuariosC->getDataError();
                 } elseif ($usuariosC->updateRow()) {
