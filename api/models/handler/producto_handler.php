@@ -173,33 +173,33 @@ public function readFilename()
     public function readOneS()
     {
         $sql = 'SELECT 
-            dp.id_detalle_producto,
-            dp.id_producto,
-            dp.id_oferta,
-            dp.precio,
-            dp.existencias,
-            dp.descripcion,
-            dp.capacidad_memoria_interna_celular,
-            dp.ram_celular,
-            dp.pantalla_tamaño,
-            dp.camara_trasera_celular,
-            dp.sistema_operativo_celular,
-            dp.camara_frontal_celular,
-            dp.procesador_celular,
-            p.nombre_producto,
-            m.marca,
-            c.nombre_categoria,
-            p.imagen
-        FROM 
-            tb_detalles_productos AS dp
-        INNER JOIN 
-            tb_productos AS p ON dp.id_producto = p.id_producto
-        INNER JOIN 
-            tb_marcas AS m ON p.id_marca = m.id_marca
-        INNER JOIN 
-            tb_categorias AS c ON p.id_categoria = c.id_categoria
-        WHERE 
-            dp.id_detalle_producto = ?';
+        dp.id_detalle_producto,
+        dp.id_producto,
+        dp.id_oferta,
+        dp.precio,
+        dp.existencias,
+        dp.descripcion,
+        dp.capacidad_memoria_interna_celular,
+        dp.ram_celular,
+        dp.pantalla_tamaño,
+        dp.camara_trasera_celular,
+        dp.sistema_operativo_celular,
+        dp.camara_frontal_celular,
+        dp.procesador_celular,
+        p.nombre_producto,
+        m.marca,
+        c.nombre_categoria,
+        p.imagen
+      FROM 
+        tb_detalles_productos AS dp
+      INNER JOIN 
+        tb_productos AS p ON dp.id_producto = p.id_producto
+      INNER JOIN 
+        tb_marcas AS m ON p.id_marca = m.id_marca
+      INNER JOIN 
+        tb_categorias AS c ON p.id_categoria = c.id_categoria
+      WHERE 
+        dp.id_producto = ?';
     
         $params = array($this->id_producto);
     

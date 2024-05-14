@@ -120,18 +120,19 @@ const fillTable = async (form = null) => {
     const DATA = await fetchData(PRODUCTO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        DATA.dataset.forEach(row => {
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += `
+        for (const row of DATA.dataset) {
+            const FORM2 = new FormData();
+            FORM2.append('idProsub', row.id_producto);
+            const DATA2 = await fetchData(PRODUCTO_API, 'readOne', FORM2);
+            if (DATA2.status) {
+                TABLE_BODY.innerHTML += `
                 <tr>
                 <td><img src="${SERVER_URL}images/categorias/${row.imagen}" height="50"></td>
                     <td>${row.nombre_producto}</td>
                     <td>${row.marca}</td>
                     <td>${row.nombre_categoria}</td>
                     <td>
-                        <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openCREATES(${row.id_producto}, '${row.nombre_producto}')">
-                            <i class="bi bi-plus-circle-fill"></i>
-                        </button>
+                        
                         <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_producto})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
@@ -141,8 +142,28 @@ const fillTable = async (form = null) => {
                     </td>
                 </tr>
             `;
-        });
-        // Se muestra un mensaje de acuerdo con el resultado.
+            } else {
+                TABLE_BODY.innerHTML += `
+                <tr>
+                <td><img src="${SERVER_URL}images/categorias/${row.imagen}" height="50"></td>
+                    <td>${row.nombre_producto}</td>
+                    <td>${row.marca}</td>
+                    <td>${row.nombre_categoria}</td>
+                    <td>
+                        <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openCREATES(${row.id_producto}, '${row.nombre_producto}')">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </button>
+
+                        </button>
+                        <button type="button" class="btn btn-danger me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_producto})">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
+                    </td>
+                </tr>
+            `;
+            }
+        }
+            
         ROWS_FOUND.textContent = DATA.message;
     } else {
         sweetAlert(4, DATA.error, true);
@@ -199,6 +220,10 @@ const openUpdate = async (id) => {
         SAVE_FORMS.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
+        NOMBRE_PRODUCTOS.disabled = false;
+        IMAGEN_PRODUCTOS.disabled = false;
+        CATEGORIAS_PRODUCTOS.disabled = false;
+        MARCAS_PRODUCTOS.disabled = false;
         ID_PRODUCTOS1.value = ROW.id_producto;
         NOMBRE_PRODUCTOS.value = ROW.nombre_producto;
         PRECIO_PRODUCTO.value = ROW.precio;
