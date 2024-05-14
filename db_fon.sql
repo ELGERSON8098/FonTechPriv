@@ -15,6 +15,18 @@ CREATE TABLE tb_usuarios (
   CONSTRAINT uc_correo UNIQUE (correo)
 );
 
+INSERT INTO tb_usuarios (id_usuario, nombre, usuario, correo, clave) VALUES
+(1, 'Alejandro', 'dikei1', 'af111111@gmail.com' , '123456789'),
+(2, 'Alejandro', 'dikei2', 'af222222@gmail.com' , '123456789'),
+(3, 'Alejandro', 'dikei3', 'af333333@gmail.com' , '123456789'),
+(4, 'Alejandro', 'dikei4', 'af444444@gmail.com' , '123456789'),
+(5, 'Alejandro', 'dikei5', 'af555555@gmail.com' , '123456789'),
+(6, 'Alejandro', 'dikei6', 'af666666@gmail.com' , '123456789'),
+(7, 'Alejandro', 'dikei7', 'af777777@gmail.com' , '123456789'),
+(8, 'Alejandro', 'dikei8', 'af888888@gmail.com' , '123456789'),
+(9, 'Alejandro', 'dikei9', 'af999999@gmail.com' , '123456789'),
+(10, 'Alejandro', 'dikei10', 'af101010@gmail.com' , '123456789');
+
 CREATE TABLE tb_departamentos (
   id_departamento INT UNSIGNED AUTO_INCREMENT NOT NULL,
   departamento VARCHAR(1000) NOT NULL,
@@ -59,12 +71,8 @@ INSERT INTO tb_distritos (distrito, id_municipio) VALUES
 ('Distrito 5', 5),
 ('Distrito 6', 6);
 
-UPDATE tb_distritos AS d
-                INNER JOIN tb_municipios AS m ON d.id_municipio = m.id_municipio
-                INNER JOIN tb_departamentos AS depto ON m.id_departamento = depto.id_departamento
-                SET d.distrito = 1, m.municipio = 1, m.id_departamento = 1
-                WHERE d.id_distrito = 1;
 
+select * from tb_distritos;
 
 
 
@@ -136,36 +144,6 @@ CREATE TABLE tb_detalles_productos (
   CONSTRAINT ck_existencias  CHECK (existencias >= 0)
 );
 
-SELECT 
-    p.id_producto,
-    p.nombre_producto,
-    m.marca,
-    c.nombre_categoria,
-    dp.precio,
-    dp.existencias,
-    dp.descripcion AS descripcion_producto,
-    dp.capacidad_memoria_interna_celular,
-    dp.ram_celular,
-    dp.pantalla_tamaño,
-    dp.camara_trasera_celular,
-    dp.sistema_operativo_celular,
-    dp.camara_frontal_celular,
-    dp.procesador_celular,
-    o.id_oferta,
-    o.nombre_descuento,
-    o.descripcion AS descripcion_oferta,
-    o.valor AS valor_descuento
-FROM 
-    tb_productos p
-INNER JOIN 
-    tb_marcas m ON p.id_marca = m.id_marca
-INNER JOIN 
-    tb_categorias c ON p.id_categoria = c.id_categoria
-INNER JOIN 
-    tb_detalles_productos dp ON p.id_producto = dp.id_producto
-INNER JOIN 
-    tb_ofertas o ON dp.id_oferta = o.id_oferta;
-
 
 CREATE TABLE tb_comentarios (
   id_comentario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -181,10 +159,13 @@ CREATE TABLE tb_reservas (
   fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL, 
   estado_reserva ENUM ('Aceptado', 'Pendiente') NOT NULL,
   id_distrito INT UNSIGNED NOT NULL,
-  PRIMARY KEY (id_reserva),
   CONSTRAINT fk_direcciones FOREIGN KEY (id_distrito) REFERENCES tb_distritos (id_distrito),
-  CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)
+  CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
+  PRIMARY KEY (id_reserva) -- Asegurando que id_reserva sea una clave primaria
 );
+
+select * from tb_reservas;
+	
 
 CREATE TABLE tb_detalles_reservas (
   id_detalle_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -199,3 +180,5 @@ CREATE TABLE tb_detalles_reservas (
   CONSTRAINT ck_cantidad  CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
+
+select * from tb_detalles_reservas;
