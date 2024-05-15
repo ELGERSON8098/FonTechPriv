@@ -190,8 +190,8 @@ const openCreate = () => {
     MODAL_TITLE.textContent = 'Crear producto';
     // Se prepara el formulario.
     SAVE_FORM.reset();
-    fillSelect(PRODUCTO_API, 'readAllS', 'Marca');
-    fillSelect(PRODUCTO_API, 'readAllSS', 'Categoria');
+    fillSelect(PRODUCTO_API, 'readAllSS', 'Marca');
+    fillSelect(PRODUCTO_API, 'readAllS', 'Categoria');
 
 }
 
