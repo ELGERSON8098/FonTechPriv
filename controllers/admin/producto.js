@@ -35,8 +35,9 @@ const SAVE_MODALS = new bootstrap.Modal('#saveModalS'),
     SISTEMA_PRODUCTO = document.getElementById('SisP'),
     PROCESADOR_PRODUCTO = document.getElementById('SistP'),
     DESCUENTO_PRODUCTO = document.getElementById('Oferta'),
-    ID_PRODUCTOS1 = document.getElementById('idProsub');
-
+    ID_PRODUCTOS1 = document.getElementById('idProsub'),
+    ESTADO_PRODUCTO1 = document.getElementById('estadoProducto1'),
+    ESTADO_PRODUCTO2 = document.getElementById('estadoProducto');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -86,6 +87,8 @@ SAVE_FORMS.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Se verifica la acción a realizar.
+    console.log(ID_Modals.value);
+
     (ID_Modals.value) ? action = 'updateRow' : action = 'createRowS';
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(SAVE_FORMS);
@@ -124,13 +127,18 @@ const fillTable = async (form = null) => {
             const FORM2 = new FormData();
             FORM2.append('idProsub', row.id_producto);
             const DATA2 = await fetchData(PRODUCTO_API, 'readOne', FORM2);
+            console.log(row.estado_producto);
+            icon = (parseInt(row.estado_producto) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
+
             if (DATA2.status) {
+
                 TABLE_BODY.innerHTML += `
                 <tr>
-                <td><img src="${SERVER_URL}images/categorias/${row.imagen}" height="50"></td>
+                <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
                     <td>${row.nombre_producto}</td>
                     <td>${row.marca}</td>
                     <td>${row.nombre_categoria}</td>
+                    <td><i class="${icon}"></i></td>
                     <td>
                         
                         <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_producto})">
@@ -145,10 +153,11 @@ const fillTable = async (form = null) => {
             } else {
                 TABLE_BODY.innerHTML += `
                 <tr>
-                <td><img src="${SERVER_URL}images/categorias/${row.imagen}" height="50"></td>
+                <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
                     <td>${row.nombre_producto}</td>
                     <td>${row.marca}</td>
                     <td>${row.nombre_categoria}</td>
+                    <td><i class="${icon}"></i></td>
                     <td>
                         <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openCREATES(${row.id_producto}, '${row.nombre_producto}')">
                             <i class="bi bi-plus-circle-fill"></i>
@@ -183,6 +192,7 @@ const openCreate = () => {
     SAVE_FORM.reset();
     fillSelect(PRODUCTO_API, 'readAllS', 'Marca');
     fillSelect(PRODUCTO_API, 'readAllSS', 'Categoria');
+
 }
 
 const openCREATES = (id, nombre) => {
@@ -224,6 +234,7 @@ const openUpdate = async (id) => {
         IMAGEN_PRODUCTOS.disabled = false;
         CATEGORIAS_PRODUCTOS.disabled = false;
         MARCAS_PRODUCTOS.disabled = false;
+        ID_Modals.value = ROW.id_detalle_producto;
         ID_PRODUCTOS1.value = ROW.id_producto;
         NOMBRE_PRODUCTOS.value = ROW.nombre_producto;
         PRECIO_PRODUCTO.value = ROW.precio;
@@ -236,9 +247,10 @@ const openUpdate = async (id) => {
         CAMARA_FRONTAL_PRODUCTO.value = ROW.camara_frontal_celular;
         SISTEMA_PRODUCTO.value = ROW.sistema_operativo_celular;
         PROCESADOR_PRODUCTO.value = ROW.procesador_celular;
-        fillSelect(PRODUCTO_API, 'readAllS', 'Marcas',  parseInt(ROW.id_marca));
-        fillSelect(PRODUCTO_API, 'readAllSS', 'Categorias', parseInt(ROW.id_categoria));
-        fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', parseInt(ROW.id_oferta));
+        ESTADO_PRODUCTO2.checked = parseInt(ROW.estado_producto);
+        fillSelect(PRODUCTO_API, 'readAllS', 'Marcas',  ROW.id_marca);
+        fillSelect(PRODUCTO_API, 'readAllSS', 'Categorias', ROW.id_categoria);
+        fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', ROW.id_oferta);
     } else {
         sweetAlert(2, DATA.error, false);
     }

@@ -28,7 +28,8 @@ class productoHandler
     protected $camara_frontal_celular = null;
     protected $procesador_celular = null;
     protected $id_detalle_producto = null;
-    const RUTA_IMAGEN = '../../images/categorias/';
+    protected $estado = null;
+    const RUTA_IMAGEN = '../../images/productos/';
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -47,9 +48,9 @@ class productoHandler
 
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_productos (nombre_producto, id_marca, id_categoria, imagen)
-                VALUES (?, ?, ?, ?)';
-        $params = array($this->nombre_producto, $this->id_marca, $this->id_categoria, $this->imagen);
+        $sql = 'INSERT INTO tb_productos (nombre_producto, id_marca, id_categoria, imagen, estado_producto)
+                VALUES (?, ?, ?, ?, ?)';
+        $params = array($this->nombre_producto, $this->id_marca, $this->id_categoria, $this->imagen, $this->estado);
         return Database::executeRow($sql, $params);
     }
 
@@ -89,12 +90,13 @@ class productoHandler
     
     public function readAll()
     {
-        $sql = 'SELECT 
+        $sql = /*'    SELECT * FROM tb_productos'*/'SELECT 
             p.id_producto,
             p.nombre_producto,
             m.marca,
             c.nombre_categoria,
-            p.imagen
+            p.imagen,
+            p.estado_producto
         FROM 
             tb_productos p
         INNER JOIN 
@@ -142,7 +144,7 @@ public function readFilename()
 {
     $sql = 'SELECT imagen
             FROM tb_productos
-            WHERE id_categoria = ?';
+            WHERE id_producto = ?';
     $params = array($this->id_producto);
     return Database::getRow($sql, $params);
 }
@@ -173,38 +175,42 @@ public function readFilename()
     public function readOneS()
     {
         $sql = 'SELECT 
-        dp.id_detalle_producto,
-        dp.id_producto,
-        dp.id_oferta,
-        dp.precio,
-        dp.existencias,
-        dp.descripcion,
-        dp.capacidad_memoria_interna_celular,
-        dp.ram_celular,
-        dp.pantalla_tamaño,
-        dp.camara_trasera_celular,
-        dp.sistema_operativo_celular,
-        dp.camara_frontal_celular,
-        dp.procesador_celular,
-        p.nombre_producto,
-        m.marca,
-        c.nombre_categoria,
-        p.imagen
-      FROM 
-        tb_detalles_productos AS dp
-      INNER JOIN 
-        tb_productos AS p ON dp.id_producto = p.id_producto
-      INNER JOIN 
-        tb_marcas AS m ON p.id_marca = m.id_marca
-      INNER JOIN 
-        tb_categorias AS c ON p.id_categoria = c.id_categoria
-      WHERE 
-        dp.id_producto = ?';
+                    dp.id_detalle_producto,
+                    dp.id_producto,
+                    m.id_marca,
+                    c.id_categoria,
+                    dp.id_oferta,
+                    dp.precio,
+                    dp.existencias,
+                    dp.descripcion,
+                    dp.capacidad_memoria_interna_celular,
+                    dp.ram_celular,
+                    dp.pantalla_tamaño,
+                    dp.camara_trasera_celular,
+                    dp.sistema_operativo_celular,
+                    dp.camara_frontal_celular,
+                    dp.procesador_celular,
+                    p.nombre_producto,
+                    m.marca,
+                    c.nombre_categoria,
+                    p.imagen,
+                    p.estado_producto
+                FROM 
+                    tb_detalles_productos AS dp
+                INNER JOIN 
+                    tb_productos AS p ON dp.id_producto = p.id_producto
+                INNER JOIN 
+                    tb_marcas AS m ON p.id_marca = m.id_marca
+                INNER JOIN 
+                    tb_categorias AS c ON p.id_categoria = c.id_categoria
+                WHERE 
+                    dp.id_producto = ?';
     
         $params = array($this->id_producto);
     
         return Database::getRow($sql, $params);
-    }    
+    }
+    
 
 public function updateRow()
 {
@@ -224,8 +230,9 @@ public function updateRow()
                 dp.procesador_celular = ?,
                 p.nombre_producto = ?,
                 p.imagen = ?,
-                p.id_marca = ?,  -- Agregar id_marca
-                p.id_categoria = ?  -- Agregar id_categoria
+                p.id_marca = ?, 
+                p.id_categoria = ? ,
+                p.estado_producto = ?
             WHERE dp.id_detalle_producto = ?';
     
     $params = array(
@@ -245,6 +252,7 @@ public function updateRow()
         $this->imagen,
         $this->id_marca,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
         $this->id_categoria,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
+        $this->estado,
         $this->id_detalle_producto
     );
     

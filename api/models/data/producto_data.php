@@ -26,6 +26,18 @@ class productoData extends productoHandler
         }
     }
 
+    
+    public function setIdD($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->id_detalle_producto = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del producto es incorrecto';
+            return false;
+        }
+    }
+
     public function setImagen($file, $filename = null)
     {
         if (Validator::validateImageFile($file, 1000)) {
@@ -45,8 +57,9 @@ class productoData extends productoHandler
 
     public function setNombre($value, $min = 2, $max = 50)
     {
+        //echo $value;
         if (!Validator::validateAlphanumeric($value)) {
-            $this->data_error = 'El nombre debe ser un valor alfabético';
+            $this->data_error = 'El debe ser un valor alfabético';
             return false;
         } elseif (Validator::validateLength($value, $min, $max)) {
             $this->nombre_producto = $value;
@@ -174,18 +187,19 @@ class productoData extends productoHandler
                 $this->cantidad = $value;
                 return true;
         } else {
-            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1z';
             return false;
         }
     }
 
     public function setCantidad1($value)
+    
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateMoney($value)) {
                 $this->precio = $value;
                 return true;
         } else {
-            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1s';
             return false;
         }
     }
@@ -196,7 +210,7 @@ class productoData extends productoHandler
                 $this->existencias = $value;
                 return true;
         } else {
-            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1a';
             return false;
         }
     }
@@ -207,18 +221,18 @@ class productoData extends productoHandler
                 $this->capacidad_memoria_interna_celular = $value;
                 return true;
         } else {
-            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1x';
             return false;
         }
     }
 
     public function setCantidad4($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateAlphanumeric($value)) {
                 $this->ram_celular = $value;
                 return true;
         } else {
-            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1v';
             return false;
         }
     }
@@ -245,16 +259,28 @@ class productoData extends productoHandler
         }
     }
 
-    public function setCategoria1($value)
+    public function setEstado($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->id_oferta = $value;
+        if (Validator::validateBoolean($value)) {
+            $this->estado = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'Estado incorrecto';
             return false;
         }
     }
+
+    public function setCategoria1($value)
+    {
+        if ($value !== null && !Validator::validateNaturalNumber($value)) {
+            // Si el valor no es NULL y tampoco es un número natural válido, establecer como NULL
+            $this->id_oferta = null;
+            return true; // Opcional: Puedes devolver true para indicar que no hubo error
+        }
+        $this->id_oferta = $value;
+        return true;
+    }
+    
 
     public function setFilename()
     {

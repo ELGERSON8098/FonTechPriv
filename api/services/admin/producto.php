@@ -31,6 +31,7 @@ if (isset($_GET['action'])) {
                     !$producto->setImagen($_FILES['ImagenP']) or
                     !$producto->setNombre($_POST['nombreP']) or
                     !$producto->setCategoria($_POST['Categoria']) or
+                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
                     !$producto->setCategorias($_POST['Marca'])
                 ) {
                     $result['error'] = $producto->getDataError();
@@ -115,9 +116,9 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
+                    !$producto->setIdD($_POST['idProducto1']) or
                     !$producto->setId($_POST['idProsub']) or
-                    !$producto->setImagen($_FILES['ImagenPs']) or
-                    !$producto->setNombre($_POST['nombreP']) or
+                    !$producto->setNombre($_POST['Name']) or
                     !$producto->setCategoria($_POST['Categorias']) or
                     !$producto->setCategorias($_POST['Marcas']) or
                     !$producto->setCantidad1($_POST['PrecioP']) or
@@ -130,16 +131,21 @@ if (isset($_GET['action'])) {
                     !$producto->setNombre4($_POST['CamsP']) or
                     !$producto->setNombre5($_POST['SisP']) or
                     !$producto->setNombre6($_POST['SistP']) or
-                    !$producto->setCategoria1($_POST['Oferta'])
-                ) {
-                    $result['error'] = $producto->getDataError();
-                } elseif ($producto->updateRow()) {
-                    $result['status'] = 1;
-                    $result['message'] = 'El producto modificado correctamente';
-                } else {
-                    $result['error'] = 'Ocurrió un problema al modificar el producto';
-                }
-                break;
+                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
+                    !$producto->setCategoria1($_POST['Oferta'])or
+                    !$producto->setFilename() or
+                    !$producto->setImagen($_FILES['ImagenPs'], $producto->getFilename())
+                    ) {
+                        $result['error'] = $producto->getDataError();
+                    } elseif ($producto->updateRow()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Categoría modificada correctamente';
+                        // Se asigna el estado del archivo después de actualizar.
+                        $result['fileStatus'] = Validator::changeFile($_FILES['ImagenPs'], $producto::RUTA_IMAGEN, $producto->getFilename());
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar la categoría';
+                    }
+                    break;
             case 'deleteRow':
                 if (
                     !$producto->setid($_POST['idProducto'])

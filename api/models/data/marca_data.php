@@ -10,6 +10,7 @@ class marcaData extends marcaHandler
 {
     // Atributo genérico para manejo de errores.
     private $data_error = null;
+    private $filename = null;
 
     /*
      *  Métodos para validar y asignar valores de los atributos.
@@ -49,6 +50,36 @@ class marcaData extends marcaHandler
             return false;
         }
     }
+
+    
+    public function setImagen($file, $filename = null)
+    {
+        if (Validator::validateImageFile($file, 1000)) {
+            $this->imagen = Validator::getFilename();
+            return true;
+        } elseif (Validator::getFileError()) {
+            $this->data_error = Validator::getFileError();
+            return false;
+        } elseif ($filename) {
+            $this->imagen = $filename;
+            return true;
+        } else {
+            $this->imagen = 'default.png';
+            return true;
+        }
+    }
+
+    public function setFilename()
+    {
+        if ($data = $this->readFilename()) {
+            $this->filename = $data['imagen'];
+            return true;
+        } else {
+            $this->data_error = 'Categoría inexistente';
+            return false;
+        }
+    }
+
     
 
 
@@ -56,6 +87,10 @@ class marcaData extends marcaHandler
     public function getDataError()
     {
         return $this->data_error;
+    }
+    public function getFilename()
+    {
+        return $this->filename;
     }
 }
 

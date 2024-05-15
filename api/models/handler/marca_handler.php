@@ -11,6 +11,9 @@ class marcaHandler
      */
     protected $id = null;
     protected $nombre = null;
+    protected $imagen = null;
+
+    const RUTA_IMAGEN = '../../images/marcas/';
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -28,16 +31,26 @@ class marcaHandler
     
     public function createRow()
     {
-        $sql = 'INSERT INTO tb_marcas(marca)
-                VALUES(?)';
-        $params = array($this->nombre);
+        $sql = 'INSERT INTO tb_marcas(marca, imagen)
+                VALUES(?, ?)';
+        $params = array($this->nombre, $this ->imagen);
         return Database::executeRow($sql, $params);
     }
+
+    public function readFilename()
+    {
+        $sql = 'SELECT imagen
+                FROM tb_marcas
+                WHERE id_marca = ?';
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
+    
     
 //Llamar los datos de la base de datos 
     public function readAll()
     {
-        $sql = 'SELECT id_marca, marca
+        $sql = 'SELECT id_marca, marca, imagen
                 FROM tb_marcas';
         return Database::getRows($sql);
     }
