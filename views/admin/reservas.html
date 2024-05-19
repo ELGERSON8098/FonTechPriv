@@ -50,6 +50,8 @@
             <br>
             <br>
             <div class="col-12 col-sm-auto ms-auto">
+                <!-- Botón para agregar un nuevo producto -->
+                
             </div>
         </div>
 
@@ -68,12 +70,24 @@
                     <th>Departamento</th>
                     <th>Municipio</th>
                     <th>Distrito</th>
-                    <th>Estado de la Reserva</th>
-                    <th>Acciones</th>   
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <!-- Cuerpo de la tabla -->
-            <tbody id="tableBody"></tbody>
+            <tbody id="tableBody">
+                <!-- Fila de ejemplo -->
+                <tr>
+                    <td>Ejemplo Producto</td>
+                    <td>2024-05-14</td>
+                    <td>Ejemplo Departamento</td>
+                    <td>Ejemplo Municipio</td>
+                    <td>Ejemplo Distrito</td>
+                    <td>
+                        <!-- Botón de Ver detalles -->
+                        <button class="btn btn-primary" onclick="verDetalles(1)">Ver detalles</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
 
         <!-- Modal para guardar un nuevo producto -->
@@ -85,17 +99,17 @@
                         <h1 class="modal-title fs-5" id="modalTitle"></h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para guardar un nuevo producto 
+                    <!-- Formulario para guardar un nuevo producto -->
                     <form id="saveForm">
                         <div class="modal-body row g-3">
-                             Campo oculto para el ID del producto 
+                            <!-- Campo oculto para el ID del producto -->
                             <input type="hidden" id="idProducto" name="idProducto">
-                             Campo para la imagen del producto 
+                            <!-- Campo para la imagen del producto -->
                             <div class="col-sm-12 col-md-6">
                                 <label for="ImagenP" class="form-label">Imagen del producto</label>
                                 <input id="ImagenP" type="file" name="ImagenP" class="form-control" required>
                             </div>
-                            Campos para los datos del producto 
+                            <!-- Campos para los datos del producto -->
                             <div class="col-sm-12 col-md-6">
                                 <label for="nombreP" class="form-label">Nombre del producto</label>
                                 <input id="nombreP" type="text" name="nombreP" class="form-control" required>
@@ -112,7 +126,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            Botón para guardar el producto -->
+                            <!-- Botón para guardar el producto -->
                             <button type="submit" class="btn btn-primary">Guardar</button>
                         </div>
                     </form>
@@ -219,6 +233,15 @@
     <script src="../../controllers/utils/admin.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/admin/reserva.js"></script>
+
+    <script>
+        // Función para ver detalles del producto
+        function verDetalles(id) {
+            // Aquí puedes implementar la lógica para mostrar los detalles del producto con el ID proporcionado
+            console.log("Detalles del producto con ID:", id);
+        }
+    </script>
 </body>
 
 </html>
+    
