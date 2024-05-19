@@ -112,46 +112,46 @@ const openUpdate = async (id) => {
 
         switch (notaValoracion) {
             case 1:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_off.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Blanca.png'
                 break;
             case 2:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_off.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
                 break;
             case 3:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_off.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
                 break;
             case 4:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_off.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
                 break;
             case 5:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_on.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_on.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
                 break;
             default:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/start_off.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/start_off.png'
+                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Blanca.png'
                 break;
             }
 

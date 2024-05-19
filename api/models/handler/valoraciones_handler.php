@@ -29,12 +29,9 @@ class ValoracionesHandler
         $value = '%' . Validator::getSearchValue() . '%';
         $sql = 'SELECT id_valoracion, nombre_producto, imagen_producto, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion, nombre_cliente, apellido_cliente
                 FROM valoraciones v
-                INNER JOIN detalles_pedidos dp ON v.id_detalle_pedido = dp.id_detalle_pedido
-                INNER JOIN productos p ON dp.id_producto = p.id_producto
-                INNER JOIN pedidos pe ON dp.id_pedido = pe.id_pedido
-                INNER JOIN clientes c ON pe.id_cliente = c.id_cliente
+                INNER JOIN  id_producto dp ON v. id_producto = dp. id_producto
                 WHERE nombre_producto LIKE ?
-                ORDER BY c.nombre_cliente;';
+                ORDER BY c.nombre_producto;';
         $params = array($value);
         return Database::getRows($sql, $params);
     }
@@ -44,11 +41,9 @@ class ValoracionesHandler
     {
         $sql = 'SELECT id_valoracion, nombre_producto, imagen_producto, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion, nombre_cliente, apellido_cliente
                 FROM valoraciones v
-                INNER JOIN detalles_pedidos dp ON v.id_detalle_pedido = dp.id_detalle_pedido
-                INNER JOIN productos p ON dp.id_producto = p.id_producto
-                INNER JOIN pedidos pe ON dp.id_pedido = pe.id_pedido
-                INNER JOIN clientes c ON pe.id_cliente = c.id_cliente
-                ORDER BY nombre_cliente';
+                INNER JOIN  id_producto dp ON v. id_producto = dp. id_producto
+                WHERE nombre_producto LIKE ?
+                ORDER BY c.nombre_producto;';
         return Database::getRows($sql);
     }
 
@@ -57,10 +52,9 @@ class ValoracionesHandler
         $sql = 'SELECT id_valoracion, nombre_producto, imagen_producto, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion, nombre_cliente, apellido_cliente
                 FROM valoraciones v
                 INNER JOIN detalles_pedidos dp ON v.id_detalle_pedido = dp.id_detalle_pedido
-                INNER JOIN productos p ON dp.id_producto = p.id_producto
-                INNER JOIN pedidos pe ON dp.id_pedido = pe.id_pedido
-                INNER JOIN clientes c ON pe.id_cliente = c.id_cliente
-                WHERE id_valoracion = ?';
+                INNER JOIN  id_producto dp ON v. id_producto = dp. id_producto
+                WHERE nombre_producto LIKE ?
+                ORDER BY c.nombre_producto;';
         $params = array($this->idValoracion);
         return Database::getRows($sql, $params);
     }
