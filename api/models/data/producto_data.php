@@ -217,7 +217,7 @@ class productoData extends productoHandler
 
     public function setCantidad3($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
+        if (Validator::validateAlphanumeric($value)) {
                 $this->capacidad_memoria_interna_celular = $value;
                 return true;
         } else {
