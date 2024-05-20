@@ -14,10 +14,6 @@ class ValoracionesHandler
     protected $comentarioValoracion = null;
     protected $fechaValoracion = null;
     protected $estadoValoracion = null;
-    protected $idDetalleedido = null;
-
-    const RUTA_IMAGEN = '../../images/productos/';
-
 
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).

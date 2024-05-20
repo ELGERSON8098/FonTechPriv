@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //Carga el menu en las pantalla
     loadTemplate();
     //Espera a que fillTable termine de ejecutarse, para luego llamar a la funcion initializeDataTable;
-    fillTable().then(initializeDataTable);
+    fillTable();
 })
 
 // Función asincrona para inicializar la instancia de DataTable(Paginacion en las tablas)
@@ -109,46 +109,45 @@ const openUpdate = async (id) => {
 
         switch (notaValoracion) {
             case 1:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrellaBlanca'
                 break;
             case 2:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella'
                 break;
             case 3:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
-                break;
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella'
             case 4:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella'
                 break;
             case 5:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Amarillita.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Amarillita.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella'
                 break;
             default:
-                IMAGEN_ESTRELLA1.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA2.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA3.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA4.src ='../../resources/img/png/Blanca.png'
-                IMAGEN_ESTRELLA5.src ='../../resources/img/png/Blanca.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrellaBlanca'
+                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrellaBlanca'
                 break;
             }
 
@@ -168,13 +167,12 @@ const fillTable = async (form = null, option = null) => {
             TABLE_BODY.innerHTML += `
             <tr>
                 <td class="align-middle">${row.nombre_producto}</td>
-                    <td class="align-middle">${row.nombre_cliente} ${row.apellido_cliente}</td>
                     <td class="align-middle">${row.fecha_valoracion}</td>
                     <td class="align-middle">${row.calificacion_valoracion}/5</td>
-                    <td class="align-middle"><img src="../../resources/img/png/oculto_categorias.png" alt=""></td>
+                    <td class="align-middle"><img src="../../api/images/productos/oculto_categorias.png"></td>
                     <td class="align-middle">
                         <button type="button" class="btn btn-light" data-bs-toggle="modal"
-                        data-bs-target="#infoModal"><img src="../../resources/img/svg/info_icon.svg"
+                        data-bs-target="#infoModal"><img src="../../api/images/productos/informacion.png"
                         width="33px" onclick="openUpdate(${row.id_valoracion})">
                         </button>
                     </td>
@@ -184,7 +182,7 @@ const fillTable = async (form = null, option = null) => {
         });
         ROWS_FOUND.textContent = DATA.message;
     } else {
-        sweetAlert(4, DATA.error, true);
+        sweetAlert(3, DATA.error, true);
     }
  }
 
