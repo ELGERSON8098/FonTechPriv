@@ -129,7 +129,6 @@ const fillTable = async (form = null) => {
             const DATA2 = await fetchData(PRODUCTO_API, 'readOne', FORM2);
             console.log(row.estado_producto);
             icon = (parseInt(row.estado_producto) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
-
             if (DATA2.status) {
 
                 TABLE_BODY.innerHTML += `
@@ -192,7 +191,6 @@ const openCreate = () => {
     SAVE_FORM.reset();
     fillSelect(PRODUCTO_API, 'readAllSS', 'Marca');
     fillSelect(PRODUCTO_API, 'readAllS', 'Categoria');
-
 }
 
 const openCREATES = (id, nombre) => {
@@ -204,6 +202,7 @@ const openCREATES = (id, nombre) => {
     IMAGEN_PRODUCTOS.disabled = true;
     CATEGORIAS_PRODUCTOS.disabled = true;
     MARCAS_PRODUCTOS.disabled = true;
+    ESTADO_PRODUCTO2.disabled = true;
     ID_PRODUCTOS1.value = id;
     NOMBRE_PRODUCTOS.value = nombre;
     //Se prepara el formulario
@@ -234,6 +233,7 @@ const openUpdate = async (id) => {
         IMAGEN_PRODUCTOS.disabled = false;
         CATEGORIAS_PRODUCTOS.disabled = false;
         MARCAS_PRODUCTOS.disabled = false;
+        ESTADO_PRODUCTO2.disabled = false;
         ID_Modals.value = ROW.id_detalle_producto;
         ID_PRODUCTOS1.value = ROW.id_producto;
         NOMBRE_PRODUCTOS.value = ROW.nombre_producto;

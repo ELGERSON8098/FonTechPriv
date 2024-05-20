@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
                     !$producto->setImagen($_FILES['ImagenP']) or
                     !$producto->setNombre($_POST['nombreP']) or
                     !$producto->setCategoria($_POST['Categoria']) or
-                    !$producto->setEstado(isset($_POST['estadoProducto']) ? 1 : 0) or
+                    !$producto->setEstado(isset($_POST['estadoProducto1']) ? 1 : 0) or
                     !$producto->setCategorias($_POST['Marca'])
                 ) {
                     $result['error'] = $producto->getDataError();
