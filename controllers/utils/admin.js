@@ -35,14 +35,6 @@ const loadTemplate = async () => {
                   href="../admin/dashboard.html">
                   <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
               </a>
-      
-              <div class="order-lg-2 nav-btns">
-               <a href="../admin/miperfil.html" class="btn position-relative">
-                 <i class="fa fa-user"></i>
-                  <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
-               </a>
-              </div>
-      
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                   <span class="navbar-toggler-icon"></span>
               </button>
@@ -83,6 +75,15 @@ const loadTemplate = async () => {
                         <li><a class="dropdown-item" href="../admin/distritos.html">Distritos</a></li>
                         </ul>
                     </li>
+                    <div class="order-lg-2 nav-btns">
+                    <a href="../admin/miperfil.html" class="btn position-relative mb-3">
+                    <i class="fa fa-user"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
+                </a>
+                </div>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark small" href="#" onclick="logOut()">Cerrar sesión</a>
+                </li>                     
                   </ul>
               </div>
               </a>

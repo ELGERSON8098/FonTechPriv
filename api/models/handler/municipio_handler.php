@@ -18,10 +18,11 @@ class municipioHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_municipio, municipio, id_departamento
-                FROM tb_municipios
-                WHERE municipio LIKE ?
-                ORDER BY municipio';
+        $sql = 'SELECT m.id_municipio, m.municipio, d.departamento
+                FROM tb_municipios m
+                INNER JOIN tb_departamentos d ON m.id_departamento = d.id_departamento
+                WHERE m.municipio LIKE ?
+                ORDER BY m.municipio';
         $params = array($value);
         return Database::getRows($sql, $params);
     }

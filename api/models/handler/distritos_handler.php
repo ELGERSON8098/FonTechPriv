@@ -19,12 +19,13 @@ class distritoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT m.id_municipio, m.municipio, d.id_departamento
-                FROM tb_municipios m
-                INNER JOIN tb_departamentos d ON m.id_departamento = d.id_departamento
-                WHERE m.municipio LIKE ?
-                ORDER BY m.municipio';
-        $params = array($value);
+        $sql = 'SELECT d.distrito, m.municipio, dp.departamento
+                FROM tb_distritos d
+                INNER JOIN tb_municipios m ON d.id_municipio = m.id_municipio
+                INNER JOIN tb_departamentos dp ON m.id_departamento = dp.id_departamento
+                WHERE d.distrito LIKE ? OR m.municipio LIKE ? OR dp.departamento LIKE ?
+                ORDER BY d.distrito';
+        $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
     
@@ -60,11 +61,8 @@ class distritoHandler
         return Database::getRows($sql);
     }
     
-    public function readMunicipios(){
-
-        $sql = 'SELECT id_municipio, municipio
-        FROM tb_municipios 
-        WHERE id_departamento = ?';
+    public function readMunicipios() {
+        $sql = 'SELECT id_municipio, municipio FROM tb_municipios WHERE id_departamento = ?';
         $params = array($this->Depa);
         return Database::getRows($sql, $params);
     }

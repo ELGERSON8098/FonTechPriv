@@ -37,13 +37,17 @@ class productoHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_producto, nombre_producto, id_marca, id_categoria, imagen
-                FROM tb_productos
-                WHERE nombre_producto LIKE ? 
-                ORDER BY nombre_producto';
+        $sql = 'SELECT p.id_producto, p.nombre_producto, m.marca, c.nombre_categoria, p.imagen, p.estado_producto
+                FROM tb_productos p
+                INNER JOIN tb_marcas m ON p.id_marca = m.id_marca
+                INNER JOIN tb_categorias c ON p.id_categoria = c.id_categoria
+                WHERE p.nombre_producto LIKE ?
+                ORDER BY p.nombre_producto';
         $params = array($value);
         return Database::getRows($sql, $params);
     }
+    
+    
     
 
     public function createRow()

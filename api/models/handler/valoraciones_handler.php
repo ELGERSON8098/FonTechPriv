@@ -15,6 +15,7 @@ class ValoracionesHandler
     protected $fechaValoracion = null;
     protected $estadoValoracion = null;
 
+    
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      * Aunque ahorita solo haré el de agregar cupones
@@ -23,14 +24,15 @@ class ValoracionesHandler
     public function searchRows()
     {
         $value = '%' . Validator::getSearchValue() . '%';
-        $sql = 'SELECT id_valoracion, nombre_producto, imagen_producto, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion
-                FROM valoraciones v
-                INNER JOIN  id_producto dp ON v. id_producto = dp. id_producto
-                WHERE nombre_producto LIKE ?
-                ORDER BY c.nombre_producto;';
+        $sql = 'SELECT v.id_valoracion, p.nombre_producto, p.imagen AS imagen_producto, v.calificacion_valoracion, v.comentario_valoracion, v.fecha_valoracion, v.estado_valoracion
+        FROM tb_valoraciones v
+        INNER JOIN tb_productos p ON v.id_producto = p.id_producto
+        WHERE p.nombre_producto LIKE ?
+        ORDER BY p.id_producto';
         $params = array($value);
         return Database::getRows($sql, $params);
-    }
+    }    
+    
 
     // READ ALL
     public function readAll()
@@ -44,18 +46,17 @@ class ValoracionesHandler
 
     //    Leer un registro de una valoracion
     public function readOne(){
-        $sql = 'SELECT v.id_valoracion, p.nombre_producto, p.imagen, v.calificacion_valoracion, v.comentario_valoracion, v.fecha_valoracion, v.estado_valoracion
+        $sql = 'SELECT v.id_valoracion, p.nombre_producto, p.imagen AS imagen_producto, v.calificacion_valoracion, v.comentario_valoracion, v.fecha_valoracion, v.estado_valoracion
         FROM tb_valoraciones v
         INNER JOIN tb_productos p ON v.id_producto = p.id_producto
-        where id_valoracion = ?
-        ORDER BY p.nombre_producto;';
+        WHERE id_valoracion = ?';
         $params = array($this->idValoracion);
         return Database::getRows($sql, $params);
     }
-
+    
     //    Actualizar una valoracion
     public function updateRow(){
-        $sql = 'UPDATE valoraciones 
+        $sql = 'UPDATE tb_valoraciones 
                 SET estado_valoracion = ?
                 WHERE id_valoracion = ?';
         $params = array(

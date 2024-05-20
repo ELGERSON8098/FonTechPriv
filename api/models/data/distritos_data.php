@@ -19,7 +19,7 @@ class distritoData extends distritoHandler
             $this->id = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la reserva es incorrecto';
+            $this->data_error = 'El identificador del departamento es incorrecto';
             return false;
         }
     }
@@ -44,7 +44,7 @@ class distritoData extends distritoHandler
             $this->Depa = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador del departamento es incorrecto';
             return false;
         }
     }
@@ -55,7 +55,7 @@ class distritoData extends distritoHandler
             $this->Muni = $value;
             return true;
         } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
+            $this->data_error = 'El identificador del municipio es incorrecto';
             return false;
         }
     }

@@ -12,12 +12,12 @@ $result = array('status' => 0, 'message' => null, 'dataset' => null, 'error' => 
 if(isset($_SESSION['idAdministrador']) or true){
     switch($_GET['action']){
         case 'searchRows':
-            if (!Validator::validateSearch($_POST['search'])){
+            if (!Validator::validateSearch($_POST['search'])) {
                 $result['error'] = Validator::getSearchError();
-            } elseif ($result['dataset'] = $valoraciones->searchRows()){
+            } elseif ($result['dataset'] = $valoraciones->searchRows()) {
                 $result['status'] = 1;
                 $result['message'] = 'Existen ' . count($result['dataset']) . ' coincidencias';
-            } else{
+            } else {
                 $result['error'] = 'No hay coincidencias';
             }
             break;
