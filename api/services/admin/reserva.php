@@ -133,3 +133,6 @@ if (isset($_GET['action'])) {
 } else {
     print(json_encode('Recurso no disponible'));
 }
+
+
+// Se imprime el resultado en formato JSON y se retorna al controlador.
