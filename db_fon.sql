@@ -101,7 +101,7 @@ CREATE TABLE tb_detalles_productos (
   ram_celular varchar(50) NOT NULL,
   pantalla_tamaño varchar(50) NOT NULL,
   camara_trasera_celular varchar(50) NOT NULL,
-  sistema_operativo_celular enum('Android','IOS') NOT NULL,
+  sistema_operativo_celular VARCHAR(100) NOT NULL,
   camara_frontal_celular varchar(50) NOT NULL,
   procesador_celular varchar(50) NOT NULL,
   PRIMARY KEY (id_detalle_producto),
