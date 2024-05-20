@@ -129,6 +129,7 @@ const fillTable = async (form = null) => {
             const DATA2 = await fetchData(PRODUCTO_API, 'readOne', FORM2);
             console.log(row.estado_producto);
             icon = (parseInt(row.estado_producto) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
+
             if (DATA2.status) {
 
                 TABLE_BODY.innerHTML += `
@@ -191,6 +192,7 @@ const openCreate = () => {
     SAVE_FORM.reset();
     fillSelect(PRODUCTO_API, 'readAllSS', 'Marca');
     fillSelect(PRODUCTO_API, 'readAllS', 'Categoria');
+
 }
 
 const openCREATES = (id, nombre) => {
@@ -247,10 +249,10 @@ const openUpdate = async (id) => {
         CAMARA_FRONTAL_PRODUCTO.value = ROW.camara_frontal_celular;
         SISTEMA_PRODUCTO.value = ROW.sistema_operativo_celular;
         PROCESADOR_PRODUCTO.value = ROW.procesador_celular;
+        fillSelect(PRODUCTO_API, 'readAllS', 'Marcas',  parseInt(ROW.id_marca));
+        fillSelect(PRODUCTO_API, 'readAllSS', 'Categorias', parseInt(ROW.id_categoria));
+        fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', parseInt(ROW.id_oferta));
         ESTADO_PRODUCTO2.checked = parseInt(ROW.estado_producto);
-        fillSelect(PRODUCTO_API, 'readAllS', 'Marcas',  ROW.id_marca);
-        fillSelect(PRODUCTO_API, 'readAllSS', 'Categorias', ROW.id_categoria);
-        fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', ROW.id_oferta);
     } else {
         sweetAlert(2, DATA.error, false);
     }

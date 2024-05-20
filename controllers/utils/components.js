@@ -80,7 +80,7 @@ const sweetAlert = async (type, text, timer, url = null) => {
 *   Parámetros: filename (nombre del archivo), action (acción a realizar), select (identificador del select en el formulario) y filter (dato opcional para seleccionar una opción o filtrar los datos).
 *   Retorno: ninguno.
 */
-/*const fillSelect = async (filename, action, select, filter = undefined) => {
+const fillSelect = async (filename, action, select, filter = undefined) => {
     // Se verifica si el filtro contiene un objeto para enviar a la API.
     const FORM = (typeof (filter) == 'object') ? filter : null;
     // Petición para obtener los datos.
@@ -108,7 +108,9 @@ const sweetAlert = async (type, text, timer, url = null) => {
     }
     // Se agregan las opciones a la etiqueta select mediante el id.
     document.getElementById(select).innerHTML = content;
-}*/
+}
+
+/*
 const fillSelect = async (filename, action, select, selected = null) => {
     // Petición para obtener los datos.
     const DATA = await fetchData(filename, action);
@@ -134,7 +136,7 @@ const fillSelect = async (filename, action, select, selected = null) => {
     }
     // Se agregan las opciones a la etiqueta select mediante el id.
     document.getElementById(select).innerHTML = content;
-}
+}*/
 
 /*
 *   Función para generar un gráfico de barras verticales.
