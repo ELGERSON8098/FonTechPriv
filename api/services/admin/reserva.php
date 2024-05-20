@@ -75,6 +75,15 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'Reserva inexistentes';
                     }
                     break;
+                    case 'readDetalles':
+                        if (!$reserva->setId($_POST['idReservas'])) {
+                            $result['error'] = $reserva->getDataError();
+                        } elseif ($result['dataset'] = $reserva->readOneS()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['error'] = 'Reserva inexistentes';
+                        }
+                        break;
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (

@@ -65,14 +65,16 @@
                 </tr>
                 <!-- Títulos de las columnas -->
                 <tr>
-                    <th>Nombre</th>
+                    <th>Usuario</th>
                     <th>Fecha Reserva</th>
                     <th>Departamento</th>
                     <th>Municipio</th>
                     <th>Distrito</th>
+                    <th>Estado de la reserva</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
+            <tbody id = "tableBody"></tbody>
         </table>
 
         <!-- Modal para guardar un nuevo producto -->
@@ -85,36 +87,25 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <!-- Formulario para guardar un nuevo producto -->
-                    <form id="saveForm">
-                        <div class="modal-body row g-3">
-                            <!-- Campo oculto para el ID del producto -->
-                            <input type="hidden" id="idProducto" name="idProducto">
-                            <!-- Campo para la imagen del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ImagenP" class="form-label">Imagen del producto</label>
-                                <input id="ImagenP" type="file" name="ImagenP" class="form-control" required>
-                            </div>
-                            <!-- Campos para los datos del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="nombreP" class="form-label">Nombre del producto</label>
-                                <input id="nombreP" type="text" name="nombreP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Marca" class="form-label">Marca</label>
-                                <select id="Marca" type="text" name="Marca" class="form-control" required></select>
-
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Categoria" class="form-label">Categoria</label>
-                                <select id="Categoria" type="text" name="Categoria" class="form-control"
-                                    required></select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <!-- Botón para guardar el producto -->
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
+                    <table class="table table-hover">
+                        <!-- Encabezado de la tabla -->
+                        <thead>
+                            <tr>
+                                <!-- Cantidad de registros encontrados -->
+                                <td colspan="5" id="rowsFound"></td>
+                            </tr>
+                            <!-- Títulos de las columnas -->
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Fecha Reserva</th>
+                                <th>Departamento</th>
+                                <th>Municipio</th>
+                                <th>Distrito</th>
+                                <th>Estado de la reserva</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div>
@@ -122,88 +113,96 @@
 
     <main>
         <!-- Modal para guardar un nuevo producto -->
+        <!-- Componente Modal para guardar un registro -->
         <div class="modal fade" id="saveModalS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="modalTitle" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalTitleS"></h1>
+                        <!-- Título del modal -->
+                        <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                        <!-- Botón de cierre del modal -->
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <!-- Formulario para guardar un nuevo producto -->
-                    <form id="saveFormS">
-                        <div class="modal-body row g-3">
-                            <input type="hidden" id="idProducto1" name="idProducto1">
-                            <input type="hidden" id="idProsub" name="idProsub">
-                            <!-- Campo para la imagen del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ImagenPs" class="form-label">Imagen del producto</label>
-                                <input id="ImagenPs" type="file" name="ImagenPs" class="form-control" required>
-                            </div>
-                            <!-- Campos para los datos del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Name" class="form-label">Producto</label>
-                                <input id="Name" type="text" name="Name" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="PrecioP" class="form-label">Precio</label>
-                                <input id="PrecioP" type="number" name="PrecioP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Exist" class="form-label">Existencia</label>
-                                <input id="Exist" type="number" name="Exist" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Descrp" class="form-label">Descripción</label>
-                                <input id="Descrp" type="text" name="Descrp" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="MemoriaP" class="form-label">Almacenamiento</label>
-                                <input id="MemoriaP" type="text" name="MemoriaP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="RamP" class="form-label">Ram</label>
-                                <input id="RamP" type="text" name="RamP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="TamañoP" class="form-label">Tamaño de la pantalla</label>
-                                <input id="TamañoP" type="text" name="TamañoP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="CamP" class="form-label">Camara Trasera</label>
-                                <input id="CamP" type="text" name="CamP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="CamsP" class="form-label">Camara Frontal</label>
-                                <input id="CamsP" type="text" name="CamsP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="SisP" class="form-label">Sistema Operativo</label>
-                                <input id="SisP" type="text" name="SisP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="SistP" class="form-label">Procesador</label>
-                                <input id="SistP" type="text" name="SistP" class="form-control" required>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Oferta" class="form-label">Descuento</label>
-                                <select id="Oferta" type="text" name="Oferta" class="form-control"></select>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Marcas" class="form-label">Marca</label>
-                                <select id="Marcas" type="text" name="Marcas" class="form-control" required></select>
+                    <!-- Formulario para crear o actualizar un registro -->
+                    <form id="saveForm">
+                        <div class="modal-body row g-4">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idReserva" name="idReserva">
 
+                            <!-- Campos del formulario -->
+                            <div class="col-sm-12 col-md-6">
+                                <label for="clientePedido" class="form-label">Usuario</label>
+                                <input id="clientePedido" type="text" name="clientePedido" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="clientePedido" class="form-label">Usuario</label>
+                                <input id="clientePedido" type="text" name="clientePedido" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fechaPedido" class="form-label">Producto</label>
+                                <input id="fechaPedido" type="text" name="fechaPedido" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
-                                <label for="Categorias" class="form-label">Categoria</label>
-                                <select id="Categorias" type="text" name="Categorias" class="form-control"
-                                    required></select>
+                                <label for="formaPago" class="form-label">Precio</label>
+                                <input id="formaPago" type="text" name="formaPago" class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="estadoPedido" class="form-label">Estado</label>
+                                <select id="estadoPedido" name="estadoPedido" class="form-select" required>
+                                    <option class="fs-5 py-2" value="Pendiente">Pendiente</option>
+                                    <option class="fs-5 py-2" value="Aceptado">Aceptado</option>
+                                </select>
+                            </div>
+                            <!-- Pie del modal sin botones de acción -->
+                            <div class="modal-footer border-0">
+                                <button type="submit" class="btn" style="background-color: #CCC8AA;">Guardar</button>
+                            </div>
+                            <!-- Subtabla para mostrar los detalles del pedido -->
+                            <div id="subtable" class="mt-0">
+                                <!-- TABLA DE MODELO TALLAS -->
+                                <div class="modal-header border-0">
+                                    <h1 class="modal-title fs-5" id="submodalTitle"></h1>
+                                </div>
+
+                                <!-- Formulario de búsqueda para la subtabla -->
+                                <form class="col-sm-12 col-md-6" id="searchsubForm">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input id="subinputsearch" type="search" class="form-control" name="search"
+                                                placeholder="Nombre del modelo">
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <!-- Subtabla para mostrar los detalles del pedido -->
+                                <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
+                                    <table id="subheaderT" class="table table-hover ">
+                                        <!-- Cabeza de la tabla para mostrar la cantidad de registros y los títulos de las columnas -->
+                                        <thead>
+                                            <tr>
+                                                <td colspan="5" id="subrowsFound"></td>
+                                            </tr>
+                                            <tr>
+                                                <th>MODELO</th>
+                                                <th>MARCA</th>
+                                                <th>TALLA</th>
+                                                <th>PRECIO</th>
+                                                <th>CANTIDAD</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- Cuerpo de la tabla para mostrar un registro por fila -->
+                                        <tbody id="subtableBody"></tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <!-- Botón para guardar el producto -->
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
+
+
                     </form>
                 </div>
             </div>
@@ -218,14 +217,6 @@
     <script src="../../controllers/utils/admin.js"></script>
     <script src="../../controllers/utils/components.js"></script>
     <script src="../../controllers/admin/reserva.js"></script>
-
-    <script>
-        // Función para ver detalles del producto
-        function verDetalles(id) {
-            // Aquí puedes implementar la lógica para mostrar los detalles del producto con el ID proporcionado
-            console.log("Detalles del producto con ID:", id);
-        }
-    </script>
 </body>
 
 </html>

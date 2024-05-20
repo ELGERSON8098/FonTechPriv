@@ -9,7 +9,7 @@ class reservaHandler
     /*
      *  Declaración de atributos para el manejo de datos.
      */
-    protected $id = null;
+    protected $id_reserva = null;
     protected $nombre = null;
     protected $apellido = null;
     protected $correo = null;
@@ -146,6 +146,14 @@ class reservaHandler
                 tb_municipios m ON d.id_municipio = m.id_municipio
             INNER JOIN 
                 tb_departamentos dept ON m.id_departamento = dept.id_departamento';
+    return Database::getRows($sql);
+}
+
+public function readDetalles()
+{
+    $sql = 'select * from tb_detalles_reservas
+    where id_reserva=?;';
+    $params = array($this->id);
     return Database::getRows($sql);
 }
 

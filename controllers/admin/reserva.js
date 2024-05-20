@@ -12,24 +12,21 @@ MODAL_TITLE = document.getElementById('modalTitle');
 const SAVE_MODALS = new bootstrap.Modal('#saveModalS'),
 MODAL_TITLES = document.getElementById('modalTitleS');
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORMS = document.getElementById('saveForms'),
-ID_ESTADO = document.getElementById('idReservas');
-COMBOC_RESERVA = document.getElementById('EstadoP');
+const SAVE_FORMS = document.getElementById('saveForm'),
+ID_RESERVA = document.getElementById('idReserva'),
+USUARIO_RESERVA = document.getElementById('usuario'),
+FECHA_RESERVA = document.getElementById('fecha_Reserva'),
+DEPARTAMENTO_RESERVA = document.getElementById('departamento'),
+MUNICIPIO_RESERVA = document.getElementById('municipio'),
+DISTRITO_RESERVA  = document.getElementById('distrito');
 // Constantes para establecer los elementos del formulario de guardar.
-const SAVE_FORM = document.getElementById('saveForm'),
-    ID_RESERVAz = document.getElementById('idReserva'),
-    ID_RESERVA = document.getElementById('idReserva'),
-    ID_DRESERVA = document.getElementById('idReserva'),
-    NOMBRE_RESERVAS = document.getElementById('NomClien'),
-    FECHA_RESERVA  = document.getElementById('FechReserva'),
-    ESTADO_RESERVA = document.getElementById('Produc'),
-    DEPARTAMENTO_RESERVA = document.getElementById('Materi'),
-    MUNICIPIO_RESERVA = document.getElementById('COL'),
-    DISTRITO_RESERVA = document.getElementById('Tallas'),
-    NOMBREP_RESERVA = document.getElementById('MARCA'),
-    MARCA_RESERVA = document.getElementById('Cant'),
-    CANTIDAD_RESERVA = document.getElementById('Precio'),
-    PRECIO_RESERVA = document.getElementById('Descu');
+const SAVE_FORM = document.getElementById('saveForms'),
+    ID_DETALLE_RESERVA = document.getElementById('idDetalleR'),
+    PRODUCTO_RESERVA = document.getElementById('productoReserva'),
+    IMAGEN_RESERVA = document.getElementById('imgReserva'),
+    PRECIO_RESERVA = document.getElementById('precioReserva'),
+    MARCA_RESERVA = document.getElementById('marcaReserva');
+    
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -71,7 +68,7 @@ const fillTable = async (form = null) => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
-                    <td>${row.nombre}</td>
+                    <td>${row.usuario}</td>
                     <td>${row.fecha_reserva}</td>
                     <td>${row.departamento}</td>
                     <td>${row.municipio}</td>
