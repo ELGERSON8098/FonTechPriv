@@ -70,6 +70,9 @@ const loadTemplate = async () => {
                       <li class="nav-item px-2 py-2">
                           <a class="nav-link text-uppercase text-dark" href="../admin/Reservas.html">Reservas</a>
                       </li>
+                      <li class="nav-item px-2 py-2">
+                      <a class="nav-link text-uppercase text-dark" href="../admin/Valoraciones.html">Valoraciones</a>
+                      </li>
                       <li class="nav-item px-2 py-2 dropdown">
                         <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Direcciones
