@@ -26,14 +26,6 @@ const IMAGEN = document.getElementById('imagen'),
     IMAGEN_ESTRELLA4 = document.getElementById('imagenE4'),
     IMAGEN_ESTRELLA5 = document.getElementById('imagenE5');
 
-// CUANDO SE CARGUE EL DOCUMENTO
-document.addEventListener('DOMContentLoaded', () => {
-    //Carga el menu en las pantalla
-    loadTemplate();
-    //Espera a que fillTable termine de ejecutarse, para luego llamar a la funcion initializeDataTable;
-    fillTable();
-})
-
 // Función asincrona para inicializar la instancia de DataTable(Paginacion en las tablas)
 const initializeDataTable = async () => {
     PAGINATION = await new DataTable(PAGINATION_TABLE, {
