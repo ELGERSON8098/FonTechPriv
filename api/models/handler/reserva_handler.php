@@ -181,6 +181,7 @@ public function readDetalles()
 public function readDetalles2()
 {
     $sql = ' SELECT 
+    dr.id_detalle_reserva,
     dr.precio_unitario,
     dr.cantidad,
     r.fecha_reserva,

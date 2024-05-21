@@ -19,6 +19,23 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_FORM = document.getElementById('saveForm'),
     INPUTSEARCH = document.getElementById('inputsearch'),
     ESTADO_PEDIDO = document.getElementById('estadoPedido');
+// Constantes para establecer los elementos del componente Modal.
+const SAVE_TREMODAL = new bootstrap.Modal('#savetreModal'),
+    TREMODAL_TITLE = document.getElementById('tremodalTitle');
+// Constantes para establecer los elementos del formulario de guardar.
+const SAVE_TREFORM = document.getElementById('savetreForm'),
+    ID_DETALLE = document.getElementById('idDetalleReserva'),
+    PRECIO = document.getElementById('precioUnitario'),
+    CANTIDAD = document.getElementById('cantidad'),
+    FECHA_RESERVA = document.getElementById('fecha_reserva'),
+    ALMACENAMIENTO = document.getElementById('capacidad_memoria_interna_celular'),
+    RAM = document.getElementById('ram_celular'),
+    TAMAÑO_P = document.getElementById('pantalla_tamaño'),
+    CAMARA_TRASERA_C = document.getElementById('camara_trasera_celular'),
+    SISTEMA_OPERATIVO = document.getElementById('sistema_operativo_celular'),
+    CAMARA_FRONTAL_CELULAR = document.getElementById('camara_frontal_celular'),
+    PROCESADOR = document.getElementById('procesador_celular'),
+    MARCARS = document.getElementById('marca');
     let ESTADO_BUSQUEDA = "Pendiente",
     TIMEOUT_ID;
 
@@ -175,13 +192,7 @@ const fillSubTable = async (id) => {
         sweetAlert(4, DATA.error, true);
     }
 }
-/*Busqueda en tiempo real dentro del modal*/
-SUBINPUTSEARCH.addEventListener('input', function () {
-    clearTimeout(TIMEOUT_ID);
-    TIMEOUT_ID = setTimeout(async function () {
-        fillSubTable();
-    }, 50); // Delay de 50ms
-});
+
 //ABRIR EL MODAL DESDE EL HTML
 const subClose = () => {
     SAVE_MODAL.show();
@@ -203,24 +214,32 @@ const opensubCreate = () => {
 const opensubUpdate = async (id) => {
     // Se define un objeto con los datos del registro seleccionado.
     SAVE_MODAL.hide();
-    SELECTALLA.hidden = true;
     const FORM = new FormData();
-    FORM.append('idModeloTalla', id);
+    FORM.append('idDetalleReserva', id);
     // Petición para obtener los datos del registro solicitado.
-    const DATA = await fetchData(MODELOTALLAS_API, 'readOne', FORM);
+    const DATA = await fetchData(PEDIDO_API, 'readDetalles2', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
         SAVE_TREMODAL.show();
-        TREMODAL_TITLE.textContent = 'Tallas del modelo';
+        TREMODAL_TITLE.textContent = 'Detalle';
         // Se prepara el formulario.
         SAVE_TREFORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        ID_MODELOTALLA.value = ROW.id_modelo_talla;
-        console.log(ROW.stock + ' ' + ROW.precio_modelo_talla);
-        STOCK_MODELOTALLA.value = ROW.stock_modelo_talla;
-        PRECIO_MODELOTALLA.value = ROW.precio_modelo_talla;
+        ID_DETALLE.value = ROW.id_detalle_reserva;
+        //console.log(ROW.stock + ' ' + ROW.precio_modelo_talla);
+        PRECIO.value = ROW.precio_unitario;
+        CANTIDAD.value = ROW.cantidad;
+        FECHA_RESERVA.value = ROW.fecha_reserva;
+        ALMACENAMIENTO.value = ROW.capacidad_memoria_interna_celular;
+        RAM.value = ROW.ram_celular;
+        TAMAÑO_P.value = ROW.pantalla_tamaño;
+        CAMARA_TRASERA_C.value = ROW.camara_trasera_celular;
+        SISTEMA_OPERATIVO.value = ROW.sistema_operativo_celular;
+        CAMARA_FRONTAL_CELULAR.value = ROW.camara_frontal_celular;
+        PROCESADOR.value = ROW.procesador_celular;
+        MARCARS.value = ROW.marca;
 
     } else {
         sweetAlert(2, DATA.error, false);

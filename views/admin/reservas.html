@@ -132,6 +132,82 @@
                 </div>
             </div>
         </div>
+
+        <!-- SEGUNDO MODAL -->
+        <div class="modal fade" id="savetreModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="tremodalTitle"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                            onclick="subClose()"></button>
+                    </div>
+                    <!-- Formulario para crear o actualizar un registro en la subtabla de modelos tallas -->
+                    <form id="savetreForm">
+                        <div class="modal-body row g-3 ">
+                            <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                            <input type="hidden" id="idDetalleReserva" name="idDetalleReserva">
+                            <div class="col-sm-12 col-md-6">
+                                <label for="precioUnitario" class="precioUnitario">Precio</label>
+                                <input id="precioUnitario" type="text" name="precioUnitario" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="cantidad" class="precioUnitario">Cantidad</label>
+                                <input id="cantidad" type="text" name="cantidad" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="fecha_reserva" class="fecha_reserva">Fecha de reserva</label>
+                                <input id="fecha_reserva" type="text" name="fecha_reserva" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="capacidad_memoria_interna_celular" class="capacidad_memoria_interna_celular">Almancenamiento</label>
+                                <input id="capacidad_memoria_interna_celular" type="text" name="capacidad_memoria_interna_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="ram_celular" class="ram_celular">RAM</label>
+                                <input id="ram_celular" type="text" name="ram_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="pantalla_tamaño" class="pantalla_tamaño">Tamaño de pantalla</label>
+                                <input id="pantalla_tamaño" type="text" name="pantalla_tamaño" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="camara_trasera_celular" class="camara_trasera_celular">Camara trasera</label>
+                                <input id="camara_trasera_celular" type="text" name="camara_trasera_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="sistema_operativo_celular" class="sistema_operativo_celular">Sistema Operativo</label>
+                                <input id="sistema_operativo_celular" type="text" name="sistema_operativo_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="camara_frontal_celular" class="camara_frontal_celular">Camara frontal</label>
+                                <input id="camara_frontal_celular" type="text" name="camara_frontal_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="procesador_celular" class="procesador_celular">Procesador</label>
+                                <input id="procesador_celular" type="text" name="procesador_celular" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <label for="marca" class="marca">Marca</label>
+                                <input id="marca" type="text" name="marca" min="1" step="1"
+                                    class="form-control" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 
 
