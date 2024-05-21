@@ -124,10 +124,6 @@ class reservaHandler
         }
     }
 
-
-
-
-
     public function readAll()
 {
     $sql = 'SELECT 
@@ -149,13 +145,7 @@ class reservaHandler
     return Database::getRows($sql);
 }
 
-public function readDetalles()
-{
-    $sql = 'select * from tb_detalles_reservas
-    where id_reserva=?;';
-    $params = array($this->id);
-    return Database::getRows($sql);
-}
+
 
 public function readOne()
 {
@@ -176,6 +166,14 @@ public function readOne()
     
     $params = array($this->id);
     return Database::getRow($sql, $params);
+}
+
+public function readDetalles()
+{
+    $sql = 'select * from tb_detalles_reservas
+    where id_reserva=?;';
+    $params = array($this->id);
+    return Database::getRows($sql);
 }
 
 public function readOneS()

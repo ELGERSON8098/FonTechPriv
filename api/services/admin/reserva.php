@@ -76,7 +76,7 @@ if (isset($_GET['action'])) {
                     }
                     break;
                     case 'readDetalles':
-                        if (!$reserva->setId($_POST['idReservas'])) {
+                        if (!$reserva->setId($_POST['idDetallesReservas'])) {
                             $result['error'] = $reserva->getDataError();
                         } elseif ($result['dataset'] = $reserva->readOneS()) {
                             $result['status'] = 1;
