@@ -67,7 +67,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 case 'readOneS':
-                    if (!$reserva->setId($_POST['idReservas'])) {
+                    if (!$reserva->setId($_POST['idReservass'])) {
                         $result['error'] = $reserva->getDataError();
                     } elseif ($result['dataset'] = $reserva->readOneS()) {
                         $result['status'] = 1;
@@ -76,9 +76,9 @@ if (isset($_GET['action'])) {
                     }
                     break;
                     case 'readDetalles':
-                        if (!$reserva->setId($_POST['idDetallesReservas'])) {
+                        if (!$reserva->setId($_POST['idReservas'])) {
                             $result['error'] = $reserva->getDataError();
-                        } elseif ($result['dataset'] = $reserva->readOneS()) {
+                        } elseif ($result['dataset'] = $reserva->readDetalles()) {
                             $result['status'] = 1;
                         } else {
                             $result['error'] = 'Reserva inexistentes';

@@ -16,6 +16,7 @@ class reservaHandler
     protected $alias = null;
     protected $clave = null;
     protected $nivel = null;
+    const RUTA_IMAGEN = '../../images/productos/';
 
     /*
      *  Métodos para gestionar la cuenta del administrador.
@@ -125,62 +126,71 @@ class reservaHandler
     }
 
     public function readAll()
-{
-    $sql = 'SELECT 
-                r.id_reserva,
-                r.id_usuario,
-                r.fecha_reserva,
-                r.estado_reserva,
-                d.distrito,
-                m.municipio,
-                dept.departamento
-            FROM 
-                tb_reservas r
-            INNER JOIN 
-                tb_distritos d ON r.id_distrito = d.id_distrito
-            INNER JOIN 
-                tb_municipios m ON d.id_municipio = m.id_municipio
-            INNER JOIN 
-                tb_departamentos dept ON m.id_departamento = dept.id_departamento';
-    return Database::getRows($sql);
-}
+    {
+        $sql = 'SELECT 
+                    r.id_reserva,
+                    r.id_usuario,
+                    r.fecha_reserva,
+                    r.estado_reserva,
+                    d.distrito,
+                    m.municipio,
+                    dept.departamento
+                FROM 
+                    tb_reservas r
+                INNER JOIN 
+                    tb_distritos d ON r.id_distrito = d.id_distrito
+                INNER JOIN 
+                    tb_municipios m ON d.id_municipio = m.id_municipio
+                INNER JOIN 
+                    tb_departamentos dept ON m.id_departamento = dept.id_departamento';
+        return Database::getRows($sql);
+    }
 
 
 
-public function readOne()
-{
-    $sql = 'SELECT 
-                r.id_usuario, 
-                r.id_reserva, 
-                r.estado_reserva, 
-                r.fecha_reserva,
-                d.distrito,
-                u.nombre AS nombre_usuario
-            FROM 
-                tb_reservas r
-            INNER JOIN 
-                tb_usuarios u ON r.id_usuario = u.id_usuario
-            INNER JOIN 
-                tb_distritos d ON r.id_distrito = d.id_distrito
-            WHERE r.id_reserva = ?';
+    public function readOne()
+    {
+        $sql = 'SELECT 
+                    r.id_usuario, 
+                    r.id_reserva, 
+                    r.estado_reserva, 
+                    r.fecha_reserva,
+                    d.distrito,
+                    u.nombre AS nombre_usuario
+                FROM 
+                    tb_reservas r
+                INNER JOIN 
+                    tb_usuarios u ON r.id_usuario = u.id_usuario
+                INNER JOIN 
+                    tb_distritos d ON r.id_distrito = d.id_distrito
+                WHERE r.id_reserva = ?';
+        
+        $params = array($this->id);
+        return Database::getRow($sql, $params);
+    }
     
-    $params = array($this->id);
-    return Database::getRow($sql, $params);
-}
 
 public function readDetalles()
 {
     $sql = 'select * from tb_detalles_reservas
     where id_reserva=?;';
     $params = array($this->id);
-    return Database::getRows($sql);
+    return Database::getRows($sql, $params);
 }
 
 public function readOneS()
 {
     $sql = 'SELECT 
+                dr.id_detalle_reserva,
                 dr.id_reserva,
-                dr.estado_reserva
+                dr.cantidad,
+                dr.precio_unitario,
+                r.estado_reserva,
+                r.fecha_reserva,
+                u.nombre AS nombre_usuario,
+                d.distrito,
+                m.municipio,
+                dept.departamento
             FROM 
                 tb_detalles_reservas dr
             INNER JOIN 
@@ -193,19 +203,28 @@ public function readOneS()
                 tb_municipios m ON d.id_municipio = m.id_municipio
             INNER JOIN 
                 tb_departamentos dept ON m.id_departamento = dept.id_departamento
-            WHERE dr.id_reserva = ?'; // Agregamos una condición para seleccionar una sola reserva
+            WHERE dr.id_detalle_reserva = ?'; // Agregamos una condición para seleccionar un solo detalle de reserva
             
     $params = array($this->id);
-    return Database::getRows($sql, $params);
+    return Database::getRow($sql, $params);
 }
+
 
 
 
 public function readAlls()
 {
     $sql = 'SELECT 
+                dr.id_detalle_reserva,
                 dr.id_reserva,
-                dr.estado_reserva
+                dr.cantidad,
+                dr.precio_unitario,
+                r.estado_reserva,
+                r.fecha_reserva,
+                u.nombre AS nombre_usuario,
+                d.distrito,
+                m.municipio,
+                dept.departamento
             FROM 
                 tb_detalles_reservas dr
             INNER JOIN 
@@ -220,10 +239,6 @@ public function readAlls()
                 tb_departamentos dept ON m.id_departamento = dept.id_departamento';
     return Database::getRows($sql);
 }
-
-
-
-    
 
     public function deleteRow()
     {
