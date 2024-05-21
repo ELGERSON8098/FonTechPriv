@@ -146,25 +146,25 @@ const openUpdate = async (id) => {
 
         switch (notaValoracion) {
             case 1:
-                IMAGEN_ESTRELLA1.src ='../../images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
                 break;
             case 2:
-                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
                 break;
             case 3:
-                IMAGEN_ESTRELLA1.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/produdctos/estrella.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/produdctos/estrella.png'
+                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
             case 4:
                 IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
                 IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
@@ -208,7 +208,7 @@ const fillTable = async (form = null, option = null) => {
                     <td class="align-middle">${row.calificacion_valoracion}/5</td>
                     <td><i class="${icon}"></i></td>
                     <td class="align-middle">
-                        <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_valoracion})">
+                        <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_valoracion})">
                             <i class="bi bi-info-circle"></i>
                         </button>
 

@@ -66,4 +66,3 @@ class ValoracionesHandler
         return Database::executeRow($sql, $params);
     }
 }
-
