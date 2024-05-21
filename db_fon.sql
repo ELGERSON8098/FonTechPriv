@@ -8,7 +8,7 @@ CREATE TABLE tb_usuarios (
   id_usuario INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(100) NOT NULL,
   usuario VARCHAR(100) NOT NULL,
-  correo VARCHAR(100) NOT NULL,
+  correo VARCHAR(100) NOT NULL,	
   clave VARCHAR(100) NOT NULL, 
   PRIMARY KEY (id_usuario),
   CONSTRAINT uc_usuario UNIQUE (usuario),
@@ -94,12 +94,26 @@ CREATE TABLE tb_categorias (
   PRIMARY KEY (id_categoria)
 );
 
+insert into tb_categorias (id_categoria,nombre_categoria, imagen ) values
+('1', 'nestle', '6644c4cee4ac0.jpg'),
+('2', 'nestle', '6644c4cee4ac0.jpg'),
+('3', 'nestle', '6644c4cee4ac0.jpg'),
+('4', 'nestle', '6644c4cee4ac0.jpg'),
+('5', 'nestle', '6644c4cee4ac0.jpg');
+
 CREATE TABLE tb_marcas (
   id_marca INT UNSIGNED AUTO_INCREMENT NOT NULL,
   marca VARCHAR(50) NOT NULL,
   imagen varchar(20)not null,
   PRIMARY KEY (id_marca)
 );
+
+insert into tb_marcas (id_marca,marca, imagen ) values
+('1', 'Prado', '6644c4cee4ac0.jpg'),
+('2', 'Prado', '6644c4cee4ac0.jpg'),
+('3', 'Prado', '6644c4cee4ac0.jpg'),
+('4', 'Prado', '6644c4cee4ac0.jpg'),
+('5', 'Prado', '6644c4cee4ac0.jpg');
 
 CREATE TABLE tb_ofertas (
   id_oferta INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -110,6 +124,13 @@ CREATE TABLE tb_ofertas (
   CONSTRAINT ck_valor CHECK (valor >= 0)
 );
 
+insert into tb_ofertas (id_oferta, nombre_descuento, descripcion, valor) values
+('1', 'Descuento de verano', 'Verano descuento', '12.10'),
+('2', 'Descuento de verano', 'Verano descuento', '12.10'),
+('3', 'Descuento de verano', 'Verano descuento', '12.10'),
+('4', 'Descuento de verano', 'Verano descuento', '12.10'),
+('5', 'Descuento de verano', 'Verano descuento', '12.10');
+
 CREATE TABLE tb_productos (
   id_producto INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre_producto VARCHAR(100) NOT NULL,
@@ -117,10 +138,17 @@ CREATE TABLE tb_productos (
   id_categoria INT UNSIGNED,
   imagen VARCHAR(20) NOT NULL,
   estado_producto tinyint(1) NOT NULL,
-  PRIMARY KEY (id_producto),
+  PRIMARY KEY (id_producto),	
   CONSTRAINT fk_marcas_ FOREIGN KEY (id_marca) REFERENCES tb_marcas(id_marca)ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_categorias FOREIGN KEY (id_categoria) REFERENCES tb_categorias(id_categoria)ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+insert into tb_productos (id_producto,nombre_producto,id_marca, id_categoria, imagen, estado_producto) values
+('1', 'Leche', '1', '1', '6644c4cee4ac0.jpg', 1),
+('2', 'Leche', '2', '2', '6644c4cee4ac0.jpg', 1),
+('3', 'Leche', '3', '3', '6644c4cee4ac0.jpg', 1),
+('4', 'Leche', '4', '4', '6644c4cee4ac0.jpg', 1),
+('5', 'Leche', '5', '5', '6644c4cee4ac0.jpg', 1);
 
 
 
@@ -144,6 +172,14 @@ CREATE TABLE tb_detalles_productos (
   CONSTRAINT ck_precio  CHECK (precio >= 0),
   CONSTRAINT ck_existencias  CHECK (existencias >= 0)
 );
+
+insert into tb_detalles_productos (id_detalle_producto, id_producto, id_oferta, precio, existencias, descripcion, capacidad_memoria_interna_celular, ram_celular,
+pantalla_tamaño, camara_trasera_celular, sistema_operativo_celular, camara_frontal_celular,procesador_celular) values
+('1', '1', '1', '12.01', '1', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
+('2', '2', '2', '12.01', '2', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
+('3', '3', '3', '12.01', '3', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
+('4', '4', '4', '12.01', '4', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
+('5', '5', '5', '12.01', '5', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon');
 
 ALTER TABLE tb_detalles_productos
 MODIFY COLUMN id_oferta INT UNSIGNED DEFAULT NULL,
@@ -187,7 +223,7 @@ SELECT
         INNER JOIN 
             tb_categorias c ON p.id_categoria = c.id_categoria
 
-DROP TABLE 
+
 
 CREATE TABLE tb_valoraciones (
   id_valoracion INT AUTO_INCREMENT PRIMARY KEY,
@@ -200,32 +236,120 @@ CREATE TABLE tb_valoraciones (
   CONSTRAINT fk_productos FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+insert into tb_valoraciones (id_valoracion,calificacion_valoracion,comentario_valoracion,fecha_valoracion, estado_valoracion,id_producto) values
+('1', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '1'),
+('2', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '2'),
+('3', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '3'),
+('4', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '4'),
+('5', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '5');
+
+select * from tb_valoraciones;
+
+drop table tb_reservas;
+
 CREATE TABLE tb_reservas (
   id_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_usuario INT UNSIGNED NOT NULL,
+  id_producto INT UNSIGNED NOT NULL,
+  id_detalle_producto INT UNSIGNED NOT NULL,
   fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL, 
   estado_reserva ENUM ('Aceptado', 'Pendiente') NOT NULL,
   id_distrito INT UNSIGNED NOT NULL,
   CONSTRAINT fk_direcciones FOREIGN KEY (id_distrito) REFERENCES tb_distritos (id_distrito)ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)ON DELETE CASCADE ON UPDATE CASCADE,
-  PRIMARY KEY (id_reserva) -- Asegurando que id_reserva sea una clave primaria
+  PRIMARY KEY (id_reserva) 
 );
 
+insert into tb_reservas (id_reserva, id_usuario, id_producto, id_detalle_producto, fecha_reserva, estado_reserva, id_distrito) values
+('1', '1','1', '1', '2024-05-20 15:30:00', 'Pendiente', '1'),
+('2', '2','2', '2', '2024-05-20 15:30:00', 'Pendiente', '2'),
+('3', '3','3', '3', '2024-05-20 15:30:00', 'Pendiente', '3'),
+('4', '4','4', '4', '2024-05-20 15:30:00', 'Pendiente', '4'),
+('5', '5','5', '5', '2024-05-20 15:30:00', 'Pendiente', '5');
+
 select * from tb_reservas;
-	
 
 CREATE TABLE tb_detalles_reservas (
   id_detalle_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_reserva INT UNSIGNED NOT NULL,
-  id_producto INT UNSIGNED NOT NULL,
   cantidad INT UNSIGNED NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
-  id_detalle_producto INT UNSIGNED NOT NULL,
   PRIMARY KEY (id_detalle_reserva),
   CONSTRAINT fk_reserva FOREIGN KEY (id_reserva) REFERENCES tb_reservas(id_reserva)ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT fk_detalle_producto FOREIGN KEY (id_detalle_producto) REFERENCES tb_detalles_productos(id_detalle_producto)ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT ck_cantidad  CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
+insert into tb_detalles_reservas (id_detalle_reserva, id_reserva, cantidad, precio_unitario) values
+('1', '1', '2', '12.10'),
+('2', '2', '3', '13.10'),
+('3', '3', '4', '31.23'),
+('4', '4', '2', '14.12'),
+('5', '5', '1', '15.92');
 
-select * from tb_detalles_reservas;
+
+select * from tb_detalles_reservas
+where id_reserva=1;
+
+SELECT 
+                r.id_reserva,
+                r.id_usuario,
+                r.fecha_reserva,
+                r.estado_reserva,
+                d.distrito,
+                m.municipio,
+                dept.departamento
+            FROM 
+                tb_reservas r
+            INNER JOIN 
+                tb_distritos d ON r.id_distrito = d.id_distrito
+            INNER JOIN 
+                tb_municipios m ON d.id_municipio = m.id_municipio
+            INNER JOIN 
+                tb_departamentos dept ON m.id_departamento = dept.id_departamento
+                
+                
+                SELECT 
+                r.id_usuario, 
+                r.id_reserva, 
+                r.estado_reserva, 
+                r.fecha_reserva,
+                d.distrito,
+                u.nombre AS nombre_usuario
+            FROM 
+                tb_reservas r
+            INNER JOIN 
+                tb_usuarios u ON r.id_usuario = u.id_usuario
+            INNER JOIN 
+                tb_distritos d ON r.id_distrito = d.id_distrito
+            WHERE r.id_reserva = 1
+            
+            
+            SELECT 
+                    r.id_reserva,
+                    r.id_usuario,
+                    r.fecha_reserva,
+                    r.estado_reserva,
+                    d.distrito,
+                    m.municipio,
+                    dept.departamento
+                FROM 
+                    tb_reservas r
+                INNER JOIN 
+                    tb_distritos d ON r.id_distrito = d.id_distrito
+                INNER JOIN 
+                    tb_municipios m ON d.id_municipio = m.id_municipio
+                INNER JOIN 
+                    tb_departamentos dept ON m.id_departamento = dept.id_departamento
+                    
+                    
+                    SELECT 
+                    p.nombre_producto,
+                    p.imagen,
+                    r.fecha_reserva
+                FROM 
+                    tb_reservas r
+                INNER JOIN 
+                    tb_productos p ON r.id_producto = p.id_producto
+                    
+                    select * from tb_detalles_reservas
+    where id_reserva=2;

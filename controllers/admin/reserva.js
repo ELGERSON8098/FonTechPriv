@@ -18,11 +18,6 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 // Constantes para establecer los elementos del formulario de guardar.
 const SAVE_FORM = document.getElementById('saveForm'),
     INPUTSEARCH = document.getElementById('inputsearch'),
-    SUBINPUTSEARCH = document.getElementById('subinputsearch'),
-    ID_PEDIDO = document.getElementById('idPedido'),
-    CLIENTE_PEDIDO = document.getElementById('clientePedido'),
-    FECHA_PEDIDO = document.getElementById('fechaPedido'),
-    FORMA_PAGO = document.getElementById('formaPago'),
     ESTADO_PEDIDO = document.getElementById('estadoPedido');
     let ESTADO_BUSQUEDA = "Pendiente",
     TIMEOUT_ID;
@@ -122,7 +117,6 @@ const openUpdate = async (id) => {
         SAVE_MODAL.show();
         SUBTABLE.hidden = false;
         MODAL_TITLE.textContent = 'Información del pedido';
-        SUBMODAL_TITLE.textContent = 'Detalle del pedido';
         // Se prepara el formulario.
         SAVE_FORM.reset();
         fillSubTable(id);
@@ -169,6 +163,9 @@ const fillSubTable = async (id) => {
                 <td>${row.nombre_producto}</td>
                 <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
                 <td>${row.fecha_reserva}</td>
+                <td><button type="button" class="btn btn-success" onclick="opensubUpdate(${row.id_detalle_reserva})">
+                            <i class="bi bi-info-circle"></i>
+                        </button></td>
                 </tr>
             `;
         });

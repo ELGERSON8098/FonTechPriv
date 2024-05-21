@@ -178,6 +178,8 @@ public function readDetalles()
     return Database::getRows($sql, $params);
 }
 
+
+
 public function readOneS()
 {
     $sql = 'SELECT 
