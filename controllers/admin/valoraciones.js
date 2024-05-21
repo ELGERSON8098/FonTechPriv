@@ -208,7 +208,7 @@ const fillTable = async (form = null, option = null) => {
                     <td class="align-middle">${row.calificacion_valoracion}/5</td>
                     <td><i class="${icon}"></i></td>
                     <td class="align-middle">
-                        <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_valoracion})">
+                        <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_valoracion})">
                             <i class="bi bi-info-circle"></i>
                         </button>
 
