@@ -30,8 +30,8 @@ if (isset($_GET['action'])) {
                 if (
                     !$direccion->setNombre($_POST['Direc']) or
                     !$direccion->setCorreo($_POST['Departamento']) or
-                    !$direccion->setCorreo($_POST['Direccion']) 
-                    
+                    !$direccion->setCorreo($_POST['Direccion'])
+
                 ) {
                     $result['error'] = $direccion->getDataError();
                 } elseif ($_POST['claveAdministrador'] != $_POST['confirmarClave']) {
@@ -65,7 +65,7 @@ if (isset($_GET['action'])) {
                 if (
                     !$direccion->setNombre($_POST['Direc']) or
                     !$direccion->setCorreo($_POST['Departamento']) or
-                    !$direccion->setCorreo($_POST['Direccion']) 
+                    !$direccion->setCorreo($_POST['Direccion'])
                 ) {
                     $result['error'] = $administrador->getDataError();
                 } elseif ($administrador->updateRow()) {

@@ -30,8 +30,8 @@ class UsuariosHandler
         $params = array($value, $value, $value);
         return Database::getRows($sql, $params);
     }
-    
-//Llamar los datos de la base de datos 
+
+    //Llamar los datos de la base de datos 
     public function readAll()
     {
         $sql = 'SELECT id_usuario, nombre, usuario, correo  
@@ -56,7 +56,7 @@ class UsuariosHandler
         $params = array($this->nombre, $this->alias, $this->correo, $this->id);
         return Database::executeRow($sql, $params);
     }
-    
+
 
     public function deleteRow()
     {

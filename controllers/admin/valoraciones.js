@@ -9,7 +9,7 @@ const INFO_MODAL = new bootstrap.Modal('#infoModal'),
 
 // BUSCADOR
 const SEARCH_FORM = document.getElementById('searchForm');
-    
+
 const SAVE_FORM = document.getElementById('saveForm'),
     ID_VALORACION = document.getElementById('idValoracion'),
     NOMBRE_PRODUCTO = document.getElementById('nombreProductoValoracion'),
@@ -32,14 +32,14 @@ const IMAGEN = document.getElementById('imagen'),
 
 
 // CUANDO SE CARGUE EL DOCUMENTO
-    document.addEventListener('DOMContentLoaded', () => {
-        // Llamada a la función para mostrar el encabezado y pie del documento.
-        loadTemplate();
-        // Se establece el título del contenido principal.
-        MAIN_TITLE.textContent = 'Gestionar valoraciones';
-        // Llamada a la función para llenar la tabla con los registros existentes.
-        fillTable();
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    // Llamada a la función para mostrar el encabezado y pie del documento.
+    loadTemplate();
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = 'Gestionar valoraciones';
+    // Llamada a la función para llenar la tabla con los registros existentes.
+    fillTable();
+});
 
 // CUANDO SE CARGUE EL DOCUMENTO
 
@@ -54,7 +54,7 @@ const initializeDataTable = async () => {
     });
 
 
-    
+
 };
 
 SEARCH_FORM.addEventListener('submit', (event) => {
@@ -138,55 +138,55 @@ const openUpdate = async (id) => {
         NOMBRE_PRODUCTO.value = ROW.nombre_producto;
         COMENTARIO_VALORACION.value = ROW.comentario_valoracion;
         //Cargamos la imagen del registro seleccionado
-        IMAGEN.src = SERVER_URL + 'images/productos/' + ROW.imagen_producto; 
+        IMAGEN.src = SERVER_URL + 'images/productos/' + ROW.imagen_producto;
         ESTADO_COMENTARIO.checked = parseInt(ROW.estado_valoracion);
-        
+
         const notaValoracion = ROW.calificacion_valoracion;
         console.log(notaValoracion)
 
         switch (notaValoracion) {
             case 1:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
                 break;
             case 2:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
                 break;
             case 3:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
             case 4:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
                 break;
             case 5:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrella.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrella.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrella.png'
                 break;
             default:
-                IMAGEN_ESTRELLA1.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA2.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA3.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA4.src ='../../api/images/productos/estrellaBlanca.png'
-                IMAGEN_ESTRELLA5.src ='../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrellaBlanca.png'
+                IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
                 break;
-            }
+        }
 
     } else {
         sweetAlert(2, DATA.error, false);
@@ -200,7 +200,7 @@ const fillTable = async (form = null, option = null) => {
     const DATA = await fetchData(VALORACIONES_API, action, form);
     if (DATA.status) {
         DATA.dataset.forEach(row => {
-             icon = (parseInt(row.estado_valoracion) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
+            icon = (parseInt(row.estado_valoracion) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
             TABLE_BODY.innerHTML += `
             <tr>
                 <td class="align-middle">${row.nombre_producto}</td>
@@ -221,5 +221,5 @@ const fillTable = async (form = null, option = null) => {
     } else {
         sweetAlert(3, DATA.error, true);
     }
- }
+}
 

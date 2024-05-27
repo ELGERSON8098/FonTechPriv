@@ -31,7 +31,7 @@ if (isset($_GET['action'])) {
                     !$tbAdmins->setNombre($_POST['NAdmin']) or
                     !$tbAdmins->setUsuario($_POST['NUsuario']) or
                     !$tbAdmins->setCorreo($_POST['CorreoAd']) or
-                    !$tbAdmins->setClave($_POST['claveAd'])or
+                    !$tbAdmins->setClave($_POST['claveAd']) or
                     !$tbAdmins->setId($_POST['NivAd'])
                 ) {
                     $result['error'] = $tbAdmins->getDataError();
@@ -67,7 +67,7 @@ if (isset($_GET['action'])) {
                     !$tbAdmins->setNombre($_POST['NAdmin']) or
                     !$tbAdmins->setUsuario($_POST['NUsuario']) or
                     !$tbAdmins->setCorreo($_POST['CorreoAd']) or
-                    !$tbAdmins->setClave($_POST['claveAd'])or
+                    !$tbAdmins->setClave($_POST['claveAd']) or
                     !$tbAdmins->setId($_POST['NivAd'])
                 ) {
                     $result['error'] = $tbAdmins->getDataError();
@@ -119,7 +119,7 @@ if (isset($_GET['action'])) {
                     !$tbAdmins->setNombre($_POST['NAdmin']) or
                     !$tbAdmins->setUsuario($_POST['NUsuario']) or
                     !$tbAdmins->setCorreo($_POST['CorreoAd']) or
-                    !$tbAdmins->setClave($_POST['claveAd'])or
+                    !$tbAdmins->setClave($_POST['claveAd']) or
                     !$tbAdmins->setId($_POST['NivAd'])
                 ) {
                     $result['error'] = $tbAdmins->getDataError();
@@ -167,7 +167,7 @@ if (isset($_GET['action'])) {
                     !$tbAdmins->setNombre($_POST['NAdmin']) or
                     !$tbAdmins->setUsuario($_POST['NUsuario']) or
                     !$tbAdmins->setCorreo($_POST['CorreoAd']) or
-                    !$tbAdmins->setClave($_POST['claveAd'])or
+                    !$tbAdmins->setClave($_POST['claveAd']) or
                     !$tbAdmins->setId($_POST['NivAd'])
                 ) {
                     $result['error'] = $tbAdmins->getDataError();

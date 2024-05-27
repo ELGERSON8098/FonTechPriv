@@ -31,12 +31,12 @@ class departamentoData extends departamentoHandler
         $checkSql = 'SELECT COUNT(*) as count FROM tb_departamentos WHERE departamento = ?';
         $checkParams = array($value);
         $checkResult = Database::getRow($checkSql, $checkParams);
-    
+
         if ($checkResult['count'] > 0) {
             $this->data_error = 'El departamento ya existe';
             return false;
         }
-    
+
         // Validar el valor y la longitud del nombre
         if (!Validator::validateAlphabetic($value)) {
             $this->data_error = 'El nombre debe ser un valor alfabético';
@@ -49,9 +49,9 @@ class departamentoData extends departamentoHandler
             return false;
         }
     }
-    
 
-    
+
+
 
     // Método para obtener el error de los datos.
     public function getDataError()
@@ -59,4 +59,3 @@ class departamentoData extends departamentoHandler
         return $this->data_error;
     }
 }
-

@@ -39,7 +39,7 @@ class AdministradorData extends AdministradorHandler
         }
     }
 
- 
+
 
     public function setCorreo($value, $min = 8, $max = 100)
     {

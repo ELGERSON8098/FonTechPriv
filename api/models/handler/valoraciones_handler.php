@@ -15,7 +15,7 @@ class ValoracionesHandler
     protected $fechaValoracion = null;
     protected $estadoValoracion = null;
 
-    
+
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
      * Aunque ahorita solo haré el de agregar cupones
@@ -31,8 +31,8 @@ class ValoracionesHandler
         ORDER BY p.id_producto';
         $params = array($value);
         return Database::getRows($sql, $params);
-    }    
-    
+    }
+
 
     // READ ALL
     public function readAll()
@@ -45,7 +45,8 @@ class ValoracionesHandler
     }
 
     //    Leer un registro de una valoracion
-    public function readOne(){
+    public function readOne()
+    {
         $sql = 'SELECT v.id_valoracion, p.nombre_producto, p.imagen AS imagen_producto, v.calificacion_valoracion, v.comentario_valoracion, v.fecha_valoracion, v.estado_valoracion
         FROM tb_valoraciones v
         INNER JOIN tb_productos p ON v.id_producto = p.id_producto
@@ -53,9 +54,10 @@ class ValoracionesHandler
         $params = array($this->idValoracion);
         return Database::getRows($sql, $params);
     }
-    
+
     //    Actualizar una valoracion
-    public function updateRow(){
+    public function updateRow()
+    {
         $sql = 'UPDATE tb_valoraciones 
                 SET estado_valoracion = ?
                 WHERE id_valoracion = ?';

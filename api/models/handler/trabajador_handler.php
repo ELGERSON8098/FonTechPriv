@@ -29,7 +29,7 @@ class AdministradorHandler
             $_SESSION['idAdmin'] = $data['id_administrador'];
             $_SESSION['NUsuario'] = $data['usuario_administrador'];
 
-            
+
             return true;
         } else {
             return false;
@@ -109,7 +109,7 @@ class AdministradorHandler
                 ORDER BY a.nombre_administrador';
         return Database::getRows($sql);
     }
-    
+
     public function readOne()
     {
         $sql = 'SELECT a.id_administrador, a.nombre_administrador, a.correo_administrador, a.usuario_administrador, n.nombre_nivel
@@ -119,10 +119,10 @@ class AdministradorHandler
         $params = array();
         return Database::getRow($sql, $params);
     }
-    
-    
 
-    public function updateRow() 
+
+
+    public function updateRow()
     {
         $sql = 'UPDATE tb_admins
                 SET nombre_administrador = ?,  correo_administrador = ?

@@ -28,12 +28,12 @@ class marcaHandler
         $params = array($value);
         return Database::getRows($sql, $params);
     }
-    
+
     public function createRow()
     {
         $sql = 'INSERT INTO tb_marcas(marca, imagen)
                 VALUES(?, ?)';
-        $params = array($this->nombre, $this ->imagen);
+        $params = array($this->nombre, $this->imagen);
         return Database::executeRow($sql, $params);
     }
 
@@ -45,9 +45,9 @@ class marcaHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-    
-    
-//Llamar los datos de la base de datos 
+
+
+    //Llamar los datos de la base de datos 
     public function readAll()
     {
         $sql = 'SELECT id_marca, marca, imagen
@@ -72,7 +72,7 @@ class marcaHandler
         $params = array($this->nombre, $this->id);
         return Database::executeRow($sql, $params);
     }
-    
+
 
     public function deleteRow()
     {
@@ -81,5 +81,4 @@ class marcaHandler
         $params = array($this->id);
         return Database::executeRow($sql, $params);
     }
-    
 }

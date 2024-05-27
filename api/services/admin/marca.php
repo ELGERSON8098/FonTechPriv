@@ -24,22 +24,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                case 'createRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        !$marca->setNombre($_POST['nombreMARCA']) or
-                        !$marca->setImagen($_FILES['nombreIMG'])
-                    ) {
-                        $result['error'] = $marca->getDataError();
-                    } elseif ($marca->createRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Categoría creada correctamente';
-                        // Se asigna el estado del archivo después de insertar.
-                        $result['fileStatus'] = Validator::saveFile($_FILES['nombreIMG'], $marca::RUTA_IMAGEN);
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al crear la categoría';
-                    }
-                    break;
+            case 'createRow':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$marca->setNombre($_POST['nombreMARCA']) or
+                    !$marca->setImagen($_FILES['nombreIMG'])
+                ) {
+                    $result['error'] = $marca->getDataError();
+                } elseif ($marca->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Categoría creada correctamente';
+                    // Se asigna el estado del archivo después de insertar.
+                    $result['fileStatus'] = Validator::saveFile($_FILES['nombreIMG'], $marca::RUTA_IMAGEN);
+                } else {
+                    $result['error'] = 'Ocurrió un problema al crear la categoría';
+                }
+                break;
             case 'readAll':
                 if ($result['dataset'] = $marca->readAll()) {
                     $result['status'] = 1;
@@ -57,27 +57,27 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Marca inexistente';
                 }
                 break;
-                case 'updateRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        !$marca->setId($_POST['idMarca']) or
-                        !$marca->setFilename() or
-                        !$marca->setNombre($_POST['nombreMARCA']) or
-                        !$marca->setImagen($_FILES['nombreIMG'], $marca->getFilename())
-                    ) {
-                        $result['error'] = $marca->getDataError();
-                    } elseif ($marca->updateRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Marca modificada correctamente';
-                        // Se asigna el estado del archivo después de actualizar.
-                        $result['fileStatus'] = Validator::changeFile($_FILES['nombreIMG'], $marca::RUTA_IMAGEN, $marca->getFilename());
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al modificar la marca';
-                    }
-                    break;
+            case 'updateRow':
+                $_POST = Validator::validateForm($_POST);
+                if (
+                    !$marca->setId($_POST['idMarca']) or
+                    !$marca->setFilename() or
+                    !$marca->setNombre($_POST['nombreMARCA']) or
+                    !$marca->setImagen($_FILES['nombreIMG'], $marca->getFilename())
+                ) {
+                    $result['error'] = $marca->getDataError();
+                } elseif ($marca->updateRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Marca modificada correctamente';
+                    // Se asigna el estado del archivo después de actualizar.
+                    $result['fileStatus'] = Validator::changeFile($_FILES['nombreIMG'], $marca::RUTA_IMAGEN, $marca->getFilename());
+                } else {
+                    $result['error'] = 'Ocurrió un problema al modificar la marca';
+                }
+                break;
             case 'deleteRow':
                 if (
-                    !$marca->setid($_POST['idMarca']) 
+                    !$marca->setid($_POST['idMarca'])
                 ) {
                     $result['error'] = $marca->getDataError();
                 } elseif ($marca->deleteRow()) {
@@ -87,7 +87,6 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar la marca';
                 }
                 break;
-            
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

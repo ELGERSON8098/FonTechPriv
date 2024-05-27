@@ -30,15 +30,15 @@ class CategoriaHandler
         $params = array($value);
         return Database::getRows($sql, $params);
     }
-    
-  
-    
+
+
+
     public function createRow()
     {
-    $sql = 'INSERT INTO tb_categorias(nombre_categoria, imagen)
+        $sql = 'INSERT INTO tb_categorias(nombre_categoria, imagen)
             VALUES(?, ?)';
-    $params = array($this->nombre, $this->imagen);
-    return Database::executeRow($sql, $params);
+        $params = array($this->nombre, $this->imagen);
+        return Database::executeRow($sql, $params);
     }
 
     public function readAll()
@@ -66,7 +66,7 @@ class CategoriaHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-    
+
 
     public function updateRow()
     {
@@ -76,7 +76,7 @@ class CategoriaHandler
         $params = array($this->imagen, $this->nombre, $this->id);
         return Database::executeRow($sql, $params);
     }
-    
+
 
     public function deleteRow()
     {

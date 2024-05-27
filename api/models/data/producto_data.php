@@ -26,7 +26,7 @@ class productoData extends productoHandler
         }
     }
 
-    
+
     public function setIdD($value)
     {
         if (Validator::validateNaturalNumber($value)) {
@@ -184,8 +184,8 @@ class productoData extends productoHandler
     public function setCantidad($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-                $this->cantidad = $value;
-                return true;
+            $this->cantidad = $value;
+            return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1z';
             return false;
@@ -193,11 +193,11 @@ class productoData extends productoHandler
     }
 
     public function setCantidad1($value)
-    
+
     {
         if (Validator::validateMoney($value)) {
-                $this->precio = $value;
-                return true;
+            $this->precio = $value;
+            return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1s';
             return false;
@@ -207,8 +207,8 @@ class productoData extends productoHandler
     public function setCantidad2($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-                $this->existencias = $value;
-                return true;
+            $this->existencias = $value;
+            return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1a';
             return false;
@@ -218,8 +218,8 @@ class productoData extends productoHandler
     public function setCantidad3($value)
     {
         if (Validator::validateAlphanumeric($value)) {
-                $this->capacidad_memoria_interna_celular = $value;
-                return true;
+            $this->capacidad_memoria_interna_celular = $value;
+            return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1x';
             return false;
@@ -229,8 +229,8 @@ class productoData extends productoHandler
     public function setCantidad4($value)
     {
         if (Validator::validateAlphanumeric($value)) {
-                $this->ram_celular = $value;
-                return true;
+            $this->ram_celular = $value;
+            return true;
         } else {
             $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1v';
             return false;
@@ -280,7 +280,7 @@ class productoData extends productoHandler
         $this->id_oferta = $value;
         return true;
     }
-    
+
 
     public function setFilename()
     {
@@ -308,4 +308,3 @@ class productoData extends productoHandler
         return $this->filename;
     }
 }
-

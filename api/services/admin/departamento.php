@@ -24,18 +24,18 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No hay coincidencias';
                 }
                 break;
-                case 'createRow':
-                    $_POST = Validator::validateForm($_POST);
-                    if (! $departamento->setNombre($_POST['NomDepa'])) {
-                        $result['error'] = $ $departamento->getDataError();
-                    } elseif ( $departamento->createRow()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Departamento agregado correctamente';
-                    } else {
-                        $result['error'] =  $departamento->getDataError() ?: 'Ocurrió un problema al agregar el departamento';
-                    }
-                    break;
-                
+            case 'createRow':
+                $_POST = Validator::validateForm($_POST);
+                if (!$departamento->setNombre($_POST['NomDepa'])) {
+                    $result['error'] = $$departamento->getDataError();
+                } elseif ($departamento->createRow()) {
+                    $result['status'] = 1;
+                    $result['message'] = 'Departamento agregado correctamente';
+                } else {
+                    $result['error'] =  $departamento->getDataError() ?: 'Ocurrió un problema al agregar el departamento';
+                }
+                break;
+
             case 'readAll':
                 if ($result['dataset'] =  $departamento->readAll()) {
                     $result['status'] = 1;
@@ -45,7 +45,7 @@ if (isset($_GET['action'])) {
                 }
                 break;
             case 'readOne':
-                if (! $departamento->setId($_POST['idDepartamento'])) {
+                if (!$departamento->setId($_POST['idDepartamento'])) {
                     $result['error'] =  $departamento->getDataError();
                 } elseif ($result['dataset'] =  $departamento->readOne()) {
                     $result['status'] = 1;
@@ -56,11 +56,11 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    ! $departamento->setId($_POST['idDepartamento'])or
-                    ! $departamento->setNombre($_POST['NomDepa']) 
+                    !$departamento->setId($_POST['idDepartamento']) or
+                    !$departamento->setNombre($_POST['NomDepa'])
                 ) {
                     $result['error'] = $color->getDataError();
-                } elseif ( $departamento->updateRow()) {
+                } elseif ($departamento->updateRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Departamento modificado correctamente';
                 } else {
@@ -69,17 +69,16 @@ if (isset($_GET['action'])) {
                 break;
             case 'deleteRow':
                 if (
-                    ! $departamento->setid($_POST['idDepartamento'])
+                    !$departamento->setid($_POST['idDepartamento'])
                 ) {
                     $result['error'] =  $departamento->getDataError();
-                } elseif ( $departamento->deleteRow()) {
+                } elseif ($departamento->deleteRow()) {
                     $result['status'] = 1;
                     $result['message'] = 'Departamento eliminado correctamente';
                 } else {
                     $result['error'] = 'Ocurrió un problema al eliminar el departamento';
                 }
                 break;
-            
         }
         // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
         $result['exception'] = Database::getException();

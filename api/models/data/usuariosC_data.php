@@ -77,29 +77,11 @@ class UsuariosData extends UsuariosHandler
             return false;
         }
     }
-
-    public function setDUI($value)
-    {
-        if (!Validator::validateDUI($value)) {
-            $this->data_error = 'El DUI debe tener el formato #########';
-            return false;
-        } 
-        
-        if ($this->checkDuplicate($value)) {
-            $this->data_error = 'El DUI ingresado ya existe';
-            return false;
-        } 
-        
-        $this->dui = $value;
-        return true;
-    }
-    
-
     public function setTelefono($value)
     {
         // Eliminar todos los caracteres no numéricos del número de teléfono
         $value = preg_replace('/\D/', '', $value);
-        
+
         // Validar que el número de teléfono tenga al menos 7 dígitos
         if (strlen($value) >= 7) {
             $this->telefono = $value;
@@ -109,7 +91,7 @@ class UsuariosData extends UsuariosHandler
             return false;
         }
     }
-    
+
 
 
     // Método para obtener el error de los datos.
@@ -118,4 +100,3 @@ class UsuariosData extends UsuariosHandler
         return $this->data_error;
     }
 }
-

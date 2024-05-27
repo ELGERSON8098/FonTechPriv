@@ -48,18 +48,18 @@ class descuentoData extends descuentoHandler
             $this->data_error = 'El valor debe contener solo números';
             return false;
         }
-    
+
         // Validar la longitud del valor
         if (!Validator::validateLength($value, $min, $max)) {
             $this->data_error = 'El valor debe tener una longitud entre '  . $min . ' y ' . $max;
             return false;
         }
-    
+
         // Asignar el valor validado al atributo de la clase
         $this->valor = $value;
         return true;
     }
-    
+
 
     public function setDesc($value, $min = 2, $max = 50)
     {
@@ -74,7 +74,7 @@ class descuentoData extends descuentoHandler
             return false;
         }
     }
-    
+
 
 
     // Método para obtener el error de los datos.

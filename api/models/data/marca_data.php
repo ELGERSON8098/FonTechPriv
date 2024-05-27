@@ -32,12 +32,12 @@ class marcaData extends marcaHandler
         $checkSql = 'SELECT COUNT(*) as count FROM tb_marcas WHERE marca = ?';
         $checkParams = array($value);
         $checkResult = Database::getRow($checkSql, $checkParams);
-    
+
         if ($checkResult['count'] > 0) {
             $this->data_error = 'La marca ya existe';
             return false;
         }
-    
+
         // Validar el valor y la longitud del nombre de la marca
         if (!Validator::validateAlphabetic($value)) {
             $this->data_error = 'El nombre de la marca debe ser un valor alfabético';
@@ -51,7 +51,7 @@ class marcaData extends marcaHandler
         }
     }
 
-    
+
     public function setImagen($file, $filename = null)
     {
         if (Validator::validateImageFile($file, 1000)) {
@@ -80,7 +80,7 @@ class marcaData extends marcaHandler
         }
     }
 
-    
+
 
 
     // Método para obtener el error de los datos.
@@ -93,4 +93,3 @@ class marcaData extends marcaHandler
         return $this->filename;
     }
 }
-

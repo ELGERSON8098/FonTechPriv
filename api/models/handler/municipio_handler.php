@@ -10,7 +10,7 @@ class municipioHandler
      *  Declaración de atributos para el manejo de datos.
      */
     protected $id = null;
-    protected $Depa= null;
+    protected $Depa = null;
     protected $Muni = null;
     /*
      *  Métodos para realizar las operaciones SCRUD (search, create, read, update, and delete).
@@ -26,7 +26,7 @@ class municipioHandler
         $params = array($value);
         return Database::getRows($sql, $params);
     }
-    
+
 
     public function createRow()
     {
@@ -37,14 +37,14 @@ class municipioHandler
     }
 
     public function updateRow()
-{
-    $sql = 'UPDATE tb_municipios AS m
+    {
+        $sql = 'UPDATE tb_municipios AS m
             INNER JOIN tb_departamentos AS d ON m.id_departamento = d.id_departamento
             SET m.municipio = ?, m.id_departamento = ?
             WHERE m.id_municipio = ?';
-    $params = array($this->Muni, $this->Depa, $this->id);
-    return Database::executeRow($sql, $params);
-}
+        $params = array($this->Muni, $this->Depa, $this->id);
+        return Database::executeRow($sql, $params);
+    }
 
 
     public function readAll()
@@ -63,7 +63,7 @@ class municipioHandler
         ORDER BY departamento';
         return Database::getRows($sql);
     }
-    
+
 
     public function readOne()
     {
@@ -78,7 +78,7 @@ class municipioHandler
         $params = array($this->id);
         return Database::getRow($sql, $params);
     }
-    
+
 
     public function deleteRow()
     {

@@ -27,7 +27,7 @@ class AdministradorHandler
                 WHERE usuario_administrador = ?';
         $params = array($username);
         $data = Database::getRow($sql, $params);
-    
+
         if ($data && password_verify($password, $data['clave_administrador'])) {
             // Si las credenciales son válidas, establecer las variables de sesión y devolver el id_administrador
             $_SESSION['idAdministrador'] = $data['id_administrador'];
@@ -38,7 +38,7 @@ class AdministradorHandler
             return false;
         }
     }
-    
+
 
     public function checkPassword($password)
     {
@@ -48,7 +48,7 @@ class AdministradorHandler
                 WHERE id_administrador = ?';
         $params = array($_SESSION['idAdministrador']);
         $data = Database::getRow($sql, $params);
-    
+
         // Verificar si la contraseña coincide con el hash almacenado en la base de datos.
         if ($data && password_verify($password, $data['clave_administrador'])) {
             return true; // La contraseña es correcta
@@ -56,7 +56,7 @@ class AdministradorHandler
             return false; // La contraseña es incorrecta o el usuario no existe
         }
     }
-    
+
 
     public function changePassword()
     {
@@ -76,7 +76,7 @@ class AdministradorHandler
         $params = array($_SESSION['idAdministrador']);
         return Database::getRow($sql, $params);
     }
-    
+
     public function editProfile()
     {
         // Actualizar el perfil del administrador
@@ -103,7 +103,7 @@ class AdministradorHandler
                 FROM tb_admins';
         return Database::getRows($sql);
     }
-    
+
     public function readOne()
     {
         // Consultar un administrador específico en la tabla tb_admins

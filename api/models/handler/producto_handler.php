@@ -46,9 +46,9 @@ class productoHandler
         $params = array($value);
         return Database::getRows($sql, $params);
     }
-    
-    
-    
+
+
+
 
     public function createRow()
     {
@@ -59,8 +59,8 @@ class productoHandler
     }
 
     public function createRowS()
-{
-    $sql = 'INSERT INTO tb_detalles_productos (
+    {
+        $sql = 'INSERT INTO tb_detalles_productos (
                 id_producto,
                 id_oferta,
                 precio,
@@ -75,26 +75,26 @@ class productoHandler
                 procesador_celular
             )
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    $params = array(
-        $this->id_producto,
-        $this->id_oferta,
-        $this->precio,
-        $this->existencias,
-        $this->descripcion,
-        $this->capacidad_memoria_interna_celular,
-        $this->ram_celular,
-        $this->pantalla_tamaño,
-        $this->camara_trasera_celular,
-        $this->sistema_operativo_celular,
-        $this->camara_frontal_celular,
-        $this->procesador_celular
-    );
-    return Database::executeRow($sql, $params);
-}
-    
+        $params = array(
+            $this->id_producto,
+            $this->id_oferta,
+            $this->precio,
+            $this->existencias,
+            $this->descripcion,
+            $this->capacidad_memoria_interna_celular,
+            $this->ram_celular,
+            $this->pantalla_tamaño,
+            $this->camara_trasera_celular,
+            $this->sistema_operativo_celular,
+            $this->camara_frontal_celular,
+            $this->procesador_celular
+        );
+        return Database::executeRow($sql, $params);
+    }
+
     public function readAll()
     {
-        $sql = /*'    SELECT * FROM tb_productos'*/'SELECT 
+        $sql = /*'    SELECT * FROM tb_productos'*/ 'SELECT 
             p.id_producto,
             p.nombre_producto,
             m.marca,
@@ -107,51 +107,51 @@ class productoHandler
             tb_marcas m ON p.id_marca = m.id_marca
         INNER JOIN 
             tb_categorias c ON p.id_categoria = c.id_categoria';
-    
+
         return Database::getRows($sql);
     }
-    
+
     public function readAllS()
-{
-    $sql = 'SELECT 
+    {
+        $sql = 'SELECT 
         id_categoria,
         nombre_categoria
     FROM 
         tb_categorias';
 
-    return Database::getRows($sql);
-}
+        return Database::getRows($sql);
+    }
 
-public function readAllSS()
-{
-    $sql = 'SELECT 
+    public function readAllSS()
+    {
+        $sql = 'SELECT 
         id_marca,
         marca
     FROM 
         tb_marcas';
 
-    return Database::getRows($sql);
-}
+        return Database::getRows($sql);
+    }
 
-public function readAllSSS()
-{
-    $sql = 'SELECT 
+    public function readAllSSS()
+    {
+        $sql = 'SELECT 
         id_oferta,
         nombre_descuento
     FROM 
     tb_ofertas';
 
-    return Database::getRows($sql);
-}
+        return Database::getRows($sql);
+    }
 
-public function readFilename()
-{
-    $sql = 'SELECT imagen
+    public function readFilename()
+    {
+        $sql = 'SELECT imagen
             FROM tb_productos
             WHERE id_producto = ?';
-    $params = array($this->id_producto);
-    return Database::getRow($sql, $params);
-}
+        $params = array($this->id_producto);
+        return Database::getRow($sql, $params);
+    }
 
 
     public function readOne()
@@ -170,12 +170,12 @@ public function readFilename()
             tb_categorias c ON p.id_categoria = c.id_categoria
         WHERE 
             p.id_producto = ?';
-    
+
         $params = array($this->id_producto);
-    
+
         return Database::getRow($sql, $params);
     }
-    
+
     public function readOneS()
     {
         $sql = 'SELECT 
@@ -209,16 +209,16 @@ public function readFilename()
                     tb_categorias AS c ON p.id_categoria = c.id_categoria
                 WHERE 
                     dp.id_producto = ?';
-    
+
         $params = array($this->id_producto);
-    
+
         return Database::getRow($sql, $params);
     }
-    
 
-public function updateRow()
-{
-    $sql = 'UPDATE tb_detalles_productos AS dp
+
+    public function updateRow()
+    {
+        $sql = 'UPDATE tb_detalles_productos AS dp
             INNER JOIN tb_productos AS p ON dp.id_producto = p.id_producto
             SET dp.id_producto = ?,
                 dp.id_oferta = ?,
@@ -238,30 +238,30 @@ public function updateRow()
                 p.id_categoria = ? ,
                 p.estado_producto = ?
             WHERE dp.id_detalle_producto = ?';
-    
-    $params = array(
-        $this->id_producto,
-        $this->id_oferta,
-        $this->precio,
-        $this->existencias,
-        $this->descripcion,
-        $this->capacidad_memoria_interna_celular,
-        $this->ram_celular,
-        $this->pantalla_tamaño,
-        $this->camara_trasera_celular,
-        $this->sistema_operativo_celular,
-        $this->camara_frontal_celular,
-        $this->procesador_celular,
-        $this->nombre_producto,
-        $this->imagen,
-        $this->id_marca,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
-        $this->id_categoria,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
-        $this->estado,
-        $this->id_detalle_producto
-    );
-    
-    return Database::executeRow($sql, $params);
-}
+
+        $params = array(
+            $this->id_producto,
+            $this->id_oferta,
+            $this->precio,
+            $this->existencias,
+            $this->descripcion,
+            $this->capacidad_memoria_interna_celular,
+            $this->ram_celular,
+            $this->pantalla_tamaño,
+            $this->camara_trasera_celular,
+            $this->sistema_operativo_celular,
+            $this->camara_frontal_celular,
+            $this->procesador_celular,
+            $this->nombre_producto,
+            $this->imagen,
+            $this->id_marca,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
+            $this->id_categoria,  // Asegúrate de ajustar el nombre de la propiedad según corresponda
+            $this->estado,
+            $this->id_detalle_producto
+        );
+
+        return Database::executeRow($sql, $params);
+    }
 
 
     public function deleteRow()
