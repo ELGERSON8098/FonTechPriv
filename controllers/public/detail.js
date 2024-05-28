@@ -20,11 +20,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se colocan los datos en la página web de acuerdo con el producto seleccionado previamente.
-        document.getElementById('imagenProducto').src = SERVER_URL.concat('images/productos/', DATA.dataset.imagen_producto);
+        document.getElementById('imagenProducto').src = SERVER_URL.concat('images/productos/', DATA.dataset.imagen);
         document.getElementById('nombreProducto').textContent = DATA.dataset.nombre_producto;
-        document.getElementById('descripcionProducto').textContent = DATA.dataset.descripcion_producto;
-        document.getElementById('precioProducto').textContent = DATA.dataset.precio_producto;
-        document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias_producto;
+        document.getElementById('descripcionProducto').textContent = DATA.dataset.descripcion;
+        document.getElementById('Interna').textContent = DATA.dataset.capacidad_memoria_interna_celular;
+        document.getElementById('Ram').textContent = DATA.dataset.ram_celular;
+        document.getElementById('Pantalla').textContent = DATA.dataset.pantalla_tamaño;
+        document.getElementById('Frontal').textContent = DATA.dataset.camara_frontal_celular;
+        document.getElementById('Trasera').textContent = DATA.dataset.camara_trasera_celular;
+        document.getElementById('Operativo').textContent = DATA.dataset.sistema_operativo_celular;
+        document.getElementById('Procesador').textContent = DATA.dataset.procesador_celular;
+        document.getElementById('precioProducto').textContent = DATA.dataset.precio;
+        document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias;
         document.getElementById('idProducto').value = DATA.dataset.id_producto;
     } else {
         // Se presenta un mensaje de error cuando no existen datos para mostrar.

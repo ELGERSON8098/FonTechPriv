@@ -2,7 +2,7 @@
 const PRODUCTO_API = 'services/public/producto.php';
 // Constante tipo objeto para obtener los parámetros disponibles en la URL.
 const PARAMS = new URLSearchParams(location.search);
-const PRODUCTOS = document.getElementById('productos');
+const PRODUCTOS = document.getElementById('special');
 
 // Método manejador de eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -23,24 +23,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las tarjetas con los datos de cada producto.
             PRODUCTOS.innerHTML += `
-            <section id="special" class="py-5">
             <div class="container">
-                <div class="special-list row g-0">
                     <div class="col-md-6 col-lg-4 col-xl-3 p-2">
                         <div class="special-img position-relative overflow-hidden">
-                            <img src="${SERVER_URL}images/productos/${row.imagen}" class="w-100">
-    
+                            <img src="${SERVER_URL}images/productos/${row.imagen}" class="card-img-top" alt="${row.nombre_producto}" class="w-100">
                         </div>
                         <div class="text-center">
-                            <p class="text-capitalize mt-3 mb-1"> ${row.nombre_producto}</p>
-                            <span class="fw-bold d-block"> Precio unitario (US$) ${row.precio_producto} </span>
-                            <span class="fw-bold d-block"> Existencias ${row.existencias_producto} </span>
-                            <a href="#" class="btn btn-primary mt-3"> </a>
+                            <p class="fw-bold d-block mt-3 mb-1"> ${row.nombre_producto}</p>
+                            <span class="text-capitalize mt-3 mb-1"> Precio unitario (US$) ${row.precio} </span>
+                            <span class="text-capitalize mt-3 mb-1"> Existencias ${row.existencias} </span>
+                            <br>
+                            <a href="detail.html?id=${row.id_producto}" class="btn btn-primary mt-3">Ver detalle</a>
                         </div>
                     </div>
-                </div>
             </div>
-        </section>
+        
             `;
         });
     } else {

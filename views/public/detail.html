@@ -15,44 +15,99 @@
     <!-- Llamada a las hojas de estilos del framework e iconos -->
     <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
+    <!-- CSS personalizado -->
+    <link rel="stylesheet" href="../../resources/css/Dashboard_publico.css">
 </head>
 
 <body>
     <!-- Contenido principal del documento -->
     <main>
-        <!-- Título del contenido principal -->
-        <h4 id="mainTitle"></h4>
-        <!-- Componente Horizontal Card para mostrar el detalle de un producto -->
-        <div class="card mb-3" id="detalle">
-            <div class="row">
-                <div class="col-md-4">
-                    <!-- Se muestra la imagen del producto -->
-                    <img id="imagenProducto" class="img-fluid rounded-start">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" id="nombreProducto"></h5>
-                        <p class="card-text" id="descripcionProducto"></p>
-                        <p class="card-text">Precio unitario (US$) <b id="precioProducto"></b></p>
-                        <p class="card-text">Existencias <b id="existenciasProducto"></b></p>
-                        <!-- Formulario para agregar el producto al carrito de compras -->
-                        <form class="row" id="shoppingForm">
-                            <!-- Campo oculto para asignar el id del producto -->
-                            <input type="number" class="d-none" id="idProducto" name="idProducto">
-                            <div class="col-6">
-                                <input type="number" id="cantidadProducto" name="cantidadProducto" min="1" class="form-control" placeholder="Ingrese cantidad"
-                                    required>
-                            </div>
-                            <div class="col-6 align-self-end">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="bi bi-cart-plus-fill"></i> Comprar
-                                </button>
-                            </div>
-                        </form>
+
+        <section id="about" class="py-5">
+            <div class="container">
+                <div class="row gy-lg-5 align-items-center">
+                    <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                        <div class="title pt-3 pb-5">
+                            <h2 class="position-relative d-inline-block ms-4" id="nombreProducto"></h2>
+                        </div>
+                        <p class="text-uppercase text-decoration-none brand text-black">Detalles del producto</p>
+                        <p class="lead text-muted" id="descripcionProducto"></p>
+                    </div>
+                    <div class="col-lg-4 order-lg-0">
+                        <img id="imagenProducto" class="img-fluid rounded-start">
                     </div>
                 </div>
             </div>
+        </section>
+
+
+        <div class="title pt-3 pb-5">
+            <h2 class="position-relative d-inline-block ms-4">Especificaciones</h2>
         </div>
+
+        <!--Especificaciones del producto-->
+        <div class="container mt-3">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                        <th scope="row">Capacidad de memoria Interna</th>
+                        <td class="p-1" id="Interna"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Memoria Ram</th>
+                        <td class="p-1" id="Ram"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Pantalla</th>
+                        <td class="p-1" id="Pantalla"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cámara Frontal</th>
+                        <td class="p-1" id="Frontal"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cámara Trasera</th>
+                        <td class="p-1" id="Trasera"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Sistema Operativo</th>
+                        <td class="p-1" id="Operativo"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Procesador</th>
+                        <td class="p-1" id="Procesador"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Título del contenido principal -->
+        <h4 id="mainTitle"></h4>
+        <!-- Componente Horizontal Card para mostrar el detalle de un producto -->
+        <div class="text-center" id="detalle">
+            <div class="row justify-content-center">
+                <div class="card-body col-12 col-md-6">
+                    <p class="fw-bold mt-3">Precio unitario (US$) <b id="precioProducto"></b></p>
+                    <p class="fw-bold mt-3">Existencias <b id="existenciasProducto"></b></p>
+                    <!-- Formulario para agregar el producto al carrito de compras -->
+                    <form class="row justify-content-center" id="shoppingForm">
+                        <!-- Campo oculto para asignar el id del producto -->
+                        <input type="number" class="d-none" id="idProducto" name="idProducto">
+                        <div class="col-12 mb-3 d-flex justify-content-center">
+                            <div class="col-6">
+                                <input type="number" id="cantidadProducto" name="cantidadProducto" min="1"
+                                    class="form-control text-center" placeholder="Ingrese cantidad" required>
+                            </div>
+                        </div>
+                        <div class="col-12 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-cart-plus-fill"></i> Comprar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>        
     </main>
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->

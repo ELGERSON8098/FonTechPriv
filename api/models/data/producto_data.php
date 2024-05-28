@@ -69,7 +69,7 @@ class productoData extends productoHandler
             return false;
         }
     }
-    public function setNombre1($value, $min = 2, $max = 50)
+    public function setNombre1($value, $min = 2, $max = 500)
     {
         if (!Validator::validateAlphanumeric($value)) {
             $this->data_error = 'El nombre debe ser un valor alfabético descripcion';

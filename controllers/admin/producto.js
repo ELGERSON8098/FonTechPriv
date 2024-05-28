@@ -168,8 +168,8 @@ const openUpdate = async (id) => {
         CAMARA_FRONTAL_PRODUCTO.value = ROW.camara_frontal_celular;
         SISTEMA_PRODUCTO.value = ROW.sistema_operativo_celular;
         PROCESADOR_PRODUCTO.value = ROW.procesador_celular;
-        fillSelect(PRODUCTO_API, 'readAllS', 'Marca',  parseInt(ROW.id_marca));
-        fillSelect(PRODUCTO_API, 'readAllSS', 'Categoria', parseInt(ROW.id_categoria));
+        fillSelect(PRODUCTO_API, 'readAllSS', 'Marca',  parseInt(ROW.id_marca));
+        fillSelect(PRODUCTO_API, 'readAllS', 'Categoria', parseInt(ROW.id_categoria));
         fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', parseInt(ROW.id_oferta));
         ESTADO_PRODUCTO1.checked = parseInt(ROW.estado_producto);
     } else {

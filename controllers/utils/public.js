@@ -30,22 +30,25 @@ const loadTemplate = async () => {
             // Se agrega el encabezado de la página web antes del contenido principal.
             MAIN.insertAdjacentHTML('beforebegin', `
                 <header>
-                    <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
-                        <div class="container">
-                            <a class="navbar-brand" href="index.html"><img src="../../resources/img/logo.png" height="50" alt="CoffeeShop"></a>
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                                <div class="navbar-nav ms-auto">
-                                    <a class="nav-link" href="index.html"><i class="bi bi-shop"></i> Catálogo</a>
-                                    <a class="nav-link" href="cart.html"><i class="bi bi-cart"></i> Carrito</a>
-                                    <a class="nav-link" href="#" onclick="logOut()"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
-                                </div>
-                            </div>
-                        </div>
-                    </nav>
-                </header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
+        <div class="container">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+        href="../public/index.html">
+        <img src="../../resources/img/image 67.png" class="logo img-fluid" alt="site icon">
+    </a>
+           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+               <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html"><i class="bi bi-shop"></i> Catálogo</a>
+                <a class="nav-link" href="cart.html"><i class="bi bi-cart"></i> Carrito</a>
+                <a class="nav-link" href="#" onclick="logOut()"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    </header>
             `);
         } else {
             location.href = 'index.html';
@@ -54,9 +57,12 @@ const loadTemplate = async () => {
         // Se agrega el encabezado de la página web antes del contenido principal.
         MAIN.insertAdjacentHTML('beforebegin', `
             <header>
-                <nav class="navbar fixed-top navbar-expand-lg bg-body-tertiary">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
                     <div class="container">
-                        <a class="navbar-brand" href="index.html"><img src="../../resources/img/logo.png" height="50" alt="CoffeeShop"></a>
+                    <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
+                    href="../public/index.html">
+                    <img src="../../resources/img/image 67.png" class="logo img-fluid" alt="site icon">
+                </a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>

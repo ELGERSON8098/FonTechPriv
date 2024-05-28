@@ -1,7 +1,7 @@
 // Constante para completar la ruta de la API.
 const CATEGORIA_API = 'services/public/categoria.php';
 // Constante para establecer el contenedor de categorías.
-const CATEGORIAS = document.getElementById('categorias');
+const CATEGORIAS = document.getElementById('special');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -21,16 +21,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             let url = `products.html?id=${row.id_categoria}&nombre=${row.nombre_categoria}`;
             // Se crean y concatenan las tarjetas con los datos de cada categoría.
             CATEGORIAS.innerHTML += `
-                <div class="col-sm-12 col-md-6 col-lg-3">
-                    <div class="card mb-3">
-                        <img src="${SERVER_URL}images/categorias/${row.imagen_categoria}" class="card-img-top" alt="${row.nombre_categoria}">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">${row.nombre_categoria}</h5>
-                            <p class="card-text">${row.descripcion_categoria}</p>
-                            <a href="${url}" class="btn btn-primary">Ver productos</a>
-                        </div>
-                    </div>
+        <div class="col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class="special-img position-relative overflow-hidden">
+                    <img src="${SERVER_URL}images/categorias/${row.imagen}" class="card-img-top" alt="${row.nombre_categoria}" class="w-100">
                 </div>
+            <div class="text-center">
+                <p class="fw-bold d-block mt-3 mb-1"> ${row.nombre_categoria}</p>
+                <a href="${url}" class="btn btn-primary mt-3">Ver productos</a>
+            </div>
+        </div>
             `;
         });
     } else {
