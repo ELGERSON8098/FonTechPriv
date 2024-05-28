@@ -13,31 +13,21 @@ const SAVE_FORM = document.getElementById('saveForm'),
 ID_PRODUCTO = document.getElementById('idProducto'),
 IMG_PRODUCTO = document.getElementById('ImagenP'),
 NOMBRE_PRODUCTO = document.getElementById('nombreP'),
-CodigoI_Producto = document.getElementById('CodigoI');
-
-const SAVE_MODALS = new bootstrap.Modal('#saveModalS'),
-    MODAL_TITLES = document.getElementById('modalTitleS');
-// Constantes para establecer los elementos del formulario de guardar.
-    const SAVE_FORMS = document.getElementById('saveFormS'),
-    ID_Modals = document.getElementById('idProducto1'),
-    IMAGEN_PRODUCTOS = document.getElementById('ImagenPs'),
-    CATEGORIAS_PRODUCTOS = document.getElementById('Categorias'),
-    MARCAS_PRODUCTOS = document.getElementById('Marcas'),
-    NOMBRE_PRODUCTOS = document.getElementById('Name'),
-    PRECIO_PRODUCTO = document.getElementById('PrecioP'),
-    EXISTENCIA_PRODUCTO = document.getElementById('Exist'),
-    DESCRIPCION_PRODUCTO = document.getElementById('Descrp'),
-    MEMORIA_INTERNA_PRODUCTO = document.getElementById('MemoriaP'),
-    RAM_PRODUCTO = document.getElementById('RamP'),
-    TAMAÑO_PRODUCTO = document.getElementById('TamañoP'),
-    CAMARA_TRASERA_PRODUCTO = document.getElementById('CamP'),
-    CAMARA_FRONTAL_PRODUCTO = document.getElementById('CamsP'),
-    SISTEMA_PRODUCTO = document.getElementById('SisP'),
-    PROCESADOR_PRODUCTO = document.getElementById('SistP'),
-    DESCUENTO_PRODUCTO = document.getElementById('Oferta'),
-    ID_PRODUCTOS1 = document.getElementById('idProsub'),
-    ESTADO_PRODUCTO1 = document.getElementById('estadoProducto1'),
-    ESTADO_PRODUCTO2 = document.getElementById('estadoProducto');
+CATEGORIAS_PRODUCTOS = document.getElementById('Categoria'),
+MARCAS_PRODUCTOS = document.getElementById('Marca'),
+PRECIO_PRODUCTO = document.getElementById('PrecioP'),
+EXISTENCIA_PRODUCTO = document.getElementById('Exist'),
+DESCRIPCION_PRODUCTO = document.getElementById('Descrp'),
+MEMORIA_INTERNA_PRODUCTO = document.getElementById('MemoriaP'),
+RAM_PRODUCTO = document.getElementById('RamP'),
+TAMAÑO_PRODUCTO = document.getElementById('TamañoP'),
+CAMARA_TRASERA_PRODUCTO = document.getElementById('CamP'),
+CAMARA_FRONTAL_PRODUCTO = document.getElementById('CamsP'),
+SISTEMA_PRODUCTO = document.getElementById('SisP'),
+PROCESADOR_PRODUCTO = document.getElementById('SistP'),
+DESCUENTO_PRODUCTO = document.getElementById('Oferta'),
+CodigoI_Producto = document.getElementById('CodigoI'),
+ESTADO_PRODUCTO1 = document.getElementById('estadoProducto');
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,36 +73,8 @@ SAVE_FORM.addEventListener('submit', async (event) => {
     }
 });
 
-SAVE_FORMS.addEventListener('submit', async (event) => {
-    // Se evita recargar la página web después de enviar el formulario.
-    event.preventDefault();
-    // Se verifica la acción a realizar.
-    console.log(ID_Modals.value);
 
-    (ID_Modals.value) ? action = 'updateRow' : action = 'createRowS';
-    // Constante tipo objeto con los datos del formulario.
-    const FORM = new FormData(SAVE_FORMS);
-    // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PRODUCTO_API, action, FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se cierra la caja de diálogo.
-        SAVE_MODALS.hide();
-        // Se muestra un mensaje de éxito.
-        sweetAlert(1, DATA.message, true);
 
-        // Se carga nuevamente la tabla para visualizar los cambios.
-        fillTable();
-    } else {
-        sweetAlert(2, DATA.error, false);
-    }
-});
-
-/*
-*   Función asíncrona para llenar la tabla con los registros disponibles.
-*   Parámetros: form (objeto opcional con los datos de búsqueda).
-*   Retorno: ninguno.
-*/
 const fillTable = async (form = null) => {
     // Se inicializa el contenido de la tabla.
     ROWS_FOUND.textContent = '';
@@ -123,61 +85,38 @@ const fillTable = async (form = null) => {
     const DATA = await fetchData(PRODUCTO_API, action, form);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        for (const row of DATA.dataset) {
-            const FORM2 = new FormData();
-            FORM2.append('idProsub', row.id_producto);
-            const DATA2 = await fetchData(PRODUCTO_API, 'readOne', FORM2);
-            console.log(row.estado_producto);
-            icon = (parseInt(row.estado_producto) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
-
-            if (DATA2.status) {
-
-                TABLE_BODY.innerHTML += `
+        // Se recorre el conjunto de registros (dataset) fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se establece un icono para el estado del producto.
+            (parseInt(row.estado_producto)) ? icon = 'bi bi-eye-fill' : icon = 'bi bi-eye-slash-fill';
+            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            TABLE_BODY.innerHTML += `
                 <tr>
-                <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
+                    <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
                     <td>${row.nombre_producto}</td>
                     <td>${row.marca}</td>
                     <td>${row.nombre_categoria}</td>
                     <td><i class="${icon}"></i></td>
                     <td>
-                        
-                        <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_producto})">
+                        <button type="button" class="btn btn-info" onclick="openUpdate(${row.id_producto})">
                             <i class="bi bi-pencil-fill"></i>
                         </button>
-                        <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_producto})">
+                        <button type="button" class="btn btn-danger" onclick="openDelete(${row.id_producto})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
                     </td>
                 </tr>
+                
             `;
-            } else {
-                TABLE_BODY.innerHTML += `
-                <tr>
-                <td><img src="${SERVER_URL}images/productos/${row.imagen}" height="50"></td>
-                    <td>${row.nombre_producto}</td>
-                    <td>${row.marca}</td>
-                    <td>${row.nombre_categoria}</td>
-                    <td><i class="${icon}"></i></td>
-                    <td>
-                        <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openCREATES(${row.id_producto}, '${row.nombre_producto}')">
-                            <i class="bi bi-plus-circle-fill"></i>
-                        </button>
-
-                        </button>
-                        <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_producto})">
-                            <i class="bi bi-trash-fill"></i>
-                        </button>
-                    </td>
-                </tr>
-            `;
-            }
-        }
-            
+        });
+        // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
     } else {
         sweetAlert(4, DATA.error, true);
     }
 }
+
+
 
 /*
 *   Función para preparar el formulario al momento de insertar un registro.
@@ -192,24 +131,10 @@ const openCreate = () => {
     SAVE_FORM.reset();
     fillSelect(PRODUCTO_API, 'readAllSS', 'Marca');
     fillSelect(PRODUCTO_API, 'readAllS', 'Categoria');
-
-}
-
-const openCREATES = (id, nombre) => {
-    //console.log
-    SAVE_MODALS.show();
-    MODAL_TITLES.textContent = 'Crear el detalle del producto';
-    SAVE_FORMS.reset();
-    NOMBRE_PRODUCTOS.disabled = true;
-    IMAGEN_PRODUCTOS.disabled = true;
-    CATEGORIAS_PRODUCTOS.disabled = true;
-    MARCAS_PRODUCTOS.disabled = true;
-    ESTADO_PRODUCTO2.disabled = true;
-    ID_PRODUCTOS1.value = id;
-    NOMBRE_PRODUCTOS.value = nombre;
-    //Se prepara el formulario
     fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta');
+
 }
+
 
 /*
 *   Función asíncrona para preparar el formulario al momento de actualizar un registro.
@@ -219,26 +144,20 @@ const openCREATES = (id, nombre) => {
 const openUpdate = async (id) => {
      // Se define una constante tipo objeto con los datos del registro seleccionado.
      const FORM = new FormData();
-     FORM.append('idProsub', id);
+     FORM.append('idProducto', id);
      // Petición para obtener los datos del registro solicitado.
      const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
      // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
      if (DATA.status) {
         // Se muestra la caja de diálogo con su título.
-        SAVE_MODALS.show();
-        MODAL_TITLES.textContent = 'Actualizar producto';
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar producto';
         // Se prepara el formulario.
-        SAVE_FORMS.reset();
+        SAVE_FORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
-        NOMBRE_PRODUCTOS.disabled = false;
-        IMAGEN_PRODUCTOS.disabled = false;
-        CATEGORIAS_PRODUCTOS.disabled = false;
-        MARCAS_PRODUCTOS.disabled = false;
-        ESTADO_PRODUCTO2.disabled = false;
-        ID_Modals.value = ROW.id_detalle_producto;
-        ID_PRODUCTOS1.value = ROW.id_producto;
-        NOMBRE_PRODUCTOS.value = ROW.nombre_producto;
+        ID_PRODUCTO.value = ROW.id_producto;
+        NOMBRE_PRODUCTO.value = ROW.nombre_producto;
         PRECIO_PRODUCTO.value = ROW.precio;
         EXISTENCIA_PRODUCTO.value = ROW.existencias;
         DESCRIPCION_PRODUCTO.value = ROW.descripcion;
@@ -249,10 +168,10 @@ const openUpdate = async (id) => {
         CAMARA_FRONTAL_PRODUCTO.value = ROW.camara_frontal_celular;
         SISTEMA_PRODUCTO.value = ROW.sistema_operativo_celular;
         PROCESADOR_PRODUCTO.value = ROW.procesador_celular;
-        fillSelect(PRODUCTO_API, 'readAllS', 'Marcas',  parseInt(ROW.id_marca));
-        fillSelect(PRODUCTO_API, 'readAllSS', 'Categorias', parseInt(ROW.id_categoria));
+        fillSelect(PRODUCTO_API, 'readAllS', 'Marca',  parseInt(ROW.id_marca));
+        fillSelect(PRODUCTO_API, 'readAllSS', 'Categoria', parseInt(ROW.id_categoria));
         fillSelect(PRODUCTO_API, 'readAllSSS', 'Oferta', parseInt(ROW.id_oferta));
-        ESTADO_PRODUCTO2.checked = parseInt(ROW.estado_producto);
+        ESTADO_PRODUCTO1.checked = parseInt(ROW.estado_producto);
     } else {
         sweetAlert(2, DATA.error, false);
     }
