@@ -1,10 +1,12 @@
 // Constantes para completar la ruta de la API.
 const PRODUCTO_API = 'services/public/producto.php';
 const PEDIDO_API = 'services/public/pedido.php';
+const COMENTARIO_API = 'services/public/comentario.php';
 // Constante tipo objeto para obtener los parámetros disponibles en la URL.
 const PARAMS = new URLSearchParams(location.search);
 // Constante para establecer el formulario de agregar un producto al carrito de compras.
-const SHOPPING_FORM = document.getElementById('shoppingForm');
+const SHOPPING_FORM = document.getElementById('shoppingForm'),
+IDPRODUCTO=document.getElementById('idProducto');
 
 // Método del eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('Procesador').textContent = DATA.dataset.procesador_celular;
         document.getElementById('precioProducto').textContent = DATA.dataset.precio;
         document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias;
-        document.getElementById('idProducto').value = DATA.dataset.id_producto;
+        IDPRODUCTO.value = DATA.dataset.id_producto;
     } else {
         // Se presenta un mensaje de error cuando no existen datos para mostrar.
         document.getElementById('mainTitle').textContent = DATA.error;
@@ -55,18 +57,16 @@ SHOPPING_FORM.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const selectedStars = document.querySelector('input[name="star-radio"]:checked');
     const starValue = selectedStars ? selectedStars.value : null;
-    console.log(6-starValue);
-    /*
+    //console.log(6-starValue);
+    
     const FORM = new FormData(SHOPPING_FORM);
     FORM.append('starValue', 6-starValue);
     // Petición para guardar los datos del formulario.
-    const DATA = await fetchData(PEDIDO_API, 'createDetail', FORM);
+    const DATA = await fetchData(COMENTARIO_API, 'createComentario', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se constata si el cliente ha iniciado sesión.
     if (DATA.status) {
-        sweetAlert(1, DATA.message, false, 'cart.html');
-    } else if (DATA.session) {
-        sweetAlert(2, DATA.error, false);
+        sweetAlert(1, DATA.message, true);
     } else {
-        sweetAlert(3, DATA.error, true, 'login.html');
-    }*/
+        sweetAlert(2, DATA.error, false);
+    }
 });

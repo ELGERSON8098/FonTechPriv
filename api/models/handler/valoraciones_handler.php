@@ -10,6 +10,7 @@ class ValoracionesHandler
      *  Declaración de atributos para el manejo de datos.
      */
     protected $idValoracion = null;
+    protected $id_producto = null;
     protected $calificacionValoracion = null;
     protected $comentarioValoracion = null;
     protected $fechaValoracion = null;
@@ -64,6 +65,18 @@ class ValoracionesHandler
         $params = array(
             $this->estadoValoracion,
             $this->idValoracion
+        );
+        return Database::executeRow($sql, $params);
+    }
+    public function createComentario()
+    {
+        $sql = 'INSERT INTO tb_valoraciones (calificacion_valoracion, comentario_valoracion, estado_valoracion, id_producto,id_usuario)
+        VALUES ( ?,  ?, false,  ?,?);';
+        $params = array(
+            $this->calificacionValoracion,
+            $this->comentarioValoracion,
+            $this->id_producto,
+            $_SESSION['idUsuario']
         );
         return Database::executeRow($sql, $params);
     }

@@ -93,7 +93,7 @@
                     <!-- Formulario para agregar el producto al carrito de compras -->
                     <form class="row justify-content-center" id="shoppingFor">
                         <!-- Campo oculto para asignar el id del producto -->
-                        <input type="number" class="d-none" id="idProducto" name="idProducto">
+                    
                         <div class="col-12 mb-3 d-flex justify-content-center">
                             <div class="col-6">
                                 <input type="number" id="cantidadProducto" name="cantidadProducto" min="1"
@@ -116,6 +116,7 @@
                     <h2 class="position-relative d-inline-block ms-4">Escribe tu Comentario</h2>
                 </div>
                 <form class="row justify-content-center" id="shoppingForm">
+                    <input type="number" class="d-none" id="idProducto" name="idProducto">
                     <div class="rating">
                         <input type="radio" id="star-1" name="star-radio" value="1">
                         <label for="star-1">
@@ -169,7 +170,7 @@
 
                     
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name="floatingTextarea2"
                             style="height: 100px"></textarea>
                         <label for="floatingTextarea2">Escribe tu Comentario del Producto</label>
                         <br>
