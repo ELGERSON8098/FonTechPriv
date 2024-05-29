@@ -44,6 +44,17 @@ class ValoracionesHandler
         ORDER BY p.nombre_producto;';
         return Database::getRows($sql);
     }
+    public function readAllByProducto()
+    {
+        $sql = 'SELECT id_valoracion,nombre_producto, imagen, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion,nombre
+        FROM tb_valoraciones v
+        INNER JOIN tb_productos USING(id_producto)
+        INNER JOIN tb_usuarios  USING(id_usuario)
+        WHERE id_producto=?
+        ORDER BY nombre_producto;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql, $params);
+    }
 
     //    Leer un registro de una valoracion
     public function readOne()

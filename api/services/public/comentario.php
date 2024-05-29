@@ -34,13 +34,15 @@ if (isset($_GET['action'])) {
                 }
                 break;
             // Acción para obtener los productos agregados en el carrito de compras.
-            case 'readDetail':
-                if (!$pedido->getOrder()) {
-                    $result['error'] = 'No ha agregado productos al carrito';
-                } elseif ($result['dataset'] = $pedido->readDetail()) {
+            case 'readAllByProducto':
+                if (
+                    !$pedido->setIdProducto($_POST['idProducto']) 
+                ) {
+                    $result['error'] = $pedido->getDataError();
+                } elseif ($result['dataset'] = $pedido->readAllByProducto()) {
                     $result['status'] = 1;
                 } else {
-                    $result['error'] = 'No existen productos en el carrito';
+                    $result['error'] = 'No existen categorías para mostrar';
                 }
                 break;
             // Acción para actualizar la cantidad de un producto en el carrito de compras.
