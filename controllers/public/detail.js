@@ -39,14 +39,26 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Se limpia el contenido cuando no hay datos para mostrar.
         document.getElementById('detalle').innerHTML = '';
     }
+
 });
+
+
+
+
+
+
 
 // Método del evento para cuando se envía el formulario de agregar un producto al carrito.
 SHOPPING_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
     // Constante tipo objeto con los datos del formulario.
+    const selectedStars = document.querySelector('input[name="star-radio"]:checked');
+    const starValue = selectedStars ? selectedStars.value : null;
+    console.log(6-starValue);
+    /*
     const FORM = new FormData(SHOPPING_FORM);
+    FORM.append('starValue', 6-starValue);
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(PEDIDO_API, 'createDetail', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se constata si el cliente ha iniciado sesión.
@@ -56,5 +68,5 @@ SHOPPING_FORM.addEventListener('submit', async (event) => {
         sweetAlert(2, DATA.error, false);
     } else {
         sweetAlert(3, DATA.error, true, 'login.html');
-    }
+    }*/
 });
