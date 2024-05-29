@@ -10,6 +10,7 @@
     <meta name="author" content="Daniel Carranza">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
+    <link type="text/css" rel="stylesheet" href="../../resources/css/estrellas.css">
     <!-- Llamada al icono de la página web -->
     <link type="image/png" rel="icon" href="../../resources/img/image 67.png">
     <!-- Llamada a las hojas de estilos del framework e iconos -->
@@ -90,7 +91,7 @@
                     <p class="fw-bold mt-3">Precio unitario (US$) <b id="precioProducto"></b></p>
                     <p class="fw-bold mt-3">Existencias <b id="existenciasProducto"></b></p>
                     <!-- Formulario para agregar el producto al carrito de compras -->
-                    <form class="row justify-content-center" id="shoppingForm">
+                    <form class="row justify-content-center" id="shoppingFor">
                         <!-- Campo oculto para asignar el id del producto -->
                         <input type="number" class="d-none" id="idProducto" name="idProducto">
                         <div class="col-12 mb-3 d-flex justify-content-center">
@@ -107,7 +108,93 @@
                     </form>
                 </div>
             </div>
-        </div>        
+        </div>
+
+        <div class="container">
+            <div class="col-lg-6 order-lg-1 text-center text-lg-start mb-5">
+                <div class="title pt-3 pb-5">
+                    <h2 class="position-relative d-inline-block ms-4">Escribe tu Comentario</h2>
+                </div>
+                <form class="row justify-content-center" id="shoppingForm">
+                    <div class="rating">
+                        <input type="radio" id="star-1" name="star-radio" value="1">
+                        <label for="star-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path pathLength="360"
+                                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                </path>
+                            </svg>
+                        </label>
+                        <input type="radio" id="star-2" name="star-radio" value="2">
+                        <label for="star-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path pathLength="360"
+                                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                </path>
+                            </svg>
+                        </label>
+                        <input type="radio" id="star-3" name="star-radio" value="3">
+                        <label for="star-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path pathLength="360"
+                                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                </path>
+                            </svg>
+                        </label>
+                        <input type="radio" id="star-4" name="star-radio" value="4">
+                        <label for="star-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path pathLength="360"
+                                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                </path>
+                            </svg>
+                        </label>
+                        <input type="radio" id="star-5" name="star-radio" value="5">
+                        <label for="star-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path pathLength="360"
+                                    d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                </path>
+                            </svg>
+                        </label>
+                    </div>
+
+                    <span class="Estrellita"><i class="fas fa-star"></i></span>
+                    <span class="Estrellita"><i class="fas fa-star"></i></span>
+                    <span class="Estrellita"><i class="fas fa-star"></i></span>
+                    <span class="Estrellita"><i class="fas fa-star"></i></span>
+                    <span class="Estrellita"><i class="fas fa-star"></i></span>
+
+                    <div class="my-2"></div>
+
+                    
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+                            style="height: 100px"></textarea>
+                        <label for="floatingTextarea2">Escribe tu Comentario del Producto</label>
+                        <br>
+                        <button type="submit" class="btn btn-primary">
+                            <i class=""></i> Enviar Comentario
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-lg-6 order-lg-1 text-center text-lg-start">
+                <div class="title pt-3 pb-5">
+                    <h2 class="position-relative d-inline-block ms-4">Opiniones</h2>
+                </div>
+                <p class="text-uppercase text-decoration-none brand text-black">Juan Alberto Rodriguez</p>
+                <span class="Estrellita1"><i class="fas fa-star"></i></span>
+                <span class="Estrellita1"><i class="fas fa-star"></i></span>
+                <span class="Estrellita1"><i class="fas fa-star"></i></span>
+                <span class="Estrellita1"><i class="fas fa-star"></i></span>
+                <span class="Estrellita1"><i class="fas fa-star"></i></span>
+                <p class="lead text-muted">Buen Producto con funcionalidades increibles</p>
+            </div>
+        </div>
+        <!--Fin de Comentarios-->
     </main>
     <!-- IMPORTACIÓN DE ARCHIVOS JAVASCRIPT -->
     <!-- Llamada al framework y librería de mensajes -->
