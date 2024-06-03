@@ -77,15 +77,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
                 }
                 break;
+                case 'readProfile':
+                    if ($result['dataset'] = $cliente->readProfile()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al leer el perfil';
+                    }
+                    break;
                 case 'editProfile':
                     $_POST = Validator::validateForm($_POST);
                     if (
-                        !$administrador->setNombre($_POST['nombreAdministrador']) or
-                        !$administrador->setCorreo($_POST['correoAdministrador']) or
-                        !$administrador->setAlias($_POST['aliasAdministrador'])
+                        !$cliente->setNombre($_POST['nombreAdministrador']) or
+                        !$cliente->setCorreo($_POST['correoAdministrador']) or
+                        !$cliente->setAlias($_POST['aliasAdministrador'])
                     ) {
-                        $result['error'] = $administrador->getDataError();
-                    } elseif ($administrador->editProfile()) {
+                        $result['error'] = $cliente->getDataError();
+                    } elseif ($cliente->editProfile()) {
                         $result['status'] = 1;
                         $result['message'] = 'Perfil modificado correctamente';
                         $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];

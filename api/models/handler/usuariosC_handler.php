@@ -55,12 +55,11 @@ class UsuariosHandler
                 SET estado_usuario = ?
                 WHERE id_usuario = ?';
         $params = array(
-            $this->estadoValoracion,
-            $this->idValoracion
+            $this->estadocliente,
+            $this->estadocliente
         );
         return Database::executeRow($sql, $params);
     }
-}
 
     public function deleteRow()
     {
