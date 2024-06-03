@@ -29,7 +29,25 @@ if (isset($_GET['action'])) {
                     } else {
                         $result['error'] = 'Ocurrió un problema al leer el perfil';
                     }
-                    break;
+                    break;     
+
+                    case 'changePassword':
+                        $_POST = Validator::validateForm($_POST);
+                        if (!$cliente->checkPassword($_POST['claveActual'])) {
+                            $result['error'] = 'Contraseña actual incorrecta';
+                        } elseif ($_POST['claveNueva'] != $_POST['confirmarClave']) {
+                            $result['error'] = 'Confirmación de contraseña diferente';
+                        } elseif (!$cliente->setClave($_POST['claveNueva'])) {
+                            $result['error'] = $cliente->getDataError();
+                        } elseif ($cliente->changePassword()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'La constraseña ha sido cambiada exitosamente';
+                        } else {
+                            $result['error'] = 'Ocurrió un problema al cambiar la contraseña';
+                        }
+                break;
+
+
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -101,6 +119,8 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'Ocurrió un problema al modificar el perfil';
                     }
                     break;
+                  
+                    
             case 'logIn':
                 $_POST = Validator::validateForm($_POST);
                 if (!$cliente->checkUser($_POST['UsuarioCliente'], $_POST['clave'])) {

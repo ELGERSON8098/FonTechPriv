@@ -56,13 +56,26 @@ class ClienteHandler
 
     public function changePassword()
     {
-        $sql = 'UPDATE cliente
-                SET clave_cliente = ?
-                WHERE id_cliente = ?';
+        $sql = 'UPDATE tb_usuarios
+                SET clave = ?
+                WHERE id_usuario = ?';
         $params = array($this->clave, $_SESSION['idUsuario']);
         return Database::executeRow($sql, $params);
     }
 
+    public function checkPassword($password)
+    {
+        $sql = 'SELECT clave
+                FROM tb_usuarios
+                WHERE id_usuario = ?';
+        $params = array($_SESSION['idUsuario']);
+        $data = Database::getRow($sql, $params);
+        if (password_verify($password, $data['clave'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function editProfile()
     {
         $sql = 'UPDATE tb_usuarios
