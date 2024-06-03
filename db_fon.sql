@@ -162,7 +162,11 @@ CREATE TABLE tb_valoraciones (
 );
 
 
-
+ALTER TABLE tb_valoraciones
+ADD COLUMN id_usuario INT UNSIGNED NOT NULL,
+ADD CONSTRAINT fk_usuarios
+FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE tb_reservas (
   id_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
