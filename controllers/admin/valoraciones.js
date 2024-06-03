@@ -165,6 +165,7 @@ const openUpdate = async (id) => {
                 IMAGEN_ESTRELLA3.src = '../../api/images/productos/estrella.png'
                 IMAGEN_ESTRELLA4.src = '../../api/images/productos/estrellaBlanca.png'
                 IMAGEN_ESTRELLA5.src = '../../api/images/productos/estrellaBlanca.png'
+                break;
             case 4:
                 IMAGEN_ESTRELLA1.src = '../../api/images/productos/estrella.png'
                 IMAGEN_ESTRELLA2.src = '../../api/images/productos/estrella.png'
