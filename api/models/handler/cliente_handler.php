@@ -26,7 +26,7 @@ class ClienteHandler
     */
     public function checkUser($correo, $password)
     {
-        $sql = 'SELECT id_usuario, usuario, clave, estado_cliente
+        $sql = 'SELECT id_usuario, usuario, clave, estado_cliente, usuario
                 FROM tb_usuarios
                 WHERE usuario = ?';
         $params = array($correo);
@@ -34,7 +34,7 @@ class ClienteHandler
     
         if ($data && password_verify($password, $data['clave'])) {
             $this->id = $data['id_usuario'];
-            $this->correo = $data['usuario'];
+            $this->alias = $data['usuario'];
             $this->estado = $data['estado_cliente'];
             return true;
         } else {
@@ -47,7 +47,7 @@ class ClienteHandler
     {
         if ($this->estado) {
             $_SESSION['idUsuario'] = $this->id;
-            $_SESSION['usuarioCliente'] = $this->alias;
+            $_SESSION['UsuarioCliente'] = $this->alias;
             return true;
         } else {
             return false;
@@ -59,7 +59,7 @@ class ClienteHandler
         $sql = 'UPDATE cliente
                 SET clave_cliente = ?
                 WHERE id_cliente = ?';
-        $params = array($this->clave, $this->id);
+        $params = array($this->clave, $_SESSION['idUsuario']);
         return Database::executeRow($sql, $params);
     }
 
@@ -126,7 +126,7 @@ class ClienteHandler
         $sql = 'SELECT id_usuario, nombre, usuario, correo, clave, estado_cliente
         FROM tb_usuarios
         WHERE id_usuario = ?';
-        $params = array($_SESSION['usuarioCliente']);
+        $params = array($_SESSION['idUsuario']);
         return Database::getRow($sql, $params);
     }
 

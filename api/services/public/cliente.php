@@ -16,13 +16,20 @@ if (isset($_GET['action'])) {
         // Se compara la acción a realizar cuando un cliente ha iniciado sesión.
         switch ($_GET['action']) {
             case 'getUser':
-                if (isset($_SESSION['usuarioCliente'])) {
+                if (isset($_SESSION['UsuarioCliente'])) {
                     $result['status'] = 1;
-                    $result['username'] = $_SESSION['usuarioCliente'];
+                    $result['username'] = $_SESSION['UsuarioCliente'];
                 } else {
                     $result['error'] = 'Usuario indefinido';
                 }
                 break;
+                case 'readProfile':
+                    if ($result['dataset'] = $cliente->readProfile()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al leer el perfil';
+                    }
+                    break;
             case 'logOut':
                 if (session_destroy()) {
                     $result['status'] = 1;
@@ -77,13 +84,7 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al registrar la cuenta';
                 }
                 break;
-                case 'readProfile':
-                    if ($result['dataset'] = $cliente->readProfile()) {
-                        $result['status'] = 1;
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al leer el perfil';
-                    }
-                    break;
+                
                 case 'editProfile':
                     $_POST = Validator::validateForm($_POST);
                     if (
