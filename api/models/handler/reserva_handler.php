@@ -88,33 +88,31 @@ WHERE
     public function readDetalles2()
     {
         $sql = ' SELECT 
-    dr.id_detalle_reserva,
-    dr.precio_unitario,
-    dr.cantidad,
-    r.fecha_reserva,
-    dp.capacidad_memoria_interna_celular,
-    dp.ram_celular,
-    dp.pantalla_tamaño,
-    dp.camara_trasera_celular,
-    dp.sistema_operativo_celular,
-    dp.camara_frontal_celular,
-    dp.procesador_celular,
-    m.marca AS marca,
-    o.nombre_descuento
-FROM 
-    tb_detalles_reservas dr
-INNER JOIN 
-    tb_reservas r ON dr.id_reserva = r.id_reserva
-INNER JOIN 
-    tb_productos p ON r.id_producto = p.id_producto
-INNER JOIN 
-    tb_detalles_productos dp ON p.id_producto = dp.id_producto
-INNER JOIN 
-    tb_marcas m ON p.id_marca = m.id_marca
-INNER JOIN 
-    tb_ofertas o ON dp.id_oferta = o.id_oferta
-WHERE 
-    dr.id_detalle_reserva = ?'; // Ajusta esta condición según tus necesidades
+        dr.id_detalle_reserva,
+        dr.precio_unitario,
+        dr.cantidad,
+        r.fecha_reserva,
+        p.capacidad_memoria_interna_celular,
+        p.ram_celular,
+        p.pantalla_tamaño,
+        p.camara_trasera_celular,
+        p.sistema_operativo_celular,
+        p.camara_frontal_celular,
+        p.procesador_celular,
+        m.marca AS marca,
+        o.nombre_descuento
+    FROM 
+        tb_detalles_reservas dr
+    INNER JOIN 
+        tb_reservas r ON dr.id_reserva = r.id_reserva
+    INNER JOIN 
+        tb_productos p ON r.id_producto = p.id_producto
+    INNER JOIN 
+        tb_marcas m ON p.id_marca = m.id_marca
+    LEFT JOIN 
+        tb_ofertas o ON p.id_oferta = o.id_oferta
+    WHERE 
+        dr.id_detalle_reserva = ?'; // Ajusta esta condición según tus necesidades
 
         $params = array($this->id);
         return Database::getRow($sql, $params);

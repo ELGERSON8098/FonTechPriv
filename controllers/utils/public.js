@@ -43,6 +43,12 @@ const loadTemplate = async () => {
                <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="index.html"><i class="bi bi-shop"></i> Catálogo</a>
                 <a class="nav-link" href="cart.html"><i class="bi bi-cart"></i> Carrito</a>
+                <div class="order-lg-2 nav-btns">
+                    <a href="../admin/miperfil.html" class="btn position-relative mb-3">
+                    <i class="fa fa-user"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary"></span>
+                </a>
+                </div>
                 <a class="nav-link" href="#" onclick="logOut()"><i class="bi bi-box-arrow-left"></i> Cerrar sesión</a>
                 </div>
             </div>

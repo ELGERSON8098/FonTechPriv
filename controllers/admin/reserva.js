@@ -19,6 +19,14 @@ const SAVE_MODAL = new bootstrap.Modal('#saveModal'),
 const SAVE_FORM = document.getElementById('saveForm'),
     INPUTSEARCH = document.getElementById('inputsearch'),
     ESTADO_PEDIDO = document.getElementById('estadoPedido');
+
+    const SAVE_MODALSS = new bootstrap.Modal('#saveModalSS'),
+    MODAL_TITLESS = document.getElementById('modalTitleSS');
+
+    const SAVE_FORMSS = document.getElementById('saveFormSS'),
+    ID_ESTADOSA = document.getElementById('idEstadosa'),
+    ESTADO_DEL_PEDIDO = document.getElementById('estadopedidosa');
+
 // Constantes para establecer los elementos del componente Modal.
 const SAVE_TREMODAL = new bootstrap.Modal('#savetreModal'),
     TREMODAL_TITLE = document.getElementById('tremodalTitle');
@@ -137,6 +145,7 @@ const openUpdate = async (id) => {
         // Se prepara el formulario.
         SAVE_FORM.reset();
         fillSubTable(id);
+        
     } 
 
 
@@ -227,8 +236,8 @@ const opensubUpdate = async (id) => {
         SAVE_TREFORM.reset();
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
+
         ID_DETALLE.value = ROW.id_detalle_reserva;
-        //console.log(ROW.stock + ' ' + ROW.precio_modelo_talla);
         PRECIO.value = ROW.precio_unitario;
         CANTIDAD.value = ROW.cantidad;
         FECHA_RESERVA.value = ROW.fecha_reserva;

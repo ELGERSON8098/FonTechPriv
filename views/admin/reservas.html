@@ -26,6 +26,7 @@
 
     <!-- Contenido principal del documento -->
     <main>
+        <br>
         <!-- Título del contenido principal -->
         <h3 id="mainTitle"></h3>
 
@@ -68,7 +69,7 @@
                     <th>Municipio</th>
                     <th>Distrito</th>
                     <th>Estado de la reserva</th>
-                    <th>Acciones</th>
+                    <th>Accion</th>
                 </thead>
                 <!-- Cuerpo de la tabla para mostrar un registro por fila -->
                 <tbody id="tableBody"></tbody>
@@ -126,8 +127,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
@@ -208,6 +207,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal para guardar un registro -->
+        <div class="modal fade" id="saveModalSS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="modalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="modalTitleSS"></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <!-- Formulario para guardar un registro -->
+                    <form id="saveFormSS">
+                        <div class="col-sm-12 col-md-6">
+                            <input type="number" class="d-none" id="idEstadosa" name="idEstadosa">
+                            <label for="estadopedido" class="form-label">Estado del pedido</label>
+                            <select id="estadopedidosa" name="estadopedido" class="form-select" required>
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </main>
 
 
