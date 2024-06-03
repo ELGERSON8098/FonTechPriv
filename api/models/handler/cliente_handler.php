@@ -123,10 +123,10 @@ class ClienteHandler
 
     public function readProfile()
     {
-        $sql = 'SELECT id_administrador, nombre_administrador, apellido_administrador, correo_administrador, alias_administrador
-                FROM administrador
-                WHERE id_administrador = ?';
-        $params = array($_SESSION['idAdministrador']);
+        $sql = 'SELECT id_usuario, nombre, usuario, correo, clave, estado_cliente
+        FROM tb_usuarios
+        WHERE id_usuario = ?';
+        $params = array($_SESSION['usuarioCliente']);
         return Database::getRow($sql, $params);
     }
 
