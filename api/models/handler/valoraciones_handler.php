@@ -10,6 +10,7 @@ class ValoracionesHandler
      *  Declaración de atributos para el manejo de datos.
      */
     protected $idValoracion = null;
+    protected $id_producto = null;
     protected $calificacionValoracion = null;
     protected $comentarioValoracion = null;
     protected $fechaValoracion = null;
@@ -43,6 +44,17 @@ class ValoracionesHandler
         ORDER BY p.nombre_producto;';
         return Database::getRows($sql);
     }
+    public function readAllByProducto()
+    {
+        $sql = 'SELECT id_valoracion,nombre_producto, imagen, calificacion_valoracion, comentario_valoracion, fecha_valoracion, estado_valoracion,nombre
+        FROM tb_valoraciones v
+        INNER JOIN tb_productos USING(id_producto)
+        INNER JOIN tb_usuarios  USING(id_usuario)
+        WHERE id_producto=?
+        ORDER BY nombre_producto;';
+        $params = array($this->id_producto);
+        return Database::getRows($sql, $params);
+    }
 
     //    Leer un registro de una valoracion
     public function readOne()
@@ -64,6 +76,18 @@ class ValoracionesHandler
         $params = array(
             $this->estadoValoracion,
             $this->idValoracion
+        );
+        return Database::executeRow($sql, $params);
+    }
+    public function createComentario()
+    {
+        $sql = 'INSERT INTO tb_valoraciones (calificacion_valoracion, comentario_valoracion, estado_valoracion, id_producto,id_usuario)
+        VALUES ( ?,  ?, false,  ?,?);';
+        $params = array(
+            $this->calificacionValoracion,
+            $this->comentarioValoracion,
+            $this->id_producto,
+            $_SESSION['idUsuario']
         );
         return Database::executeRow($sql, $params);
     }

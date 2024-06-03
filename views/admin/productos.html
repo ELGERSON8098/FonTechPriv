@@ -96,7 +96,7 @@
                             <!-- Campo para la imagen del producto -->
                             <div class="col-sm-12 col-md-6">
                                 <label for="ImagenP" class="form-label">Imagen del producto</label>
-                                <input id="ImagenP" type="file" name="ImagenP" class="form-control" accept=".png, .jpg" required>
+                                <input id="ImagenP" type="file" name="ImagenP" class="form-control" accept=".png, .jpg" >
                             </div>
                             <!-- Campos para los datos del producto -->
                             <div class="col-sm-12 col-md-6">
@@ -112,47 +112,6 @@
                                 <label for="Categoria" class="form-label">Categoria</label>
                                 <select id="Categoria" type="text" name="Categoria" class="form-control"
                                     required></select>
-                            </div>
-                            <div class="form-check form-switch form-check-reverse">
-                                <input class="form-check-input" type="checkbox" id="estadoProducto1"
-                                    name="estadoProducto1" checked>
-                                <label class="form-check-label" for="estadoProducto1">Estado</label>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <!-- Botón para guardar el producto -->
-                            <button type="submit" class="btn btn-primary">Guardar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <main>
-        <!-- Modal para guardar un nuevo producto -->
-        <div class="modal fade" id="saveModalS" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="modalTitle" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="modalTitleS"></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <!-- Formulario para guardar un nuevo producto -->
-                    <form id="saveFormS">
-                        <div class="modal-body row g-3">
-                            <input type="number" class="d-none" id="idProducto1" name="idProducto1">
-                            <input type="number" class="d-none" id="idProsub" name="idProsub">
-                            <!-- Campo para la imagen del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="ImagenPs" class="form-label">Imagen del producto</label>
-                                <input id="ImagenPs" type="file" name="ImagenPs" class="form-control" accept=".png, .jpg">
-                            </div>
-                            <!-- Campos para los datos del producto -->
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Name" class="form-label">Producto</label>
-                                <input id="Name" type="text" name="Name" class="form-control" required>
                             </div>
                             <div class="col-sm-12 col-md-6">
                                 <label for="PrecioP" class="form-label">Precio</label>
@@ -198,16 +157,6 @@
                             <div class="col-sm-12 col-md-6">
                                 <label for="Oferta" class="form-label">Descuento</label>
                                 <select id="Oferta" type="text" name="Oferta" class="form-control"></select>
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Marcas" class="form-label">Marca</label>
-                                <select id="Marcas" type="text" name="Marcas" class="form-control"></select>
-
-                            </div>
-                            <div class="col-sm-12 col-md-6">
-                                <label for="Categorias" class="form-label">Categoria</label>
-                                <select id="Categorias" type="text" name="Categorias" class="form-control"
-                                    ></select>
                             </div>
                             <div class="form-check form-switch form-check-reverse">
                                 <input class="form-check-input" type="checkbox" id="estadoProducto"

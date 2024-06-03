@@ -6,7 +6,7 @@ require_once('../../models/handler/cliente_handler.php');
 /*
 *	Clase para manejar el encapsulamiento de los datos de la tabla CLIENTE.
 */
-class ClienteData extends UsuariosHandler
+class ClienteData extends ClienteHandler
 {
     // Atributo genérico para manejo de errores.
     private $data_error = null;
@@ -25,6 +25,20 @@ class ClienteData extends UsuariosHandler
         }
     }
 
+    public function setAlias($value, $min = 6, $max = 25)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El alias debe ser un valor alfanumérico';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->alias = $value;
+            return true;
+        } else {
+            $this->data_error = 'El alias debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
     public function setNombre($value, $min = 2, $max = 50)
     {
         if (!Validator::validateAlphabetic($value)) {
@@ -39,19 +53,6 @@ class ClienteData extends UsuariosHandler
         }
     }
 
-    public function setApellido($value, $min = 2, $max = 50)
-    {
-        if (!Validator::validateAlphabetic($value)) {
-            $this->data_error = 'El apellido debe ser un valor alfabético';
-            return false;
-        } elseif (Validator::validateLength($value, $min, $max)) {
-            $this->apellido = $value;
-            return true;
-        } else {
-            $this->data_error = 'El apellido debe tener una longitud entre ' . $min . ' y ' . $max;
-            return false;
-        }
-    }
 
     public function setCorreo($value, $min = 8, $max = 100)
     {
