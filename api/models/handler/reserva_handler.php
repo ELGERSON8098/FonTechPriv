@@ -43,7 +43,7 @@ class reservaHandler
         return Database::getRows($sql);
     }
 
-
+//Es una función que obtiene los detalles de una reserva específica, incluyendo información del usuario y del distrito asociado
     public function readOne()
     {
         $sql = 'SELECT 
@@ -65,40 +65,41 @@ class reservaHandler
         return Database::getRow($sql, $params);
     }
 
-
+//Esta funcion es la que se utiliza para mostrar los datos de la segunda tabla
     public function readDetalles()
     {
         $sql = 'SELECT 
-    p.nombre_producto, 
-    p.imagen, 
-    r.fecha_reserva,
-    dr.id_detalle_reserva
-FROM 
-    tb_detalles_reservas dr
-INNER JOIN 
-    tb_reservas r ON dr.id_reserva = r.id_reserva
-INNER JOIN 
-    tb_productos p ON r.id_producto = p.id_producto
-WHERE 
-    dr.id_reserva = ?';
+        p.nombre_producto, 
+        p.imagen, 
+        r.fecha_reserva,
+        dr.id_detalle_reserva
+    FROM 
+        tb_detalles_reservas dr
+    INNER JOIN 
+        tb_reservas r ON dr.id_reserva = r.id_reserva
+    INNER JOIN 
+        tb_detalles_productos dp ON dr.id_detalle_producto = dp.id_detalle_producto
+    INNER JOIN 
+        tb_productos p ON dp.id_producto = p.id_producto
+    WHERE 
+        dr.id_reserva = ?';
         $params = array($this->id);
         return Database::getRows($sql, $params);
     }
 
+    // Esta funcion es la que se utiliza cuando se abre el modal dentro de la segunda tabla para mostrar los detalles del producto
     public function readDetalles2()
     {
-        $sql = ' SELECT 
-        dr.id_detalle_reserva,
-        dr.precio_unitario,
+        $sql = 'SELECT 
         dr.cantidad,
         r.fecha_reserva,
-        p.capacidad_memoria_interna_celular,
-        p.ram_celular,
-        p.pantalla_tamaño,
-        p.camara_trasera_celular,
-        p.sistema_operativo_celular,
-        p.camara_frontal_celular,
-        p.procesador_celular,
+        dp.capacidad_memoria_interna_celular,
+        dp.ram_celular,
+        dp.pantalla_tamaño,
+        dp.camara_trasera_celular,
+        dp.sistema_operativo_celular,
+        dp.camara_frontal_celular,
+        dp.procesador_celular,
         m.marca AS marca,
         o.nombre_descuento
     FROM 
@@ -106,11 +107,13 @@ WHERE
     INNER JOIN 
         tb_reservas r ON dr.id_reserva = r.id_reserva
     INNER JOIN 
-        tb_productos p ON r.id_producto = p.id_producto
+        tb_detalles_productos dp ON dr.id_detalle_producto = dp.id_detalle_producto
+    INNER JOIN 
+        tb_productos p ON dp.id_producto = p.id_producto
     INNER JOIN 
         tb_marcas m ON p.id_marca = m.id_marca
-    LEFT JOIN 
-        tb_ofertas o ON p.id_oferta = o.id_oferta
+    INNER JOIN 
+        tb_ofertas o ON dp.id_oferta = o.id_oferta
     WHERE 
         dr.id_detalle_reserva = ?'; // Ajusta esta condición según tus necesidades
 
@@ -125,7 +128,6 @@ WHERE
                 dr.id_detalle_reserva,
                 dr.id_reserva,
                 dr.cantidad,
-                dr.precio_unitario,
                 r.estado_reserva,
                 r.fecha_reserva,
                 u.nombre AS nombre_usuario,
@@ -144,7 +146,7 @@ WHERE
                 tb_municipios m ON d.id_municipio = m.id_municipio
             INNER JOIN 
                 tb_departamentos dept ON m.id_departamento = dept.id_departamento
-            WHERE dr.id_detalle_reserva = ?'; // Agregamos una condición para seleccionar un solo detalle de reserva
+            WHERE dr.id_detalle_reserva = ?';
 
         $params = array($this->id);
         return Database::getRow($sql, $params);
