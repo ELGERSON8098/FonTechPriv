@@ -74,4 +74,15 @@ class PedidoData extends PedidoHandler
     {
         return $this->data_error;
     }
+
+    public function setPrecio($value)
+    {
+        if (Validator::validateMoney($value)) {
+            $this->precio = $value;
+            return true;
+        } else {
+            $this->data_error = 'La cantidad del producto debe ser mayor o igual a 1';
+            return false;
+        }
+    }
 }

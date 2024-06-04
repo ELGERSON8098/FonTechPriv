@@ -27,7 +27,7 @@ class reservaData extends reservaHandler
     public function setIdDetalle($value)
     {
         if (Validator::validateNaturalNumber($value)) {
-            $this->id = $value;
+            $this->id_reserva = $value;
             return true;
         } else {
             $this->data_error = 'El identificador de la reserva es incorrecto';

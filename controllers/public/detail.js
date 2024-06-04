@@ -1,13 +1,15 @@
 // Constantes para completar la ruta de la API.
 const PRODUCTO_API = 'services/public/producto.php';
-const PEDIDO_API = 'services/public/pedido.php';
+const PEDIDO_API2 = 'services/public/pedido.php';
 const COMENTARIO_API = 'services/public/comentario.php';
 // Constante tipo objeto para obtener los parámetros disponibles en la URL.
 const PARAMS = new URLSearchParams(location.search);
 // Constante para establecer el formulario de agregar un producto al carrito de compras.
 const SHOPPING_FORM = document.getElementById('shoppingForm'),
 LISTCOMENTARIO = document.getElementById('listComentario'),
+FORMULARIO = document.getElementById('shoppingFor'),
 IDPRODUCTO=document.getElementById('idProducto');
+
 
 // Método del eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
@@ -108,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             element.disabled = true;
         });
     } else {
-        sweetAlert(4, DATA.error, false);
+        //sweetAlert(4, DATA.error, false);
     }
 
 
@@ -116,7 +118,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-
+FORMULARIO.addEventListener('submit', async (event) => {
+    // Se evita recargar la página web después de enviar el formulario.
+    event.preventDefault();
+    // Constante tipo objeto con los datos del formulario.
+    const FORM = new FormData(FORMULARIO);
+    FORM.append("idProducto",IDPRODUCTO.value)
+    // Petición para guardar los datos del formulario.
+    const DATA = await fetchData(PEDIDO_API2, 'createDetail', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se constata si el cliente ha iniciado sesión.
+    if (DATA.status) {
+        sweetAlert(1, DATA.message, false, 'cart.html');
+    } else if (DATA.session) {
+        sweetAlert(2, DATA.error, false);
+    } else {
+        sweetAlert(3, DATA.error, true, 'login.html');
+    }
+});
 
 
 

@@ -13,7 +13,7 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idusuarioC'),
     NOMBRE_USUARIO = document.getElementById('nombreUsuarioC'),
     ALIAS_USUARIO = document.getElementById('aliasUsuarioC'),
-    CORREO_USUARIO = document.getElementById('correoUsuarioC'),
+    CORREO_USUARIO = document.getElementById('correoUsuarioC')
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -77,28 +77,59 @@ const fillTable = async (form = null) => {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            icon = (parseInt(row.estado_cliente) === 1) ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill';
             TABLE_BODY.innerHTML += `
-            <tr>
-                <td class="align-middle">${row.nombre_producto}</td>
-                    <td class="align-middle">${row.fecha_valoracion}</td>
-                    <td><i class="${icon}"></i></td>
-                    <td class="align-middle">
-                        <button type="button" class="btn btn-info me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.estado_cliente})">
-                            <i class="bi bi-info-circle"></i>
+                <tr>
+                    <td>${row.nombre}</td>
+                    <td>${row.usuario}</td>
+                    <td>${row.correo}</td>                
+                    <td>
+                        <button type="button" class="btn btn-info  rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_usuario})">
+                            <i class="bi bi-pencil-fill"></i>
                         </button>
-
+                        <button type="button" class="btn btn-danger  rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_usuario})">
+                            <i class="bi bi-trash-fill"></i>
+                        </button>
                     </td>
-                </td>
-            </tr>
-            `
+                </tr>
+            `;
         });
+        // Se muestra un mensaje de acuerdo con el resultado.
         ROWS_FOUND.textContent = DATA.message;
     } else {
-        sweetAlert(3, DATA.error, true);
+        sweetAlert(4, DATA.error, true);
     }
 }
 
+
+/*
+*   Función asíncrona para preparar el formulario al momento de actualizar un registro.
+*   Parámetros: id (identificador del registro seleccionado).
+*   Retorno: ninguno.
+*/
+const openUpdate = async (id) => {
+    // Se define una constante tipo objeto con los datos del registro seleccionado.
+    const FORM = new FormData();
+    FORM.append('idusuarioC', id);
+    // Petición para obtener los datos del registro solicitado.
+    const DATA = await fetchData(USUARIO_API, 'readOne', FORM);
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+    if (DATA.status) {
+        // Se muestra la caja de diálogo con su título.
+        SAVE_MODAL.show();
+        MODAL_TITLE.textContent = 'Actualizar cliente';
+        // Se prepara el formulario.
+        SAVE_FORM.reset();
+        // Se inicializan los campos con los datos.
+        const ROW = DATA.dataset;
+        ID_USUARIO.value = ROW.id_usuario;
+        NOMBRE_USUARIO.value = ROW.nombre;
+        ALIAS_USUARIO.value = ROW.usuario;
+        CORREO_USUARIO.value = ROW.correo;
+      ;
+    } else {
+        sweetAlert(2, DATA.error, false);
+    }
+}
 
 /*
 *   Función asíncrona para eliminar un registro.

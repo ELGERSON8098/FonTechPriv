@@ -14,6 +14,7 @@ class PedidoHandler
     protected $cliente = null;
     protected $producto = null;
     protected $cantidad = null;
+    protected $precio = null;
     protected $estado = null;
 
     /*
@@ -31,12 +32,12 @@ class PedidoHandler
     public function getOrder()
     {
         $this->estado = 'Pendiente';
-        $sql = 'SELECT id_pedido
-                FROM pedido
-                WHERE estado_pedido = ? AND id_cliente = ?';
-        $params = array($this->estado, $_SESSION['idCliente']);
+        $sql = 'SELECT id_reserva
+                FROM tb_reservas
+                WHERE estado_reserva = ? AND id_usuario = ?';
+        $params = array($this->estado, $_SESSION['id_usuario']);
         if ($data = Database::getRow($sql, $params)) {
-            $_SESSION['idPedido'] = $data['id_pedido'];
+            $_SESSION['idPedido'] = $data['id_reserva'];
             return true;
         } else {
             return false;
@@ -49,9 +50,9 @@ class PedidoHandler
         if ($this->getOrder()) {
             return true;
         } else {
-            $sql = 'INSERT INTO pedido(direccion_pedido, id_cliente)
-                    VALUES((SELECT direccion_cliente FROM cliente WHERE id_cliente = ?), ?)';
-            $params = array($_SESSION['idCliente'], $_SESSION['idCliente']);
+            $sql = 'INSERT INTO tb_reservas(id_usuario, fecha_reserva, estado_reserva, id_distrito)
+                VALUES(?,now(),?,"Pendiente",1)';
+            $params = array($_SESSION['idUsuario']);
             // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
             if ($_SESSION['idPedido'] = Database::getLastRow($sql, $params)) {
                 return true;
@@ -65,9 +66,9 @@ class PedidoHandler
     public function createDetail()
     {
         // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO detalle_pedido(id_producto, precio_producto, cantidad_producto, id_pedido)
-                VALUES(?, (SELECT precio_producto FROM producto WHERE id_producto = ?), ?, ?)';
-        $params = array($this->producto, $this->producto, $this->cantidad, $_SESSION['idPedido']);
+        $sql = 'INSERT INTO tb_detalles_reservas(id_reserva,id_producto, precio_unitario, cantidad)
+                VALUES(?, ?, ?, ?)';
+        $params = array($_SESSION['idPedido'], $this->producto, $this->precio,$this->cantidad);
         return Database::executeRow($sql, $params);
     }
 
