@@ -39,6 +39,20 @@ class UsuariosData extends UsuariosHandler
         }
     }
 
+    public function setDireccion($value, $min = 2, $max = 500)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->nombre = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
     public function setCorreo($value, $min = 8, $max = 100)
     {
         if (!Validator::validateEmail($value)) {
@@ -52,6 +66,19 @@ class UsuariosData extends UsuariosHandler
             return false;
         }
     }
+
+    public function setEstado($value)
+    {
+        if (Validator::validateBoolean($value)) {
+            $this->estadocliente = $value;
+            return true;
+        } else {
+            $this->data_error = 'Estado incorrecto';
+            return false;
+        }
+    }
+
+
 
     public function setAlias($value, $min = 6, $max = 25)
     {

@@ -17,65 +17,6 @@ CREATE TABLE tb_usuarios (
   CONSTRAINT uc_correo UNIQUE (correo)
 );
 
-SELECT * FROM tb_usuarios
-
-INSERT INTO tb_usuarios (id_usuario, nombre, usuario, correo, clave) VALUES
-(1, 'Alejandro', 'dikei1', 'af111111@gmail.com' , '123456789'),
-(2, 'Alejandro', 'dikei2', 'af222222@gmail.com' , '123456789'),
-(3, 'Alejandro', 'dikei3', 'af333333@gmail.com' , '123456789'),
-(4, 'Alejandro', 'dikei4', 'af444444@gmail.com' , '123456789'),
-(5, 'Alejandro', 'dikei5', 'af555555@gmail.com' , '123456789'),
-(6, 'Alejandro', 'dikei6', 'af666666@gmail.com' , '123456789'),
-(7, 'Alejandro', 'dikei7', 'af777777@gmail.com' , '123456789'),
-(8, 'Alejandro', 'dikei8', 'af888888@gmail.com' , '123456789'),
-(9, 'Alejandro', 'dikei9', 'af999999@gmail.com' , '123456789'),
-(10, 'Alejandro', 'dikei10', 'af101010@gmail.com' , '123456789');
-
-CREATE TABLE tb_departamentos (
-  id_departamento INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  departamento VARCHAR(1000) NOT NULL,
-  PRIMARY KEY (id_departamento)
-);
-           
-CREATE TABLE tb_municipios (
-  id_municipio INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  municipio VARCHAR(1000) NOT NULL,
-  id_departamento INT UNSIGNED NOT NULL,
-  PRIMARY KEY (id_municipio),
-  CONSTRAINT muni FOREIGN KEY (id_departamento) REFERENCES tb_departamentos (id_departamento)ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-CREATE TABLE tb_distritos (
-  id_distrito INT UNSIGNED AUTO_INCREMENT NOT NULL,
-  distrito VARCHAR(1000) NOT NULL,
-  id_municipio INT UNSIGNED NOT NULL,
-  PRIMARY KEY (id_distrito),
-  CONSTRAINT distrito FOREIGN KEY (id_municipio) REFERENCES tb_municipios (id_municipio)ON DELETE CASCADE ON UPDATE CASCADE
-);
-
-INSERT INTO tb_departamentos (departamento) VALUES
-('San Salvador'),
-('Santa Ana'),
-('San Miguel');
-
-
-INSERT INTO tb_municipios (municipio, id_departamento) VALUES
-('San Salvador', 1),
-('Santa Tecla', 1),
-('Santa Ana', 2),
-('Metapán', 2),
-('San Miguel', 3),
-('Usulután', 3);
-
-INSERT INTO tb_distritos (distrito, id_municipio) VALUES
-('Distrito 1', 1),
-('Distrito 2', 2),
-('Distrito 3', 3),
-('Distrito 4', 4),
-('Distrito 5', 5),
-('Distrito 6', 6);
-
-
 
 
 CREATE TABLE tb_admins (
@@ -172,7 +113,6 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE tb_reservas (
   id_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_usuario INT UNSIGNED NOT NULL,
-  id_producto INT UNSIGNED NOT NULL,
   fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL, 
   estado_reserva ENUM ('Aceptado', 'Pendiente') NOT NULL,
   id_distrito INT UNSIGNED NOT NULL,
@@ -188,6 +128,7 @@ CREATE TABLE tb_detalles_reservas (
   id_detalle_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_reserva INT UNSIGNED NOT NULL,
   cantidad INT UNSIGNED NOT NULL,
+  id_producto INT UNSIGNED NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id_detalle_reserva),
   CONSTRAINT fk_reserva FOREIGN KEY (id_reserva) REFERENCES tb_reservas(id_reserva)ON DELETE CASCADE ON UPDATE CASCADE,

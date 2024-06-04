@@ -13,7 +13,9 @@ const SAVE_FORM = document.getElementById('saveForm'),
     ID_USUARIO = document.getElementById('idusuarioC'),
     NOMBRE_USUARIO = document.getElementById('nombreUsuarioC'),
     ALIAS_USUARIO = document.getElementById('aliasUsuarioC'),
-    CORREO_USUARIO = document.getElementById('correoUsuarioC')
+    CORREO_USUARIO = document.getElementById('correoUsuarioC'),
+    DIRECCION_CLIENTE = document.getElementById('direc'),
+    ESTADO_CLIENTE = document.getElementById('EstadoCliente');
 
 
 // Método del evento para cuando el documento ha cargado.
@@ -76,12 +78,14 @@ const fillTable = async (form = null) => {
     if (DATA.status) {
         // Se recorre el conjunto de registros fila por fila.
         DATA.dataset.forEach(row => {
+            (parseInt(row.estado_cliente)) ? icon = 'bi bi-eye-fill' : icon = 'bi bi-eye-slash-fill';
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre}</td>
                     <td>${row.usuario}</td>
-                    <td>${row.correo}</td>                
+                    <td>${row.correo}</td> 
+                    <td><i class="${icon}"></i></td>               
                     <td>
                         <button type="button" class="btn btn-info  rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_usuario})">
                             <i class="bi bi-pencil-fill"></i>
@@ -119,13 +123,18 @@ const openUpdate = async (id) => {
         MODAL_TITLE.textContent = 'Actualizar cliente';
         // Se prepara el formulario.
         SAVE_FORM.reset();
+        NOMBRE_USUARIO.disabled = true;
+        ALIAS_USUARIO.disabled = true;
+        CORREO_USUARIO.disabled = true;
+        DIRECCION_CLIENTE.disabled = true;
         // Se inicializan los campos con los datos.
         const ROW = DATA.dataset;
         ID_USUARIO.value = ROW.id_usuario;
         NOMBRE_USUARIO.value = ROW.nombre;
         ALIAS_USUARIO.value = ROW.usuario;
         CORREO_USUARIO.value = ROW.correo;
-      ;
+        DIRECCION_CLIENTE.value = ROW.direccion;
+        ESTADO_CLIENTE.checked = parseInt(ROW.estado_cliente);
     } else {
         sweetAlert(2, DATA.error, false);
     }

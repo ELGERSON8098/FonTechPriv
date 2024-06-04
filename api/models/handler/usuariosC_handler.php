@@ -15,7 +15,7 @@ class UsuariosHandler
     protected $correo = null;
     protected $clave = null;
     protected $telefono = null;
-    protected $dui = null;
+    protected $direccion = null;
     protected $estadocliente =null;
 
     /*
@@ -35,14 +35,14 @@ class UsuariosHandler
     //Llamar los datos de la base de datos 
     public function readAll()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, estado cliente
+        $sql = 'SELECT id_usuario, nombre, usuario, correo, estado_cliente
                 FROM tb_usuarios';
         return Database::getRows($sql);
     }
 
     public function readOne()
     {
-        $sql = 'SELECT id_usuario, nombre, usuario, correo, estadocliente
+        $sql = 'SELECT id_usuario, nombre, usuario, correo, estado_cliente, direccion
                 FROM tb_usuarios
                 WHERE id_usuario = ?';
         $params = array($this->id);
@@ -52,12 +52,11 @@ class UsuariosHandler
     public function updateRow()
     {
         $sql = 'UPDATE tb_usuarios 
-                SET estado_usuario = ?
-                WHERE id_usuario = ?';
+        SET estado_cliente = ?
+        WHERE id_usuario = ?';
         $params = array(
             $this->estadocliente,
-            $this->estadocliente
-        );
+            $this->id);
         return Database::executeRow($sql, $params);
     }
 

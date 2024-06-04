@@ -44,9 +44,8 @@ if (isset($_GET['action'])) {
             case 'updateRow':
                 $_POST = Validator::validateForm($_POST);
                 if (
-                    !$usuariosC->setNombre($_POST['nombreUsuarioC']) or
-                    !$usuariosC->setAlias($_POST['aliasUsuarioC']) or
-                    !$usuariosC->setCorreo($_POST['correoUsuarioC'])
+                    !$usuariosC->setId($_POST['idusuarioC'])or
+                    !$usuariosC->setEstado(isset($_POST['EstadoCliente']) ? 1 : 0)
                 ) {
                     $result['error'] = $usuariosC->getDataError();
                 } elseif ($usuariosC->updateRow()) {
