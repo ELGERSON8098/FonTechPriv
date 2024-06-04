@@ -90,7 +90,8 @@ if (isset($_GET['action'])) {
                     !$cliente->setNombre($_POST['nombreCliente']) or
                     !$cliente->setAlias($_POST['UsuarioCliente']) or
                     !$cliente->setCorreo($_POST['correoCliente']) or
-                    !$cliente->setClave($_POST['claveCliente'])
+                    !$cliente->setClave($_POST['claveCliente'])or
+                    !$cliente ->setDirec($_POST['direc'])
                 ) {
                     $result['error'] = $cliente->getDataError();
                 } elseif ($_POST['claveCliente'] != $_POST['confirmarClave']) {

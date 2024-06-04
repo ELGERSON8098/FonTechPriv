@@ -110,9 +110,9 @@ class ClienteHandler
 
     public function createUsuario()
     {
-        $sql = 'INSERT INTO tb_usuarios (nombre, usuario, correo, clave)
-                VALUES (?, ?, ?, ?)';
-        $params = array($this->nombre, $this->alias, $this->correo, $this->clave);
+        $sql = 'INSERT INTO tb_usuarios (nombre, usuario, correo, clave, direccion)
+                VALUES (?, ?, ?, ?, ?)';
+        $params = array($this->nombre, $this->alias, $this->correo, $this->clave, $this->direccion);
         return Database::executeRow($sql, $params);
     }
     
