@@ -53,6 +53,20 @@ class ClienteData extends ClienteHandler
         }
     }
 
+    public function setDirec($value, $min = 2, $max = 500)
+    {
+        if (!Validator::validateAlphanumeric($value)) {
+            $this->data_error = 'El nombre debe ser un valor alfabético';
+            return false;
+        } elseif (Validator::validateLength($value, $min, $max)) {
+            $this->direccion = $value;
+            return true;
+        } else {
+            $this->data_error = 'El nombre debe tener una longitud entre ' . $min . ' y ' . $max;
+            return false;
+        }
+    }
+
 
     public function setCorreo($value, $min = 8, $max = 100)
     {

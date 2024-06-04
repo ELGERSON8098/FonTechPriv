@@ -1,4 +1,3 @@
-// Constantes para completar la ruta de la API.
 const PRODUCTO_API = 'services/public/producto.php';
 const PEDIDO_API2 = 'services/public/pedido.php';
 const COMENTARIO_API = 'services/public/comentario.php';
@@ -92,10 +91,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </li>
             `;
             LISTCOMENTARIO.insertAdjacentHTML('beforeend', comentario);
-        
+
             let ratingValue = parseInt(row.calificacion_valoracion);
             let stars = document.querySelectorAll(`.rating-${row.id_valoracion} input[type="radio"]`);
-        
+
             stars.forEach((star, index) => {
                 if (index < 6-ratingValue) {
                     star.checked = true;
@@ -104,8 +103,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
         });
-              
-        
+
+
         document.querySelectorAll('.rating input[type="radio"], .rating label').forEach(function (element) {
             element.disabled = true;
         });
@@ -118,6 +117,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
+<<<<<<< HEAD
 FORMULARIO.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
@@ -139,6 +139,8 @@ FORMULARIO.addEventListener('submit', async (event) => {
 
 
 
+=======
+>>>>>>> d8e485adff4a1d479fe125da22007c94ac54ca2f
 // Método del evento para cuando se envía el formulario de agregar un producto al carrito.
 SHOPPING_FORM.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.

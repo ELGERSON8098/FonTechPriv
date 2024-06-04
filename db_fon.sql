@@ -10,6 +10,7 @@ CREATE TABLE tb_usuarios (
   usuario VARCHAR(100) NOT NULL,
   correo VARCHAR(100) NOT NULL,	
   clave VARCHAR(100) NOT NULL,
+  direccion LONGTEXT NOT NULL,
   estado_cliente TINYINT(1) DEFAULT TRUE, 
   PRIMARY KEY (id_usuario),
   CONSTRAINT uc_usuario UNIQUE (usuario),
