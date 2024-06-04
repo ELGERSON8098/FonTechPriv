@@ -18,7 +18,6 @@ CREATE TABLE tb_usuarios (
 );
 
 
-
 CREATE TABLE tb_admins (
   id_administrador INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre_administrador VARCHAR(50) NOT NULL,
@@ -115,8 +114,6 @@ CREATE TABLE tb_reservas (
   id_usuario INT UNSIGNED NOT NULL,
   fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL, 
   estado_reserva ENUM ('Aceptado', 'Pendiente') NOT NULL,
-  id_distrito INT UNSIGNED NOT NULL,
-  CONSTRAINT fk_direcciones FOREIGN KEY (id_distrito) REFERENCES tb_distritos (id_distrito)ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (id_reserva) 
 );
@@ -131,10 +128,8 @@ CREATE TABLE tb_detalles_reservas (
   id_producto INT UNSIGNED NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id_detalle_reserva),
-  CONSTRAINT fk_reserva FOREIGN KEY (id_reserva) REFERENCES tb_reservas(id_reserva)ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT ck_cantidad  CHECK (cantidad >= 0),
+  CONSTRAINT fk_reserva FOREIGN KEY (id_reserva) REFERENCES tb_reservas(id_reserva) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT fk_producto FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT ck_cantidad CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
-
-
-
