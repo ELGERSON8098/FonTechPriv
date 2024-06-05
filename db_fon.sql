@@ -112,7 +112,7 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 CREATE TABLE tb_reservas (
   id_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_usuario INT UNSIGNED NOT NULL,
-  fecha_reserva DATETIME DEFAULT CURRENT_TIMESTAMP() NOT NULL, 
+  fecha_registro date NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   estado_reserva ENUM ('Aceptado', 'Pendiente') NOT NULL,
   CONSTRAINT fk_reserva_usuario FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario)ON DELETE CASCADE ON UPDATE CASCADE,
   PRIMARY KEY (id_reserva) 
@@ -124,7 +124,7 @@ CREATE TABLE tb_reservas (
 CREATE TABLE tb_detalles_reservas (
   id_detalle_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
   id_reserva INT UNSIGNED NOT NULL,
-  cantidad INT UNSIGNED NOT NULL,
+  cantidad smallint(6) UNSIGNED NOT NULL,
   id_producto INT UNSIGNED NOT NULL,
   precio_unitario DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (id_detalle_reserva),
@@ -133,3 +133,21 @@ CREATE TABLE tb_detalles_reservas (
   CONSTRAINT ck_cantidad CHECK (cantidad >= 0),
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
+
+SELECT * FROM tb_detalles_reservas
+
+DELIMITER //
+
+CREATE TRIGGER actualizar_existencias
+AFTER UPDATE ON tb_reservas
+FOR EACH ROW
+BEGIN
+    IF NEW.estado_reserva = 'Aceptado' THEN
+        UPDATE tb_productos p
+        INNER JOIN tb_detalles_reservas dr ON p.id_producto = dr.id_producto
+        SET p.existencias = p.existencias - dr.cantidad
+        WHERE dr.id_reserva = NEW.id_reserva;
+    END IF;
+END //
+
+DELIMITER ;

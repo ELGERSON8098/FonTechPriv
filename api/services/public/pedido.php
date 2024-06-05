@@ -42,6 +42,22 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen productos en el carrito';
                 }
                 break;
+                case 'getExistencias':
+                    // Verificar si el ID del producto está presente en la solicitud.
+                    if (isset($_POST['idProducto'])) {
+                        $idProducto = $_POST['idProducto'];
+                        // Obtener las existencias del producto.
+                        $existencias = $pedido->getExistencias($idProducto);
+                        if ($existencias !== false) {
+                            $result['status'] = 1;
+                            $result['data'] = ['existencias' => $existencias];
+                        } else {
+                            $result['error'] = 'No se pudo obtener las existencias del producto. ID: ' . $idProducto;
+                        }
+                    } else {
+                        $result['error'] = 'ID del producto no especificado.';
+                    }
+                    break;
             // Acción para actualizar la cantidad de un producto en el carrito de compras.
             case 'updateDetail':
                 $_POST = Validator::validateForm($_POST);

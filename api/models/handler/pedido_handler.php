@@ -16,6 +16,7 @@ class PedidoHandler
     protected $cantidad = null;
     protected $precio = null;
     protected $estado = null;
+    protected $idProducto = null;
 
     /*
     *   ESTADOS DEL PEDIDO
@@ -104,6 +105,14 @@ class PedidoHandler
                 WHERE id_reserva = ?';
         $params = array($this->estado, $_SESSION['idReserva']);
         return Database::executeRow($sql, $params);
+    }
+
+    public function getExistencias() {
+        $sql = 'SELECT existencias FROM tb_productos WHERE id_producto = ?';
+        $params = array($this->idProducto);
+        if ($data = Database::getRow($sql, $params)) {
+            return $data['existencias'];
+        } 
     }
 
     // Método para actualizar la cantidad de un producto agregado al carrito de compras.
