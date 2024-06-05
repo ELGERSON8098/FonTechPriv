@@ -96,7 +96,7 @@ class PedidoHandler
         return Database::getRows($sql, $params);
     }
 
-    public function readHistorial()
+    public function readHistorials()
 {
     $sql = 'SELECT 
         dr.id_detalle_reserva, 
