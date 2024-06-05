@@ -103,44 +103,39 @@ async function readDetail() {
             }*/
             // Se crean y concatenan las filas de la tabla con los datos de cada registro.
             TABLE_BODY.innerHTML += `
-
-                
-                    <div class="card mb-3 col-6" id="detalle" style="background-color: #F1EFEF;">
-                        <div class="row g-0" style="background-color: #F1EFEF;">
-                            <div class="col-lg-5 col-md-12 col-sm-12">
-                                <img height="80px" width="70%" src="${SERVER_URL}images/productos/${row.imagen}"
-                                    class="img-fluid rounded" alt="${row.nombre_producto}">
-                    
-                    
-                            </div>
-                            <div class="col-lg-7 col-md-12 col-sm-12">
-                                <div class="card-body">
-                                    <input type="hidden" id="idModelo" name="idModelo" value="${row.id_producto}">
-                                    <h5 class="card-title" style="font-size: 30px;">${row.nombre_producto}</h5>
-
-                                    
-                                        <div class="col-6">
-                                            <p class="card-text" style="font-size: 20px;">
-                                                <strong>Precio:</strong> $${row.precio_unitario}<br>
-                                            </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <p class="card-text" style="font-size: 20px;">
-                                                <strong>Cantidad:</strong> ${row.cantidad}<br>
-                                            </p>
-                                        </div>
-                                        <div class="col-12">
-                                            <p class="card-text" style="font-size: 20px;">
-                                                <strong>Fecha:</strong> ${row.fecha_registro}<br>
-                                            </p>
-                                        </div>
-                                        
-
-                                   
+            <div class="col-12 mb-3">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <img src="${SERVER_URL}images/productos/${row.imagen}" class="img-fluid rounded" alt="${row.nombre_producto}">
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <div class="card-body">
+                            <input type="hidden" id="idModelo" name="idModelo" value="${row.id_producto}">
+                            <h5 class="card-title">${row.nombre_producto}</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        <strong>Precio:</strong> $${row.precio_unitario}<br>
+                                    </p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text">
+                                        <strong>Cantidad:</strong> ${row.cantidad}<br>
+                                    </p>
+                                </div>
+                                <div class="col-12">
+                                    <p class="card-text">
+                                        <strong>Fecha:</strong> ${row.fecha_registro}<br>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </div> `;
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
         });
         /*document.querySelectorAll('.rating input[type="radio"], .rating label').forEach(function (element) {
             element.disabled = false;

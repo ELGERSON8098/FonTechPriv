@@ -139,3 +139,42 @@ footer a:hover{
  .justify-text {
         text-align: justify;
     }
+
+
+    .search-form {
+        background: #f8f9fa;
+        border-radius: 25px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input {
+        border: none;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 1.1em;
+        width: 100%;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .search-input:focus {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        outline: none;
+    }
+
+    .input-container {
+        position: relative;
+    }
+
+    .input-container input {
+        padding-right: 40px;
+    }
+
+    .input-container .icon-search {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2em;
+        color: #6c757d;
+    }
