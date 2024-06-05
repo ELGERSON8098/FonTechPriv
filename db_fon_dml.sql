@@ -60,13 +60,6 @@ insert into tb_productos (id_producto,nombre_producto,id_marca, id_categoria, im
 ('4', 'Leche', '4', '4', '6644c4cee4ac0.jpg', 1),
 ('5', 'Leche', '5', '5', '6644c4cee4ac0.jpg', 1);
 
-insert into tb_detalles_productos (id_detalle_producto, id_producto, id_oferta, precio, existencias, descripcion, capacidad_memoria_interna_celular, ram_celular,
-pantalla_tamaño, camara_trasera_celular, sistema_operativo_celular, camara_frontal_celular,procesador_celular) values
-('1', '1', '1', '12.01', '1', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
-('2', '2', '2', '12.01', '2', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
-('3', '3', '3', '12.01', '3', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
-('4', '4', '4', '12.01', '4', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon'),
-('5', '5', '5', '12.01', '5', 'AAAAAAAAAAA', '12gb', '12gb', '21px', '12px', 'android', '22px', 'redragon');
 
 insert into tb_valoraciones (id_valoracion,calificacion_valoracion,comentario_valoracion,fecha_valoracion, estado_valoracion,id_producto) values
 ('1', '2', 'ayudaaaaa', '2024-05-20 15:30:00', '1', '1'),
