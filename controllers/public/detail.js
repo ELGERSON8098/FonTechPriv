@@ -10,7 +10,6 @@ FORMULARIO = document.getElementById('shoppingFor'),
 IDPRODUCTO=document.getElementById('idProducto');
 
 
-// Método del eventos para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
@@ -21,6 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     FORM.append('idProducto', PARAMS.get('id'));
     // Petición para solicitar los datos del producto seleccionado.
     const DATA = await fetchData(PRODUCTO_API, 'readOne', FORM);
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se colocan los datos en la página web de acuerdo con el producto seleccionado previamente.
@@ -37,13 +37,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('precioProducto').textContent = DATA.dataset.precio;
         document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias;
         IDPRODUCTO.value = DATA.dataset.id_producto;
+
+        // Deshabilitar el botón de compra si las existencias son 0
+        const comprarBtn = document.getElementById('comprarBtn');
+        if (parseInt(DATA.dataset.existencias) === 0) {
+            comprarBtn.disabled = true;
+            comprarBtn.textContent = 'Sin existencias';
+        } else {
+            comprarBtn.disabled = false;
+        }
     } else {
         // Se presenta un mensaje de error cuando no existen datos para mostrar.
         document.getElementById('mainTitle').textContent = DATA.error;
         // Se limpia el contenido cuando no hay datos para mostrar.
         document.getElementById('detalle').innerHTML = '';
     }
-
     const FORM2 = new FormData();
     FORM2.append('idProducto', IDPRODUCTO.value);
     // Petición para obtener los datos del registro solicitado.

@@ -30,31 +30,34 @@ class PedidoHandler
     */
     // Método para verificar si existe un pedido en proceso con el fin de iniciar o continuar una compra.
     public function getOrder()
-    {
-        $this->estado = 'Pendiente';
-        $sql = 'SELECT id_reserva
-                FROM tb_reservas
-                WHERE estado_reserva = ? AND id_usuario = ?';
-        $params = array($this->estado, $_SESSION['idUsuario']);
-        if ($data = Database::getRow($sql, $params)) {
-            $_SESSION['idPedido'] = $data['id_reserva'];
-            return true;
-        } else {
-            return false;
-        }
+{
+    $this->estado = 'Pendiente';
+    $sql = 'SELECT id_reserva
+            FROM tb_reservas
+            WHERE estado_reserva = ? AND id_usuario = ?';
+    $params = array($this->estado, $_SESSION['idUsuario']);
+    if ($data = Database::getRow($sql, $params)) {
+        $_SESSION['idReserva'] = $data['id_reserva']; // Asegúrate de usar 'idReserva' en lugar de 'idPedido' para consistencia.
+        return true;
+    } else {
+        return false;
     }
+}
 
     // Método para iniciar un pedido en proceso.
     public function startOrder()
     {
+        // Verifica si ya existe una orden para el usuario actual.
         if ($this->getOrder()) {
             return true;
         } else {
-            $sql = 'INSERT INTO tb_reservas(id_usuario, fecha_reserva, estado_reserva)
-                VALUES(?,now(),?,"Pendiente",1)';
-            $params = array($_SESSION['idUsuario']);
-            // Se obtiene el ultimo valor insertado de la llave primaria en la tabla pedido.
-            if ($_SESSION['idPedido'] = Database::getLastRow($sql, $params)) {
+            // Crea una nueva reserva para el usuario actual.
+            $sql = 'INSERT INTO tb_reservas(id_usuario, fecha_registro, estado_reserva)
+                    VALUES(?, now(), ?)';
+            $params = array($_SESSION['idUsuario'], 'Pendiente');
+    
+            // Ejecuta la consulta y obtiene el ID de la nueva reserva.
+            if ($_SESSION['idReserva'] = Database::getLastRow($sql, $params)) {
                 return true;
             } else {
                 return false;
@@ -65,10 +68,9 @@ class PedidoHandler
     // Método para agregar un producto al carrito de compras.
     public function createDetail()
     {
-        // Se realiza una subconsulta para obtener el precio del producto.
-        $sql = 'INSERT INTO tb_detalles_reservas(id_producto, precio_unitario, cantidad, id_reserva)
-                VALUES(?, ?,(SELECT precio FROM tb_productos WHERE id_producto = ?), ?)';
-        $params = array($this->producto, $this->producto, $this->cantidad, $_SESSION['idPedido']);
+        $sql = 'INSERT INTO tb_detalles_reservas (id_producto, precio_unitario, cantidad, id_reserva)
+                VALUES (?, (SELECT precio FROM tb_productos WHERE id_producto = ?), ?, ?)';
+        $params = array($this->producto, $this->producto, $this->cantidad, $_SESSION['idReserva']);
         return Database::executeRow($sql, $params);
     }
 
@@ -89,7 +91,7 @@ class PedidoHandler
         tb_productos p ON dr.id_producto = p.id_producto
     WHERE 
         dr.id_reserva = ?';
-        $params = array($_SESSION['idPedido']);
+        $params = array($_SESSION['idReserva']);
         return Database::getRows($sql, $params);
     }
 
@@ -100,7 +102,7 @@ class PedidoHandler
         $sql = 'UPDATE tb_reservas
                 SET estado_reserva = ?
                 WHERE id_reserva = ?';
-        $params = array($this->estado, $_SESSION['idPedido']);
+        $params = array($this->estado, $_SESSION['idReserva']);
         return Database::executeRow($sql, $params);
     }
 
@@ -110,7 +112,7 @@ class PedidoHandler
         $sql = 'UPDATE tb_detalles_reservas
                 SET cantidad = ?
                 WHERE id_detalle_reserva = ? AND id_reserva = ?';
-        $params = array($this->cantidad, $this->id_detalle, $_SESSION['idPedido']);
+        $params = array($this->cantidad, $this->id_detalle, $_SESSION['idReserva']);
         return Database::executeRow($sql, $params);
     }
 
@@ -119,7 +121,7 @@ class PedidoHandler
     {
         $sql = 'DELETE FROM tb_detalles_reservas
                 WHERE id_detalle_reserva = ? AND id_reserva = ?';
-        $params = array($this->id_detalle, $_SESSION['idPedido']);
+        $params = array($this->id_detalle, $_SESSION['idReserva']);
         return Database::executeRow($sql, $params);
     }
 }

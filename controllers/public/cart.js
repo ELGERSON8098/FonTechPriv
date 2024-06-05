@@ -88,13 +88,52 @@ async function readDetail() {
 *   Parámetros: id (identificador del producto) y quantity (cantidad actual del producto).
 *   Retorno: ninguno.
 */
-function openUpdate(id, quantity) {
+function openUpdate(id, quantity, existencias) {
     // Se abre la caja de diálogo que contiene el formulario.
     ITEM_MODAL.show();
+
     // Se inicializan los campos del formulario con los datos del registro seleccionado.
     document.getElementById('idDetalle').value = id;
     document.getElementById('cantidadProducto').value = quantity;
+
+    // Obtener el campo de cantidad de producto.
+    const cantidadProductoField = document.getElementById('cantidadProducto');
+    const mensajeError = document.getElementById('mensajeError') || document.createElement('p');
+    mensajeError.id = 'mensajeError';
+
+    // Verificar si hay existencias suficientes.
+    if (existencias === 0) {
+        // Deshabilitar el campo de cantidad y mostrar un mensaje de error.
+        cantidadProductoField.disabled = true;
+        mensajeError.textContent = 'No hay existencias disponibles.';
+        cantidadProductoField.parentNode.appendChild(mensajeError);
+        // Deshabilitar el botón de guardar.
+        document.querySelector('#itemForm button[type="submit"]').disabled = true;
+    } else {
+        // Habilitar el campo de cantidad y asegurar que el mensaje de error no esté presente.
+        cantidadProductoField.disabled = false;
+        if (mensajeError.parentNode) {
+            mensajeError.parentNode.removeChild(mensajeError);
+        }
+        // Habilitar el botón de guardar.
+        document.querySelector('#itemForm button[type="submit"]').disabled = false;
+    }
 }
+
+// Función para validar el formulario antes de enviar.
+document.getElementById('itemForm').addEventListener('submit', function(event) {
+    const cantidadProducto = parseInt(document.getElementById('cantidadProducto').value);
+    const existencias = parseInt(document.getElementById('existenciasProducto').textContent);
+
+    // Verificar si la cantidad ingresada es mayor que las existencias disponibles.
+    if (cantidadProducto > existencias) {
+        // Evitar el envío del formulario si la cantidad es mayor que las existencias.
+        event.preventDefault();
+        alert('La cantidad ingresada es mayor que las existencias disponibles.');
+        // Deshabilitar el botón de guardar.
+        document.querySelector('#itemForm button[type="submit"]').disabled = true;
+    }
+});
 
 /*
 *   Función asíncrona para mostrar un mensaje de confirmación al momento de finalizar el pedido.
