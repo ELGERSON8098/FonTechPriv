@@ -43,7 +43,7 @@ const loadTemplate = async () => {
                <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="index.html"><i class="bi bi-shop"></i> Catálogo</a>
                 <a class="nav-link" href="cart.html"><i class="bi bi-cart"></i> Carrito</a>
-                <a class="nav-link" href="cart.html"><i class="bi bi-cart"></i> Historial del pedido</a>
+                <a class="nav-link" href="historial.html"><i class="bi bi-clock-history"></i> Historial</a>
                 <br>
                 <div class="order-lg-2 nav-btns">
                     <a href="../public/miperfil.html" class="btn position-relative mb-3">

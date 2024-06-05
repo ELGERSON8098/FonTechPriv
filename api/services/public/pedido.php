@@ -42,6 +42,13 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen productos en el carrito';
                 }
                 break;
+                case 'readHistorials':
+                    if ($result['dataset'] = $pedido->readHistorials($_POST['valor'])) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No existen categorías para mostrar';
+                    }
+                    break;
                 case 'getExistencias':
                     // Verificar si el ID del producto está presente en la solicitud.
                     if (isset($_POST['idProducto'])) {
