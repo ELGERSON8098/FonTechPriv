@@ -72,72 +72,62 @@ INPUTSEARCH.addEventListener('input', function () {
 *   Retorno: ninguno.
 */
 async function readDetail() {
-    // Petición para obtener los datos del pedido en proceso.
-    const FORM = new FormData();
-    FORM.append('valor', INPUTSEARCH.value); //
+    const searchInput = document.getElementById('inputsearch').value;
 
-    const DATA = await fetchData(PEDIDO_API, 'readHistorials', FORM);
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
-    if (DATA.status) {
-        // Se inicializa el cuerpo de la tabla.
-        TABLE_BODY.innerHTML = '';
-        // Se declara e inicializa una variable para calcular el importe por cada producto.
-        let subtotal = 0;
-        // Se declara e inicializa una variable para sumar cada subtotal y obtener el monto final a pagar.
-        let total = 0;
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
-        DATA.dataset.forEach(async row => {
-            subtotal = row.precio_unitario * row.cantidad;
-            total += subtotal;
+    // Crear un FormData y agregar el valor de búsqueda.
+    const formData = new FormData();
+    formData.append('valor', searchInput);
 
-            /*PARA VERIFICAR SI YA HAY UN COMENTARIO*/
-            /*btnComentario = '';
-            const FORM3 = new FormData();
-            FORM3.append('idDetalle', row.id_detalle);
-            // Petición para obtener los datos del registro solicitado.
-            const DATA3 = await fetchData(COMENTARIO_API, 'readByIdDetalle', FORM3);
-            if (DATA3.dataset.length > 0) {
-                btnComentario = `openRead(${DATA3.dataset[0].id_comentario})`;
-            } else {
-                btnComentario = `openCreate(${row.id_detalle})`;
-            }*/
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
-            TABLE_BODY.innerHTML += `
-<div class="container">
-    <div class="row justify-content-center">
-        <!-- Comienzo de las tarjetas -->
-        <div class="col-8 mb-4">
-            <div class="card h-100">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="${SERVER_URL}images/productos/${row.imagen}" class="img-fluid rounded" alt="${row.nombre_producto}" style="max-height: 150px; object-fit: cover;">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <input type="hidden" id="idModelo" name="idModelo" value="${row.id_producto}">
-                            <h5 class="card-title">${row.nombre_producto}</h5>
-                            <p class="card-text">
-                                <strong>Precio:</strong> $${row.precio_unitario}<br>
-                                <strong>Cantidad:</strong> ${row.cantidad}<br>
-                                <strong>Fecha:</strong> ${row.fecha_registro}<br>
-                            </p>
+    // Petición para obtener los datos del historial.
+    const data = await fetchData(PEDIDO_API, 'readHistorials', formData);
+
+    // Se comprueba si la respuesta es satisfactoria.
+    if (data.status) {
+        // Se inicializa el contenedor de las tarjetas.
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = ''; // Limpiar el contenedor de las tarjetas.
+
+        // Recorrer el conjunto de registros y crear las tarjetas.
+        data.dataset.forEach(row => {
+            const cardHTML = `
+                <div class="col-md-8 mb-4">
+                    <div class="card h-100">
+                        <div class="row g-0">
+                            <div class="col-4">
+                                <img src="${SERVER_URL}images/productos/${row.imagen}" class="img-fluid rounded" alt="${row.nombre_producto}" style="max-height: 150px; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <input type="hidden" id="idModelo" name="idModelo" value="${row.id_producto}">
+                                    <h5 class="card-title">${row.nombre_producto}</h5>
+                                    <p class="card-text">
+                                        <strong>Precio:</strong> $${row.precio_unitario}<br>
+                                        <strong>Cantidad:</strong> ${row.cantidad}<br>
+                                        <strong>Fecha:</strong> ${row.fecha_registro}<br>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- Puedes duplicar este bloque div.col-8 mb-4 para cada tarjeta adicional -->
-    </div>
-</div>
-        `;
+            `;
+            tableBody.innerHTML += cardHTML;
         });
-        /*document.querySelectorAll('.rating input[type="radio"], .rating label').forEach(function (element) {
-            element.disabled = false;
-        });*/
     } else {
-        sweetAlert(4, DATA.error, false);
+        sweetAlert(4, data.error, false);
     }
 }
+
+// Llamar a la función de búsqueda al hacer clic en el botón de búsqueda.
+document.getElementById('searchForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Evitar que el formulario se envíe de forma tradicional.
+    readDetail(); // Llamar a la función de búsqueda.
+});
+
+// Inicializar la búsqueda al cargar la página.
+document.addEventListener('DOMContentLoaded', function() {
+    readDetail();
+});
 
 /*
 *   Función para abrir la caja de diálogo con el formulario de cambiar cantidad de producto.
