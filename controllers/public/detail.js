@@ -5,10 +5,9 @@ const COMENTARIO_API = 'services/public/comentario.php';
 const PARAMS = new URLSearchParams(location.search);
 // Constante para establecer el formulario de agregar un producto al carrito de compras.
 const SHOPPING_FORM = document.getElementById('shoppingForm'),
-LISTCOMENTARIO = document.getElementById('listComentario'),
-FORMULARIO = document.getElementById('shoppingFor'),
-IDPRODUCTO=document.getElementById('idProducto');
-
+    LISTCOMENTARIO = document.getElementById('listComentario'),
+    FORMULARIO = document.getElementById('shoppingFor'),
+    IDPRODUCTO = document.getElementById('idProducto1');
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Llamada a la función para mostrar el encabezado y pie del documento.
@@ -52,15 +51,16 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Se limpia el contenido cuando no hay datos para mostrar.
         document.getElementById('detalle').innerHTML = '';
     }
+
+    // Petición para obtener los comentarios del producto seleccionado.
     const FORM2 = new FormData();
-    FORM2.append('idProducto', IDPRODUCTO.value);
-    // Petición para obtener los datos del registro solicitado.
+    FORM2.append('idProducto1', IDPRODUCTO.value);
     const DATA2 = await fetchData(COMENTARIO_API, 'readAllByProducto', FORM2);
-    LISTCOMENTARIO.innerHTML = ``;
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
+
+    // Se comprueba si la respuesta es satisfactoria.
     if (DATA2.status) {
+        // Iterar sobre cada comentario y agregarlo al HTML.
         DATA2.dataset.forEach(row => {
-            // Se crea y concatena la fila de la tabla con los datos de cada registro.
             let comentario = `
             <li class="list-group-item" style="border: none;">
             <div class="row">
@@ -100,11 +100,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             LISTCOMENTARIO.insertAdjacentHTML('beforeend', comentario);
 
+            // Calcula el valor de la calificación para establecer las estrellas activas.
             let ratingValue = parseInt(row.calificacion_valoracion);
             let stars = document.querySelectorAll(`.rating-${row.id_valoracion} input[type="radio"]`);
 
+            // Marca las estrellas según el valor de la calificación.
             stars.forEach((star, index) => {
-                if (index < 6-ratingValue) {
+                if (index < 6 - ratingValue) {
                     star.checked = true;
                 } else {
                     star.checked = false;
@@ -112,17 +114,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
         });
 
-
-        document.querySelectorAll('.rating input[type="radio"], .rating label').forEach(function (element) {
-            element.disabled = true;
+        // Habilitar los radios de las estrellas después de cargar los comentarios.
+        document.querySelectorAll('.rating input[type="radio"]').forEach(function (element) {
+            element.disabled = false;
         });
     } else {
-        //sweetAlert(4, DATA.error, false);
+        // Manejar el caso si no se pueden cargar los comentarios.
     }
-
-
-
 });
+
 
 
 FORMULARIO.addEventListener('submit', async (event) => {

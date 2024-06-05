@@ -31,6 +31,23 @@ if (isset($_GET['action'])) {
                     }
                     break;     
 
+                    case 'editProfile':
+                        $_POST = Validator::validateForm($_POST);
+                        if (
+                            !$cliente->setNombre($_POST['nombreAdministrador']) or
+                            !$cliente->setCorreo($_POST['correoAdministrador']) or
+                            !$cliente->setAlias($_POST['aliasAdministrador'])
+                        ) {
+                            $result['error'] = $cliente->getDataError();
+                        } elseif ($cliente->editProfile()) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Perfil modificado correctamente';
+                            $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
+                        } else {
+                            $result['error'] = 'Ocurrió un problema al modificar el perfil';
+                        }
+                        break;
+
                     case 'changePassword':
                         $_POST = Validator::validateForm($_POST);
                         if (!$cliente->checkPassword($_POST['claveActual'])) {
@@ -104,22 +121,6 @@ if (isset($_GET['action'])) {
                 }
                 break;
                 
-                case 'editProfile':
-                    $_POST = Validator::validateForm($_POST);
-                    if (
-                        !$cliente->setNombre($_POST['nombreAdministrador']) or
-                        !$cliente->setCorreo($_POST['correoAdministrador']) or
-                        !$cliente->setAlias($_POST['aliasAdministrador'])
-                    ) {
-                        $result['error'] = $cliente->getDataError();
-                    } elseif ($cliente->editProfile()) {
-                        $result['status'] = 1;
-                        $result['message'] = 'Perfil modificado correctamente';
-                        $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
-                    } else {
-                        $result['error'] = 'Ocurrió un problema al modificar el perfil';
-                    }
-                    break;
                   
                     
             case 'logIn':
