@@ -93,7 +93,8 @@ ADD CONSTRAINT ck_oferta
 
 CREATE TABLE tb_valoraciones (
   id_valoracion INT AUTO_INCREMENT PRIMARY KEY,
-  calificacion_valoracion INT,
+  calificacion_valoracion INT NOT NULL,
+  id_usuario INT UNSIGNED NOT NULL,
   comentario_valoracion VARCHAR(250),
   fecha_valoracion DATETIME DEFAULT CURRENT_TIMESTAMP,
   estado_valoracion BOOL,
@@ -102,12 +103,6 @@ CREATE TABLE tb_valoraciones (
   CONSTRAINT fk_productos FOREIGN KEY (id_producto) REFERENCES tb_productos(id_producto) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
-ALTER TABLE tb_valoraciones
-ADD COLUMN id_usuario INT UNSIGNED NOT NULL,
-ADD CONSTRAINT fk_usuarios
-FOREIGN KEY (id_usuario) REFERENCES tb_usuarios(id_usuario)
-ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE tb_reservas (
   id_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -118,8 +113,7 @@ CREATE TABLE tb_reservas (
   PRIMARY KEY (id_reserva) 
 );
 
-
-
+SELECT * from tb_valoraciones
 
 CREATE TABLE tb_detalles_reservas (
   id_detalle_reserva INT UNSIGNED AUTO_INCREMENT NOT NULL,
@@ -134,9 +128,10 @@ CREATE TABLE tb_detalles_reservas (
   CONSTRAINT ck_precio_unitario CHECK (precio_unitario >= 0)
 );
 
-SELECT * FROM tb_detalles_reservas
-
+        
 DELIMITER //
+
+
 
 CREATE TRIGGER actualizar_existencias
 AFTER UPDATE ON tb_reservas
