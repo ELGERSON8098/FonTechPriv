@@ -152,6 +152,7 @@ class PedidoHandler
         return Database::executeRow($sql, $params);
     }
 
+
     // Método para eliminar un producto que se encuentra en el carrito de compras.
     public function deleteDetail()
     {

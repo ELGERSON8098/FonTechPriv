@@ -88,84 +88,13 @@ async function readDetail() {
 *   Parámetros: id (identificador del producto), quantity (cantidad actual del producto), productId (identificador del producto).
 *   Retorno: ninguno.
 */
-async function openUpdate(id, quantity, productId) {
+function openUpdate(id, quantity) {
     // Se abre la caja de diálogo que contiene el formulario.
     ITEM_MODAL.show();
-
     // Se inicializan los campos del formulario con los datos del registro seleccionado.
     document.getElementById('idDetalle').value = id;
     document.getElementById('cantidadProducto').value = quantity;
-
-    // Obtener el campo de cantidad de producto y el botón de guardar.
-    const cantidadProductoField = document.getElementById('cantidadProducto');
-    const submitButton = document.querySelector('#itemForm button[type="submit"]');
-
-    // Crear o seleccionar el mensaje de error.
-    let mensajeError = document.getElementById('mensajeError');
-    if (!mensajeError) {
-        mensajeError = document.createElement('p');
-        mensajeError.id = 'mensajeError';
-        mensajeError.style.color = 'red';
-        cantidadProductoField.parentNode.appendChild(mensajeError);
-    }
-
-    // Petición para obtener las existencias del producto.
-    const formData = new FormData();
-    formData.append('idProducto', productId);
-    const response = await fetchData(PEDIDO_API, 'getExistencias', formData);
-
-    if (response.status) {
-        const existencias = response.data.existencias;
-
-        // Verificar si hay existencias suficientes.
-        if (existencias === 0) {
-            // Deshabilitar el campo de cantidad y mostrar un mensaje de error.
-            cantidadProductoField.disabled = true;
-            mensajeError.textContent = 'No hay existencias disponibles.';
-            // Deshabilitar el botón de guardar.
-            submitButton.disabled = true;
-        } else {
-            // Habilitar el campo de cantidad y asegurar que el mensaje de error no esté presente.
-            cantidadProductoField.disabled = false;
-            mensajeError.textContent = '';
-            // Habilitar el botón de guardar.
-            submitButton.disabled = false;
-        }
-    } else {
-        // Manejo de errores al obtener existencias.
-        sweetAlert(2, response.error, false);
-    }
 }
-
-document.getElementById('itemForm').addEventListener('submit', async function(event) {
-    const cantidadProducto = parseInt(document.getElementById('cantidadProducto').value);
-    const productId = document.getElementById('idDetalle').value;
-
-    // Petición para obtener las existencias del producto.
-    const formData = new FormData();
-    formData.append('idProducto', productId);
-    const response = await fetchData(PEDIDO_API, 'getExistencias', formData);
-
-    if (response.status) {
-        const existencias = response.data.existencias;
-
-        // Verificar si la cantidad ingresada es mayor que las existencias disponibles.
-        if (cantidadProducto > existencias) {
-            // Evitar el envío del formulario si la cantidad es mayor que las existencias.
-            event.preventDefault();
-            sweetAlert(2, 'La cantidad ingresada es mayor que las existencias disponibles.', false);
-        } else {
-            // Habilitar el botón de guardar si la validación es correcta.
-            document.querySelector('#itemForm button[type="submit"]').disabled = false;
-        }
-    } else {
-        // Manejo de errores al obtener existencias.
-        event.preventDefault();
-        sweetAlert(2, response.error, false);
-    }
-    // Evitar que se pueda modificar la cantidad después de enviar el formulario.
-    document.getElementById('cantidadProducto').disabled = true;
-});
 
 /*
 *   Función asíncrona para mostrar un mensaje de confirmación al momento de finalizar el pedido.
