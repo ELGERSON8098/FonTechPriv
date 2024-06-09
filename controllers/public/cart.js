@@ -44,26 +44,25 @@ ITEM_FORM.addEventListener('submit', async (event) => {
 *   Retorno: ninguno.
 */
 async function readDetail() {
-    // Petición para obtener los datos del pedido en proceso.
     const DATA = await fetchData(PEDIDO_API, 'readDetail');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
-        // Se inicializa el cuerpo de la tabla.
         TABLE_BODY.innerHTML = '';
-        // Se declara e inicializa una variable para calcular el importe por cada producto.
-        let subtotal = 0;
-        // Se declara e inicializa una variable para sumar cada subtotal y obtener el monto final a pagar.
         let total = 0;
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            subtotal = row.precio_unitario * row.cantidad;
+            let subtotal;
+            if (row.valor_oferta !== null) {
+                subtotal = (row.precio_unitario - row.valor_oferta) * row.cantidad; // Calcular subtotal con oferta
+            } else {
+                subtotal = row.precio_unitario * row.cantidad; // Calcular subtotal sin oferta
+            }
             total += subtotal;
-            // Se crean y concatenan las filas de la tabla con los datos de cada registro.
+            // Crear y concatenar las filas de la tabla con los datos de cada registro
             TABLE_BODY.innerHTML += `
                 <tr>
                     <td>${row.nombre_producto}</td>
                     <td>${row.precio_unitario}</td>
                     <td>${row.cantidad}</td>
+                    <td>${row.valor_oferta !== null ? row.valor_oferta : 'No tiene oferta'}</td>
                     <td>${subtotal.toFixed(2)}</td>
                     <td>
                         <button type="button" onclick="openUpdate(${row.id_detalle_reserva}, ${row.cantidad}, ${row.id_producto})" class="btn btn-info">
@@ -76,7 +75,7 @@ async function readDetail() {
                 </tr>
             `;
         });
-        // Se muestra el total a pagar con dos decimales.
+        // Mostrar el total a pagar con dos decimales
         document.getElementById('pago').textContent = total.toFixed(2);
     } else {
         sweetAlert(4, DATA.error, false, 'index.html');

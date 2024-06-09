@@ -79,19 +79,22 @@ class PedidoHandler
     public function readDetail()
     {
         $sql = 'SELECT 
-        dr.id_detalle_reserva, 
-        p.nombre_producto, 
-        dr.precio_unitario, 
-        dr.cantidad, 
-        r.estado_reserva
-    FROM 
-        tb_detalles_reservas dr
-    INNER JOIN 
-        tb_reservas r ON dr.id_reserva = r.id_reserva
-    INNER JOIN 
-        tb_productos p ON dr.id_producto = p.id_producto
-    WHERE 
-        dr.id_reserva = ?';
+                dr.id_detalle_reserva, 
+                p.nombre_producto, 
+                IFNULL(o.valor, 0) AS valor_oferta, -- Utiliza IFNULL para manejar el caso de no oferta
+                dr.precio_unitario, 
+                dr.cantidad, 
+                r.estado_reserva
+            FROM 
+                tb_detalles_reservas dr
+            INNER JOIN 
+                tb_reservas r ON dr.id_reserva = r.id_reserva
+            INNER JOIN 
+                tb_productos p ON dr.id_producto = p.id_producto
+            LEFT JOIN
+                tb_ofertas o ON p.id_oferta = o.id_oferta -- Usa LEFT JOIN para incluir productos sin oferta
+            WHERE 
+                dr.id_reserva = ?';
         $params = array($_SESSION['idReserva']);
         return Database::getRows($sql, $params);
     }
