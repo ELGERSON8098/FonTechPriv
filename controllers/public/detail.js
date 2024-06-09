@@ -123,16 +123,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
+// Validación inicial al ingresar la cantidad
+document.getElementById('cantidadProducto').addEventListener('input', function() {
+    const existenciasDisponibles = parseInt(document.getElementById('existenciasProducto').textContent);
+    const cantidadSolicitada = parseInt(this.value);
+    const comprarBtn = document.getElementById('comprarBtn');
 
+    if (cantidadSolicitada > existenciasDisponibles || cantidadSolicitada < 1) {
+        comprarBtn.disabled = true;
+        comprarBtn.textContent = 'Cantidad inválida';
+    } else {
+        comprarBtn.disabled = false;
+        comprarBtn.textContent = ' Comprar';
+    }
+});
 
 FORMULARIO.addEventListener('submit', async (event) => {
     // Se evita recargar la página web después de enviar el formulario.
     event.preventDefault();
+
+    // Obtener las existencias disponibles y la cantidad solicitada.
+    const existenciasDisponibles = parseInt(document.getElementById('existenciasProducto').textContent);
+    const cantidadSolicitada = parseInt(document.getElementById('cantidadProducto').value);
+
+    // Validar si la cantidad solicitada es mayor que las existencias disponibles.
+    if (cantidadSolicitada > existenciasDisponibles || cantidadSolicitada < 1) {
+        sweetAlert(2, 'La cantidad ingresada no es válida', false);
+        return;
+    }
+
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(FORMULARIO);
-    FORM.append("idProducto",IDPRODUCTO.value)
+    FORM.append("idProducto", IDPRODUCTO.value);
+
     // Petición para guardar los datos del formulario.
     const DATA = await fetchData(PEDIDO_API2, 'createDetail', FORM);
+
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se constata si el cliente ha iniciado sesión.
     if (DATA.status) {
         sweetAlert(1, DATA.message, false, 'cart.html');
@@ -142,7 +168,6 @@ FORMULARIO.addEventListener('submit', async (event) => {
         sweetAlert(3, DATA.error, true, 'login.html');
     }
 });
-
 
 
 
