@@ -88,5 +88,77 @@ const loadTemplate = async () => {
     }
     // Se agrega el pie de la página web después del contenido principal.
     MAIN.insertAdjacentHTML('afterend', `
-    `);
+        <footer class="bg-dark py-5">
+            <div class="container">
+                <div class="row text-white g-4">
+                    <div class="col-md-6 col-lg-3">
+                        <h5 class="fw-light text-white">Información</h5>
+                        <ul class="list-unstyled">
+                            <li class="my-3">
+                                <a href="#" class="text-white text-decoration-none">
+                                    <i class="me-1"></i> Sobre Nosotros
+                                </a>
+                            </li>
+                            <li class="my-3">
+                                <a href="#" class="text-white text-decoration-none">
+                                    <i class="me-1"></i> Términos y Condiciones
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div class="col-md-6 col-lg-3">
+                        <h5 class="fw-light mb-3 text-white">Contáctanos</h5>
+                        <div class="d-flex justify-content-start align-items-start my-2">
+                            <span class="me-3 text-white">
+                                <i class="fas fa-map-marked-alt"></i>
+                            </span>
+                            <span class="fw-light text-white">
+                                San Salvador, Colonia Escalon, Edificio Don Pepe
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-start align-items-start my-2">
+                            <span class="me-3 text-white">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="fw-light text-white">
+                                Fontech503@gmail.com.sv
+                            </span>
+                        </div>
+                        <div class="d-flex justify-content-start align-items-start my-2">
+                            <span class="me-3 text-white">
+                                <i class="fas fa-phone-alt"></i>
+                            </span>
+                            <span class="fw-light text-white">
+                                63058048
+                            </span>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6 col-lg-3">
+                        <h5 class="fw-light mb-3 text-white">Síguenos en nuestras redes sociales</h5>
+                        <div>
+                            <ul class="list-unstyled d-flex">
+                                <li>
+                                    <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="text-white text-decoration-none fs-4 me-4">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    `);    
 }
