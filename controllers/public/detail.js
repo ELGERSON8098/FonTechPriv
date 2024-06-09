@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('Procesador').textContent = DATA.dataset.procesador_celular;
         document.getElementById('precioProducto').textContent = DATA.dataset.precio;
         document.getElementById('existenciasProducto').textContent = DATA.dataset.existencias;
+        document.getElementById('DescuentoProducto').textContent = DATA.dataset.valor_oferta;
         IDPRODUCTO.value = DATA.dataset.id_producto;
 
         // Deshabilitar el botón de compra si las existencias son 0

@@ -75,7 +75,7 @@ class productoHandler
         );
         return Database::executeRow($sql, $params);
     }
-    
+
 
 
     public function readProductosCategoria()
@@ -103,11 +103,11 @@ class productoHandler
                     AND p.estado_producto = true
                 ORDER BY 
                     p.nombre_producto';
-        
+
         $params = array($this->id_categoria);
         return Database::getRows($sql, $params);
     }
-    
+
 
 
     public function readAll()
@@ -138,10 +138,10 @@ class productoHandler
                     tb_categorias c ON p.id_categoria = c.id_categoria
                 ORDER BY 
                     p.nombre_producto';
-    
+
         return Database::getRows($sql);
     }
-    
+
 
     public function readAllS()
     {
@@ -189,37 +189,40 @@ class productoHandler
     public function readOne()
     {
         $sql = 'SELECT 
-                    p.id_producto,
-                    p.nombre_producto,
-                    m.id_marca,
-                    c.id_categoria,
-                    p.imagen,
-                    p.estado_producto,
-                    p.id_oferta,
-                    p.precio,
-                    p.existencias,
-                    p.descripcion,
-                    p.capacidad_memoria_interna_celular,
-                    p.ram_celular,
-                    p.pantalla_tamaño,
-                    p.camara_trasera_celular,
-                    p.sistema_operativo_celular,
-                    p.camara_frontal_celular,
-                    p.procesador_celular
-                FROM 
-                    tb_productos p
-                INNER JOIN 
-                    tb_marcas m ON p.id_marca = m.id_marca
-                INNER JOIN 
-                    tb_categorias c ON p.id_categoria = c.id_categoria
-                WHERE 
-                    p.id_producto = ?';
-    
+    p.id_producto,
+    p.nombre_producto,
+    m.id_marca,
+    c.id_categoria,
+    p.imagen,
+    p.estado_producto,
+    p.id_oferta,
+    p.precio,
+    p.existencias,
+    p.descripcion,
+    p.capacidad_memoria_interna_celular,
+    p.ram_celular,
+    p.pantalla_tamaño,
+    p.camara_trasera_celular,
+    p.sistema_operativo_celular,
+    p.camara_frontal_celular,
+    p.procesador_celular,
+    IFNULL(d.valor, 0) AS valor_oferta -- Obtener el valor de descuento de la tabla tb_descuentos
+FROM 
+    tb_productos p
+INNER JOIN 
+    tb_marcas m ON p.id_marca = m.id_marca
+INNER JOIN 
+    tb_categorias c ON p.id_categoria = c.id_categoria
+LEFT JOIN -- Utilizamos LEFT JOIN para garantizar que los productos sin descuento también sean mostrados
+    tb_ofertas d ON p.id_oferta = d.id_oferta
+WHERE 
+    p.id_producto = ?';
+
         $params = array($this->id_producto);
-    
+
         return Database::getRow($sql, $params);
     }
-    
+
 
     public function updateRow()
     {
@@ -242,7 +245,7 @@ class productoHandler
                     camara_frontal_celular = ?,
                     procesador_celular = ?
                 WHERE id_producto = ?';
-    
+
         $params = array(
             $this->nombre_producto,
             $this->id_marca,
@@ -264,7 +267,7 @@ class productoHandler
         );
         return Database::executeRow($sql, $params);
     }
-    
+
 
 
 
