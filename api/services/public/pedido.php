@@ -46,7 +46,7 @@ if (isset($_GET['action'])) {
                     if ($result['dataset'] = $pedido->readHistorials($_POST['valor'])) {
                         $result['status'] = 1;
                     } else {
-                        $result['error'] = 'No existen categorías para mostrar';
+                        $result['error'] = 'No existen productos para mostrar';
                     }
                     break;
                 case 'getExistencias':
@@ -97,7 +97,7 @@ if (isset($_GET['action'])) {
                     $result['status'] = 1;
                     $result['message'] = 'Pedido finalizado correctamente';
                 } else {
-                    $result['error'] = 'Ocurrió un problema al finalizar el pedido';
+                    $result['error'] = 'Ocurrió un problema al finalizar el pedido, no puede comprar mas productos de los que ya estan en stock';
                 }
                 break;
             default:
