@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         DATA.dataset.forEach(row => {
             // Se crean y concatenan las tarjetas con los datos de cada producto.
             PRODUCTOS.innerHTML += `
-            <div class="container">
+            
                     <div class="col-md-6 col-lg-4 col-xl-3 p-2">
                         <div class="special-img position-relative overflow-hidden">
                             <img src="${SERVER_URL}images/productos/${row.imagen}" class="card-img-top" alt="${row.nombre_producto}" class="w-100">
@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <a href="detail.html?id=${row.id_producto}" class="btn btn-primary mt-3">Ver detalle</a>
                         </div>
                     </div>
-            </div>
         
             `;
         });
