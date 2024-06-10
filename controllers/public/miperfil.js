@@ -1,9 +1,8 @@
-const CLIENTEP_API = 'services/public/cliente.php';
 // Constantes para establecer los elementos del formulario de editar perfil.
 const PROFILE_FORM = document.getElementById('profileForm'),
-    NOMBRE_ADMINISTRADOR = document.getElementById('nombreAdministrador'),
-    CORREO_ADMINISTRADOR = document.getElementById('correoAdministrador'),
-    ALIAS_ADMINISTRADOR = document.getElementById('aliasAdministrador');
+    NOMBRE_ADMINISTRADOR = document.getElementById('nombreCliente'),
+    CORREO_ADMINISTRADOR = document.getElementById('correoCliente'),
+    ALIAS_ADMINISTRADOR = document.getElementById('aliaCliente');
 // Constante para establecer la modal de cambiar contraseña.
 const PASSWORD_MODAL = new bootstrap.Modal('#passwordModal');
 // Constante para establecer el formulario de cambiar contraseña.
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Se establece el título del contenido principal.
     MAIN_TITLE.textContent = 'Editar perfil';
     // Petición para obtener los datos del usuario que ha iniciado sesión.
-    const DATA = await fetchData(CLIENTEP_API, 'readProfile');
+    const DATA = await fetchData(USER_API, 'readProfile');
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se inicializan los campos del formulario con los datos del usuario que ha iniciado sesión.
@@ -36,7 +35,7 @@ PROFILE_FORM.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(PROFILE_FORM);
     // Petición para actualizar los datos personales del usuario.
-    const DATA = await fetchData(CLIENTEP_API, 'editProfile', FORM);
+    const DATA = await fetchData(USER_API, 'editProfile', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         sweetAlert(1, DATA.message, true);
@@ -52,7 +51,7 @@ PASSWORD_FORM.addEventListener('submit', async (event) => {
     // Constante tipo objeto con los datos del formulario.
     const FORM = new FormData(PASSWORD_FORM);
     // Petición para actualizar la constraseña.
-    const DATA = await fetchData(CLIENTEP_API, 'changePassword', FORM);
+    const DATA = await fetchData(USER_API, 'changePassword', FORM);
     // Se comprueba si la respuesta es satisfactoria, de lo contrario se muestra un mensaje con la excepción.
     if (DATA.status) {
         // Se cierra la caja de diálogo.

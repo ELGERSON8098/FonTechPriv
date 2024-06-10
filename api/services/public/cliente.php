@@ -34,15 +34,15 @@ if (isset($_GET['action'])) {
                     case 'editProfile':
                         $_POST = Validator::validateForm($_POST);
                         if (
-                            !$cliente->setNombre($_POST['nombreAdministrador']) or
-                            !$cliente->setCorreo($_POST['correoAdministrador']) or
-                            !$cliente->setAlias($_POST['aliasAdministrador'])
+                            !$cliente->setNombre($_POST['nombreCliente']) or
+                            !$cliente->setCorreo($_POST['correoCliente']) or
+                            !$cliente->setAlias($_POST['aliaCliente'])
                         ) {
                             $result['error'] = $cliente->getDataError();
-                        } elseif ($cliente->editProfile()) {
+                        } elseif ($cliente->editProfileS()) {
                             $result['status'] = 1;
                             $result['message'] = 'Perfil modificado correctamente';
-                            $_SESSION['aliasAdministrador'] = $_POST['aliasAdministrador'];
+                            $_SESSION['aliaCliente'] = $_POST['aliaCliente'];
                         } else {
                             $result['error'] = 'Ocurrió un problema al modificar el perfil';
                         }

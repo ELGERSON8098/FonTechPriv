@@ -76,14 +76,6 @@ class ClienteHandler
             return false;
         }
     }
-    public function editProfile()
-    {
-        $sql = 'UPDATE tb_usuarios
-                SET nombre = ?, usuario = ?, correo = ?
-                WHERE id_usuario = ?';
-        $params = array($this->nombre, $this->alias, $this->correo, $_SESSION['idUsuario']);
-        return Database::executeRow($sql, $params);
-    }
 
     public function changeStatus()
     {
@@ -141,6 +133,15 @@ class ClienteHandler
         WHERE id_usuario = ?';
         $params = array($_SESSION['idUsuario']);
         return Database::getRow($sql, $params);
+    }
+
+    public function editProfileS()
+    {
+        $sql = 'UPDATE tb_usuarios
+                SET nombre = ?, usuario = ?, correo = ?
+                WHERE id_usuario = ?';
+        $params = array($this->nombre, $this->alias, $this->correo, $_SESSION['idUsuario']);
+        return Database::executeRow($sql, $params);
     }
 
     public function updateRow()
