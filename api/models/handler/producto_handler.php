@@ -192,10 +192,13 @@ class productoHandler
     p.id_producto,
     p.nombre_producto,
     m.id_marca,
+    m.marca, -- Incluye el nombre de la marca
     c.id_categoria,
+    c.nombre_categoria, -- Incluye el nombre de la categoría
     p.imagen,
     p.estado_producto,
     p.id_oferta,
+    o.nombre_descuento, -- Incluye el nombre del descuento
     p.precio,
     p.existencias,
     p.descripcion,
@@ -206,15 +209,15 @@ class productoHandler
     p.sistema_operativo_celular,
     p.camara_frontal_celular,
     p.procesador_celular,
-    IFNULL(d.valor, 0) AS valor_oferta -- Obtener el valor de descuento de la tabla tb_descuentos
+    IFNULL(o.valor, 0) AS valor_oferta -- Obtener el valor de descuento de la tabla tb_ofertas
 FROM 
     tb_productos p
 INNER JOIN 
     tb_marcas m ON p.id_marca = m.id_marca
 INNER JOIN 
     tb_categorias c ON p.id_categoria = c.id_categoria
-LEFT JOIN -- Utilizamos LEFT JOIN para garantizar que los productos sin descuento también sean mostrados
-    tb_ofertas d ON p.id_oferta = d.id_oferta
+LEFT JOIN 
+    tb_ofertas o ON p.id_oferta = o.id_oferta
 WHERE 
     p.id_producto = ?';
 
