@@ -4,6 +4,7 @@ CREATE DATABASE dbfondReal;
 
 USE dbfondReal;
 
+
 CREATE TABLE tb_usuarios (
   id_usuario INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre VARCHAR(100) NOT NULL,
@@ -16,6 +17,8 @@ CREATE TABLE tb_usuarios (
   CONSTRAINT uc_usuario UNIQUE (usuario),
   CONSTRAINT uc_correo UNIQUE (correo)
 );
+
+SELECT * FROM tb_usuarios;
 
 
 CREATE TABLE tb_admins (
@@ -55,6 +58,7 @@ CREATE TABLE tb_ofertas (
 );
 
 
+
 CREATE TABLE tb_productos (
   id_producto INT UNSIGNED AUTO_INCREMENT NOT NULL,
   nombre_producto VARCHAR(100) NOT NULL,
@@ -79,7 +83,7 @@ CREATE TABLE tb_productos (
   CONSTRAINT ck_existencias  CHECK (existencias >= 0)
 );
 
-
+SELECT * FROM tb_productos
 
 ALTER TABLE tb_productos
 MODIFY COLUMN id_oferta INT UNSIGNED DEFAULT NULL,
