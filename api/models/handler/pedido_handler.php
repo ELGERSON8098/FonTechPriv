@@ -80,7 +80,8 @@ class PedidoHandler
     {
         $sql = 'SELECT 
                 dr.id_detalle_reserva, 
-                p.nombre_producto, 
+                p.nombre_producto,
+                p.imagen, 
                 IFNULL(o.valor, 0) AS valor_oferta, -- Utiliza IFNULL para manejar el caso de no oferta
                 dr.precio_unitario, 
                 dr.cantidad, 
