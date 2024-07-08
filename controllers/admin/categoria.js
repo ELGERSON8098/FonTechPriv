@@ -114,6 +114,9 @@ const fillTable = async (form = null) => {
                         <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_categoria})">
                             <i class="bi bi-trash-fill"></i>
                         </button>
+                        <button type="button" class="btn btn-warning" onclick="openReport(${row.id_categoria})">
+                            <i class="bi bi-filetype-pdf"></i>
+                        </button>
                     </td>
                 </tr>
             `;
@@ -193,4 +196,13 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+const openReport = (id) => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/productos_categoria.php`);
+    // Se agrega un parámetro a la ruta con el valor del registro seleccionado.
+    PATH.searchParams.append('idCategoria', id);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
