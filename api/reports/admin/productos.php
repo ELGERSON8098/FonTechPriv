@@ -10,7 +10,7 @@ $categoria = new CategoriaData;
 
 if ($dataCategorias = $categoria->readAll()) {
     // Establecer colores y fuentes para encabezados
-    $pdf->setFillColor(92, 184, 92); // Verde para encabezados
+    $pdf->setFillColor(0, 153, 153); // Verde para encabezados
     $pdf->setTextColor(255, 255, 255); // Texto blanco para encabezados
     $pdf->setFont('Arial', 'B', 12);
 
