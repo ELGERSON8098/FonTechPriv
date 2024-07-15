@@ -17,6 +17,7 @@ class Report extends FPDF
             $this->AliasNbPages();
         } else {
             header('location:' . self::CLIENT_URL);
+            exit; // Ensure script stops executing after redirection
         }
     }
 
@@ -27,35 +28,75 @@ class Report extends FPDF
 
     public function Header()
     {
-        // Fondo degradado
-        $this->SetFillColor(200); // Color inicial del degradado
-        $this->Rect(0, 0, $this->GetPageWidth(), $this->GetPageHeight(), 'F'); // Rectángulo para fondo degradado
+        // Logo centered
+        $this->Image('../../images/image 67.png', $this->GetPageWidth() / 2 - 25, 10, 60);
 
-        // Logo y título
-        $this->Image('../../images/image 67.png', 15, 15, 20);
+        // Title
         $this->SetFont('Arial', 'B', 18);
-        $this->SetTextColor(255); // Color de texto blanco
+        $this->Ln(25); // Space after logo
         $this->Cell(0, 10, $this->encodeString($this->title), 0, 1, 'C');
 
-        // Línea decorativa
-        $this->SetDrawColor(255); // Color de línea blanco
-        $this->Line(15, 35, $this->GetPageWidth() - 15, 35);
+        // Decorative line
+        $this->SetDrawColor(0, 0, 0); // Black line color
+        $this->SetLineWidth(0.5);
+        $this->Line(15, 40, $this->GetPageWidth() - 15, 40);
 
-        // Fecha y hora
+        // Date and time
         $this->SetFont('Arial', '', 12);
         $this->Cell(0, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
         
-        // Espacio después del encabezado
-        $this->Ln(10);
+        // Space after header
+        $this->Ln(5);
     }
 
     public function Footer()
     {
-        // Posición en el pie de página a 15 mm del final
+        // Position at 15 mm from bottom
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 10);
-        $this->SetTextColor(0); // Color de texto negro
+        $this->SetTextColor(0); // Black text color
         $this->Cell(0, 10, $this->encodeString('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
+
+    public function FancyTable($header, $data)
+    {
+        // Colors, line width and bold font
+        $this->SetFillColor(0, 255, 255); // Light cyan for header
+        $this->SetTextColor(0);
+        $this->SetDrawColor(128, 0, 0);
+        $this->SetLineWidth(0.3);
+        $this->SetFont('Calibri', 'B', 12);
+        
+        // Column widths
+        $w = array(40, 60, 30, 20, 30);
+        
+        // Headers
+        for ($i = 0; $i < count($header); $i++) {
+            $this->Cell($w[$i], 7, $this->encodeString($header[$i]), 1, 0, 'C', true);
+        }
+        $this->Ln();
+        
+        // Restoring colors and fonts
+        $this->SetFillColor(224, 255, 255); // Light cyan for rows
+        $this->SetTextColor(0);
+        $this->SetFont('Arial', '', 12);
+        
+        // Data rows
+        $fill = false;
+        foreach ($data as $row) {
+            $this->Cell($w[0], 6, $this->encodeString($row[0]), 'LR', 0, 'L', $fill);
+            $this->Cell($w[1], 6, $this->encodeString($row[1]), 'LR', 0, 'L', $fill);
+            $this->Cell($w[2], 6, $this->encodeString($row[2]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[3], 6, $this->encodeString($row[3]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[4], 6, $this->encodeString($row[4]), 'LR', 0, 'R', $fill);
+            $this->Ln();
+            $fill = !$fill;
+        }
+        // Closing line
+        $this->Cell(array_sum($w), 0, '', 'T');
+    }
 }
+
+// Example usage:
+
 ?>
