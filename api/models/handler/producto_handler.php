@@ -282,4 +282,16 @@ WHERE
         $params = array($this->id_producto);
         return Database::executeRow($sql, $params);
     }
+
+    
+    public function productosCategoria()
+    {
+        $sql = 'SELECT nombre_producto, precio, estado_producto
+                FROM tb_productos
+                INNER JOIN tb_categorias USING(id_categoria)
+                WHERE id_categoria = ?
+                ORDER BY nombre_producto';
+        $params = array($this->id_categoria);
+        return Database::getRows($sql, $params);
+    }
 }
