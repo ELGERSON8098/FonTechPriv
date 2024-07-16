@@ -154,6 +154,27 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'No hay datos disponibles';
                     }
                     break;
+                    case 'cantidadProductosCategorias':
+                        if ($result['dataset'] = $producto->cantidadProductosCategorias()) {
+                            $result['status'] = 1;
+                        } else {
+                            $result['error'] = 'No hay datos disponibles';
+                        }
+                        break;
+                        case 'cantidadProductosCategoriass':
+                            if ($result['dataset'] = $producto->cantidadProductosCategoriass()) {
+                                $result['status'] = 1;
+                            } else {
+                                $result['error'] = 'No hay datos disponibles';
+                            }
+                            break;
+                            case 'cantidadProductosCategoriasss':
+                                if ($result['dataset'] = $producto->cantidadProductosCategoriasss()) {
+                                    $result['status'] = 1;
+                                } else {
+                                    $result['error'] = 'No hay datos disponibles';
+                                }
+                                break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }

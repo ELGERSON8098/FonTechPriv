@@ -311,4 +311,31 @@ WHERE
                 GROUP BY nombre_categoria ORDER BY porcentaje DESC';
         return Database::getRows($sql);
     }
+
+    public function cantidadProductosCategorias()
+    {
+        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
+                FROM tb_productos
+                INNER JOIN tb_categorias USING(id_categoria)
+                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        return Database::getRows($sql);
+    }
+
+    public function cantidadProductosCategoriass()
+    {
+        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
+                FROM tb_productos
+                INNER JOIN tb_categorias USING(id_categoria)
+                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        return Database::getRows($sql);
+    }
+
+    public function cantidadProductosCategoriasss()
+    {
+        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
+                FROM tb_productos
+                INNER JOIN tb_categorias USING(id_categoria)
+                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        return Database::getRows($sql);
+    }
 }
