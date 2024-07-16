@@ -9,27 +9,48 @@ document.addEventListener('DOMContentLoaded', () => {
     let greeting = '';
     // Dependiendo del número de horas transcurridas en el día, se asigna un saludo para el usuario.
     if (HOUR < 12) {
-        greeting = '<br>Buenos días';
+        greeting = 'Buenos días';
     } else if (HOUR < 19) {
-        greeting = '<br>Buenas tardes';
+        greeting = 'Buenas tardes';
     } else if (HOUR <= 23) {
-        greeting = '<br>Buenas noches';
+        greeting = 'Buenas noches';
     }
     // Llamada a la función para mostrar el encabezado y pie del documento.
     loadTemplate();
-    // Se establece el título del contenido principal con los saludos y el mensaje de bienvenida.
-    MAIN_TITLE.innerHTML = `${greeting}<br> Bienvenido`;
+    // Se establece el título del contenido principal.
+    MAIN_TITLE.textContent = `${greeting}, bienvenido`;
     // Llamada a la funciones que generan los gráficos en la página web.
     graficoBarrasCategorias();
     graficoPastelCategorias();
 });
-
 
 /*
 *   Función asíncrona para mostrar un gráfico de barras con la cantidad de productos por categoría.
 *   Parámetros: ninguno.
 *   Retorno: ninguno.
 */
+const graficoBarrasCategorias = async () => {
+    // Petición para obtener los datos del gráfico.
+    const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategoria');
+    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+    if (DATA.status) {
+        // Se declaran los arreglos para guardar los datos a graficar.
+        let categorias = [];
+        let cantidades = [];
+        // Se recorre el conjunto de registros fila por fila a través del objeto row.
+        DATA.dataset.forEach(row => {
+            // Se agregan los datos a los arreglos.
+            categorias.push(row.nombre_categoria);
+            cantidades.push(row.cantidad);
+        });
+        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
+        barGraph('chart1', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+    } else {
+        document.getElementById('chart1').remove();
+        console.log(DATA.error);
+    }
+}
+
 /*
 *   Función asíncrona para mostrar un gráfico de pastel con el porcentaje de productos por categoría.
 *   Parámetros: ninguno.

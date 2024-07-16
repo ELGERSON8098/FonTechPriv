@@ -298,7 +298,7 @@ WHERE
     {
         $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
                 FROM tb_productos
-                INNER JOIN categoria USING(id_categoria)
+                INNER JOIN tb_categorias USING(id_categoria)
                 GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
         return Database::getRows($sql);
     }
@@ -307,7 +307,7 @@ WHERE
     {
         $sql = 'SELECT nombre_categoria, ROUND((COUNT(id_producto) * 100.0 / (SELECT COUNT(id_producto) FROM tb_productos)), 2) porcentaje
                 FROM tb_productos
-                INNER JOIN categoria USING(id_categoria)
+                INNER JOIN tb_categorias USING(id_categoria)
                 GROUP BY nombre_categoria ORDER BY porcentaje DESC';
         return Database::getRows($sql);
     }
