@@ -65,16 +65,6 @@ const loadTemplate = async () => {
                       <li class="nav-item px-2 py-2">
                       <a class="nav-link text-uppercase text-dark" href="../admin/Valoraciones.html">Valoraciones</a>
                       </li>
-                      <li class="nav-item px-2 py-2 dropdown">
-                        <a class="nav-link text-uppercase text-dark dropdown-toggle" href="#" id="productosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Direcciones
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="productosDropdown">
-                        <li><a class="dropdown-item" href="../admin/departamentos.html">Departamentos</a></li>
-                        <li><a class="dropdown-item" href="../admin/municipios.html">Municipios</a></li>
-                        <li><a class="dropdown-item" href="../admin/distritos.html">Distritos</a></li>
-                        </ul>
-                    </li>
                     <div class="order-lg-2 nav-btns">
                     <a href="../admin/miperfil.html" class="btn position-relative mb-3">
                     <i class="fa fa-user"></i>
