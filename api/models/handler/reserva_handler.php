@@ -128,7 +128,8 @@ class ReservaHandler
     p.imagen,
     r.fecha_registro,
     dr.cantidad,
-    dr.precio_unitario
+    dr.precio_unitario,
+    r.estado_reserva
 FROM
     tb_detalles_reservas dr
 INNER JOIN

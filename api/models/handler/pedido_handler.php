@@ -11,6 +11,7 @@ class PedidoHandler
     */
     protected $id_pedido = null;
     protected $id_detalle = null;
+    protected $id_reserva = null;
     protected $cliente = null;
     protected $producto = null;
     protected $cantidad = null;
