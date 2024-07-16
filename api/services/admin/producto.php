@@ -140,6 +140,20 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al eliminar el producto';
                 }
                 break;
+                case 'cantidadProductosCategoria':
+                    if ($result['dataset'] = $producto->cantidadProductosCategoria()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay datos disponibles';
+                    }
+                    break;
+                case 'porcentajeProductosCategoria':
+                    if ($result['dataset'] = $producto->porcentajeProductosCategoria()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No hay datos disponibles';
+                    }
+                    break;
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
