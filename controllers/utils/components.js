@@ -210,22 +210,24 @@ const pieGraph = (canvas, legends, values, title) => {
     });
 }
 
-const barGraphs = (canvas, xAxis, yAxis, legend, title) => {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
-    let colors = [];
-    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
-    xAxis.forEach(() => {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
-    });
+/*
+*   Función para generar un gráfico de líneas.
+*   Requiere la librería chart.js para funcionar.
+*   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
+const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
     // Se crea una instancia para generar el gráfico con los datos recibidos.
     new Chart(document.getElementById(canvas), {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: xAxis,
             datasets: [{
                 label: legend,
                 data: yAxis,
-                backgroundColor: colors
+                fill: false,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                tension: 0.1
             }]
         },
         options: {
@@ -233,31 +235,34 @@ const barGraphs = (canvas, xAxis, yAxis, legend, title) => {
                 title: {
                     display: true,
                     text: title
-                },
-                legend: {
-                    display: false
                 }
             }
         }
     });
 }
 
-const barGraphss = (canvas, xAxis, yAxis, legend, title) => {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
-    let colors = [];
-    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
-    xAxis.forEach(() => {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
-    });
+/*
+*   Función para generar un gráfico de radar.
+*   Requiere la librería chart.js para funcionar.
+*   Parámetros: canvas (identificador de la etiqueta canvas), labels (etiquetas para el gráfico), data (datos del gráfico), label (etiqueta para los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
+const radarGraph = (canvas, labels, data, label, title) => {
     // Se crea una instancia para generar el gráfico con los datos recibidos.
     new Chart(document.getElementById(canvas), {
-        type: 'bar',
+        type: 'radar',
         data: {
-            labels: xAxis,
+            labels: labels,
             datasets: [{
-                label: legend,
-                data: yAxis,
-                backgroundColor: colors
+                label: label,
+                data: data,
+                fill: true,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
             }]
         },
         options: {
@@ -265,30 +270,33 @@ const barGraphss = (canvas, xAxis, yAxis, legend, title) => {
                 title: {
                     display: true,
                     text: title
-                },
-                legend: {
-                    display: false
                 }
             }
         }
     });
 }
 
-const barGraphsss = (canvas, xAxis, yAxis, legend, title) => {
+/*
+*   Función para generar un gráfico polar.
+*   Requiere la librería chart.js para funcionar.
+*   Parámetros: canvas (identificador de la etiqueta canvas), labels (etiquetas para el gráfico), data (datos del gráfico), label (etiqueta para los datos) y title (título del gráfico).
+*   Retorno: ninguno.
+*/
+const polarGraph = (canvas, labels, data, label, title) => {
     // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
     let colors = [];
     // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
-    xAxis.forEach(() => {
+    data.forEach(() => {
         colors.push('#' + (Math.random().toString(16)).substring(2, 8));
     });
     // Se crea una instancia para generar el gráfico con los datos recibidos.
     new Chart(document.getElementById(canvas), {
-        type: 'bar',
+        type: 'polarArea',
         data: {
-            labels: xAxis,
+            labels: labels,
             datasets: [{
-                label: legend,
-                data: yAxis,
+                label: label,
+                data: data,
                 backgroundColor: colors
             }]
         },
@@ -297,9 +305,6 @@ const barGraphsss = (canvas, xAxis, yAxis, legend, title) => {
                 title: {
                     display: true,
                     text: title
-                },
-                legend: {
-                    display: false
                 }
             }
         }

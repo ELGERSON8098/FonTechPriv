@@ -306,6 +306,7 @@ WHERE
         $params = array($this->id_categoria);
         return Database::getRows($sql, $params);
     }
+    
     public function cantidadProductosCategoria()
     {
         $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
@@ -324,30 +325,40 @@ WHERE
         return Database::getRows($sql);
     }
 
-    public function cantidadProductosCategorias()
+    public function descuentosMasUtilizados()
     {
-        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
-                FROM tb_productos
-                INNER JOIN tb_categorias USING(id_categoria)
-                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        $sql = 'SELECT o.nombre_descuento, COUNT(p.id_producto) AS cantidad
+FROM tb_ofertas o
+INNER JOIN tb_productos p ON o.id_oferta = p.id_oferta
+GROUP BY o.nombre_descuento
+ORDER BY cantidad DESC
+LIMIT 5
+';
         return Database::getRows($sql);
     }
 
-    public function cantidadProductosCategoriass()
+    public function marcaMasComprada()
     {
-        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
-                FROM tb_productos
-                INNER JOIN tb_categorias USING(id_categoria)
-                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        $sql = 'SELECT m.marca, COUNT(p.id_producto) AS cantidad
+FROM tb_productos p
+INNER JOIN tb_marcas m ON p.id_marca = m.id_marca
+INNER JOIN tb_detalles_reservas dr ON p.id_producto = dr.id_producto
+INNER JOIN tb_reservas r ON dr.id_reserva = r.id_reserva AND r.estado_reserva = "Aceptado"
+GROUP BY m.marca
+ORDER BY cantidad DESC
+LIMIT 5';
         return Database::getRows($sql);
     }
 
-    public function cantidadProductosCategoriasss()
+    public function productosMasVendidosPorCategoria()
     {
-        $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
-                FROM tb_productos
-                INNER JOIN tb_categorias USING(id_categoria)
-                GROUP BY nombre_categoria ORDER BY cantidad DESC LIMIT 5';
+        $sql = 'SELECT nombre_categoria, COUNT(p.id_producto) AS cantidad
+FROM tb_productos p
+INNER JOIN tb_detalles_reservas dr ON p.id_producto = dr.id_producto
+INNER JOIN tb_reservas r ON dr.id_reserva = r.id_reserva AND r.estado_reserva = "Aceptado"
+INNER JOIN tb_categorias USING(id_categoria)
+GROUP BY nombre_categoria
+ORDER BY cantidad DESC LIMIT 5';
         return Database::getRows($sql);
     }
 }

@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     loadTemplate();
     // Se establece el título del contenido principal.
     MAIN_TITLE.textContent = `${greeting}, bienvenido`;
-    // Llamada a la funciones que generan los gráficos en la página web.
+    // Llamada a las funciones que generan los gráficos en la página web.
     graficoBarrasCategorias();
     graficoPastelCategorias();
-    graficoBarrasCategoriass();
-    graficoBarrasCategoriasss();
-    graficoBarrasCategoriassss();
+    graficoLineasCategorias();
+    graficoRadarCategorias();
+    graficoPolarCategorias();
 });
 
 /*
@@ -33,20 +33,14 @@ document.addEventListener('DOMContentLoaded', () => {
 *   Retorno: ninguno.
 */
 const graficoBarrasCategorias = async () => {
-    // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategoria');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
-        // Se declaran los arreglos para guardar los datos a graficar.
         let categorias = [];
         let cantidades = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
             categorias.push(row.nombre_categoria);
             cantidades.push(row.cantidad);
         });
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
         barGraph('chart1', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
     } else {
         document.getElementById('chart1').remove();
@@ -60,20 +54,14 @@ const graficoBarrasCategorias = async () => {
 *   Retorno: ninguno.
 */
 const graficoPastelCategorias = async () => {
-    // Petición para obtener los datos del gráfico.
     const DATA = await fetchData(PRODUCTO_API, 'porcentajeProductosCategoria');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
     if (DATA.status) {
-        // Se declaran los arreglos para guardar los datos a gráficar.
         let categorias = [];
         let porcentajes = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
             categorias.push(row.nombre_categoria);
             porcentajes.push(row.porcentaje);
         });
-        // Llamada a la función para generar y mostrar un gráfico de pastel. Se encuentra en el archivo components.js
         pieGraph('chart2', categorias, porcentajes, 'Porcentaje de productos por categoría');
     } else {
         document.getElementById('chart2').remove();
@@ -81,68 +69,68 @@ const graficoPastelCategorias = async () => {
     }
 }
 
-const graficoBarrasCategoriass = async () => {
-    // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategorias');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+/*
+*   Función asíncrona para mostrar un gráfico de líneas con la cantidad de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const graficoLineasCategorias = async () => {
+    const DATA = await fetchData(PRODUCTO_API, 'descuentosMasUtilizados');
     if (DATA.status) {
-        // Se declaran los arreglos para guardar los datos a graficar.
-        let categorias = [];
+        let descuentos = [];
         let cantidades = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
-            categorias.push(row.nombre_categoria);
+            descuentos.push(row.nombre_descuento);
             cantidades.push(row.cantidad);
         });
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraphs('chart3', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+        lineGraph('chart3', descuentos, cantidades, 'Cantidad de productos', 'Descuentos más utilizados');
     } else {
         document.getElementById('chart3').remove();
         console.log(DATA.error);
     }
 }
 
-const graficoBarrasCategoriasss = async () => {
-    // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategoriass');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+
+/*
+*   Función asíncrona para mostrar un gráfico de radar con la cantidad de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const graficoRadarCategorias = async () => {
+    const DATA = await fetchData(PRODUCTO_API, 'marcaMasComprada');
     if (DATA.status) {
-        // Se declaran los arreglos para guardar los datos a graficar.
-        let categorias = [];
+        let marcas = [];
         let cantidades = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
-            categorias.push(row.nombre_categoria);
+            marcas.push(row.marca);
             cantidades.push(row.cantidad);
         });
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraphss('chart4', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+        radarGraph('chart4', marcas, cantidades, 'Cantidad de productos vendidos', 'Marca más comprada');
     } else {
         document.getElementById('chart4').remove();
         console.log(DATA.error);
     }
 }
 
-const graficoBarrasCategoriassss = async () => {
-    // Petición para obtener los datos del gráfico.
-    const DATA = await fetchData(PRODUCTO_API, 'cantidadProductosCategoriasss');
-    // Se comprueba si la respuesta es satisfactoria, de lo contrario se remueve la etiqueta canvas.
+
+/*
+*   Función asíncrona para mostrar un gráfico polar con la cantidad de productos por categoría.
+*   Parámetros: ninguno.
+*   Retorno: ninguno.
+*/
+const graficoPolarCategorias = async () => {
+    const DATA = await fetchData(PRODUCTO_API, 'productosMasVendidosPorCategoria');
     if (DATA.status) {
-        // Se declaran los arreglos para guardar los datos a graficar.
         let categorias = [];
         let cantidades = [];
-        // Se recorre el conjunto de registros fila por fila a través del objeto row.
         DATA.dataset.forEach(row => {
-            // Se agregan los datos a los arreglos.
             categorias.push(row.nombre_categoria);
             cantidades.push(row.cantidad);
         });
-        // Llamada a la función para generar y mostrar un gráfico de barras. Se encuentra en el archivo components.js
-        barGraphsss('chart5', categorias, cantidades, 'Cantidad de productos', 'Cantidad de productos por categoría');
+        polarGraph('chart5', categorias, cantidades, 'Cantidad de productos vendidos', 'Productos más vendidos por categoría');
     } else {
         document.getElementById('chart5').remove();
         console.log(DATA.error);
     }
 }
+

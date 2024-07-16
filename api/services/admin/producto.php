@@ -154,22 +154,22 @@ if (isset($_GET['action'])) {
                         $result['error'] = 'No hay datos disponibles';
                     }
                     break;
-                    case 'cantidadProductosCategorias':
-                        if ($result['dataset'] = $producto->cantidadProductosCategorias()) {
+                    case 'descuentosMasUtilizados':
+                        if ($result['dataset'] = $producto->descuentosMasUtilizados()) {
                             $result['status'] = 1;
                         } else {
                             $result['error'] = 'No hay datos disponibles';
                         }
                         break;
-                        case 'cantidadProductosCategoriass':
-                            if ($result['dataset'] = $producto->cantidadProductosCategoriass()) {
+                        case 'marcaMasComprada':
+                            if ($result['dataset'] = $producto->marcaMasComprada()) {
                                 $result['status'] = 1;
                             } else {
                                 $result['error'] = 'No hay datos disponibles';
                             }
                             break;
-                            case 'cantidadProductosCategoriasss':
-                                if ($result['dataset'] = $producto->cantidadProductosCategoriasss()) {
+                            case 'productosMasVendidosPorCategoria':
+                                if ($result['dataset'] = $producto->productosMasVendidosPorCategoria()) {
                                     $result['status'] = 1;
                                 } else {
                                     $result['error'] = 'No hay datos disponibles';
