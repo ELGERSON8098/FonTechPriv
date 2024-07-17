@@ -97,6 +97,4 @@ class Report extends FPDF
     }
 }
 
-// Example usage:
-
 ?>

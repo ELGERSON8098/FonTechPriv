@@ -5,18 +5,12 @@ class Report extends FPDF
 {
     const CLIENT_URL = 'http://localhost/fontechpriv/views/admin/';
     private $title = null;
-    private $clientName = null;
-    private $invoiceDate = null;
-    private $invoiceNumber = null;
 
-    public function startReport($title, $clientName, $invoiceDate, $invoiceNumber)
+    public function startReport($title)
     {
         session_start();
         if (isset($_SESSION['idAdministrador'])) {
             $this->title = $title;
-            $this->clientName = $clientName;
-            $this->invoiceDate = $invoiceDate;
-            $this->invoiceNumber = $invoiceNumber;
             $this->SetTitle('Fontech - Factura', true);
             $this->SetMargins(15, 15, 15);
             $this->AddPage('P', 'letter');
@@ -34,27 +28,31 @@ class Report extends FPDF
 
     public function Header()
     {
-        // Logo
-        $this->Image('../../images/image 67.png', 15, 10, 60);
+        // Logo centered
+        $this->Image('../../images/image 67.png', $this->GetPageWidth() / 2 - 25, 10, 60);
 
-        // Invoice Title
+        // Title
         $this->SetFont('Arial', 'B', 18);
-        $this->Cell(0, 10, $this->encodeString('Factura'), 0, 1, 'R');
-
-        // Invoice Info
-        $this->SetFont('Arial', '', 12);
-        $this->Cell(0, 10, 'Fecha: ' . $this->invoiceDate, 0, 1, 'R');
-        $this->Cell(0, 10, 'No. Factura: ' . $this->invoiceNumber, 0, 1, 'R');
-
-        // Client Info
-        $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 10, 'Cliente: ' . $this->encodeString($this->clientName), 0, 1, 'L');
+        $this->Ln(25); // Space after logo
+        $this->Cell(0, 10, $this->encodeString($this->title), 0, 1, 'C');
 
         // Decorative line
         $this->SetDrawColor(0, 0, 0); // Black line color
         $this->SetLineWidth(0.5);
-        $this->Line(15, 50, $this->GetPageWidth() - 15, 50);
+        $this->Line(15, 40, $this->GetPageWidth() - 15, 40);
 
+        // Date and time
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
+        
+        // Company details (example)
+        $this->Ln(10);
+        $this->SetFont('Arial', 'B', 12);
+        $this->Cell(0, 10, $this->encodeString('Nombre de la Empresa'), 0, 1, 'L');
+        $this->SetFont('Arial', '', 12);
+        $this->Cell(0, 10, $this->encodeString('Dirección: Calle Ejemplo, Ciudad, País'), 0, 1, 'L');
+        $this->Cell(0, 10, $this->encodeString('Teléfono: +1234567890'), 0, 1, 'L');
+        
         // Space after header
         $this->Ln(10);
     }
@@ -78,7 +76,7 @@ class Report extends FPDF
         $this->SetFont('Arial', 'B', 12);
         
         // Column widths
-        $w = array(70, 30, 30, 30);
+        $w = array(40, 60, 30, 20, 30);
         
         // Headers
         for ($i = 0; $i < count($header); $i++) {
@@ -95,9 +93,10 @@ class Report extends FPDF
         $fill = false;
         foreach ($data as $row) {
             $this->Cell($w[0], 6, $this->encodeString($row[0]), 'LR', 0, 'L', $fill);
-            $this->Cell($w[1], 6, $this->encodeString($row[1]), 'LR', 0, 'C', $fill);
+            $this->Cell($w[1], 6, $this->encodeString($row[1]), 'LR', 0, 'L', $fill);
             $this->Cell($w[2], 6, $this->encodeString($row[2]), 'LR', 0, 'R', $fill);
             $this->Cell($w[3], 6, $this->encodeString($row[3]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[4], 6, $this->encodeString($row[4]), 'LR', 0, 'R', $fill);
             $this->Ln();
             $fill = !$fill;
         }
@@ -106,4 +105,4 @@ class Report extends FPDF
     }
 }
 
-// Example usage:
+?>
