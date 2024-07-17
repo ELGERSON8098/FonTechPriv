@@ -82,10 +82,10 @@ const fillTable = async (form = null) => {
                     <td>${row.descripcion}</td>
                     <td>${row.valor}</td>
                     <td>
-                    <button type="button" class="btn btn-info rounded me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_oferta})">
+                    <button type="button" class="btn btn-info  me-2 mb-2 mb-sm-2" onclick="openUpdate(${row.id_oferta})">
                     <i class="bi bi-pencil-fill"></i>
                 </button>
-                <button type="button" class="btn btn-danger rounded me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_oferta})">
+                <button type="button" class="btn btn-danger  me-2 mb-2 mb-sm-2" onclick="openDelete(${row.id_oferta})">
                     <i class="bi bi-trash-fill"></i>
                 </button>         
                     </td>
@@ -169,4 +169,11 @@ const openDelete = async (id) => {
             sweetAlert(2, DATA.error, false);
         }
     }
+}
+
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/descuentos.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }

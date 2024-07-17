@@ -306,7 +306,31 @@ WHERE
         $params = array($this->id_categoria);
         return Database::getRows($sql, $params);
     }
+
+    public function productosConDescuento() {
+        $sql = 'SELECT
+                    p.id_producto,
+                    p.nombre_producto,
+                    p.precio,
+                    p.estado_producto,
+                    p.imagen,
+                    o.nombre_descuento,
+                    o.descripcion AS descripcion_oferta,
+                    o.valor AS valor_oferta
+                FROM
+                    tb_productos p
+                INNER JOIN
+                    tb_ofertas o ON p.id_oferta = o.id_oferta
+                WHERE
+                    p.id_oferta = ? AND o.valor > 0
+                ORDER BY
+                    p.nombre_producto';
+        $params = array($this->id_oferta);
+        return Database::getRows($sql, $params);
+    }
     
+    
+
     public function cantidadProductosCategoria()
     {
         $sql = 'SELECT nombre_categoria, COUNT(id_producto) cantidad
