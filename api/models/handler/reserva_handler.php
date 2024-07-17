@@ -185,30 +185,31 @@ WHERE
     {
         $sql = 'SELECT
     u.usuario,
-    p.nombre_producto ,
-    p.codigo_interno ,
+    p.nombre_producto,
+    p.codigo_interno,
     p.referencia_proveedor,
-    m.marca ,
+    m.marca,
     dr.cantidad,
     dr.precio_unitario,
     d.valor,
     (p.precio - (p.precio * (d.valor / 100))) AS precio_descuento,
-    u.direccion
-    FROM
+    u.direccion,
+    r.estado_reserva
+FROM
     tb_detalles_reservas dr
-    INNER JOIN
+INNER JOIN
     tb_reservas r ON dr.id_reserva = r.id_reserva
-    INNER JOIN
+INNER JOIN
     tb_detalles_productos dp ON dr.id_detalle_producto = dp.id_detalle_producto
-    INNER JOIN
+INNER JOIN
     tb_productos p ON dp.id_producto = p.id_producto
-    INNER JOIN
+INNER JOIN
     tb_usuarios u ON r.id_usuario = u.id_usuario
-    LEFT JOIN
+LEFT JOIN
     tb_marcas m ON p.id_marca = m.id_marca
-    LEFT JOIN
+LEFT JOIN
     tb_descuentos d ON p.id_descuento = d.id_descuento
-    WHERE
+WHERE
     dr.id_detalle_reserva = ?';
 
         $params = array($this->id_detalle_reserva);

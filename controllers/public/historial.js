@@ -16,7 +16,7 @@ const SAVE_MODAL2 = new bootstrap.Modal('#saveModal'),
     COMENTARIO = document.getElementById('contenidoComentario'),
     FECHA_COMENTARIO = document.getElementById('fechaComentario'),
     DIVSTARS = document.getElementById('divstars');
-    let timeout_id;
+let timeout_id;
 
 // Método del evento para cuando el documento ha cargado.
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,16 +38,16 @@ SAVE_FORM2.addEventListener('submit', async (event) => {
 
     const FORM = new FormData(SAVE_FORM2);
     // Agregar el valor de las estrellas al FormData
-    FORM.append('starValue', 6-starValue);
+    FORM.append('starValue', 6 - starValue);
 
     const DATA = await fetchData(COMENTARIO_API, 'createRow', FORM);
-    
+
 
     if (DATA.status) {
         SAVE_MODAL2.hide();
         sweetAlert(1, DATA.message, false);
         readDetail();
-        
+
     } else if (DATA.session) {
         console.log(2);
         sweetAlert(2, DATA.error, false);
@@ -125,6 +125,13 @@ async function readDetail() {
     } else {
         sweetAlert(4, DATA.error, false);
     }
+}
+
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/admin/factura.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
 }
 
 /*

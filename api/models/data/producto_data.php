@@ -272,13 +272,13 @@ class productoData extends productoHandler
 
     public function setCategoria1($value)
     {
-        if (Validator::validateNaturalNumber($value)) {
-            $this->id_oferta = $value;
-            return true;
-        } else {
-            $this->data_error = 'El identificador de la categoría es incorrecto';
-            return false;
+        if ($value !== null && !Validator::validateNaturalNumber($value)) {
+            // Si el valor no es NULL y tampoco es un número natural válido, establecer como NULL
+            $this->id_oferta = null;
+            return true; // Opcional: Puedes devolver true para indicar que no hubo error
         }
+        $this->id_oferta = $value;
+        return true;
     }
 
 

@@ -35,12 +35,17 @@
                 <!-- Formulario de búsqueda -->
                 <form class="col-sm-12 col-md-12 search-form" id="searchForm">
                     <div class="row">
-                        <div class="col-lg-6 col-md-5 col-sm-6 mx-auto">
+                        <div class="col-lg-5 col-md-5 col-sm-6 mx-auto d-flex justify-content-between align-items-center">
                             <!-- Campo de búsqueda -->
                             <div class="input-container" hidden>
-                                <input id="inputsearch" type="text" name="search" class="search-input" placeholder="Buscar...">
-                                <i class="bi bi-search icon-search"></i>/
+                                <input id="inputsearch" type="text" name="search" class="search-input" placeholder="Factura de compras de los productos reservados anteriormente">
+                                <i class="bi bi-search icon-search"></i>
                             </div>
+                            <span>Factura de productos reservados</span>
+                            <button type="button" class="btn btn-primary mb-2 mb-sm-2" onclick="openReport()">
+                                <i class="bi bi-file-earmark-pdf-fill"></i>
+                            </button>
+                            
                         </div>
                     </div>
                     
