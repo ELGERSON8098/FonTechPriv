@@ -135,6 +135,9 @@ class PedidoHandler
     dr.cantidad, 
     r.estado_reserva,
     u.nombre AS nombre_usuario,
+    u.usuario,
+    u.correo,
+    u.direccion,
     p.imagen,
     o.valor AS valor_oferta
 FROM 

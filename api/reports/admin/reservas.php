@@ -58,6 +58,7 @@ class PDF extends FPDF
         // Datos
         $this->SetFont('Times', '', 10); // Cambiado a Times para un estilo más formal
         $fill = false;
+        $totalGeneral = 0;
         foreach ($data as $row) {
             $nombre_producto = $this->encodeString($row['nombre_producto']);
             $cantidad = $row['cantidad'];
@@ -67,7 +68,8 @@ class PDF extends FPDF
 
             $subtotal = $cantidad * $precio_unitario;
             $descuento = ($valor_oferta > 0) ? $subtotal * ($valor_oferta / 100) : 0;
-            $total = $subtotal - $descuento;
+            $totalProducto = $subtotal - $descuento;
+            $totalGeneral += $totalProducto;
 
             // Calcular la posición Y para cada fila
             $currentY = $this->GetY();
@@ -83,6 +85,12 @@ class PDF extends FPDF
         // Dibujar la línea inferior centrada con la tabla
         $this->SetX($x); // Asegurar que la posición X esté alineada
         $this->Cell(array_sum($w), 0, '', 'T');
+
+        // Mostrar total general
+        $this->SetXY($x, $this->GetY());
+        $this->SetFont('Times', 'B', 12);
+        $this->Cell($w[0] + $w[1] + $w[2], 10, 'Total', 1, 0, 'C');
+        $this->Cell($w[3], 10, '$' . number_format($totalGeneral, 2, '.', ','), 1, 0, 'R');
     }
 
     // Codifica caracteres especiales
@@ -102,71 +110,39 @@ require_once('../../models/data/reserva_data.php');
 $reserva = new reservaData;
 
 if (isset($_GET['idReserva']) && $reserva->setIdReserva($_GET['idReserva'])) {
-    if ($rowReserva = $reserva->readOne()) {
-        // Título y detalles de la empresa centrados
-        $title = 'Datos de la empresa';
-        $pdf->SetFont('Times', 'B', 16); // Cambiado a Times para un estilo más formal
-        $titleWidth = $pdf->GetStringWidth($title);
-        $pageWidth = $pdf->GetPageWidth();
+    if ($dataReservas = $reserva->readDetails()) {
+        // Obtener los datos del primer registro (suponiendo que todos los registros tienen la misma información del cliente)
+        $firstRecord = $dataReservas[0];
+        $nombre_cliente = utf8_decode($firstRecord['nombre']);
+        $correo_cliente = utf8_decode($firstRecord['correo']);
+        $direccion_cliente = utf8_decode($firstRecord['direccion']);
 
-        // Calcular posición X para centrar el título
-        $xCenter = ($pageWidth - $titleWidth) / 2;
+        // Título y datos del cliente
+        $pdf->SetFont('Times', 'B', 16); // Usa una fuente integrada
+        $pdf->Cell(0, 10, utf8_decode('Datos del cliente'), 0, 1, 'C');
+        $pdf->SetFont('Times', '', 14); // Usa una fuente integrada
+        $pdf->Cell(0, 10, utf8_decode('Nombre: ') . $nombre_cliente, 0, 1, 'L');
+        $pdf->Cell(0, 10, 'Correo: ' . $correo_cliente, 0, 1, 'L');
+        
+        // Dirección con MultiCell para manejo de texto largo
+        $pdf->SetFont('Times', '', 14); // Usa una fuente integrada
+        $pdf->Cell(0, 10, utf8_decode('Dirección: '), 0, 1, 'L');
+        $pdf->SetFont('Times', '', 12); // Usa una fuente integrada
+        $pdf->MultiCell(0, 10, utf8_decode($direccion_cliente)); // Ajusta el ancho y alto según sea necesario
+        $pdf->Ln(10);
 
-        // Aplicar desplazamiento a la izquierda
-        $shiftLeft = 75; // Ajusta este valor según sea necesario
-        $xCenter -= $shiftLeft;
+        // Tabla de productos
+        $pdf->SetXY(10, $pdf->GetY() + 10); // Espacio aumentado antes de la tabla
+        $pdf->SetFont('Times', 'B', 12); // Cambiado a Times para un estilo más formal
+        $header = array('DESCRIPCION', 'CANTIDAD', 'PRECIO', 'DESCUENTO');
+        $pdf->InvoiceTable($header, $dataReservas);
 
-        // Título centrado
-        $pdf->SetXY($xCenter, $pdf->GetY() + 10); // Ajustar posición para el título
-        $pdf->Cell(0, 10, $title, 0, 1, 'C');
-
-        // Detalles de la empresa (aumento de tamaño de fuente)
-        $pdf->SetFont('Times', '', 14); // Tamaño de fuente aumentado
-        $pdf->SetXY($xCenter, $pdf->GetY() + 5); // Ajustar posición para detalles
-        $pdf->Cell(0, 10, 'Fontech', 0, 1, 'C');
-        $pdf->Cell(0, 10, 'San Salvador, El Salvador', 0, 1, 'C');
-        $pdf->Cell(0, 10, 'FontechSv@gmail.com', 0, 1, 'C');
-        $pdf->Cell(0, 10, '(503) 6305-8048', 0, 1, 'C');
-
-        if ($dataReservas = $reserva->readDetails()) {
-            $pdf->SetXY(10, $pdf->GetY() + 20); // Espacio aumentado antes de la tabla
-            $pdf->SetFont('Times', 'B', 12); // Cambiado a Times para un estilo más formal
-            $header = array('DESCRIPCION', 'CANTIDAD', 'PRECIO', 'DESCUENTO');
-            $pdf->InvoiceTable($header, $dataReservas);
-
-            $pdf->SetXY(10, $pdf->GetY() + 10);
-            $pdf->SetFont('Times', '', 11); // Cambiado a Times para un estilo más formal
-
-            // Resumir totales
-            $subtotal = array_sum(array_map(function ($item) {
-                return $item['cantidad'] * $item['precio_unitario'];
-            }, $dataReservas));
-            $descuentos = array_sum(array_map(function ($item) {
-                return $item['valor_oferta'] > 0 ? ($item['cantidad'] * $item['precio_unitario']) * ($item['valor_oferta'] / 100) : 0;
-            }, $dataReservas));
-            $total = $subtotal - $descuentos;
-
-            $pdf->Cell(130, 10, 'SUBTOTAL', 0, 0, 'R');
-            $pdf->Cell(30, 10, '$' . number_format($subtotal, 2, '.', ','), 0, 1, 'R');
-            if ($descuentos > 0) {
-                $pdf->Cell(130, 10, 'DESCUENTO', 0, 0, 'R');
-                $pdf->Cell(30, 10, '$' . number_format($descuentos, 2, '.', ','), 0, 1, 'R');
-            } else {
-                $pdf->Cell(0, 10, 'No contiene descuento', 0, 1);
-            }
-            $pdf->SetFont('Times', 'B', 12); // Cambiado a Times para un estilo más formal
-            $pdf->Cell(130, 10, 'TOTAL', 0, 0, 'R');
-            $pdf->Cell(30, 10, '$' . number_format($total, 2, '.', ','), 0, 1, 'R');
-        } else {
-            $pdf->Cell(0, 10, $pdf->encodeString('No hay productos reservados'), 1, 1);
-        }
+        // Mostrar el PDF
+        $pdf->Output();
     } else {
-        $pdf->Cell(0, 10, 'Reserva inexistente', 0, 1);
+        echo 'No se encontraron datos.';
     }
 } else {
-    $pdf->Cell(0, 10, 'Debe seleccionar una reserva', 0, 1);
+    echo 'ID de reserva no válido.';
 }
-
-// Enviar el archivo PDF al navegador
-$pdf->Output('I', 'Reservas.pdf');
 ?>

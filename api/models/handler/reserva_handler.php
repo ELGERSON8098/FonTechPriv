@@ -132,7 +132,11 @@ class ReservaHandler
     r.estado_reserva,
     o.nombre_descuento,
     o.descripcion AS descripcion_oferta,
-    o.valor AS valor_oferta
+    o.valor AS valor_oferta,
+    c.nombre,
+    c.usuario,
+    c.correo,
+    c.direccion
 FROM
     tb_detalles_reservas dr
 INNER JOIN
@@ -141,39 +145,14 @@ INNER JOIN
     tb_productos p ON dr.id_producto = p.id_producto
 LEFT JOIN
     tb_ofertas o ON p.id_oferta = o.id_oferta
+INNER JOIN
+    tb_usuarios c ON r.id_usuario = c.id_usuario
 WHERE
     dr.id_reserva = ?';
         $params = array($this->id_reserva);
         return Database::getRows($sql, $params);
     }
 
-    public function readHistorials($value)
-    {
-
-        $value = $value === '' ? '%%' : '%' . $value . '%';
-        $sql = 'SELECT 
-        dr.id_detalle_reserva, 
-        p.id_producto, 
-        r.fecha_registro,
-        p.nombre_producto, 
-        dr.precio_unitario, 
-        dr.cantidad, 
-        r.estado_reserva,
-        u.nombre AS nombre_usuario,
-        p.imagen
-    FROM 
-        tb_detalles_reservas dr
-    INNER JOIN 
-        tb_reservas r ON dr.id_reserva = r.id_reserva
-    INNER JOIN 
-        tb_productos p ON dr.id_producto = p.id_producto
-    INNER JOIN
-        tb_usuarios u ON r.id_usuario = u.id_usuario
-    WHERE r.estado_reserva="Aceptado" AND
-        u.id_usuario = ? AND nombre_producto like ?';
-        $params = array($_SESSION['idUsuario'], $value);
-        return Database::getRows($sql, $params);
-    }
 
 
     public function readDetailsByReservationId() {
