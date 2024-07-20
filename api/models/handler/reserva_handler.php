@@ -147,6 +147,45 @@ WHERE
         return Database::getRows($sql, $params);
     }
 
+    public function readHistorials($value)
+    {
+
+        $value = $value === '' ? '%%' : '%' . $value . '%';
+        $sql = 'SELECT 
+        dr.id_detalle_reserva, 
+        p.id_producto, 
+        r.fecha_registro,
+        p.nombre_producto, 
+        dr.precio_unitario, 
+        dr.cantidad, 
+        r.estado_reserva,
+        u.nombre AS nombre_usuario,
+        p.imagen
+    FROM 
+        tb_detalles_reservas dr
+    INNER JOIN 
+        tb_reservas r ON dr.id_reserva = r.id_reserva
+    INNER JOIN 
+        tb_productos p ON dr.id_producto = p.id_producto
+    INNER JOIN
+        tb_usuarios u ON r.id_usuario = u.id_usuario
+    WHERE r.estado_reserva="Aceptado" AND
+        u.id_usuario = ? AND nombre_producto like ?';
+        $params = array($_SESSION['idUsuario'], $value);
+        return Database::getRows($sql, $params);
+    }
+
+
+    public function readDetailsByReservationId() {
+        $sql = "SELECT p.nombre_producto, p.precio_unitario, o.valor_oferta, d.estado_reserva
+                FROM detalle_reserva d
+                INNER JOIN producto p ON d.id_producto = p.id_producto
+                LEFT JOIN oferta o ON d.id_oferta = o.id_oferta
+                WHERE d.id_reserva = ?";
+        $params = array($this->id_reserva);
+        return Database::getRows($sql, $params);
+    }
+
     public function updateDetail()
     {
         $sql = 'UPDATE tb_detalles_reservas

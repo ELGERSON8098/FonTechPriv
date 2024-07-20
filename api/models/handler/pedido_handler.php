@@ -18,6 +18,7 @@ class PedidoHandler
     protected $precio = null;
     protected $estado = null;
     protected $idProducto = null;
+    protected $idUsuario = null;
 
     /*
     *   ESTADOS DEL PEDIDO
@@ -32,19 +33,19 @@ class PedidoHandler
     */
     // Método para verificar si existe un pedido en proceso con el fin de iniciar o continuar una compra.
     public function getOrder()
-{
-    $this->estado = 'Pendiente';
-    $sql = 'SELECT id_reserva
+    {
+        $this->estado = 'Pendiente';
+        $sql = 'SELECT id_reserva
             FROM tb_reservas
             WHERE estado_reserva = ? AND id_usuario = ?';
-    $params = array($this->estado, $_SESSION['idUsuario']);
-    if ($data = Database::getRow($sql, $params)) {
-        $_SESSION['idReserva'] = $data['id_reserva']; // Asegúrate de usar 'idReserva' en lugar de 'idPedido' para consistencia.
-        return true;
-    } else {
-        return false;
+        $params = array($this->estado, $_SESSION['idUsuario']);
+        if ($data = Database::getRow($sql, $params)) {
+            $_SESSION['idReserva'] = $data['id_reserva']; // Asegúrate de usar 'idReserva' en lugar de 'idPedido' para consistencia.
+            return true;
+        } else {
+            return false;
+        }
     }
-}
 
     // Método para iniciar un pedido en proceso.
     public function startOrder()
@@ -57,7 +58,7 @@ class PedidoHandler
             $sql = 'INSERT INTO tb_reservas(id_usuario, fecha_registro, estado_reserva)
                     VALUES(?, now(), ?)';
             $params = array($_SESSION['idUsuario'], 'Pendiente');
-    
+
             // Ejecuta la consulta y obtiene el ID de la nueva reserva.
             if ($_SESSION['idReserva'] = Database::getLastRow($sql, $params)) {
                 return true;
@@ -112,40 +113,110 @@ class PedidoHandler
         return Database::executeRow($sql, $params);
     }
 
-    public function getExistencias() {
+    public function getExistencias()
+    {
         $sql = 'SELECT existencias FROM tb_productos WHERE id_producto = ?';
         $params = array($this->idProducto);
         if ($data = Database::getRow($sql, $params)) {
             return $data['existencias'];
-        } 
+        }
     }
     public function readHistorials($value)
-{
+    {
+        $value = $value === '' ? '%%' : '%' . $value . '%';
+    
+        // Consulta SQL actualizada para incluir el valor de la oferta
+        $sql = 'SELECT 
+    dr.id_detalle_reserva, 
+    p.id_producto, 
+    r.fecha_registro,
+    p.nombre_producto, 
+    dr.precio_unitario, 
+    dr.cantidad, 
+    r.estado_reserva,
+    u.nombre AS nombre_usuario,
+    p.imagen,
+    o.valor AS valor_oferta
+FROM 
+    tb_detalles_reservas dr
+INNER JOIN 
+    tb_reservas r ON dr.id_reserva = r.id_reserva
+INNER JOIN 
+    tb_productos p ON dr.id_producto = p.id_producto
+INNER JOIN
+    tb_usuarios u ON r.id_usuario = u.id_usuario
+LEFT JOIN
+    tb_ofertas o ON p.id_oferta = o.id_oferta
+WHERE r.estado_reserva = "Aceptado" AND
+    u.id_usuario = ? AND nombre_producto LIKE ?';
+    
+        $params = array($_SESSION['idUsuario'], $value);
+        return Database::getRows($sql, $params);
+    }
+    
 
-    $value= $value === '' ? '%%' : '%' . $value. '%';
-    $sql = 'SELECT 
-        dr.id_detalle_reserva, 
-        p.id_producto, 
-        r.fecha_registro,
-        p.nombre_producto, 
-        dr.precio_unitario, 
-        dr.cantidad, 
-        r.estado_reserva,
-        u.nombre AS nombre_usuario,
-        p.imagen
-    FROM 
-        tb_detalles_reservas dr
-    INNER JOIN 
-        tb_reservas r ON dr.id_reserva = r.id_reserva
-    INNER JOIN 
-        tb_productos p ON dr.id_producto = p.id_producto
-    INNER JOIN
-        tb_usuarios u ON r.id_usuario = u.id_usuario
-    WHERE r.estado_reserva="Aceptado" AND
-        u.id_usuario = ? AND nombre_producto like ?';
-    $params = array($_SESSION['idUsuario'], $value);
+    public function readFactura()
+{
+    // Consulta para obtener todos los productos reservados por el usuario
+    $sql = '        SELECT 
+    dr.id_detalle_reserva, 
+    p.id_producto, 
+    r.fecha_registro,
+    p.nombre_producto, 
+    dr.precio_unitario, 
+    dr.cantidad, 
+    r.estado_reserva,
+    u.nombre AS nombre_usuario,
+    p.imagen,
+    IFNULL(o.valor, 0) AS valor_oferta,
+    IFNULL(o.descripcion, "Sin oferta") AS descripcion_oferta
+FROM 
+    tb_detalles_reservas dr
+INNER JOIN 
+    tb_reservas r ON dr.id_reserva = r.id_reserva
+INNER JOIN 
+    tb_productos p ON dr.id_producto = p.id_producto
+INNER JOIN
+    tb_usuarios u ON r.id_usuario = u.id_usuario
+LEFT JOIN
+    tb_ofertas o ON p.id_oferta = o.id_oferta
+WHERE 
+    r.estado_reserva = "Aceptado" AND
+    u.id_usuario = ?';
+    $params = array($_SESSION['idUsuario']);
     return Database::getRows($sql, $params);
 }
+
+    
+    
+
+
+    public function readOne()
+    {
+        $sql = 'SELECT
+    r.id_reserva,
+    r.id_usuario,
+    r.estado_reserva,
+    r.fecha_registro,
+    u.usuario,
+    d.id_detalle_reserva,
+    d.cantidad,
+    d.id_producto,
+    d.precio_unitario,
+    p.nombre_producto
+FROM
+    tb_detalles_reservas d
+INNER JOIN
+    tb_reservas r ON d.id_reserva = r.id_reserva
+INNER JOIN
+    tb_usuarios u ON r.id_usuario = u.id_usuario
+INNER JOIN
+    tb_productos p ON d.id_producto = p.id_producto
+WHERE
+    d.id_detalle_reserva = ?';
+        $params = array($this->id_detalle);
+        return Database::getRow($sql, $params);
+    }
 
     // Método para actualizar la cantidad de un producto agregado al carrito de compras.
     public function updateDetail()

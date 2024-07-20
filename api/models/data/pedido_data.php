@@ -25,6 +25,17 @@ class PedidoData extends PedidoHandler
         }
     }
 
+    public function setIdCliente($value)
+    {
+        if (Validator::validateNaturalNumber($value)) {
+            $this->idUsuario = $value;
+            return true;
+        } else {
+            $this->data_error = 'El identificador del pedido es incorrecto';
+            return false;
+        }
+    }
+
     public function setIdDetalle($value)
     {
         if (Validator::validateNaturalNumber($value)) {

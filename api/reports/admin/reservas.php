@@ -6,6 +6,9 @@ class PDF extends FPDF
     // Página de encabezado
     function Header()
     {
+        // Borde alrededor de la página
+        $this->Rect(5, 5, $this->GetPageWidth() - 10, $this->GetPageHeight() - 10);
+        
         // Título
         $this->SetFont('Times', 'B', 20); // Cambiado a Times para un estilo más formal
         $this->Cell(0, 10, 'Factura Electronica', 0, 1, 'C');
@@ -166,3 +169,4 @@ if (isset($_GET['idReserva']) && $reserva->setIdReserva($_GET['idReserva'])) {
 
 // Enviar el archivo PDF al navegador
 $pdf->Output('I', 'Reservas.pdf');
+?>
