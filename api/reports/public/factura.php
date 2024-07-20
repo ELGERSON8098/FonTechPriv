@@ -31,7 +31,7 @@ class PDF extends FPDF
     // Tabla con encabezado y datos
     function InvoiceTable($header, $data)
     {
-        $w = array(70, 30, 30, 30);
+        $w = array(50, 25, 25, 40, 30); // Ajuste de anchos de columna: DESCRIPCION, CANTIDAD, PRECIO, DESCUENTO, TOTAL
         $totalWidth = array_sum($w);
         $x = ($this->GetPageWidth() - $totalWidth) / 2;
 
@@ -64,6 +64,7 @@ class PDF extends FPDF
             $this->Cell($w[1], 10, $cantidad, 'LR', 0, 'C', $fill);
             $this->Cell($w[2], 10, '$' . number_format($precio_unitario, 2, '.', ','), 'LR', 0, 'R', $fill);
             $this->Cell($w[3], 10, $valor_oferta > 0 ? '$' . number_format($descuento, 2, '.', ',') : '-', 'LR', 0, 'R', $fill);
+            $this->Cell($w[4], 10, '$' . number_format($total, 2, '.', ','), 'LR', 0, 'R', $fill);
             $this->Ln();
 
             $fill = !$fill;
@@ -106,12 +107,10 @@ if (isset($_SESSION['idUsuario'])) {
         $pdf->MultiCell(0, 10, utf8_decode($direccion_cliente)); // Ajusta el ancho y alto según sea necesario
         $pdf->Ln(10);
 
-       
-
         // Tabla de productos
         $pdf->SetXY(10, $pdf->GetY() + 10);
         $pdf->SetFont('Times', 'B', 12); // Usa una fuente integrada
-        $header = array('DESCRIPCION', 'CANTIDAD', 'PRECIO', 'DESCUENTO');
+        $header = array('DESCRIPCION', 'CANTIDAD', 'PRECIO', 'DESCUENTO', 'TOTAL');
         $pdf->InvoiceTable($header, $dataPedido);
 
         $pdf->SetXY(10, $pdf->GetY() + 10);
