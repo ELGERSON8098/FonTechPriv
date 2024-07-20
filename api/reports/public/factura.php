@@ -1,23 +1,22 @@
 <?php
-require_once('../../helpers/report.php');
-require_once('../../models/data/reserva_data.php');
+require_once('../../helpers/reportPublic.php');
+require_once('../../models/data/producto_data.php');
+require_once('../../models/data/categoria_data.php');
 
 $pdf = new Report;
-$pdf->startReport('Productos reservados');
+$pdf->startReport('Productos por categoría');
 
-$reserva = new reservaData;
+$categoria = new CategoriaData;
 
-if ($dataReservas = $reserva->readAll()) {
+if ($dataCategorias = $categoria->readAll()) {
     // Establecer colores y fuentes para encabezados
     $pdf->setFillColor(0, 153, 153); // Verde para encabezados
     $pdf->setTextColor(255, 255, 255); // Texto blanco para encabezados
     $pdf->setFont('Arial', 'B', 12);
 
     // Encabezados de la tabla
-    $pdf->cell(100, 10, 'Nombre del producto', 1, 0, 'C', 1);
+    $pdf->cell(100, 10, 'Nombre', 1, 0, 'C', 1);
     $pdf->cell(40, 10, 'Precio (US$)', 1, 0, 'C', 1);
-    $pdf->cell(40, 10, 'Descuento (%)', 1, 0, 'C', 1);
-    $pdf->cell(40, 10, 'Total (US$)', 1, 0, 'C', 1);
     $pdf->cell(40, 10, 'Estado', 1, 1, 'C', 1);
 
     // Establecer colores y fuentes para datos de productos
@@ -25,20 +24,21 @@ if ($dataReservas = $reserva->readAll()) {
     $pdf->setTextColor(0); // Restablecer color de texto a negro
     $pdf->setFont('Arial', '', 11);
 
-    foreach ($dataReservas as $rowReserva) {
+    foreach ($dataCategorias as $rowCategoria) {
         // Título de categoría
-        $pdf->cell(180, 10, utf8_decode('Cliente: ' . $rowReserva['usuario']), 1, 1, 'L', 1);
+        $pdf->cell(180, 10, utf8_decode('Categoría: ' . $rowCategoria['nombre_categoria']), 1, 1, 'L', 1);
 
+        $producto = new ProductoData;
 
-        if ($reserva->setIdDetalle($rowreserva['id_detalle_reserva'])) {
-            if ($dataReservas = $reserva->readOneDetailForForm()) {
-                foreach ($dataReservas as $rowReserva) {
-                    $estado = ($rowReserva['estado_reserva']) ? 'Aceptado' : 'Pendiente';
-                    $totalProducto = $rowReserva['precio'] * 1; // Ajustar la lógica según sea necesario
+        if ($producto->setCategoria($rowCategoria['id_categoria'])) {
+            if ($dataProductos = $producto->productosCategoria()) {
+                foreach ($dataProductos as $rowProducto) {
+                    $estado = ($rowProducto['estado_producto']) ? 'Activo' : 'Inactivo';
+                    $totalProducto = $rowProducto['precio'] * 1; // Ajustar la lógica según sea necesario
 
                     // Datos de productos
-                    $pdf->cell(100, 10, utf8_decode($rowReserva['nombre_producto']), 1, 0, 'L');
-                    $pdf->cell(40, 10, '$' . number_format($rowReserva['precio'], 2, '.', ','), 1, 0, 'R');
+                    $pdf->cell(100, 10, utf8_decode($rowProducto['nombre_producto']), 1, 0, 'L');
+                    $pdf->cell(40, 10, '$' . number_format($rowProducto['precio'], 2, '.', ','), 1, 0, 'R');
                     $pdf->cell(40, 10, utf8_decode($estado), 1, 1, 'C');
                 }
             } else {
@@ -58,4 +58,4 @@ if ($dataReservas = $reserva->readAll()) {
 }
 
 // Salida del documento
-$pdf->output('I', 'productos.pdf');
+$pdf->output('I', 'factura.pdf');

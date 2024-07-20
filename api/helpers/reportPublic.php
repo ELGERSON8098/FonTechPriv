@@ -3,16 +3,15 @@ require_once('../../libraries/fpdf185/fpdf.php');
 
 class Report extends FPDF
 {
-    const CLIENT_URL = 'http://localhost/fontechpriv/views/admin/';
-    
+    const CLIENT_URL = 'http://localhost/fontechpriv/views/public/';
     private $title = null;
 
     public function startReport($title)
     {
         session_start();
-        if (isset($_SESSION['idAdministrador'])) {
+        if (isset($_SESSION['idUsuario'])) {
             $this->title = $title;
-            $this->SetTitle('Fontech - Factura', true);
+            $this->SetTitle('Fontech - Reporte', true);
             $this->SetMargins(15, 15, 15);
             $this->AddPage('P', 'letter');
             $this->AliasNbPages();
@@ -29,10 +28,7 @@ class Report extends FPDF
 
     public function Header()
     {
-        // Add background image
-        
-
-        // Company Logo
+        // Logo centered
         $this->Image('../../images/image 67.png', $this->GetPageWidth() / 2 - 25, 10, 60);
 
         // Title
@@ -40,20 +36,17 @@ class Report extends FPDF
         $this->Ln(25); // Space after logo
         $this->Cell(0, 10, $this->encodeString($this->title), 0, 1, 'C');
 
+        // Decorative line
+        $this->SetDrawColor(0, 0, 0); // Black line color
+        $this->SetLineWidth(0.5);
+        $this->Line(15, 40, $this->GetPageWidth() - 15, 40);
+
         // Date and time
         $this->SetFont('Arial', '', 12);
         $this->Cell(0, 10, 'Fecha/Hora: ' . date('d-m-Y H:i:s'), 0, 1, 'C');
         
-        // Company details
-        $this->Ln(10);
-        $this->SetFont('Arial', 'B', 12);
-        $this->Cell(0, 10, $this->encodeString('Nombre de la Empresa'), 0, 1, 'L');
-        $this->SetFont('Arial', '', 12);
-        $this->Cell(0, 10, $this->encodeString('Dirección: Calle Ejemplo, Ciudad, País'), 0, 1, 'L');
-        $this->Cell(0, 10, $this->encodeString('Teléfono: +1234567890'), 0, 1, 'L');
-        
         // Space after header
-        $this->Ln(10);
+        $this->Ln(5);
     }
 
     public function Footer()
@@ -65,14 +58,14 @@ class Report extends FPDF
         $this->Cell(0, 10, $this->encodeString('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 
-    public function InvoiceTable($header, $data)
+    public function FancyTable($header, $data)
     {
         // Colors, line width and bold font
         $this->SetFillColor(0, 255, 255); // Light cyan for header
         $this->SetTextColor(0);
         $this->SetDrawColor(128, 0, 0);
         $this->SetLineWidth(0.3);
-        $this->SetFont('Arial', 'B', 12);
+        $this->SetFont('Calibri', 'B', 12);
         
         // Column widths
         $w = array(40, 60, 30, 20, 30);
@@ -91,18 +84,11 @@ class Report extends FPDF
         // Data rows
         $fill = false;
         foreach ($data as $row) {
-            // Ensure the row has enough elements before accessing them
-            $cell0 = isset($row[0]) ? $this->encodeString($row[0]) : '';
-            $cell1 = isset($row[1]) ? $this->encodeString($row[1]) : '';
-            $cell2 = isset($row[2]) ? $this->encodeString($row[2]) : '';
-            $cell3 = isset($row[3]) ? $this->encodeString($row[3]) : '';
-            $cell4 = isset($row[4]) ? $this->encodeString($row[4]) : '';
-        
-            $this->Cell($w[0], 6, $cell0, 'LR', 0, 'L', $fill);
-            $this->Cell($w[1], 6, $cell1, 'LR', 0, 'L', $fill);
-            $this->Cell($w[2], 6, $cell2, 'LR', 0, 'R', $fill);
-            $this->Cell($w[3], 6, $cell3, 'LR', 0, 'R', $fill);
-            $this->Cell($w[4], 6, $cell4, 'LR', 0, 'R', $fill);
+            $this->Cell($w[0], 6, $this->encodeString($row[0]), 'LR', 0, 'L', $fill);
+            $this->Cell($w[1], 6, $this->encodeString($row[1]), 'LR', 0, 'L', $fill);
+            $this->Cell($w[2], 6, $this->encodeString($row[2]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[3], 6, $this->encodeString($row[3]), 'LR', 0, 'R', $fill);
+            $this->Cell($w[4], 6, $this->encodeString($row[4]), 'LR', 0, 'R', $fill);
             $this->Ln();
             $fill = !$fill;
         }
@@ -110,3 +96,5 @@ class Report extends FPDF
         $this->Cell(array_sum($w), 0, '', 'T');
     }
 }
+
+?>

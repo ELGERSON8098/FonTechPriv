@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<!-- Declaración del idioma para el documento -->
 <html lang="es">
 
 <head>
-    <!-- Título del documento -->
-    <title></title>
-    <!-- Metadatos de la página web -->
-    <meta charset="utf-8">
-    <meta name="author" content="Daniel Carranza">
+    <!-- Codificación del documento -->
+    <meta charset="UTF-8">
+    <!-- Compatibilidad con Internet Explorer -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Escalabilidad para dispositivos -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- IMPORTACIÓN DE RECURSOS EXTERNOS -->
-    <!-- Llamada al icono de la página web -->
-   
-    <!-- Llamada a las hojas de estilos del framework e iconos -->
-    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap.min.css">
-     <!-- fontawesome cdn -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-     integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
-     crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <link type="text/css" rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
+    <title></title>
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Icono de la página -->
+    <link type="image/png" rel="icon" href="../../resources/img/LogoComods.png">
+    <!-- Iconos de Bootstrap -->
+    <link rel="stylesheet" href="../../resources/css/bootstrap-icons.min.css">
+    <!-- CSS personalizado -->
     <link rel="stylesheet" href="../../resources/css/Dashboard_publico.css">
 </head>
 
@@ -40,16 +41,17 @@
                             <div class="input-container" hidden>
                                 <input id="inputsearch" type="text" name="search" class="search-input" placeholder="Factura de compras de los productos reservados anteriormente">
                                 <i class="bi bi-search icon-search"></i>
-                            </div>
-                            <span>Factura de productos reservados</span>
-                            <button type="button" class="btn btn-primary mb-2 mb-sm-2" onclick="openReport()">
-                                <i class="bi bi-file-earmark-pdf-fill"></i>
-                            </button>
-                            
+                            </div>        
                         </div>
                     </div>
                     
                 </form>
+            </div>
+            <div class="col-12 col-sm-auto ms-auto">
+                <!-- Botón para abrir un reporte en formato PDF -->
+                <button type="button" class="btn btn-primary  mb-2 mb-sm-2" onclick="openReport()">
+                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                </button>
             </div>
 
 
@@ -68,9 +70,8 @@
     <script type="text/javascript" src="../../resources/js/bootstrap.bundle.min.js"></script>
     <script type="text/javascript" src="../../resources/js/sweetalert.min.js"></script>
     <!-- Llamada al controlador general de la aplicación -->
-    <script type="text/javascript" src="../../controllers/utils/components.js"></script>
-    <!-- Llamada al controlador del sitio público -->
-    <script type="text/javascript" src="../../controllers/utils/public.js"></script>
+    <script src="../../controllers/utils/admin.js"></script>
+    <script src="../../controllers/utils/components.js"></script>
     <!-- Llamada al controlador de la página web -->
     <script type="text/javascript" src="../../controllers/public/historial.js"></script>
 </body>

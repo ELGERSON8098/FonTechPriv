@@ -129,13 +129,18 @@ class ReservaHandler
     r.fecha_registro,
     dr.cantidad,
     dr.precio_unitario,
-    r.estado_reserva
+    r.estado_reserva,
+    o.nombre_descuento,
+    o.descripcion AS descripcion_oferta,
+    o.valor AS valor_oferta
 FROM
     tb_detalles_reservas dr
 INNER JOIN
     tb_reservas r ON dr.id_reserva = r.id_reserva
 INNER JOIN
     tb_productos p ON dr.id_producto = p.id_producto
+LEFT JOIN
+    tb_ofertas o ON p.id_oferta = o.id_oferta
 WHERE
     dr.id_reserva = ?';
         $params = array($this->id_reserva);

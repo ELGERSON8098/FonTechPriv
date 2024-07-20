@@ -14,6 +14,7 @@ const SAVE_MODAL2 = new bootstrap.Modal('#saveModal'),
     INPUTSEARCH = document.getElementById('inputsearch'),
     MODAL_TITLE2 = document.getElementById('modalTitle'),
     COMENTARIO = document.getElementById('contenidoComentario'),
+    BOTON_REPORT = document.getElementById('btnr'),
     FECHA_COMENTARIO = document.getElementById('fechaComentario'),
     DIVSTARS = document.getElementById('divstars');
 let timeout_id;
@@ -28,34 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     readDetail();
 });
 
+
 // Método del evento para cuando se envía el formulario de agregar un producto al carrito.
-SAVE_FORM2.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    // Obtener el valor de las estrellas seleccionadas
-    const selectedStars = document.querySelector('input[name="star-radio"]:checked');
-    const starValue = selectedStars ? selectedStars.value : null;
-
-    const FORM = new FormData(SAVE_FORM2);
-    // Agregar el valor de las estrellas al FormData
-    FORM.append('starValue', 6 - starValue);
-
-    const DATA = await fetchData(COMENTARIO_API, 'createRow', FORM);
 
 
-    if (DATA.status) {
-        SAVE_MODAL2.hide();
-        sweetAlert(1, DATA.message, false);
-        readDetail();
-
-    } else if (DATA.session) {
-        console.log(2);
-        sweetAlert(2, DATA.error, false);
-    } else {
-        console.log(3);
-        sweetAlert(3, DATA.error, true);
-    }
-});
 
 INPUTSEARCH.addEventListener('input', function () {
     clearTimeout(timeout_id);
@@ -64,6 +41,12 @@ INPUTSEARCH.addEventListener('input', function () {
     }, 50); // Delay de 50ms
 });
 
+const openReport = () => {
+    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
+    const PATH = new URL(`${SERVER_URL}reports/public/factura.php`);
+    // Se abre el reporte en una nueva pestaña.
+    window.open(PATH.href);
+}
 
 
 /*
@@ -125,13 +108,6 @@ async function readDetail() {
     } else {
         sweetAlert(4, DATA.error, false);
     }
-}
-
-const openReport = () => {
-    // Se declara una constante tipo objeto con la ruta específica del reporte en el servidor.
-    const PATH = new URL(`${SERVER_URL}reports/admin/factura.php`);
-    // Se abre el reporte en una nueva pestaña.
-    window.open(PATH.href);
 }
 
 /*
