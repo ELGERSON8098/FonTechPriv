@@ -356,8 +356,7 @@ FROM tb_ofertas o
 INNER JOIN tb_productos p ON o.id_oferta = p.id_oferta
 GROUP BY o.nombre_descuento
 ORDER BY cantidad DESC
-LIMIT 5
-';
+LIMIT 5';
         return Database::getRows($sql);
     }
 

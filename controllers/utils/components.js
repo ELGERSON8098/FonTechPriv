@@ -144,14 +144,14 @@ const fillSelect = async (filename, action, select, selected = null) => {
 *   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título del gráfico).
 *   Retorno: ninguno.
 */
+// Gráfico de Barras
+// Gráfico de Barras
 const barGraph = (canvas, xAxis, yAxis, legend, title) => {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
     let colors = [];
-    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     xAxis.forEach(() => {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        colors.push('rgba(' + [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 0.7].join(',') + ')');
     });
-    // Se crea una instancia para generar el gráfico con los datos recibidos.
+
     new Chart(document.getElementById(canvas), {
         type: 'bar',
         data: {
@@ -159,65 +159,121 @@ const barGraph = (canvas, xAxis, yAxis, legend, title) => {
             datasets: [{
                 label: legend,
                 data: yAxis,
-                backgroundColor: colors
+                backgroundColor: colors,
+                borderColor: '#ddd',
+                borderWidth: 1,
+                barThickness: 24,
+                maxBarThickness: 40,
+                minBarLength: 2
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    padding: {
+                        bottom: 20
+                    },
+                    color: '#333',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
                 },
                 legend: {
                     display: false
                 }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        color: '#666',
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        color: '#666',
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            },
+            animation: {
+                duration: 1200,
+                easing: 'easeInOutExpo'
             }
         }
     });
 }
 
-/*
-*   Función para generar un gráfico de pastel.
-*   Requiere la librería chart.js para funcionar.
-*   Parámetros: canvas (identificador de la etiqueta canvas), legends (valores para las etiquetas), values (valores de los datos) y title (título del gráfico).
-*   Retorno: ninguno.
-*/
+// Gráfico de Pastel
 const pieGraph = (canvas, legends, values, title) => {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
     let colors = [];
-    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     values.forEach(() => {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        colors.push('rgba(' + [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 0.7].join(',') + ')');
     });
-    // Se crea una instancia para generar el gráfico con los datos recibidos.
+
     new Chart(document.getElementById(canvas), {
         type: 'pie',
         data: {
             labels: legends,
             datasets: [{
                 data: values,
-                backgroundColor: colors
+                backgroundColor: colors,
+                borderColor: '#fff',
+                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    padding: {
+                        bottom: 20
+                    },
+                    color: '#333',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#333',
+                        font: {
+                            size: 14
+                        }
+                    }
                 }
+            },
+            animation: {
+                animateRotate: true,
+                animateScale: true,
+                duration: 1200,
+                easing: 'easeInOutExpo'
             }
         }
     });
 }
 
-/*
-*   Función para generar un gráfico de líneas.
-*   Requiere la librería chart.js para funcionar.
-*   Parámetros: canvas (identificador de la etiqueta canvas), xAxis (datos para el eje X), yAxis (datos para el eje Y), legend (etiqueta para los datos) y title (título del gráfico).
-*   Retorno: ninguno.
-*/
+// Gráfico de Líneas
 const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
-    // Se crea una instancia para generar el gráfico con los datos recibidos.
     new Chart(document.getElementById(canvas), {
         type: 'line',
         data: {
@@ -226,29 +282,68 @@ const lineGraph = (canvas, xAxis, yAxis, legend, title) => {
                 label: legend,
                 data: yAxis,
                 fill: false,
-                borderColor: 'rgba(75, 192, 192, 1)',
-                tension: 0.1
+                borderColor: '#007bff',
+                tension: 0.2,
+                borderWidth: 2,
+                pointRadius: 6,
+                pointBackgroundColor: '#007bff',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#007bff'
             }]
         },
         options: {
+            responsive: true,
+            scales: {
+                x: {
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        color: '#666',
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        color: '#666',
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            },
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    padding: {
+                        bottom: 20
+                    },
+                    color: '#333',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
                 }
+            },
+            animation: {
+                duration: 1200,
+                easing: 'easeInOutExpo'
             }
         }
     });
 }
 
-/*
-*   Función para generar un gráfico de radar.
-*   Requiere la librería chart.js para funcionar.
-*   Parámetros: canvas (identificador de la etiqueta canvas), labels (etiquetas para el gráfico), data (datos del gráfico), label (etiqueta para los datos) y title (título del gráfico).
-*   Retorno: ninguno.
-*/
+// Gráfico de Radar
 const radarGraph = (canvas, labels, data, label, title) => {
-    // Se crea una instancia para generar el gráfico con los datos recibidos.
     new Chart(document.getElementById(canvas), {
         type: 'radar',
         data: {
@@ -257,39 +352,56 @@ const radarGraph = (canvas, labels, data, label, title) => {
                 label: label,
                 data: data,
                 fill: true,
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                pointBackgroundColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.3)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                pointBackgroundColor: 'rgba(54, 162, 235, 1)',
                 pointBorderColor: '#fff',
                 pointHoverBackgroundColor: '#fff',
-                pointHoverBorderColor: 'rgba(255, 99, 132, 1)'
+                pointHoverBorderColor: 'rgba(54, 162, 235, 1)'
             }]
         },
         options: {
+            responsive: true,
+            scales: {
+                r: {
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.1)',
+                        borderDash: [5, 5]
+                    },
+                    ticks: {
+                        color: '#666'
+                    }
+                }
+            },
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    padding: {
+                        bottom: 20
+                    },
+                    color: '#333',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
                 }
+            },
+            animation: {
+                duration: 1200,
+                easing: 'easeInOutExpo'
             }
         }
     });
 }
 
-/*
-*   Función para generar un gráfico polar.
-*   Requiere la librería chart.js para funcionar.
-*   Parámetros: canvas (identificador de la etiqueta canvas), labels (etiquetas para el gráfico), data (datos del gráfico), label (etiqueta para los datos) y title (título del gráfico).
-*   Retorno: ninguno.
-*/
+// Gráfico Polar
 const polarGraph = (canvas, labels, data, label, title) => {
-    // Se declara un arreglo para guardar códigos de colores en formato hexadecimal.
     let colors = [];
-    // Se generan códigos hexadecimales de 6 cifras de acuerdo con el número de datos a mostrar y se agregan al arreglo.
     data.forEach(() => {
-        colors.push('#' + (Math.random().toString(16)).substring(2, 8));
+        colors.push('rgba(' + [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), 0.7].join(',') + ')');
     });
-    // Se crea una instancia para generar el gráfico con los datos recibidos.
+
     new Chart(document.getElementById(canvas), {
         type: 'polarArea',
         data: {
@@ -297,19 +409,46 @@ const polarGraph = (canvas, labels, data, label, title) => {
             datasets: [{
                 label: label,
                 data: data,
-                backgroundColor: colors
+                backgroundColor: colors,
+                borderColor: '#fff',
+                borderWidth: 1
             }]
         },
         options: {
+            responsive: true,
             plugins: {
                 title: {
                     display: true,
-                    text: title
+                    text: title,
+                    padding: {
+                        bottom: 20
+                    },
+                    color: '#333',
+                    font: {
+                        size: 18,
+                        weight: 'bold'
+                    }
+                },
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: '#333',
+                        font: {
+                            size: 14
+                        }
+                    }
                 }
+            },
+            animation: {
+                animateRotate: true,
+                animateScale: true,
+                duration: 1200,
+                easing: 'easeInOutExpo'
             }
         }
     });
 }
+
 
 /*
 *   Función asíncrona para cerrar la sesión del usuario.

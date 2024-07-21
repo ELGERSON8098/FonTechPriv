@@ -33,7 +33,7 @@ const loadTemplate = async () => {
           <div class="container">
               <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0"
                   href="../admin/dashboard.html">
-                  <img src="../../Recursos/img/image 67.png" class="logo img-fluid" alt="site icon">
+                  <img src="../../resources/img/image 67.png" class="logo img-fluid" alt="site icon">
               </a>
               <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                   <span class="navbar-toggler-icon"></span>

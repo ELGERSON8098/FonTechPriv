@@ -90,7 +90,6 @@ const graficoLineasCategorias = async () => {
     }
 }
 
-
 /*
 *   Función asíncrona para mostrar un gráfico de radar con la cantidad de productos por categoría.
 *   Parámetros: ninguno.
@@ -111,7 +110,6 @@ const graficoRadarCategorias = async () => {
         console.log(DATA.error);
     }
 }
-
 
 /*
 *   Función asíncrona para mostrar un gráfico polar con la cantidad de productos por categoría.

@@ -18,6 +18,46 @@ body{
     /* Ancho completo del contenedor */
 }
 
+.carousel-item canvas {
+    max-width: 600px; /* Ancho máximo */
+    max-height: 400px; /* Alto máximo */
+    width: 100%; /* Ancho responsivo */
+    height: auto; /* Altura responsiva */
+}
+canvas {
+    width: 100% !important;
+    max-width: 800px;
+    height: auto !important;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+.carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: black; /* Cambia el color de las flechas a negro */
+        }
+
+        /* Custom Border Colors for Each Chart */
+#chart1 {
+    border: 1px solid #007bff;
+}
+
+#chart2 {
+    border: 1px solid #28a745;
+}
+
+#chart3 {
+    border: 1px solid #dc3545;
+}
+
+#chart4 {
+    border: 1px solid #ffc107;
+}
+
+#chart5 {
+    border: 1px solid #17a2b8;
+}
+
 .navbar-brand .logo {
     /* Agrega los estilos deseados para la clase "logo" aquí */
     max-height: 50px;
