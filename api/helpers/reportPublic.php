@@ -61,7 +61,7 @@ class Report extends FPDF
     public function FancyTable($header, $data)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(0, 255, 255); // Light cyan for header
+        $this->SetFillColor(0, 153, 153); // Light cyan for header
         $this->SetTextColor(0);
         $this->SetDrawColor(128, 0, 0);
         $this->SetLineWidth(0.3);
@@ -77,7 +77,7 @@ class Report extends FPDF
         $this->Ln();
         
         // Restoring colors and fonts
-        $this->SetFillColor(224, 255, 255); // Light cyan for rows
+        $this->SetFillColor(0, 153, 153); // Light cyan for rows
         $this->SetTextColor(0);
         $this->SetFont('Arial', '', 12);
         

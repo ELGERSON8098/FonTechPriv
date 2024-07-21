@@ -31,7 +31,10 @@ class Report extends FPDF
     {
         // Add background image
         
-
+        // Draw the border
+        $this->SetDrawColor(0, 0, 0); // Black color
+        $this->Rect(5, 5, $this->GetPageWidth() - 10, $this->GetPageHeight() - 10);
+        
         // Company Logo
         $this->Image('../../images/image 67.png', $this->GetPageWidth() / 2 - 25, 10, 60);
 
@@ -68,7 +71,7 @@ class Report extends FPDF
     public function InvoiceTable($header, $data)
     {
         // Colors, line width and bold font
-        $this->SetFillColor(0, 255, 255); // Light cyan for header
+        $this->SetFillColor(0, 153, 153); // Light cyan for header
         $this->SetTextColor(0);
         $this->SetDrawColor(128, 0, 0);
         $this->SetLineWidth(0.3);
@@ -84,7 +87,7 @@ class Report extends FPDF
         $this->Ln();
         
         // Restoring colors and fonts
-        $this->SetFillColor(224, 255, 255); // Light cyan for rows
+        $this->SetFillColor(224, 153, 153); // Light cyan for rows
         $this->SetTextColor(0);
         $this->SetFont('Arial', '', 12);
         

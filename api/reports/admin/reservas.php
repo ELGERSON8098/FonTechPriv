@@ -45,7 +45,7 @@ class PDF extends FPDF
 
         // Encabezado
         $this->SetXY($x, $this->GetY());
-        $this->SetFillColor(200, 220, 255); // Color de fondo para el encabezado
+        $this->SetFillColor(0, 153, 153); // Color de fondo para el encabezado
         $this->SetTextColor(0); // Color del texto
         $this->SetDrawColor(128, 128, 128); // Color del borde
         $this->SetLineWidth(.3);
