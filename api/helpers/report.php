@@ -12,7 +12,7 @@ class Report extends FPDF
         if (isset($_SESSION['idAdministrador'])) {
             $this->title = $title;
             $this->SetTitle('Fontech - Reporte', true);
-            $this->SetMargins(15, 15, 15);
+            $this->SetMargins(15, 15, 15); // Margen de 15 mm en todos los lados
             $this->AddPage('P', 'letter');
             $this->AliasNbPages();
         } else {
@@ -56,6 +56,11 @@ class Report extends FPDF
         $this->SetFont('Arial', 'I', 10);
         $this->SetTextColor(0); // Black text color
         $this->Cell(0, 10, $this->encodeString('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
+
+        // Draw border around page closer to the bottom
+        $this->SetDrawColor(0, 0, 0); // Black border color
+        $this->SetLineWidth(0.3);
+        $this->Rect(8, 5, $this->GetPageWidth() - 15, $this->GetPageHeight() - 10); // Adjust x, y, width, height
     }
 
     public function FancyTable($header, $data)
@@ -96,5 +101,4 @@ class Report extends FPDF
         $this->Cell(array_sum($w), 0, '', 'T');
     }
 }
-
 ?>
