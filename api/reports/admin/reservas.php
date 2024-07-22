@@ -46,10 +46,10 @@ class PDF extends FPDF
         // Encabezado
         $this->SetXY($x, $this->GetY());
         $this->SetFillColor(0, 153, 153); // Color de fondo para el encabezado
-        $this->SetTextColor(0); // Color del texto
+        $this->SetTextColor(255); // Color del texto blanco
         $this->SetDrawColor(128, 128, 128); // Color del borde
         $this->SetLineWidth(.3);
-        $this->SetFont('Times', 'B', 12); // Cambiado a Times para un estilo más formal
+        $this->SetFont('Arial', '', 12); // Cambiado a Times para un estilo más formal
         foreach ($header as $i => $col) {
             $this->Cell($w[$i], 10, $col, 1, 0, 'C', true);
         }
@@ -74,6 +74,7 @@ class PDF extends FPDF
             // Calcular la posición Y para cada fila
             $currentY = $this->GetY();
             $this->SetXY($x, $currentY);
+            $this->SetTextColor(0); // Color del texto negro
             $this->Cell($w[0], 10, $nombre_producto, 'LR', 0, 'L', $fill);
             $this->Cell($w[1], 10, $cantidad, 'LR', 0, 'C', $fill);
             $this->Cell($w[2], 10, '$' . number_format($precio_unitario, 2, '.', ','), 'LR', 0, 'R', $fill);
@@ -119,6 +120,7 @@ if (isset($_GET['idReserva']) && $reserva->setIdReserva($_GET['idReserva'])) {
 
         // Título y datos del cliente
         $pdf->SetFont('Times', 'B', 16); // Usa una fuente integrada
+        $pdf->SetTextColor(0); // Color del texto negro
         $pdf->Cell(0, 10, utf8_decode('Datos del cliente'), 0, 1, 'C');
         $pdf->SetFont('Times', '', 14); // Usa una fuente integrada
         $pdf->Cell(0, 10, utf8_decode('Nombre: ') . $nombre_cliente, 0, 1, 'L');

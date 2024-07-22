@@ -54,7 +54,7 @@ class Report extends FPDF
         // Position at 15 mm from bottom
         $this->SetY(-15);
         $this->SetFont('Arial', 'I', 10);
-        $this->SetTextColor(0); // Black text color
+        $this->SetTextColor(255, 255, 255); // Black text color
         $this->Cell(0, 10, $this->encodeString('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
 
         // Draw border around page closer to the bottom
@@ -67,7 +67,7 @@ class Report extends FPDF
     {
         // Colors, line width and bold font
         $this->SetFillColor(0, 153, 153); // Light cyan for header
-        $this->SetTextColor(0);
+        $this->SetTextColor(255, 255, 255);
         $this->SetDrawColor(128, 0, 0);
         $this->SetLineWidth(0.3);
         $this->SetFont('Calibri', 'B', 12);
@@ -83,7 +83,7 @@ class Report extends FPDF
         
         // Restoring colors and fonts
         $this->SetFillColor(0, 153, 153); // Light cyan for rows
-        $this->SetTextColor(0);
+        $this->SetTextColor(255, 255, 255);
         $this->SetFont('Arial', '', 12);
         
         // Data rows

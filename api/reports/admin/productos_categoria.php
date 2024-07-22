@@ -25,6 +25,7 @@ if (isset($_GET['idCategoria'])) {
                 // Se establece la fuente para los encabezados.
                 $pdf->SetFont('Arial', 'B', 11);
                 // Se imprimen las celdas con los encabezados.
+                $pdf->SetTextColor(255, 255, 255); // Color blanco
                 $pdf->Cell(125, 10, 'Nombre', 1, 0, 'C', 1);
                 $pdf->Cell(30, 10, 'Precio (US$)', 1, 0, 'C', 1);
                 $pdf->Cell(30, 10, 'Estado', 1, 1, 'C', 1);
@@ -33,23 +34,30 @@ if (isset($_GET['idCategoria'])) {
                 // Se recorren los registros fila por fila.
                 foreach ($dataProductos as $rowProducto) {
                     ($rowProducto['estado_producto']) ? $estado = 'Activo' : $estado = 'Inactivo';
+                    // Se establece el color del texto a negro para los datos de productos.
+                    $pdf->SetTextColor(0, 0, 0); // Color negro
                     // Se imprimen las celdas con los datos de los productos.
                     $pdf->Cell(125, 10, $pdf->encodeString($rowProducto['nombre_producto']), 1, 0);
                     $pdf->Cell(30, 10, $rowProducto['precio'], 1, 0);
                     $pdf->Cell(30, 10, $estado, 1, 1);
                 }
             } else {
+                // No hay productos para la categoría
+                $pdf->SetTextColor(0, 0, 0); // Color negro
                 $pdf->Cell(0, 10, $pdf->encodeString('No hay productos para la categoría'), 1, 1);
             }
             // Se llama implícitamente al método footer() y se envía el documento al navegador web.
             $pdf->Output('I', 'categoria.pdf');
         } else {
+            // Categoría inexistente
             print('Categoría inexistente');
         }
     } else {
+        // Categoría incorrecta
         print('Categoría incorrecta');
     }
 } else {
+    // Debe seleccionar una categoría
     print('Debe seleccionar una categoría');
 }
 ?>
