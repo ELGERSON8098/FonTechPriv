@@ -42,7 +42,74 @@ if (isset($_GET['action'])) {
                 } else {
                     $result['error'] = 'Ocurrió un problema al crear el administrador';
                 }
+                
                 break;
+                case 'createTrabajadores':
+                    $_POST = Validator::validateForm($_POST);
+    
+                    // Validar datos del formulario
+                    if (
+                        !$administrador->setNombre($_POST['NAdmin']) ||
+                        !$administrador->setAlias($_POST['NUsuario']) ||
+                        !$administrador->setCorreo($_POST['CorreoAd']) ||
+                        !$administrador->setClave($_POST['ContraAd']) 
+               
+                    ) {
+                        $result['error'] = $administrador->getDataError();
+                    } elseif ($_POST['ContraAd'] !== $_POST['confirmarClaveA']) {
+                        $result['error'] = 'Las contraseñas no coinciden';
+                    } else {
+                        // Verificar duplicidad de usuario y correo electrónico
+                        $checkCorreoSql = 'SELECT COUNT(*) as count FROM tb_admins WHERE correo_administrador = ?';
+                        $checkCorreoParams = array($_POST['CorreoAd']);
+    
+                        $checkAliasSql = 'SELECT COUNT(*) as count FROM tb_admins WHERE usuario_administrador = ?';
+                        $checkAliasParams = array($_POST['NUsuario']);
+    
+                        $checkCorreoResult = Database::getRow($checkCorreoSql, $checkCorreoParams);
+                        $checkAliasResult = Database::getRow($checkAliasSql, $checkAliasParams);
+    
+                        if ($checkCorreoResult['count'] > 0) {
+                            $result['error'] = 'El correo electrónico ya está registrado';
+                        } elseif ($checkAliasResult['count'] > 0) {
+                            $result['error'] = 'El nombre de usuario ya está en uso';
+                        } elseif ($administrador->createTrabajadores()) {
+                            // Creación exitosa del trabajador (administrador)
+                            $result['status'] = 1;
+                            $result['message'] = 'Administrador creado correctamente';
+    
+                            // Enviar correo de confirmación
+                            $email = $_POST['CorreoAd'];
+                            $subject = "Cuenta de trabajador en Comodo$";
+                            $body = "
+                                    <p>Bienvenido/a a Comodo$</p>
+                                    <p>¡Hola {$_POST['NAdmin']}!</p>
+                                    <p>Gracias por unirte al equipo de administradores de Comodo$. 
+                                    Se ha confiado en ti para formar parte de este proyecto emocionante, y estamos seguros de que tu experiencia y habilidades serán un gran activo para nuestro sitio web.</p>
+                                    <p>Su cuenta de trabajador ha sido creada exitosamente.</p>
+                                    <p>Tus credenciales de acceso:</p>
+                                    <ul>
+                                        <li>Nombre de usuario: {$_POST['NUsuario']}</li>
+                                        <li>Correo electrónico: {$_POST['CorreoAd']}</li>
+                                        <li>Contraseña temporal: {$_POST['ContraAd']}</li>
+                                    </ul>
+                                    <p>Por favor, inicia sesión con esta información y asegúrate de cambiar tu contraseña temporal por una más segura y personal.</p>
+                                    <p>Saludos cordiales,<br>
+                                    El equipo de Comodo$</p>
+                                ";
+    
+                            $emailResult = sendEmail($email, $subject, $body);
+                            if ($emailResult !== true) {
+                                $result['message'] .= ' No se pudo enviar el correo de confirmación.';
+                            }
+                        } else {
+                            // Error general al crear el trabajador (administrador)
+                            $result['error'] = 'Ocurrió un problema al crear el trabajador';
+                        }
+                    }
+                    break;
+    
+                
             case 'readAll':
                 if ($result['dataset'] = $administrador->readAll()) {
                     $result['status'] = 1;
@@ -187,6 +254,7 @@ if (isset($_GET['action'])) {
             default:
                 $result['error'] = 'Acción no disponible fuera de la sesión';
         }
+
     }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.
     $result['exception'] = Database::getException();

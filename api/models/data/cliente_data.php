@@ -84,7 +84,33 @@ class ClienteData extends ClienteHandler
             return true;
         }
     }
-
+    public function setCorreos($value, $min = 8, $max = 100) {
+        // Verificar si el nombre ya existe en la base de datos, excluyendo el registro actual
+        if ($this->id) {
+           $checkSql = 'SELECT COUNT(*) as count FROM tb_admins WHERE correo_administrador = ? AND id_administrador != ?';
+           $checkParams = array($value, $this->id);
+       } else {
+           $checkSql = 'SELECT COUNT(*) as count FROM tb_admins WHERE correo_administrador = ?';
+           $checkParams = array($value);
+       }
+   
+       $checkResult = Database::getRow($checkSql, $checkParams);
+   
+       if ($checkResult['count'] > 0) {
+           $this->data_error = 'El correo ya existe';
+           return false;
+       }
+       if (!Validator::validateEmail($value)) {
+           $this->data_error = 'El correo no es válido';
+           return false;
+       } elseif (Validator::validateLength($value, $min, $max)) {
+           $this->correo = $value;
+           return true;
+       } else {
+           $this->data_error = 'El correo debe tener una longitud entre ' . $min . ' y ' . $max;
+           return false;
+       }
+   }
     public function setTelefono($value)
     {
         if (Validator::validatePhone($value)) {

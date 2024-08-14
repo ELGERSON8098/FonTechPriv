@@ -152,8 +152,84 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'La cuenta ha sido desactivada';
                 }
                 break;
-            default:
-                $result['error'] = 'Acción no disponible fuera de la sesión';
+                case 'solicitarPinRecuperacion':
+                    $_POST = Validator::validateForm($_POST);
+                    if (!isset($_POST['correo'])) {
+                        $result['error'] = 'Falta el correo electrónico';
+                    } elseif (!$cliente->setCorreo($_POST['correo'])) {
+                        $result['error'] = 'Correo electrónico inválido';
+                    } else {
+                        // Verificar si el correo existe en la base de datos
+                        $checkCorreoSql = 'SELECT COUNT(*) as count, nombre FROM tb_usuarios WHERE correo = ?';
+                        $checkCorreoParams = array($_POST['correo']);
+                        $checkCorreoResult = Database::getRow($checkCorreoSql, $checkCorreoParams);
+    
+                        if ($checkCorreoResult['count'] == 0) {
+                            $result['error'] = 'No existe una cuenta asociada a este correo electrónico';
+                        } elseif ($pin = $cliente->generarPinRecuperacion($_POST['correo'])) {
+                            $result['status'] = 1;
+                            $result['message'] = 'PIN generado con éxito';
+    
+                            // Enviar correo con el PIN
+                            $email = $_POST['correo'];
+                            $nombre = $checkCorreoResult['nombre'];
+                            $subject = "Recuperacion de clave - Comodo$";
+                            $body = "
+                                    <p>Estimado/a {$nombre},</p>
+                                    <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Comodo$.</p>
+                                    <p>Tu PIN de recuperación es: <strong>{$pin}</strong></p>
+                                    <p>Este PIN es válido por los próximos 30 minutos. Si no solicitaste este cambio, por favor ignora este mensaje.</p>
+                                    <p>Para completar el proceso de recuperación de contraseña, ingresa este PIN en la aplicación.</p>
+                                    <p>Si tienes alguna pregunta o necesitas ayuda adicional, no dudes en contactarnos.</p>
+                                    <p>Saludos cordiales,<br>
+                                    El equipo de Comodo$</p>
+                                ";
+    
+                            $emailResult = sendEmail($email, $subject, $body);
+                            if ($emailResult !== true) {
+                                $result['message'] .= ' Sin embargo, no se pudo enviar el correo con el PIN.';
+                            }
+                        } else {
+                            $result['error'] = 'No se pudo generar el PIN';
+                        }
+                    }
+                    break;
+                case 'verificarPin':
+                    if (!isset($_POST['correo']) || !isset($_POST['pin'])) {
+                        $result['error'] = 'Faltan datos necesarios';
+                    } elseif (!$cliente->setCorreos($_POST['correo'])) {
+                        $result['error'] = 'Correo electrónico inválido';
+                    } else {
+                        $id_usuario = $cliente->verificarPinRecuperacion($_POST['pin']);
+                        if ($id_usuario) {
+                            $result['status'] = 1;
+                            $result['id_usuario'] = $id_usuario;
+                            $result['message'] = 'PIN verificado correctamente';
+                        } else {
+                            $result['error'] = 'PIN inválido o expirado';
+                        }
+                    }
+                    break;
+                case 'cambiarClaveConPin':
+                    $_POST = Validator::validateForm($_POST);
+                    if (!isset($_POST['id_usuario']) || !isset($_POST['nuevaClave'])) {
+                        $result['error'] = 'Faltan datos necesarios';
+                    } else {
+                        $id_usuario = $_POST['id_usuario'];
+                        $nuevaClave = $_POST['nuevaClave'];
+                        if ($cliente->cambiarClaveConPin($id_usuario, $nuevaClave)) {
+                            $result['status'] = 1;
+                            $result['message'] = 'Contraseña cambiada exitosamente';
+                            $cliente->resetearPin(); // Resetea el PIN para que no se pueda usar nuevamente
+                        } else {
+                            $result['error'] = 'No se pudo cambiar la contraseña';
+                        }
+                    }
+                    break;
+    
+    
+                default:
+                    $result['error'] = 'Acción no disponible fuera de la sesión';
         }
     }
     // Se obtiene la excepción del servidor de base de datos por si ocurrió un problema.

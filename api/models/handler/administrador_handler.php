@@ -56,7 +56,16 @@ class AdministradorHandler
             return false; // La contraseña es incorrecta o el usuario no existe
         }
     }
+    public function createTrabajadores()
+    {
 
+        // Insertar el nuevo usuario como administrador
+        $sql = 'INSERT INTO tb_admins(nombre_administrador, correo_administrador, usuario_administrador, clave_administrador
+            VALUES(?, ?, ?, ?)';
+        $params = array($this->nombre, $this->correo, $this->alias, $this->clave);
+
+        return Database::executeRow($sql, $params);
+    }
 
     public function changePassword()
     {
