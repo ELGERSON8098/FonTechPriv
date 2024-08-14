@@ -29,6 +29,17 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen categorías para mostrar';
                 }
                 break;
+            case 'verifComent':
+                    if (
+                        !$pedido->setIdProducto($_POST['idProducto1']) 
+                    ) {
+                        $result['error'] = $pedido->getDataError();
+                    } elseif ($result['dataset'] = $pedido->verifComent()) {
+                        $result['status'] = 1;
+                    } else {
+                        $result['error'] = 'No existen categorías para mostrar';
+                    }
+            break;
             // Acción para actualizar la cantidad de un producto en el carrito de compras.
             case 'createComentario':
                 $_POST = Validator::validateForm($_POST);
@@ -46,6 +57,21 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'Ocurrió un problema al modificar la cantidad';
                 }
                 break;
+                case 'editComentario':
+                    $_POST = Validator::validateForm($_POST);
+                    if (
+                        !$pedido->setComentarioValoracion($_POST['floatingTextarea2']) or
+                        !$pedido->setCalificaionValoracion($_POST['starValue'])  or
+                        !$pedido->setIdValoracion($_POST['idValoracion'])
+                    ) {
+                        $result['error'] = $pedido->getDataError();
+                    } elseif ($pedido->createComentario()) {
+                        $result['status'] = 1;
+                        $result['message'] = 'Comentario creado correctamente';
+                    } else {
+                        $result['error'] = 'Ocurrió un problema al modificar la cantidad';
+                    }
+                    break;
             // Acción para remover un producto del carrito de compras.
             
                 }

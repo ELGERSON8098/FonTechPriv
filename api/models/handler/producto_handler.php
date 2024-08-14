@@ -374,14 +374,16 @@ LIMIT 5';
     }
 
     public function productosMasVendidosPorCategoria()
-    {
-        $sql = 'SELECT nombre_categoria, COUNT(p.id_producto) AS cantidad
-FROM tb_productos p
-INNER JOIN tb_detalles_reservas dr ON p.id_producto = dr.id_producto
-INNER JOIN tb_reservas r ON dr.id_reserva = r.id_reserva AND r.estado_reserva = "Aceptado"
-INNER JOIN tb_categorias USING(id_categoria)
-GROUP BY nombre_categoria
-ORDER BY cantidad DESC LIMIT 5';
-        return Database::getRows($sql);
-    }
+{
+    $sql = 'SELECT c.nombre_categoria, COUNT(p.id_producto) AS cantidad
+            FROM tb_productos p
+            INNER JOIN tb_detalles_reservas dr ON p.id_producto = dr.id_producto
+            INNER JOIN tb_reservas r ON dr.id_reserva = r.id_reserva AND r.estado_reserva = "Aceptado"
+            INNER JOIN tb_categorias c ON p.id_categoria = c.id_categoria
+            GROUP BY c.nombre_categoria
+            ORDER BY cantidad DESC
+            LIMIT 5';
+    return Database::getRows($sql);
+}
+
 }

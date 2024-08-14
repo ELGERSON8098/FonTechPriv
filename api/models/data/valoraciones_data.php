@@ -57,6 +57,7 @@ class ValoracionesData extends ValoracionesHandler
             return false;
         }
     }
+
     public function setEstadoValoracion($value)
     {
         if (Validator::validateBoolean($value)) {

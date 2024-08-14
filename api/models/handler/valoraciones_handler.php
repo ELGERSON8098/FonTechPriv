@@ -67,6 +67,17 @@ class ValoracionesHandler
         return Database::getRows($sql, $params);
     }
 
+    public function verifComent()
+    {
+        $sql = 'SELECT v.id_valoracion, p.nombre_producto, p.imagen AS imagen_producto, v.calificacion_valoracion, v.comentario_valoracion, v.fecha_valoracion, v.estado_valoracion
+        FROM tb_valoraciones v
+        INNER JOIN tb_productos p ON v.id_producto = p.id_producto
+        INNER JOIN tb_usuarios u ON v.id_usuario = u.id_usuario
+        WHERE id_producto = ? and v.id_usuario=?';
+        $params = array($this->id_producto,$_SESSION['idUsuario']);
+        return Database::getRows($sql, $params);
+    }
+
     //    Actualizar una valoracion
     public function updateRow()
     {
@@ -88,6 +99,16 @@ class ValoracionesHandler
             $this->comentarioValoracion,
             $this->id_producto,
             $_SESSION['idUsuario']
+        );
+        return Database::executeRow($sql, $params);
+    }
+    public function editComentario()
+    {
+        $sql = 'update tb_valoraciones set calificacion_valoracion=? comentario_valoracion=? id_valoracion = ? ;';
+        $params = array(
+            $this->calificacionValoracion,
+            $this->comentarioValoracion,
+            $this->idValoracion
         );
         return Database::executeRow($sql, $params);
     }
