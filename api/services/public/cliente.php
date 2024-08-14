@@ -173,7 +173,7 @@ if (isset($_GET['action'])) {
                             // Enviar correo con el PIN
                             $email = $_POST['correo'];
                             $nombre = $checkCorreoResult['nombre'];
-                            $subject = "Recuperacion de clave - Comodo$";
+                            $subject = "Recuperacion de clave - FontechPriv ugu";
                             $body = "
                                     <p>Estimado/a {$nombre},</p>
                                     <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Comodo$.</p>

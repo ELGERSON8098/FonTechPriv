@@ -12,7 +12,7 @@ function sendEmail($to, $subject, $body) {
         $mail->Host = 'smtp.gmail.com'; // Especifica el servidor SMTP
         $mail->SMTPAuth = true;
         $mail->Username = 'FontechPriv@gmail.com'; // Correo de origen
-        $mail->Password = 'pwrn arkr gict nyrc'; // Contraseña del correo de origen
+        $mail->Password = 'hgkw xknt pdao lrhi'; // Contraseña del correo de origen
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587; // Puerto SMTP
 
