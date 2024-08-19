@@ -42,29 +42,31 @@ if (isset($_GET['action'])) {
                     $result['error'] = 'No existen productos en el carrito';
                 }
                 break;
-                case 'readHistorials':
-                    if ($result['dataset'] = $pedido->readHistorials($_POST['valor'])) {
+            case 'readHistorials':
+                // Verificar si $_POST['valor'] está definido antes de usarlo
+                $valor = isset($_POST['valor']) ? $_POST['valor'] : null;
+                if ($result['dataset'] = $pedido->readHistorials($valor)) {
+                    $result['status'] = 1;
+                } else {
+                    $result['error'] = 'No existen productos para mostrar';
+                }
+                break;
+            case 'getExistencias':
+                // Verificar si el ID del producto está presente en la solicitud.
+                if (isset($_POST['idProducto'])) {
+                    $idProducto = $_POST['idProducto'];
+                    // Obtener las existencias del producto.
+                    $existencias = $pedido->getExistencias($idProducto);
+                    if ($existencias !== false) {
                         $result['status'] = 1;
+                        $result['data'] = ['existencias' => $existencias];
                     } else {
-                        $result['error'] = 'No existen productos para mostrar';
+                        $result['error'] = 'No se pudo obtener las existencias del producto. ID: ' . $idProducto;
                     }
-                    break;
-                case 'getExistencias':
-                    // Verificar si el ID del producto está presente en la solicitud.
-                    if (isset($_POST['idProducto'])) {
-                        $idProducto = $_POST['idProducto'];
-                        // Obtener las existencias del producto.
-                        $existencias = $pedido->getExistencias($idProducto);
-                        if ($existencias !== false) {
-                            $result['status'] = 1;
-                            $result['data'] = ['existencias' => $existencias];
-                        } else {
-                            $result['error'] = 'No se pudo obtener las existencias del producto. ID: ' . $idProducto;
-                        }
-                    } else {
-                        $result['error'] = 'ID del producto no especificado.';
-                    }
-                    break;
+                } else {
+                    $result['error'] = 'ID del producto no especificado.';
+                }
+                break;
             // Acción para actualizar la cantidad de un producto en el carrito de compras.
             case 'updateDetail':
                 $_POST = Validator::validateForm($_POST);
