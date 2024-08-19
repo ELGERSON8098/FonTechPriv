@@ -1,6 +1,7 @@
 <?php
 // Se incluye la clase del modelo.
 require_once('../../models/data/cliente_data.php');
+require_once('../../services/admin/mail_config.php');
 
 // Se comprueba si existe una acción a realizar, de lo contrario se finaliza el script con un mensaje de error.
 if (isset($_GET['action'])) {
@@ -36,7 +37,8 @@ if (isset($_GET['action'])) {
                         if (
                             !$cliente->setNombre($_POST['nombreCliente']) or
                             !$cliente->setCorreo($_POST['correoCliente']) or
-                            !$cliente->setAlias($_POST['aliaCliente'])
+                            !$cliente->setAlias($_POST['aliaCliente']) or
+                            !$cliente->setDirec($_POST['direc']) 
                         ) {
                             $result['error'] = $cliente->getDataError();
                         } elseif ($cliente->editProfileS()) {
@@ -176,7 +178,7 @@ if (isset($_GET['action'])) {
                             $subject = "Recuperacion de clave - FontechPriv ugu";
                             $body = "
                                     <p>Estimado/a {$nombre},</p>
-                                    <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Comodo$.</p>
+                                    <p>Hemos recibido una solicitud para restablecer la contraseña de tu cuenta en Fontech vro.</p>
                                     <p>Tu PIN de recuperación es: <strong>{$pin}</strong></p>
                                     <p>Este PIN es válido por los próximos 30 minutos. Si no solicitaste este cambio, por favor ignora este mensaje.</p>
                                     <p>Para completar el proceso de recuperación de contraseña, ingresa este PIN en la aplicación.</p>
